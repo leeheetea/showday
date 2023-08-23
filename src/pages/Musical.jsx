@@ -3,6 +3,7 @@ import RankingSlider from "../componenets/RankingSlider";
 import styled from "styled-components";
 import Header from "../componenets/Header";
 import LaptopNavigator from "../componenets/LaptopNavigator";
+import MobileNavigator from "../componenets/MobileNavigator";
 import "../css/Muscial.css";
 
 const Musical = () => {
@@ -17,9 +18,10 @@ const Musical = () => {
   return (
     <div>
       <Header />
+      <MobileNavigator />
       <LaptopNavigator />
       <div className="musical-title-container">
-        <h1>Muscial</h1>
+        <h1>뮤지컬</h1>
       </div>
       <div className="muscial-header">
         <div className="musical-text-container">

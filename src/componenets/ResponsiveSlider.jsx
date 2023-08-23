@@ -60,6 +60,8 @@ export default class ResponsiveSlider extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             initialSlide: 2,
+            infinite: true,
+            dots: true,
           },
         },
         {
@@ -67,6 +69,8 @@ export default class ResponsiveSlider extends Component {
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
+            infinite: true,
+            dots: true,
           },
         },
       ],

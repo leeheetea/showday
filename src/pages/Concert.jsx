@@ -3,6 +3,7 @@ import RankingSlider from "../componenets/RankingSlider";
 import styled from "styled-components";
 import Header from "../componenets/Header";
 import LaptopNavigator from "../componenets/LaptopNavigator";
+import MobileNavigator from "../componenets/MobileNavigator";
 import "../css/Concert.css";
 
 const Concert = () => {
@@ -17,6 +18,7 @@ const Concert = () => {
   return (
     <div>
       <Header />
+      <MobileNavigator />
       <LaptopNavigator />
       <div className="concert-title-container">
         <h1>콘서트</h1>

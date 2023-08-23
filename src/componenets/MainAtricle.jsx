@@ -30,20 +30,20 @@ const MainAtricle = () => {
       <h1>장르별 랭킹</h1>
       <div>
         <PurpleBtn
-          className={activeBtn === "뮤지컬" ? "active" : ""}
-          onClick={() => handleBtnClick("뮤지컬")}
+          className={activeBtn === "muscial" ? "active" : ""}
+          onClick={() => handleBtnClick("muscial")}
         >
           뮤지컬
         </PurpleBtn>
         <PurpleBtn
-          className={activeBtn === "콘서트" ? "active" : ""}
-          onClick={() => handleBtnClick("콘서트")}
+          className={activeBtn === "concert" ? "active" : ""}
+          onClick={() => handleBtnClick("concert")}
         >
           콘서트
         </PurpleBtn>
         <PurpleBtn
-          className={activeBtn === "연극" ? "active" : ""}
-          onClick={() => handleBtnClick("연극")}
+          className={activeBtn === "theatre" ? "active" : ""}
+          onClick={() => handleBtnClick("theatre")}
         >
           연극
         </PurpleBtn>

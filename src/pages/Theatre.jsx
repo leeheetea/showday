@@ -3,6 +3,7 @@ import RankingSlider from "../componenets/RankingSlider";
 import styled from "styled-components";
 import Header from "../componenets/Header";
 import LaptopNavigator from "../componenets/LaptopNavigator";
+import MobileNavigator from "../componenets/MobileNavigator";
 import "../css/Theatre.css";
 
 const Theatre = () => {
@@ -17,6 +18,7 @@ const Theatre = () => {
   return (
     <div>
       <Header />
+      <MobileNavigator />
       <LaptopNavigator />
       <div className="theatre-title-container">
         <h1>연극</h1>

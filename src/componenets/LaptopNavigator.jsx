@@ -1,12 +1,19 @@
 import React from "react";
 import "../css/LaptopNavigator.css";
+import StyledLink from "../componenets/styled";
 
 const LaptopNavigator = () => {
   return (
-    <div className="Laptiopnavigator-container">
-      <span>뮤지컬</span>
-      <span>연극</span>
-      <span>콘서트</span>
+    <div className="Laptopnavigator-container">
+      <StyledLink to="/musical">
+        <span className="Laptopnavigator-text">뮤지컬</span>
+      </StyledLink>
+      <StyledLink to="/concert">
+        <span className="Laptopnavigator-text">콘서트</span>
+      </StyledLink>
+      <StyledLink to="/theatre">
+        <span className="Laptopnavigator-text">연극</span>
+      </StyledLink>
     </div>
   );
 };

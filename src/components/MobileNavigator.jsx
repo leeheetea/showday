@@ -3,7 +3,7 @@ import { GiMusicalNotes } from "react-icons/gi";
 import img1 from "../img/mike.png";
 import { MdEventSeat } from "react-icons/md";
 import "../css/MobileNavigator.css";
-import StyledLink from "../componenets/styled";
+import StyledLink from "../components/styled";
 
 const MobileNavigator = () => {
   return (

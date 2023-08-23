@@ -6,3 +6,11 @@ a {
   text-decoration: none;
   color: black;
 }
+.App {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}

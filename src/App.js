@@ -3,6 +3,8 @@ import Main from "./pages/Main";
 import Musical from "./pages/Musical";
 import Concert from "./pages/Concert";
 import Theatre from "./pages/Theatre";
+import ServicePage from "./pages/ServicePage";
+import DetailPage from "./pages/DetailPage";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
         <Route path="/musical" element={<Musical />}></Route>
         <Route path="/concert" element={<Concert />}></Route>
         <Route path="/theatre" element={<Theatre />}></Route>
+        <Route path="/detailpage" element={<DetailPage />}></Route>
+        <Route path="/servicepage" element={<ServicePage />}></Route>
       </Routes>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/LaptopNavigator.css";
-import StyledLink from "../componenets/styled";
+import StyledLink from "../components/styled";
 
 const LaptopNavigator = () => {
   return (

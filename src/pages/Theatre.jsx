@@ -1,9 +1,9 @@
 import React from "react";
-import RankingSlider from "../componenets/RankingSlider";
+import RankingSlider from "../components/RankingSlider";
 import styled from "styled-components";
-import Header from "../componenets/Header";
-import LaptopNavigator from "../componenets/LaptopNavigator";
-import MobileNavigator from "../componenets/MobileNavigator";
+import Header from "../components/Header";
+import LaptopNavigator from "../components/LaptopNavigator";
+import MobileNavigator from "../components/MobileNavigator";
 import "../css/Theatre.css";
 
 const Theatre = () => {

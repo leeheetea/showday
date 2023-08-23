@@ -1,10 +1,10 @@
-import ResponsiveSlider from "../componenets/ResponsiveSlider";
-import Header from "../componenets/Header";
-import MobileNavigator from "../componenets/MobileNavigator";
-import MainAtricle from "../componenets/MainAtricle";
-import RankingSlider from "../componenets/RankingSlider";
-import LaptopNavigator from "../componenets/LaptopNavigator";
-import LaptopBanner from "../componenets/LaptopBanner";
+import ResponsiveSlider from "../components/ResponsiveSlider";
+import Header from "../components/Header";
+import MobileNavigator from "../components/MobileNavigator";
+import MainAtricle from "../components/MainAtricle";
+import RankingSlider from "../components/RankingSlider";
+import LaptopNavigator from "../components/LaptopNavigator";
+import LaptopBanner from "../components/LaptopBanner";
 
 const Main = () => {
   return (

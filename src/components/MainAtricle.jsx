@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "../css/MainArticle.css";
 import { useState } from "react";
+import { useRankingType } from "../store/RankingTypeContext";
 
 const PurpleBtn = styled.button`
   width: 4.5rem;
@@ -24,26 +25,36 @@ const MainAtricle = () => {
   const handleBtnClick = (genre) => {
     setActiveBtn(genre);
   };
+  const { rankingType, setRankingType } = useRankingType();
 
   return (
     <div className="article-container">
       <h1>장르별 랭킹</h1>
       <div>
         <PurpleBtn
-          className={activeBtn === "muscial" ? "active" : ""}
-          onClick={() => handleBtnClick("muscial")}
+          className={activeBtn === "musical" ? "active" : ""}
+          onClick={() => {
+            handleBtnClick("musical");
+            setRankingType("musical");
+          }}
         >
           뮤지컬
         </PurpleBtn>
         <PurpleBtn
           className={activeBtn === "concert" ? "active" : ""}
-          onClick={() => handleBtnClick("concert")}
+          onClick={() => {
+            handleBtnClick("concert");
+            setRankingType("concert");
+          }}
         >
           콘서트
         </PurpleBtn>
         <PurpleBtn
           className={activeBtn === "theatre" ? "active" : ""}
-          onClick={() => handleBtnClick("theatre")}
+          onClick={() => {
+            handleBtnClick("theatre");
+            setRankingType("theatre");
+          }}
         >
           연극
         </PurpleBtn>

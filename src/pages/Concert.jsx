@@ -1,19 +1,15 @@
-import React from "react";
 import RankingSlider from "../components/RankingSlider";
-import styled from "styled-components";
 import Header from "../components/Header";
 import LaptopNavigator from "../components/LaptopNavigator";
 import MobileNavigator from "../components/MobileNavigator";
 import "../css/Concert.css";
+import { useSelector } from "react-redux";
+import { useRankingType } from "../store/RankingTypeContext";
 
 const Concert = () => {
-  const concertItem = [1, 2, 3, 4, 5, 6, 7, 8];
-
-  const Itemimg = styled.img`
-    width: 100%;
-    heigh: 100%;
-    object-fit: cover;
-  `;
+  const concerts = useSelector((state) => state.concerts);
+  const { rankingType, setRankingType } = useRankingType();
+  setRankingType("concert");
 
   return (
     <div>
@@ -32,16 +28,14 @@ const Concert = () => {
         </div>
       </div>
       <div className="concert-article">
-        <h2 className="concert-subtitle">추천 작품</h2>
+        <div>
+          <h2 className="concert-subtitle">추천 작품</h2>
+        </div>
         <div className="concert-item-grid">
-          {concertItem.map((number, index) => (
+          {concerts.map((concert, index) => (
             <div className="concert-item-container" key={index}>
-              <Itemimg
-                className="muscial-item"
-                src="../img/slide1.webp"
-                alt=""
-              />
-              <span>{number}</span>
+              <img className="concert-item" src={concert.url} alt="" />
+              <span className="concert-item-title">{concert.title}</span>
             </div>
           ))}
         </div>

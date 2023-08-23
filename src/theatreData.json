@@ -1,0 +1,112 @@
+[
+  {
+    "id": 0,
+    "ranking": 1,
+    "title": "연극 〈테베랜드〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23006433_p.gif",
+    "place": "충무아트센터 중극장 블랙",
+    "peroid": "2023.06.28 ~2023.09.24",
+    "price": "66,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006433-19.jpg"
+  },
+  {
+    "id": 1,
+    "ranking": 2,
+    "title": "연극 〈2시22분 - A GHOST STORY〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23006686_p.gif",
+    "place": "세종문화회관 M씨어터",
+    "peroid": "2023.07.19 ~2023.09.02",
+    "price": "90,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006686-13.jpg"
+  },
+  {
+    "id": 2,
+    "ranking": 3,
+    "title": "대학로 1위 연극 〈쉬어매드니스〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/19/19018229_p.gif",
+    "place": "콘텐츠박스(KONTENTZ BOX)",
+    "peroid": "2015.11.12 ~오픈런",
+    "price": "40,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/19018229-269.jpg"
+  },
+  {
+    "id": 3,
+    "ranking": 4,
+    "title": "연극 〈3일간의 비〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23007658_p.gif",
+    "place": "이해랑예술극장",
+    "peroid": "2023.07.25 ~2023.10.01",
+    "price": "70,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007658-12.jpg"
+  },
+  {
+    "id": 4,
+    "ranking": 5,
+    "title": "행오버",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23005704_p.gif",
+    "place": "정극장",
+    "peroid": "2023.05.01 ~2023.09.30",
+    "price": "40,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23005704-17.jpg"
+  },
+  {
+    "id": 5,
+    "ranking": 6,
+    "title": "연극 〈라스트 세션〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23007040_p.gif",
+    "place": "대학로 TOM(티오엠) 1관",
+    "peroid": "2023.07.08 ~2023.09.10",
+    "price": "66,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007040-14.jpg"
+  },
+  {
+    "id": 6,
+    "ranking": 7,
+    "title": "코믹감동 휴먼판타지 연극 〈2호선 세입자〉",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/21/21013249_p.gif",
+    "place": "대학로 바탕골 소극장",
+    "peroid": "2022.01.14 ~2023.10.03",
+    "price": "40,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/21013249-105.jpg"
+  },
+  {
+    "id": 7,
+    "ranking": 8,
+    "title": "좀비연극 오마이갓",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23004562_p.gif",
+    "place": "대학로 오마이갓 전용관",
+    "peroid": "2023.04.11 ~2023.10.03",
+    "price": "45,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23004562-03.jpg"
+  },
+  {
+    "id": 8,
+    "ranking": 9,
+    "title": "연극 ＇말괄량이？ 길들이기＇",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/23/23010161_p.gif",
+    "place": "성수아트홀",
+    "peroid": "2023.08.19 ~2023.08.27",
+    "price": "20,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010161-06.jpg"
+  },
+  {
+    "id": 9,
+    "ranking": 10,
+    "title": "연극 한뼘사이",
+    "bannerUrl": "",
+    "url": "https://ticketimage.interpark.com/Play/image/large/22/22014277_p.gif",
+    "place": "라온아트홀",
+    "peroid": "2017.03.01 ~오픈런",
+    "price": "50,000원",
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/22014277-42.jpg"
+  }
+]

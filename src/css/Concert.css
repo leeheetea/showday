@@ -1,0 +1,42 @@
+.concert-slider-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.concert-title-container,
+.concert-text-container {
+  display: flex;
+  justify-content: center;
+}
+
+.concert-article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.concert-item-grid {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  text-align: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.concert-item-container {
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.concert-item {
+  margin: 0 auto;
+  object-fit: cover;
+}

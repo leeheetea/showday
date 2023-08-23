@@ -1,0 +1,154 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+  background-color: white;
+}
+
+@media (max-width: 767px) {
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .header-logo {
+    width: 60%;
+  }
+
+  .header-ticket-icon {
+    width: 6rem;
+  }
+
+  .header-icon-container {
+    display: flex;
+    width: 6rem;
+    margin-bottom: 1rem;
+  }
+
+  .header-text {
+    display: block;
+    width: 5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+
+  .searchbar-container {
+    position: relative;
+    width: 78%;
+  }
+
+  .searchbar {
+    width: 90%;
+    height: 1.7rem;
+    border-radius: 20px;
+    padding-left: 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+  }
+
+  .searchbar::placeholder {
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  .search-container-menu {
+    display: none;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 1.6rem;
+    bottom: 2.3rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
+
+  .header-logo {
+    width: 60%;
+  }
+
+  .header-ticket-icon {
+    width: 6rem;
+  }
+
+  .searchbar-container {
+    position: relative;
+  }
+
+  .searchbar {
+    width: 92%;
+    height: 1.7rem;
+    border-radius: 20px;
+    padding-left: 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+  }
+
+  .searchbar::placeholder {
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  .search-container-menu > span {
+    margin: 0 0.8rem;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 1.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
+
+  .searchbar-container {
+    width: 30%;
+    position: relative;
+  }
+
+  .searchbar {
+    width: 100%;
+    height: 1.7rem;
+    border-radius: 20px;
+    padding-left: 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+  }
+
+  .searchbar::placeholder {
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  .search-container-menu > span {
+    margin: 0 0.8rem;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0rem;
+    bottom: 2.4rem;
+  }
+
+  .header-logo {
+    width: 85%;
+  }
+
+  .header-ticket-icon {
+    width: 6rem;
+  }
+}

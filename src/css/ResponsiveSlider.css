@@ -1,0 +1,26 @@
+@media (max-width: 767px) {
+  .responsive-slider {
+    width: 22rem;
+    height: 22rem;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+
+  .responsive-slider-container {
+    height: 90vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .responsive-slider {
+    width: 100%;
+    height: 17rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-slider {
+    width: 100%;
+    height: 30rem;
+  }
+}

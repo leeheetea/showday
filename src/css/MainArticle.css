@@ -1,0 +1,20 @@
+@media (max-width: 767px) {
+  .article-container {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .article-container {
+    margin-top: 5rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article-container {
+    margin-top: 5rem;
+    text-align: center;
+  }
+}

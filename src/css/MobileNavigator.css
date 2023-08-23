@@ -1,0 +1,37 @@
+@media (max-width: 767px) {
+  .navigator-container {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .navigator-icon {
+    margin: 0 20px;
+    width: 4rem;
+    height: 3rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  .navigator-text {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .navigator-item-container {
+    text-align: center;
+  }
+
+  hr {
+    height: 10px;
+    border: 0;
+    background-color: rgb(128, 128, 128, 0.3);
+  }
+}
+
+@media (min-width: 768px) {
+  .navigator-container {
+    display: none;
+  }
+}

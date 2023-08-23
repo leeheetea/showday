@@ -1,0 +1,63 @@
+.ranking-slider-container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .ranking-slider {
+    width: 10rem;
+    height: 13rem;
+    border-radius: 10px;
+  }
+  .ranking-slider-container {
+    width: 80%;
+    position: relative;
+  }
+  .ranking-text {
+    position: absolute;
+    color: white;
+    left: 0.5rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ranking-slider {
+    width: 12rem;
+    height: 13rem;
+    border-radius: 10px;
+  }
+  .ranking-slider-container {
+    width: 80%;
+    position: relative;
+    margin-top: 1rem;
+  }
+  .ranking-text {
+    position: absolute;
+    color: white;
+    left: 0.5rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ranking-slider {
+    width: 10rem;
+    height: 13rem;
+    border-radius: 10px;
+  }
+  .ranking-slider-container {
+    width: 80%;
+    position: relative;
+    margin-top: 1rem;
+  }
+  .ranking-text {
+    position: absolute;
+    color: white;
+    left: 0.5rem;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}

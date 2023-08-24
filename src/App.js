@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import BookMainPage from "./pages/book/BookMainPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/theatre" element={<Theatre />}></Route>
             <Route path="/detailpage/:id?" element={<DetailPage />} />
             <Route path="/servicepage" element={<ServicePage />}></Route>
+            <Route path="/book" element={<BookMainPage />}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

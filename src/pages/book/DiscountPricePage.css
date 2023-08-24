@@ -1,0 +1,50 @@
+.discountPriceContainer {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookDiscountTable {
+  width: 100%;  
+  margin-top: 30px;
+}
+
+.bookDiscountTh, .bookDiscountTd, .bookDiscountThLast, .bookDiscountTdLast  {
+  border:  1px solid #ECEDFC;
+  padding: 10px;
+}
+
+.bookDiscountTh, .bookDiscountThLast {
+  width: 20%;
+  text-align: left;
+}
+
+.bookDiscountTd, .bookDiscountTdLast {
+  width: 60%;
+ /*  text-align: right; */
+}
+
+.bookDiscountThLast,
+.bookDiscountTdLast {
+  font-weight: bold;
+}
+
+.bookDiscountTd:nth-last-child(2) {
+  text-align: right;
+}
+
+.bookDiscountTd:last-child {
+  padding: 0;
+
+  > input {
+    height: 30px;
+    padding: 0 10px 0 20px;
+  }
+}
+
+.bookDiscountTdLast {
+  font-size: 2rem;
+  color: #C82020;
+}
+

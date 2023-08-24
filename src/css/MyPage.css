@@ -1,3 +1,16 @@
+.hmPiaK, .cIGGbR {
+  margin: 0 10%;
+}
+.serviceCenterContainer, .serviceCenterButton{
+  margin: 0 10%;
+}
+.eeMogx ul{
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgrey;
+}
+.eeMogx ul:first-child{
+  border-bottom: none;
+}
 .myPageIconsContainer ul{ 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -12,8 +25,16 @@
 .myPageIconsContainer ul a:first-child {
   border: none;
 }
+
 .myPageIconsContainer ul a li div h5 {
   margin: 0;
+}
+.myPageIconsContainer ul a li div h5:nth-child(2) {
+  color: red;
+  font-size: 15px;
+}
+.myPageIconsContainer ul a li div h5:nth-child(2):hover {
+  text-decoration: underline;
 }
 .myPageIconsContainer ul a li{
   height: 90px;
@@ -36,6 +57,9 @@
 }
 .help_cont ul li ul li a{
   font-size: 1rem;
+}
+.help_cont ul li ul li a:hover{
+  color: red;
 }
 
 .myPageCheckContainer{

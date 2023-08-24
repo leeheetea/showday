@@ -38,6 +38,7 @@ const Theatre = () => {
         <div className="theatre-item-grid">
           {theatres.map((theatre, index) => (
             <div className="theatre-item-container" key={index}>
+              <img className="theatre-item" src={theatre.url} alt="" />
               <img
                 onClick={() => navigator("/detailpage" + theatre.id)}
                 className="theatre-item"

@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Header from "../../components/Header";
 import BookHeader from "../../components/book/BookHeader";
-import ChangeDatePage from "../../pages/book/ChangeDatePage";
-import ChooseSeatsPage from "../../pages/book/ChooseSeatsPage";
-import DiscountPricePage from "../../pages/book/DiscountPricePage";
-import CheckBooksPage from "../../pages/book/CheckBooksPage";
-import PaymentPage from "./PaymentPage";
+
 import BookInfoView from "../../components/book/BookInfoView";
 import "./BookMainPage.css";
 
@@ -18,11 +14,17 @@ const BookMainPage = (data) => {
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(1);
 
+<<<<<<< HEAD
   const handleBookBtnClick = () => {};
 
   const handleStepClick = (index) => {
     setCurrentTab(index);
     navigator(`/book/${index}/${id}`);
+=======
+  const handleStepClick = (index) => {
+    setCurrentTab(index);
+    navigator("/book/" + id + "/" + index);
+>>>>>>> main
   };
 
   return (
@@ -32,6 +34,7 @@ const BookMainPage = (data) => {
         <BookHeader id={id} onBookStepClick={handleStepClick} />
       </div>
       <div className="bookLeftContainer">
+<<<<<<< HEAD
         <Routes>
           <Route path="1" element={<ChangeDatePage />}></Route>
           <Route path="2" element={<ChooseSeatsPage />}></Route>
@@ -39,6 +42,9 @@ const BookMainPage = (data) => {
           <Route path="4" element={<CheckBooksPage />}></Route>
           <Route path="5" element={<PaymentPage />}></Route>
         </Routes>
+=======
+        <Outlet />
+>>>>>>> main
       </div>
       {currentTab !== 5 && <BookInfoView />}
     </>

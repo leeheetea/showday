@@ -1,9 +1,10 @@
 import React from "react";
 import "../css/Header.css";
 import { RiSearchLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="header-container">
@@ -27,14 +28,28 @@ const SearchBar = () => {
           </div>
         </div>
         <div className="search-container-menu">
-          <span className="search-container-menu-text">로그인</span>
-          <span className="search-container-menu-text">회원가입</span>
-          <Link to="/mypage">
-            <span className="search-container-menu-text">마이페이지</span>
-          </Link>
-          <Link to="/servicepage">
-            <span className="search-container-menu-text">고객센터</span>
-          </Link>
+          <span
+            className="search-container-menu-text"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </span>
+          <span
+            className="search-container-menu-text"
+            onClick={() => {
+              navigate("/accountcreate");
+            }}
+          >
+            회원가입
+          </span>
+          <span className="search-container-menu-text">
+            <Link to="/mypage">마이페이지</Link>
+          </span>
+          <span className="search-container-menu-text">
+            <Link to="/servicepage">고객센터</Link>
+          </span>
         </div>
       </div>
     </header>

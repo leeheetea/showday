@@ -1,3 +1,7 @@
+
+.serviceCenterContainer, .serviceCenterButton{
+  margin: 0 10%;
+}
 .helpContIconContainer{
   margin: 20px;
 }
@@ -15,4 +19,12 @@
 }
 .smallIcon{
   font-size: 40px;
+}
+
+.service_cont ul a:hover {
+  color: purple;
+}
+.serviceCenterContainer ul a li{
+  overflow: hidden;
+  position: relative;
 }

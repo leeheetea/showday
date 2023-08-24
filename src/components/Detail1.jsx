@@ -6,112 +6,106 @@ import moment from "moment";
 import StyledLink from "./styled";
 import "../css/DetailMain.css"
 
-const Detail1 = () => {
-  const DetailContainer = styled.div`
-    display: flex; 
-    justify-content: center;
-    
-    border: 1.5px solid gray;
-    border-radius: 5px;
-    padding: 10px;
+const DetailContainer = styled.div`
+  display: flex; 
+  justify-content: center;
+  
+  border: 1.5px solid gray;
+  border-radius: 5px;
+  padding: 10px;
 
-    .detailBox{
-      width:500px;
-    }
-    .detailBox2{
-      padding: 0 0 0 3rem;
-    }
-    .detailTitle{
-      color: red;
-    }
+  .detailBox{
+    width:500px;
+  }
+  .detailBox2{
+    padding: 0 0 0 3rem;
+  }
+  .detailTitle{
+    color: red;
+  }
+  hr {
+    width: 100%
+    padding: 0;
+    margin: 0 2rem 0 2rem ;
+  }
+  input{
+    margin-bottom: 2rem;
+  }
+  input, label{
+    cursor:pointer;
+  }
+
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+    flex-direction: column; 
+    padding: 2rem;
     hr {
       width: 100%
       padding: 0;
-      margin: 0 2rem 0 2rem ;
+      margin: 2rem 0 2rem 0;
     }
-    input{
-      margin-bottom: 2rem;
+    .detailBox2{
+      padding: 0;
     }
-    input, label{
-      cursor:pointer;
+    .inputRadioCheck{
+      padding: 0 ;
     }
+    .detailBox2{
+      width: 70vw;
+    }
+`;
 
-
-    @media screen and (max-width: 800px) {
-      width: 80%;
-      flex-direction: column; 
-      padding: 2rem;
-      hr {
-        width: 100%
-        padding: 0;
-        margin: 2rem 0 2rem 0;
-      }
-      .detailBox2{
-        padding: 0;
-      }
-      .inputRadioCheck{
-        padding: 0 ;
-      }
-      .detailBox2{
-        width: 70vw;
-      }
-  `;
- 
-  const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: end;
-    div{
-      
-      background: purple;
-      color: white;
-      border-radius: 5px;
-      margin: 10px 0; 
-      padding: 0.7rem 3.5rem;
-      cursor: pointer;
-    }
-    div:hover {
-      background-color: black;
-    }
-  `;
-  const FormCheckText = styled.span`
-    font-size: 20px;
-    height: 3rem;
-    background: #e6e6e6;
-    border-radius: 50px;
-    border: none;
-    align-items: center;
-    cursor: pointer;
-    color: #777;
-  `;
-
-  const FormCheckLeft = styled.input.attrs({ type: "radio" })`
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  div{
     
-    &:checked {
-      display: inline-block;
-      background: none;
-      padding: 0px 10px;
-      text-align: center;
-      height: 35px;
-      line-height: 33px;
-      font-weight: 500;
-      display: none;
-    }
-    &:checked + ${FormCheckText} {
-      background: black;
-      color: #fff;
-    }
+    background: purple;
+    color: white;
+    border-radius: 5px;
+    margin: 10px 0; 
+    padding: 0.7rem 3.5rem;
+    cursor: pointer;
+  }
+  div:hover {
+    background-color: black;
+  }
+`;
+const FormCheckText = styled.span`
+  font-size: 20px;
+  height: 3rem;
+  background: #e6e6e6;
+  border-radius: 50px;
+  border: none;
+  align-items: center;
+  cursor: pointer;
+  color: #777;
+`;
+
+const FormCheckLeft = styled.input.attrs({ type: "radio" })`
+  
+  &:checked {
+    display: inline-block;
+    background: none;
+    padding: 0px 10px;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+    font-weight: 500;
     display: none;
-  `;
+  }
+  &:checked + ${FormCheckText} {
+    background: black;
+    color: #fff;
+  }
+  display: none;
+`;
+
+const Detail1 = () => {
 
   const [selectedValue, setSelectedValue] = useState(new Date());
-  const [checkedInputs, setCheckedInputs] = useState([]);
-
-  const changeRadio = (e) => {
-    if (e.target.checked) {
-      setCheckedInputs(e.target.id);
-    }
-  };
-
+  
   return (
     <div>
       <DetailContainer>
@@ -133,10 +127,9 @@ const Detail1 = () => {
                <div className="detailLabelContainer">
                   <FormCheckLeft
                     className="inputRadioCheck"
-                    onChange={changeRadio}
                     type="radio"
                     name="radioButton"
-                    value={checkedInputs}
+                    value="10월 3일 11시" 
                   />
                   <FormCheckText>10월 3일 11시</FormCheckText>
                </div>
@@ -146,10 +139,9 @@ const Detail1 = () => {
                 <div className="detailLabelContainer">
                   <FormCheckLeft
                     className="inputRadioCheck"
-                    onChange={changeRadio}
                     type="radio"
                     name="radioButton"
-                    value={checkedInputs}
+                    value="10월 3일 18시" 
                   />
                   <FormCheckText>10월 3일 18시</FormCheckText>
                 </div>

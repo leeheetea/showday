@@ -10,6 +10,7 @@ import PaymentPage from './PaymentPage';
 import BookInfoView from '../../components/book/BookInfoView'
 
 import './BookMainPage.css'
+import Header from '../../components/Header';
 
 const BookMainPage = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -39,6 +40,7 @@ const BookMainPage = () => {
 
   return (
    <>
+      <Header/>
       <div className='rootWrapper'>
         <BookHeader onBookStepClick={handleStepClick}/>
       </div>

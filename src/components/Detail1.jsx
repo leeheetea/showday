@@ -3,8 +3,11 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const Detail1 = () => {
+  const navigator = useNavigate();
+
   const DetailContainer = styled.div`
     display: flex; 
     justify-content: center;
@@ -155,7 +158,7 @@ const Detail1 = () => {
         </div>
       </DetailContainer>
       <ButtonContainer>
-        <ReserveButtonWrapper onClick={() => {}}>예매하기</ReserveButtonWrapper>
+        <ReserveButtonWrapper onClick={() => {navigator("/book")}}>예매하기</ReserveButtonWrapper>
       </ButtonContainer>
     </div>
   );

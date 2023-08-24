@@ -10,15 +10,15 @@ import { Provider } from "react-redux";
 import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
 import ScrollToTop from "./components/ScrollToTop";
-import Login from './page/Login'
-import FindId from './page/FindId'
-import FindPwd from './page/FindPwd'
-import AccountCreate from './page/AccountCreate'
-import AccountTerm from './page/AccountTerm'
-import AccountForm from './page/AccountForm'
+import Login from "./page/Login";
+import FindId from "./page/FindId";
+import FindPwd from "./page/FindPwd";
+import AccountCreate from "./page/AccountCreate";
+import AccountTerm from "./page/AccountTerm";
+import AccountForm from "./page/AccountForm";
 import NotFound from "./page/NotFound";
 import BookMainPage from "./pages/book/BookMainPage";
-import MyPage from "./pages/MyPage"
+import MyPage from "./pages/MyPage";
 import MyPointPage from "./pages/MyPointPage";
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
             <Route path="/accountterm" element={<AccountTerm />}></Route>
             <Route path="/accountform" element={<AccountForm />}></Route>
             <Route path="*" element={<NotFound />} />
-            <Route path="/book" element={<BookMainPage />}></Route>
-            <Route path="/mypage" element={<MyPage/>}></Route>
-            <Route path="/mypage/point" element={<MyPointPage/>}></Route>
+            <Route path="/book/*" element={<BookMainPage />}></Route>
+            <Route path="/mypage" element={<MyPage />}></Route>
+            <Route path="/mypage/point" element={<MyPointPage />}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

@@ -12,49 +12,51 @@ import "../css/RankingSlider.css";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
+import { useNavigate } from "react-router-dom";
 
 const RankingSlider = () => {
+  const navigator = useNavigate();
+
   const musicals = useSelector((state) => state.musicals);
   const concerts = useSelector((state) => state.concerts);
   const theatres = useSelector((state) => state.theatres);
 
-  const musicalUrls = useMemo(
-    () => musicals.map((musical) => musical.url),
+  const musicalItems = useMemo(
+    () => musicals.map((musical) => ({ url: musical.url, id: musical.id })),
     [musicals]
   );
-  const concertUrls = useMemo(
-    () => concerts.map((concert) => concert.url),
+  const concertItems = useMemo(
+    () => concerts.map((concert) => ({ url: concert.url, id: concert.id })),
     [concerts]
   );
-  const theatreUrls = useMemo(
-    () => theatres.map((theatre) => theatre.url),
+  const theatreItems = useMemo(
+    () => theatres.map((theatre) => ({ url: theatre.url, id: theatre.id })),
     [theatres]
   );
 
-  const [images, setImages] = useState([img1, img2, img3, img4, img5, img6]);
-  const { rankingType, setRankingType } = useRankingType();
+  const [slideData, setSlidData] = useState([
+    img1,
+    img2,
+    img3,
+    img4,
+    img5,
+    img6,
+  ]);
+  const { rankingType } = useRankingType();
 
   useEffect(() => {
     switch (rankingType) {
       case "musical":
-        setImages(musicalUrls);
+        setSlidData(musicalItems);
         break;
       case "concert":
-        setImages(concertUrls);
+        setSlidData(concertItems);
         break;
       default:
-        setImages(theatreUrls);
+        setSlidData(theatreItems);
         break;
     }
-  }, [rankingType, musicalUrls, concertUrls, theatreUrls]);
-
-  // useEffect(() => {
-  //   return rankingType === "musical"
-  //     ? setImages(musicalUrls)
-  //     : rankingType === "concert"
-  //     ? setImages(concertUrls)
-  //     : setImages(theatreUrls);
-  // }, [rankingType, musicalUrls, concertUrls, theatreUrls]);
+  }, [rankingType, musicalItems, concertItems, theatreItems]);
 
   const settings = {
     dots: false,
@@ -94,11 +96,15 @@ const RankingSlider = () => {
   return (
     <div className="ranking-slider-container">
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {slideData.map((data, index) => (
           <div className="ranking-slider-container" key={index}>
             <span className="ranking-text">{index + 1}</span>
-            <div key={index}>
-              <img className="ranking-slider" src={image} alt="" />
+
+            <div
+              onClick={() => navigator("/detailpage/" + data.id)}
+              key={index}
+            >
+              <img className="ranking-slider" src={data.url} alt="" />
             </div>
           </div>
         ))}

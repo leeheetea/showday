@@ -35,7 +35,7 @@ const ResponsiveSlider = () => {
     : defaultImages.map((item) => ({ url: item.url, id: item.id }));
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 1,

@@ -11,6 +11,7 @@ const PurpleBtn = styled.button`
   background-color: none;
   border: 1px solid rgb(0, 0, 0, 0.3);
   margin: 0 1rem;
+  cursor: pointer;
 
   &:active,
   &:hover,

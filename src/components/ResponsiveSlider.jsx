@@ -22,7 +22,7 @@ const ResponsiveSlider = () => {
     };
   }, []);
 
-  const defaultImages = jsonData
+  const data = jsonData
     .filter((state) => state.smallBannerUrl && state.smallBannerUrl !== "")
     .map((state) => ({
       bannerUrl: state.bannerUrl,
@@ -31,8 +31,8 @@ const ResponsiveSlider = () => {
     }));
 
   const images = isLargeScreen
-    ? defaultImages.map((item) => ({ url: item.bannerUrl, id: item.id }))
-    : defaultImages.map((item) => ({ url: item.url, id: item.id }));
+    ? data.map((item) => ({ url: item.bannerUrl, id: item.id }))
+    : data.map((item) => ({ url: item.url, id: item.id }));
 
   const settings = {
     dots: true,

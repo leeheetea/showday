@@ -38,6 +38,7 @@
   flex-direction: row;
   align-items: center;
   list-style: none;
+  text-align: center;
 }
 
 .contentsWrap .searchTab li {
@@ -46,6 +47,7 @@
   padding: 10px;
   font-size: 15px;
   border-bottom: 1px solid #ef3e42;
+  justify-content: center;
 }
 
 .contentsWrap .searchTab .current {

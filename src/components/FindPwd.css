@@ -46,6 +46,7 @@
   padding: 10px;
   font-size: 15px;
   border-bottom: 1px solid #ef3e42;
+  justify-content: center;
 }
 
 .contentsWrap .searchTab .current {
@@ -124,6 +125,16 @@
   border: 1p solid #ddd;
   font-size: 15px;
   color: #202020;
+}
+
+.btnBox_phone{
+  border: 1px solid black;
+  text-align: center;
+  
+}
+.btnBox_ipin{
+  border: 1px solid black;
+  text-align: center;
 }
 
 /* ***************************************** */

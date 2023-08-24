@@ -1,11 +1,30 @@
 import React, { useState } from 'react'
 import '../components/FindId.css'
+import { useNavigate } from 'react-router-dom'
 
 const FindId = () => {
-  // const [activeTab, setActiveTab] = useState('아이디 찾기');
-  // const handleTabClick = (tabName) => {
-  //   setActiveTab(tabName);
-  // };
+  const navigate = useNavigate();
+
+  const [isInputPhoneOpen, setInputPhoneOpen] = useState(false); // 아코디언 열림/닫힘 상태
+  const [isInputEmailOpen, setInputEmailOpen] = useState(false); // 아코디언 열림/닫힘 상태
+  const [isInputVerifyOpen, setInputVerifyOpen] = useState(false); // 아코디언 열림/닫힘 상태
+
+  // 아코디언 열기/닫기 함수
+  const toggleInputPhone = () => {
+    setInputPhoneOpen(!isInputPhoneOpen);
+    setInputEmailOpen(false);
+    setInputVerifyOpen(false);
+  };
+  const toggleInputEmail = () => {
+    setInputEmailOpen(!isInputEmailOpen);
+    setInputPhoneOpen(false);
+    setInputVerifyOpen(false);
+  };
+  const toggleInputVerify = () => {
+    setInputVerifyOpen(!isInputVerifyOpen);
+    setInputEmailOpen(false);
+    setInputPhoneOpen(false);
+  };
 
   return (
     <div className='body'>
@@ -22,18 +41,16 @@ const FindId = () => {
           <div className="contentsWrap">
             <div className="searchTab">
               <ul>
-                <li className='current'>
+                <li className='current' onClick={() => {
+                  navigate('/findid');
+                }} >
                   아이디 찾기
                 </li>
-                <li>
+                <li onClick={() => {
+                  navigate('/findpwd');
+                }}>
                   비밀번호 찾기
                 </li>
-                {/* <li className={activeTab === '아이디 찾기' ? 'current' : ''}>
-                  <a href="#" onClick={() => handleTabClick('아이디 찾기')}>아이디 찾기</a>
-                </li>
-                <li className={activeTab === '비밀번호 찾기' ? 'current' : ''}>
-                  <a href="#" onClick={() => handleTabClick('비밀번호 찾기')}>비밀번호 찾기</a>
-                </li> */}
               </ul>
             </div>
             <div className="idSearchWrap">
@@ -45,9 +62,9 @@ const FindId = () => {
                   {/* 휴대폰번호로 찾기 */}
                   <li className='typeList'>
                     <div className='title'>
-                      <button>등록된 휴대폰번호로 찾기</button>
+                      <button type='button' onClick={toggleInputPhone}>등록된 휴대폰번호로 찾기</button>
                     </div>
-                    <div className='inputEnter'>
+                    {isInputPhoneOpen && (<div className='inputEnter'>
                       <div className='inputBox'>
                         <div className="styleInput">
                           <input type="text" id='memNm1' className='iInput' placeholder='이름' />
@@ -63,14 +80,14 @@ const FindId = () => {
                       <div className='btnArea'>
                         <button type='submit' className='btnRed'>확인</button>
                       </div>
-                    </div>
+                    </div>)}
                   </li>
                   {/* 이메일로 찾기 */}
                   <li className='typeList'>
                     <div className='title'>
-                      <button>등록된 이메일로 찾기</button>
+                      <button type='button' onClick={toggleInputEmail}>등록된 이메일로 찾기</button>
                     </div>
-                    <div className='inputEnter'>
+                    {isInputEmailOpen && (<div className='inputEnter'>
                       <div className='inputBox'>
                         <div className="styleInput">
                           <input type="text" id='memNm2' className='iInput' placeholder='이름' />
@@ -109,23 +126,25 @@ const FindId = () => {
                       <div className='btnArea'>
                         <button type='submit' className='btnRed'>확인</button>
                       </div>
-                    </div>
+                    </div>)}
                   </li>
                   {/* 본인인증으로 찾기 */}
                   <li>
                     <div className="title">
-                      <button type="button">본인인증으로 찾기 (아이디 전체 확인 가능)</button>
+                      <button type="button" onClick={toggleInputVerify}>본인인증으로 찾기 (아이디 전체 확인 가능)</button>
                     </div>
-                    <div className="inputEnter">
+                    {isInputVerifyOpen && (<div className="inputEnter">
                       <div className="inputBox">
                         <div className="btnBox_phone">
-                          <a href=""></a>
+                          <h4>휴대폰 인증</h4>
+                          <p>본인명의 휴대폰으로 가입한 아이디 찾기</p>
                         </div>
                         <div className="btnBox_ipin">
-                          <a href=""></a>
+                          <h4>아이핀 인증</h4>
+                          <p>아이핀 인증으로 가입한 아이디 찾기</p>
                         </div>
                       </div>
-                    </div>
+                    </div>)}
                   </li>
                 </ul>
               </div>

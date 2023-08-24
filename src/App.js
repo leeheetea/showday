@@ -5,7 +5,7 @@ import Concert from "./pages/Concert";
 import Theatre from "./pages/Theatre";
 import ServicePage from "./pages/ServicePage";
 import DetailPage from "./pages/DetailPage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
@@ -16,6 +16,7 @@ import FindPwd from './page/FindPwd'
 import AccountCreate from './page/AccountCreate'
 import AccountTerm from './page/AccountTerm'
 import AccountForm from './page/AccountForm'
+import NotFound from "./page/NotFound";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/accountcreate" element={<AccountCreate />}></Route>
             <Route path="/accountterm" element={<AccountTerm />}></Route>
             <Route path="/accountform" element={<AccountForm />}></Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </RankingTypeProvider>
       </Provider>

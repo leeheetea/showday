@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 import './BookInfoView.css'
 import BOOKDATA from '../../store/bookData';
 import BookTitle from './BookTitle';

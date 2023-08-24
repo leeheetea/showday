@@ -10,6 +10,8 @@ import { Provider } from "react-redux";
 import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import myPage from "./pages/MyPage"
+import myPointPage from "./pages/MyPointPage";
 
 function App() {
   return (

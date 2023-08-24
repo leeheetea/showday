@@ -24,6 +24,8 @@ function App() {
             <Route path="/theatre" element={<Theatre />}></Route>
             <Route path="/detailpage/:id?" element={<DetailPage />} />
             <Route path="/servicepage" element={<ServicePage />}></Route>
+            <Route path="/mypage" element={<Mypage/>}></Route>
+            <Route path="/mypage/point" element={<MyPointpage/>}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

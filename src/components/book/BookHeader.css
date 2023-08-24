@@ -1,0 +1,8 @@
+.aa:hover {
+  color:  #22b8cf;
+}
+
+.aa .active {
+  border-bottom: 2px solid #22b8cf;
+  font-weight: 600;
+}

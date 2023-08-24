@@ -26,18 +26,20 @@ const MainAtricle = () => {
     setActiveBtn(genre);
   };
 
-  const { rankingType, setRankingType } = useRankingType();
+
+  const { setRankingType } = useRankingType();
+
 
   return (
     <div className="article-container">
       <h1>장르별 랭킹</h1>
       <div>
         <PurpleBtn
+
           className={activeBtn === "musical" ? "active" : ""}
           onClick={() => {
             setRankingType("musical");
             handleBtnClick("musical");
-            console.log("rankingType:", rankingType);
           }}
         >
           뮤지컬
@@ -45,9 +47,9 @@ const MainAtricle = () => {
         <PurpleBtn
           className={activeBtn === "concert" ? "active" : ""}
           onClick={() => {
-            setRankingType("concert");
             handleBtnClick("concert");
-            console.log("rankingType:", rankingType);
+            setRankingType("concert");
+
           }}
         >
           콘서트
@@ -55,9 +57,8 @@ const MainAtricle = () => {
         <PurpleBtn
           className={activeBtn === "theatre" ? "active" : ""}
           onClick={() => {
-            setRankingType("theatre");
             handleBtnClick("theatre");
-            console.log("rankingType:", rankingType);
+            setRankingType("theatre");
           }}
         >
           연극

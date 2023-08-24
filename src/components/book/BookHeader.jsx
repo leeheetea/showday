@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Link, Route, Routes } from "react-router-dom";
+import { NavLink, Link, Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import theme from "../../styles/theme";
@@ -14,7 +14,7 @@ const headerList = [
 
 const BookHeaderWrapper = styled.div`
   height: 60px;
-  width: 70%;
+  width: 80%;
   padding: 0px;
   margin: 0px;
   background-color: "#999999";
@@ -39,9 +39,9 @@ const HeaderListItem = styled.li`
   cursor: pointer;
   text-decoration: none;
 `;
-const BookHeader = ({ onBookStepClick }) => {
+const BookHeader = ({ onBookStepClick, id }) => {
   const handleStepClick = (index) => {
-    onBookStepClick(index);
+    onBookStepClick(index, id);
   };
 
   return (
@@ -54,7 +54,6 @@ const BookHeader = ({ onBookStepClick }) => {
               onClick={() => handleStepClick(index + 1)}
             >
               <ItemContainer>{menu.title}</ItemContainer>
-              {/* <ItemContainer isAccent={(currentStep === (index + 1)) ? true: false}>{menu.title}</ItemContainer>                 */}
             </HeaderListItem>
           );
         })}

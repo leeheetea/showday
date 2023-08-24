@@ -24,10 +24,10 @@ function App() {
             <Route path="/musical" element={<Musical />}></Route>
             <Route path="/concert" element={<Concert />}></Route>
             <Route path="/theatre" element={<Theatre />}></Route>
-            <Route path="/detailpage/:id?" element={<DetailPage />} />
             <Route path="/servicepage" element={<ServicePage />} />
-            <Route path="/book/*" element={<BookMainPage />} />
+            <Route path="/book/:index/:id" element={<BookMainPage />} />
             <Route path="/mypage" element={<MyPage />}></Route>
+            <Route path="/detailpage/:id?" element={<DetailPage />} />
           </Routes>
         </RankingTypeProvider>
       </Provider>

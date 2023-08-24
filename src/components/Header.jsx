@@ -30,7 +30,7 @@ const SearchBar = () => {
           <span className="search-container-menu-text">로그인</span>
           <span className="search-container-menu-text">회원가입</span>
           <span className="search-container-menu-text">마이페이지</span>
-          <span className="search-container-menu-text">예약확인/취소</span>
+          <span className="search-container-menu-text">고객센터</span>
         </div>
       </div>
     </header>

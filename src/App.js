@@ -11,6 +11,7 @@ import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
 import ScrollToTop from "./components/ScrollToTop";
 import BookMainPage from "./pages/book/BookMainPage";
+import Mypage from "./pages/MyPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/detailpage/:id?" element={<DetailPage />} />
             <Route path="/servicepage" element={<ServicePage />}></Route>
             <Route path="/book" element={<BookMainPage />}></Route>
+            <Route paht="/myPage" element={<Mypage />}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

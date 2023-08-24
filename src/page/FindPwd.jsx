@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import '../components/FindId.css'
+import '../components/FindPwd.css'
 import { useNavigate } from 'react-router-dom'
 
-const FindId = () => {
+const FindPwd = () => {
   const navigate = useNavigate();
 
   const [isInputPhoneOpen, setInputPhoneOpen] = useState(false); // 아코디언 열림/닫힘 상태
@@ -26,13 +26,14 @@ const FindId = () => {
     setInputPhoneOpen(false);
   };
 
+
   return (
     <div className='body'>
       <form className='findAccountForm'>
         <div className="searchWrap">
           <div className="popHeaderWrap">
             <h1 className='popTitle'>
-              <span>아이디 찾기</span>
+              <span>비밀번호 찾기</span>
             </h1>
             <span className='btnClose'>
               <a>닫기</a>
@@ -41,12 +42,12 @@ const FindId = () => {
           <div className="contentsWrap">
             <div className="searchTab">
               <ul>
-                <li className='current' onClick={() => {
+                <li onClick={() => {
                   navigate('/findid');
-                }} >
+                }}>
                   아이디 찾기
                 </li>
-                <li onClick={() => {
+                <li className='current' onClick={() => {
                   navigate('/findpwd');
                 }}>
                   비밀번호 찾기
@@ -55,14 +56,14 @@ const FindId = () => {
             </div>
             <div className="idSearchWrap">
               <div className="notiArea">
-                <span>아이디를 찾을 방법을 선택해주세요.</span>
+                <span>비밀번호를 찾을 방법을 선택해주세요.</span>
               </div>
               <div className="searchType">
                 <ul>
                   {/* 휴대폰번호로 찾기 */}
                   <li className='typeList'>
                     <div className='title'>
-                      <button type='button' onClick={toggleInputPhone}>등록된 휴대폰번호로 찾기</button>
+                      <button type="button" onClick={toggleInputPhone}>등록된 휴대폰번호로 찾기</button>
                     </div>
                     {isInputPhoneOpen && (<div className='inputEnter'>
                       <div className='inputBox'>
@@ -85,9 +86,9 @@ const FindId = () => {
                   {/* 이메일로 찾기 */}
                   <li className='typeList'>
                     <div className='title'>
-                      <button type='button' onClick={toggleInputEmail}>등록된 이메일로 찾기</button>
+                      <button type="button" onClick={toggleInputEmail}>등록된 이메일로 찾기</button>
                     </div>
-                    {isInputEmailOpen && (<div className='inputEnter'>
+                    {isInputEmailOpen &&(<div className='inputEnter'>
                       <div className='inputBox'>
                         <div className="styleInput">
                           <input type="text" id='memNm2' className='iInput' placeholder='이름' />
@@ -157,4 +158,4 @@ const FindId = () => {
   )
 }
 
-export default FindId
+export default FindPwd

@@ -1,7 +1,12 @@
 .body{
   margin-top: 50px;
 }
-
+.sc-fLBbxL{
+  min-width: 22rem; 
+}
+.sc-hHvkSs{
+  min-width: 28rem;
+}
 .product_shareButton button{
   background: purple;
   color:#fff;
@@ -15,7 +20,6 @@
   cursor:pointer;
   transition:500ms ease all;
   outline:none;
-  
   text-align: center;
 }
 .product_shareButton button:hover{
@@ -31,4 +35,21 @@
   width:0;
   background: purple;
   transition:200ms ease all;
+}
+.detailLabelContainer span{
+  font-size: 20px;
+  padding: 0.5rem 2.5rem;
+}
+
+.DetailRecommendTitleWrapper{
+  @media screen and (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.detailImg{
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
 }

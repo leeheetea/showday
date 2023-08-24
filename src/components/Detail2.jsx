@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import "../css/DetailMain.css"
 // import show from '../data'
 
 const Detail2 = (props) => {
@@ -14,6 +15,8 @@ const Detail2 = (props) => {
     margin-top: 10px;
     text-align: center;
     padding-left: 5px;
+
+    }
 
     .submenu {
       //기본 Tabmenu
@@ -42,7 +45,7 @@ const Detail2 = (props) => {
   const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
-    { id: 1, name: "상세정보", content: "내용1"},
+    { id: 1, name: "상세정보", content: <img class="detailImg" src={props.data.detail} alt=""/>},
     { id: 2, name: "관람후기", content: "내용2" },
     { id: 3, name: "기대평가", content: "내용3" },
     { id: 4, name: "장소정보", content: "내용4" },

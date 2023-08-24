@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
+import StyledLink from "./styled";
+import "../css/DetailMain.css"
 
 const Detail1 = () => {
   const DetailContainer = styled.div`
@@ -36,7 +38,7 @@ const Detail1 = () => {
 
 
     @media screen and (max-width: 800px) {
-      width: 100%;
+      width: 80%;
       flex-direction: column; 
       padding: 2rem;
       hr {
@@ -54,19 +56,20 @@ const Detail1 = () => {
         width: 70vw;
       }
   `;
-  const ReserveButtonWrapper = styled.button`
-    background: purple;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 0.7rem 3.5rem;
-    margin: 0.5rem;
-    cursor: pointer;
-  `;
+ 
   const ButtonContainer = styled.div`
-    text-align: end;
-    button:hover {
+    display: flex;
+    justify-content: end;
+    div{
+      
+      background: purple;
+      color: white;
+      border-radius: 5px;
+      margin: 10px 0; 
+      padding: 0.7rem 3.5rem;
+      cursor: pointer;
+    }
+    div:hover {
       background-color: black;
     }
   `;
@@ -76,14 +79,13 @@ const Detail1 = () => {
     background: #e6e6e6;
     border-radius: 50px;
     border: none;
-    display: flex;
-    justify-content: center;
     align-items: center;
     cursor: pointer;
     color: #777;
   `;
 
   const FormCheckLeft = styled.input.attrs({ type: "radio" })`
+    
     &:checked {
       display: inline-block;
       background: none;
@@ -126,33 +128,41 @@ const Detail1 = () => {
         <div className="detailBox detailBox2">
           <h3 className="detailTitle">STEP2</h3>
           <h3>회차 선택</h3>
-          <div>
-            <label>
-              <FormCheckLeft
-                className="inputRadioCheck"
-                onChange={changeRadio}
-                type="radio"
-                name="radioButton"
-                value={checkedInputs}
-              />
-              <FormCheckText>10월 3일 11시</FormCheckText>
-            </label>
-            <br></br>
-            <label>
-              <FormCheckLeft
-                className="inputRadioCheck"
-                onChange={changeRadio}
-                type="radio"
-                name="radioButton"
-                value={checkedInputs}
-              />
-              <FormCheckText>10월 3일 18시</FormCheckText>
-            </label>
+          <div className="detailLabel">
+              <label>
+               <div className="detailLabelContainer">
+                  <FormCheckLeft
+                    className="inputRadioCheck"
+                    onChange={changeRadio}
+                    type="radio"
+                    name="radioButton"
+                    value={checkedInputs}
+                  />
+                  <FormCheckText>10월 3일 11시</FormCheckText>
+               </div>
+              </label>
+              <br/>
+              <label>
+                <div className="detailLabelContainer">
+                  <FormCheckLeft
+                    className="inputRadioCheck"
+                    onChange={changeRadio}
+                    type="radio"
+                    name="radioButton"
+                    value={checkedInputs}
+                  />
+                  <FormCheckText>10월 3일 18시</FormCheckText>
+                </div>
+              </label>
           </div>
         </div>
       </DetailContainer>
       <ButtonContainer>
-        <ReserveButtonWrapper onClick={() => {}}>예매하기</ReserveButtonWrapper>
+              <StyledLink to="/book">
+                <div>
+                  예매하기
+                </div>
+              </StyledLink>
       </ButtonContainer>
     </div>
   );

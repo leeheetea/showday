@@ -1,0 +1,66 @@
+.bookInfoViewWrapper {
+  width: 30%;
+  height: 100%;
+  margin-top: 30px;
+  float: right;
+  box-sizing: border-box;
+  padding: 20px 30px 20px 20px;
+  text-align: center;
+}
+
+.titleContainer .tableContainer {
+  width: 90%;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  /*background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-retro-ticket-green-background-image_521704.jpg');*/
+}
+
+.titleLeft {
+  width:65%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .titleRight {
+  float: right; 
+  box-sizing: border-box;
+} */
+
+.bookResultTh, .bookResultTd, .bookResultThLast, .bookResultTdLast  {
+  border-bottom:  1px solid #ECEDFC;
+  padding: 10px;
+}
+
+.bookResultTh, .bookResultThLast {
+  width: 40%;
+  text-align: left;
+}
+
+.bookResultTd, .bookResultTdLast {
+  width: 60%;
+  text-align: right;
+}
+
+.bookResultThLast,
+.bookResultTdLast {
+  font-weight: bold;
+  
+}
+
+.bookResultTdLast {
+  font-size: 2rem;
+  color: #C82020;
+}
+
+.bookResultTable {
+  width: 100%;  
+  margin-top: 30px;
+}
+
+.bookButtonContainer {
+  display: flex;
+  padding-top: 15px;
+  justify-content: space-between;
+}

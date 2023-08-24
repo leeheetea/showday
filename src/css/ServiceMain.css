@@ -10,7 +10,8 @@
   padding: 0;
 }
 .helpmain_list li {
-  margin: 20px 0;
+  padding: 18px 0;
+  border-bottom: 1px solid lightgray;
 }
 .smallIcon{
   font-size: 40px;

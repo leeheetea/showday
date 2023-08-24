@@ -12,8 +12,16 @@
 .myPageIconsContainer ul a:first-child {
   border: none;
 }
+
 .myPageIconsContainer ul a li div h5 {
   margin: 0;
+}
+.myPageIconsContainer ul a li div h5:nth-child(2) {
+  color: red;
+  font-size: 15px;
+}
+.myPageIconsContainer ul a li div h5:nth-child(2):hover {
+  text-decoration: underline;
 }
 .myPageIconsContainer ul a li{
   height: 90px;
@@ -36,6 +44,9 @@
 }
 .help_cont ul li ul li a{
   font-size: 1rem;
+}
+.help_cont ul li ul li a:hover{
+  color: red;
 }
 
 .myPageCheckContainer{

@@ -23,14 +23,14 @@ const Detail2 = (props) => {
       transition: 0.5s;
       text-align: center;
       border-radius: 10px 10px 0px 0px;
-      border-bottom: 1px solid #1768ff;
+      border-bottom: 1px solid purple;
     }
     .submenu:hover {
       cursor: pointer;
     }
     .focused {
       //선택된 Tabmenu
-      border: 1px solid #1768ff;
+      border: 1px solid purple;
       border-bottom: none;
     }
   `;
@@ -42,7 +42,7 @@ const Detail2 = (props) => {
   const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
-    { id: 1, name: "상세정보", content: <img src={props.detail} alt="" /> },
+    { id: 1, name: "상세정보", content: "내용1"},
     { id: 2, name: "관람후기", content: "내용2" },
     { id: 3, name: "기대평가", content: "내용3" },
     { id: 4, name: "장소정보", content: "내용4" },

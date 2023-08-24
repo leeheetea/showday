@@ -220,13 +220,13 @@ const ServiceMain = () => {
           <div>
             <strong>예매상담하기<FaMicroblog></FaMicroblog></strong>
             <hr/>
-            <strong>1111-1111</strong>
+            <strong>1111-1111</strong>{' '}
             <span>10:00~19:00 (월~일)</span>
           </div>
           <div>
             <strong>문의하기<FaTeamspeak></FaTeamspeak></strong>
             <hr/>
-            <strong>2222-2222</strong>
+            <strong>2222-2222</strong>{' '}
             <span>10:00~19:00 (월~일)</span>
           </div>
         </div>
@@ -280,7 +280,7 @@ const ServiceMain = () => {
               </li>
               <li>
                 <a href="#">
-                  {"[단독판매]제 33기 TBC 가요아카데미 (선착순 ..."}
+                  {"[티켓오픈] PUBG NATIONS CUP 2023 티켓오픈 ..."}
                 </a>
               </li>
             </ul>

@@ -1,0 +1,34 @@
+.body{
+  margin-top: 50px;
+}
+
+.product_shareButton button{
+  background: purple;
+  color:#fff;
+  border:none;
+  position:relative;
+  width:100%;
+  height:40px;
+  font-size:1.6em;
+  border-radius: 5px;
+  padding:0 0.5em;
+  cursor:pointer;
+  transition:500ms ease all;
+  outline:none;
+  
+  text-align: center;
+}
+.product_shareButton button:hover{
+  background:#fff;
+  color: purple;
+}
+.product_shareButton button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: purple;
+  transition:200ms ease all;
+}

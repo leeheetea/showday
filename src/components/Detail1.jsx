@@ -55,7 +55,7 @@ const Detail1 = () => {
       }
   `;
   const ReserveButtonWrapper = styled.button`
-    background: #1768ff;
+    background: purple;
     color: white;
     border: none;
     border-radius: 5px;
@@ -95,7 +95,6 @@ const Detail1 = () => {
       display: none;
     }
     &:checked + ${FormCheckText} {
-      // background: #1768FF;
       background: black;
       color: #fff;
     }
@@ -134,7 +133,6 @@ const Detail1 = () => {
                 onChange={changeRadio}
                 type="radio"
                 name="radioButton"
-                // value="10월 3일 11시"
                 value={checkedInputs}
               />
               <FormCheckText>10월 3일 11시</FormCheckText>
@@ -147,7 +145,6 @@ const Detail1 = () => {
                 type="radio"
                 name="radioButton"
                 value={checkedInputs}
-                // value="10월 3일 18시"
               />
               <FormCheckText>10월 3일 18시</FormCheckText>
             </label>

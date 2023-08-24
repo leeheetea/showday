@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { FaShareAlt } from "react-icons/fa";
+import { BiLinkAlt } from "react-icons/bi";
 import "../App.css";
 import { useState } from "react";
 import Modal from "react-modal";
 import show from "../concertData.json";
+import "../css/DetailMain.css"
 
 const Main = ({ data }) => {
   const MainImgTextContainer = styled.div`
@@ -94,7 +96,7 @@ const Main = ({ data }) => {
   };
 
   return (
-    <div>
+    <div className="body">
       <MainImgTextContainer id="content">
         <div>
           <ImgSizeWrapper src={data.url} alt="/" />
@@ -104,15 +106,17 @@ const Main = ({ data }) => {
           <div className="product_heading">
             <h2 className="product_title">{data.title}</h2>
             <span className="product_shareButton">
-              <button onClick={() => setShareModalIsOpen(true)}>
-                <FaShareAlt size="20" />
-              </button>
+                <button onClick={() => setShareModalIsOpen(true)}>
+                  <FaShareAlt size="20" />
+                </button>
               <Modal
                 isOpen={shareModalIsOpen}
                 onRequestClose={() => setShareModalIsOpen(false)}
                 style={customModalStyles}
               >
-                This is Modal content
+                <button>
+                    <BiLinkAlt></BiLinkAlt>
+                </button>
               </Modal>
             </span>
           </div>

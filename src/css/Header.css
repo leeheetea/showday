@@ -98,7 +98,8 @@ header {
     padding-left: 1rem;
   }
 
-  .search-container-menu > span {
+  .search-container-menu-text {
+    display: block;
     margin: 0 0.8rem;
   }
 
@@ -134,8 +135,12 @@ header {
     padding-left: 1rem;
   }
 
-  .search-container-menu > span {
+  .search-container-menu-text {
     margin: 0 0.8rem;
+  }
+
+  .header-logo {
+    margin: 0 1rem;
   }
 
   .search-icon {

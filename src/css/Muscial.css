@@ -39,4 +39,5 @@
 .musical-item {
   margin: 0 auto;
   object-fit: cover;
+  cursor: pointer;
 }

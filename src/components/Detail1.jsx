@@ -14,6 +14,7 @@ const DetailContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
 
+
   .detailBox{
     width:500px;
   }
@@ -78,13 +79,14 @@ const FormCheckText = styled.span`
   background: #e6e6e6;
   border-radius: 50px;
   border: none;
+  display: flex;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
   color: #777;
 `;
 
 const FormCheckLeft = styled.input.attrs({ type: "radio" })`
-  
   &:checked {
     display: inline-block;
     background: none;
@@ -101,6 +103,12 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   }
   display: none;
 `;
+const Detail1 = (props) => {
+  const navigator = useNavigate();
+
+  const [selectedValue, setSelectedValue] = useState(new Date());
+  const [checkedInputs, setCheckedInputs] = useState([]);
+
 
 const Detail1 = () => {
 
@@ -150,11 +158,13 @@ const Detail1 = () => {
         </div>
       </DetailContainer>
       <ButtonContainer>
-              <StyledLink to="/book">
-                <div>
-                  예매하기
-                </div>
-              </StyledLink>
+        <ReserveButtonWrapper
+          onClick={() => {
+            navigator("/book/2/" + props.data.id);
+          }}
+        >
+          예매하기
+        </ReserveButtonWrapper>
       </ButtonContainer>
     </div>
   );

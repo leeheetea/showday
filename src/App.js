@@ -14,6 +14,7 @@ import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage"
 import MyPointPage from "./pages/MyPointPage";
 
+
 function App() {
   return (
     <div className="App">
@@ -30,6 +31,7 @@ function App() {
             <Route path="/book" element={<BookMainPage />}></Route>
             <Route path="/mypage" element={<MyPage/>}></Route>
             <Route path="/mypage/point" element={<MyPointPage/>}></Route>
+
           </Routes>
         </RankingTypeProvider>
       </Provider>

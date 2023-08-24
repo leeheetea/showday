@@ -14,23 +14,23 @@ const StyleTitle = styled.h1`
   padding-left: 1rem;
   padding-right: 1rem; */
   text-align: ${(props) =>
-    props.isSubTitle || props.isLeft ? "left" : "center"};
+    props.isSubTitle || props.isleft ? "left" : "center"};
   font-weight: ${(props) => (props.isSubTitle ? "" : "bold")};
-  padding-top: ${(props) => props.tPadding || ""};
+  padding-top: ${(props) => props.tpadding || ""};
 `;
 
 function BookTitle({
   children,
-  isLeft,
+  isleft,
   isSubTitle,
   isBottomLine,
-  tPadding,
+  tpadding,
   ...rest
 }) {
   return (
     <StyleTitle
-      tPadding={tPadding}
-      isLeft={isLeft}
+      tpadding={tpadding}
+      isleft={isleft}
       isSubTitle={isSubTitle}
       {...rest}
     >

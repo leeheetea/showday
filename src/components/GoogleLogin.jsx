@@ -6,11 +6,7 @@ const GoogleLogin = () => {
   const googleSocialLogin = useGoogleLogin({
     scope: "email profile",
     onSuccess: async ({ code }) => {
-      axios
-        .post("http://localhost:3000/", { code })
-        .then(({ data }) => {
-          console.log(data);
-        });
+      axios.post("http://localhost:3000/", { code }).then(({ data }) => {});
     },
     onError: (errorResponse) => {
       console.error(errorResponse);

@@ -16,7 +16,7 @@ header {
   }
 
   .header-logo {
-    width: 60%;
+    width: 100%;
   }
 
   .header-ticket-icon {
@@ -61,8 +61,8 @@ header {
 
   .search-icon {
     position: absolute;
-    right: 1.6rem;
-    bottom: 2.3rem;
+    right: 2rem;
+    bottom: 1.7rem;
   }
 }
 
@@ -74,7 +74,7 @@ header {
   }
 
   .header-logo {
-    width: 60%;
+    width: 100%;
   }
 
   .header-ticket-icon {
@@ -105,7 +105,7 @@ header {
   .search-icon {
     position: absolute;
     right: 0.8rem;
-    bottom: 1.3rem;
+    bottom: 0.8rem;
   }
 }
 
@@ -141,11 +141,11 @@ header {
   .search-icon {
     position: absolute;
     right: 0rem;
-    bottom: 2.4rem;
+    bottom: 1.8rem;
   }
 
   .header-logo {
-    width: 85%;
+    width: 150%;
   }
 
   .header-ticket-icon {

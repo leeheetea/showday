@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "../css/MainArticle.css";
 import { useState } from "react";
+import { useRankingType } from "../store/RankingTypeContext";
 
 const PurpleBtn = styled.button`
   width: 4.5rem;
@@ -10,6 +11,7 @@ const PurpleBtn = styled.button`
   background-color: none;
   border: 1px solid rgb(0, 0, 0, 0.3);
   margin: 0 1rem;
+  cursor: pointer;
 
   &:active,
   &:hover,
@@ -24,26 +26,36 @@ const MainAtricle = () => {
   const handleBtnClick = (genre) => {
     setActiveBtn(genre);
   };
+  const { rankingType, setRankingType } = useRankingType();
 
   return (
     <div className="article-container">
       <h1>장르별 랭킹</h1>
       <div>
         <PurpleBtn
-          className={activeBtn === "뮤지컬" ? "active" : ""}
-          onClick={() => handleBtnClick("뮤지컬")}
+          className={activeBtn === "musical" ? "active" : ""}
+          onClick={() => {
+            handleBtnClick("musical");
+            setRankingType("musical");
+          }}
         >
           뮤지컬
         </PurpleBtn>
         <PurpleBtn
-          className={activeBtn === "콘서트" ? "active" : ""}
-          onClick={() => handleBtnClick("콘서트")}
+          className={activeBtn === "concert" ? "active" : ""}
+          onClick={() => {
+            handleBtnClick("concert");
+            setRankingType("concert");
+          }}
         >
           콘서트
         </PurpleBtn>
         <PurpleBtn
-          className={activeBtn === "연극" ? "active" : ""}
-          onClick={() => handleBtnClick("연극")}
+          className={activeBtn === "theatre" ? "active" : ""}
+          onClick={() => {
+            handleBtnClick("theatre");
+            setRankingType("theatre");
+          }}
         >
           연극
         </PurpleBtn>

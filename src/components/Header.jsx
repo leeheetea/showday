@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Header.css";
 import { RiSearchLine } from "react-icons/ri";
-import logo from "../img/logo.png";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   return (
@@ -9,7 +9,15 @@ const SearchBar = () => {
       <div className="header-container">
         <div className="header-icon-container">
           <div className="header-ticket-icon">
-            <img className="header-logo" src={logo} alt="" />
+            <Link to="/">
+              <img
+                className="header-logo"
+                src={
+                  "https://github.com/leeheetea/showday/blob/main/public/img/Showday_logo.png?raw=true"
+                }
+                alt=""
+              />
+            </Link>
           </div>
         </div>
         <div className="searchbar-container">

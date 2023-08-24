@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useParams,
+  useNavigate,
+  Outlet,
+} from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Header from "../../components/Header";
 import BookHeader from "../../components/book/BookHeader";
-import ChangeDatePage from "../../pages/book/ChangeDatePage";
-import ChooseSeatsPage from "../../pages/book/ChooseSeatsPage";
-import DiscountPricePage from "../../pages/book/DiscountPricePage";
-import CheckBooksPage from "../../pages/book/CheckBooksPage";
-import PaymentPage from "./PaymentPage";
+
 import BookInfoView from "../../components/book/BookInfoView";
 import "./BookMainPage.css";
 import { getBooksInfo } from "../../store/slice";
@@ -28,7 +30,7 @@ const BookMainPage = (data) => {
     setCurrentTab(index);
     // console.log('==== index : ', index);
     // console.log('==== data2 : ', data);
-    navigator("/book/" + index + "/" + id);
+    navigator("/book/" + id + "/" + index);
   };
 
   /*   function TabContent() {
@@ -50,14 +52,7 @@ const BookMainPage = (data) => {
         <BookHeader onBookStepClick={handleStepClick} />
       </div>
       <div className="bookLeftContainer">
-        {/*  <TabContent/> */}
-        <Routes>
-          <Route path="1" element={<ChangeDatePage />}></Route>
-          <Route path="2" element={<ChooseSeatsPage />}></Route>
-          <Route path="3" element={<DiscountPricePage />}></Route>
-          <Route path="4" element={<CheckBooksPage />}></Route>
-          <Route path="5" element={<PaymentPage />}></Route>
-        </Routes>
+        <Outlet />
       </div>
       {currentTab !== 5 && <BookInfoView />}
     </>

@@ -153,7 +153,7 @@ const Detail1 = (props) => {
       <ButtonContainer>
         <button
           onClick={() => {
-            navigator("/book/2/" + props.data.id);
+            navigator("/book/" + props.data.id + "/2");
           }}
         >
           예매하기

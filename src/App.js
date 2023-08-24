@@ -21,6 +21,12 @@ import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage";
 import MyPointPage from "./pages/MyPointPage";
 
+import ChangeDatePage from "./pages/book/ChangeDatePage";
+import ChooseSeatsPage from "./pages/book/ChooseSeatsPage";
+import DiscountPricePage from "./pages/book/DiscountPricePage";
+import CheckBooksPage from "./pages/book/CheckBooksPage";
+import PaymentPage from "./pages/book/PaymentPage";
+
 function App() {
   return (
     <div className="App">
@@ -40,7 +46,13 @@ function App() {
             <Route path="/accountcreate" element={<AccountCreate />}></Route>
             <Route path="/accountterm" element={<AccountTerm />}></Route>
             <Route path="/accountform" element={<AccountForm />}></Route>
-            <Route path="/book/:index/:id/*" element={<BookMainPage />}></Route>
+            <Route path="/book/:id?/:index?" element={<BookMainPage />}>
+              <Route path="1" element={<ChangeDatePage />}></Route>
+              <Route path="2" element={<ChooseSeatsPage />}></Route>
+              <Route path="3" element={<DiscountPricePage />}></Route>
+              <Route path="4" element={<CheckBooksPage />}></Route>
+              <Route path="5" element={<PaymentPage />}></Route>
+            </Route>
             <Route path="/mypage" element={<MyPage />}></Route>
             <Route path="/mypage/point" element={<MyPointPage />}></Route>
             <Route path="*" element={<NotFound />} />

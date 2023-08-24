@@ -1,0 +1,66 @@
+.joinWrapper {
+  width: 500px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.joinBlock {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.title {
+  font-size: 25px;
+  line-height: 37px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 22px;
+  color: #666;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.IMBtn {
+  width: 100%;
+  margin-top: 30px;
+  font-size: 17px;
+  color: #fff;
+  font-weight: bold;
+  background: #1769ff;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  padding-bottom: 1px;
+}
+
+.snsLoginUl {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  display: grid;
+  grid-template-rows: 50px 50px 50px;
+}
+
+.snsLoginli{
+  margin-bottom: 10px ;
+}
+
+.BMBtn {
+  width: 100%;
+  margin-top: 30px;
+  font-size: 17px;
+  color: #fff;
+  font-weight: bold;
+  background: #ccc;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  padding-bottom: 1px;
+}

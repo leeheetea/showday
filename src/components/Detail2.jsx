@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 // import show from '../data'
 
-const Detail2 = () => {
+const Detail2 = (props) => {
   const TabMenuContainter = styled.ul`
     font-weight: bold;
     display: flex;
@@ -42,7 +42,7 @@ const Detail2 = () => {
   const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
-    { id: 1, name: "상세정보", content: "내용1" },
+    { id: 1, name: "상세정보", content: <img src={props.detail} alt="" /> },
     { id: 2, name: "관람후기", content: "내용2" },
     { id: 3, name: "기대평가", content: "내용3" },
     { id: 4, name: "장소정보", content: "내용4" },

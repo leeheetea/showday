@@ -3,10 +3,8 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import StyledLink from "./styled";
-import { useNavigate } from "react-router";
-
 import "../css/DetailMain.css";
+import { useNavigate } from "react-router-dom";
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -108,7 +106,6 @@ const Detail1 = (props) => {
   const navigator = useNavigate();
 
   const [selectedValue, setSelectedValue] = useState(new Date());
-  const [checkedInputs, setCheckedInputs] = useState([]);
 
   return (
     <div>
@@ -156,7 +153,7 @@ const Detail1 = (props) => {
       <ButtonContainer>
         <button
           onClick={() => {
-            navigator("/book/2/" + props.data.id);
+            navigator("/book/" + props.data.id + "/2");
           }}
         >
           예매하기

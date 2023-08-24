@@ -12,7 +12,7 @@ const DetailMainContainer = styled.div`
   margin: 10%;
   margin-top: 0;
 `;
-const DetailPage = () => {
+const DetailPage = (props) => {
   const { id } = useParams();
   const pageData = pagesData.find((data) => data.id === id);
 

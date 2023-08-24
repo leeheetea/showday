@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
+const CommendContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 15px;
+  place-items: center;
+`;
+const ImgCommendContainer = styled.img`
+  width: 200px;
+  height: 247px;
+  padding: 10px;
+  justify-content: center;
+  place-items: center;
+`;
+
 const Commend = () => {
-  const CommendContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-gap: 15px;
-    place-items: center;
-  `;
-  const ImgCommendContainer = styled.img`
-    width: 200px;
-    height: 247px;
-    padding: 10px;
-    justify-content: center;
-    place-items: center;
-  `;
-  
   return (
     <div>
       <div className="DetailRecommendTitleWrapper">

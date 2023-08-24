@@ -1,16 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Link, Route, Routes, useNavigate } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-
-import theme from "../../styles/theme";
-
-const headerList = [
-  { step: 1, title: "날짜/회차선택" },
-  { step: 2, title: "좌석선택" },
-  { step: 3, title: "할인/매수선택" },
-  { step: 4, title: "예매확인" },
-  { step: 5, title: "결재하기" },
-];
 
 const BookHeaderWrapper = styled.div`
   height: 60px;
@@ -39,6 +28,15 @@ const HeaderListItem = styled.li`
   cursor: pointer;
   text-decoration: none;
 `;
+
+const headerList = [
+  { step: 1, title: "날짜/회차선택" },
+  { step: 2, title: "좌석선택" },
+  { step: 3, title: "할인/매수선택" },
+  { step: 4, title: "예매확인" },
+  { step: 5, title: "결재하기" },
+];
+
 const BookHeader = ({ onBookStepClick, id }) => {
   const handleStepClick = (index) => {
     onBookStepClick(index, id);

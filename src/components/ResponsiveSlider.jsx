@@ -1,90 +1,116 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import jsonData from "../musicalData.json";
+import img1 from "../img/slide1.webp";
+import img2 from "../img/slide2.webp";
+import img3 from "../img/slide3.webp";
+import img4 from "../img/slide4.webp";
+import img5 from "../img/slide5.webp";
+import img6 from "../img/slide6.webp";
+import "../css/RankingSlider.css";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useRankingType } from "../store/RankingTypeContext";
+import { useNavigate } from "react-router-dom";
 
-import "../css/ResponsiveSlider.css";
+const RankingSlider = () => {
+  const navigator = useNavigate();
 
-export default class ResponsiveSlider extends Component {
-  state = {
-    isLargeScreen: window.innerWidth >= 768,
+  const musicals = useSelector((state) => state.musicals);
+  const concerts = useSelector((state) => state.concerts);
+  const theatres = useSelector((state) => state.theatres);
+
+  const musicalItems = useMemo(
+    () => musicals.map((musical) => ({ url: musical.url, id: musical.id })),
+    [musicals]
+  );
+  const concertItems = useMemo(
+    () => concerts.map((concert) => ({ url: concert.url, id: concert.id })),
+    [concerts]
+  );
+  const theatreItems = useMemo(
+    () => theatres.map((theatre) => ({ url: theatre.url, id: theatre.id })),
+    [theatres]
+  );
+
+  const [slideData, setSlidData] = useState([
+    img1,
+    img2,
+    img3,
+    img4,
+    img5,
+    img6,
+  ]);
+  const { rankingType } = useRankingType();
+
+  useEffect(() => {
+    switch (rankingType) {
+      case "musical":
+        setSlidData(musicalItems);
+        break;
+      case "concert":
+        setSlidData(concertItems);
+        break;
+      default:
+        setSlidData(theatreItems);
+        break;
+    }
+  }, [rankingType, musicalItems, concertItems, theatreItems]);
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 6,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 2048,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-  }
+  return (
+    <div className="ranking-slider-container">
+      <Slider {...settings}>
+        {slideData.map((data, index) => (
+          <div className="ranking-slider-container" key={index}>
+            <span className="ranking-text">{index + 1}</span>
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
-  }
-
-  handleResize = () => {
-    this.setState({ isLargeScreen: window.innerWidth >= 768 });
-  };
-
-  render() {
-    const defaultImages = jsonData
-      .filter((state) => state.smallBannerUrl && state.smallBannerUrl !== "")
-      .map((state) => state.smallBannerUrl);
-
-    const largeScreenImages = jsonData
-      .filter((state) => state.bannerUrl && state.bannerUrl !== "")
-      .map((state) => state.bannerUrl);
-
-    const images = this.state.isLargeScreen ? largeScreenImages : defaultImages;
-
-    var settings = {
-      dots: false,
-      infinite: true,
-      speed: 1000,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      initialSlide: 0,
-      autoplay: true,
-      centerMode: false,
-      centerPadding: "500px",
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true,
-          },
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            initialSlide: 2,
-            infinite: true,
-            dots: true,
-          },
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true,
-          },
-        },
-      ],
-    };
-    return (
-      <div className="responsive-slider-container">
-        <Slider {...settings}>
-          {images.map((image, index) => (
-            <div key={index}>
-              <img className="responsive-slider" src={image} alt="" />
+            <div
+              onClick={() => navigator("/detailpage/" + data.id)}
+              key={index}
+            >
+              <img className="ranking-slider" src={data.url} alt="" />
             </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
-}
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+export default RankingSlider;

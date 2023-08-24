@@ -41,11 +41,11 @@ const HeaderListItem = styled.li`
   text-decoration: none;
 `
 const BookHeader = ({onBookStepClick}) => {
-  const [currentStep, setCurrentStep] = useState(1);
 
+  // const [currentStep, setCurrentStep] = useState(1);
   const handleStepClick = (index) => {
     console.log('[BookHeader] onHeaderClick index : ', index);
-    setCurrentStep(index);
+    // setCurrentStep(index);
     onBookStepClick(index);
 }
 
@@ -55,9 +55,10 @@ const BookHeader = ({onBookStepClick}) => {
         {headerList.map((menu, index) => {
           return (
             <HeaderListItem 
-            key={index} 
-            onClick={() => handleStepClick(index)}>
-                <ItemContainer isAccent={(currentStep === index) ? true: false}>{menu.title}</ItemContainer>                
+            key={index + 1} 
+            onClick={() => handleStepClick(index + 1)}>
+                <ItemContainer>{menu.title}</ItemContainer>                
+                {/* <ItemContainer isAccent={(currentStep === (index + 1)) ? true: false}>{menu.title}</ItemContainer>                 */}
               </HeaderListItem>
           )})}
       </HeaderList>

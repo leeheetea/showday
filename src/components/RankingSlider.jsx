@@ -36,6 +36,7 @@ const RankingSlider = () => {
     switch (rankingType) {
       case "musical":
         setSlidData(musicalItems);
+        console.log("rankingType:", rankingType);
         break;
       case "concert":
         setSlidData(concertItems);

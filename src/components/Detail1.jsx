@@ -5,10 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
-const Detail1 = () => {
-  const navigator = useNavigate();
-
-  const DetailContainer = styled.div`
+const DetailContainer = styled.div`
     display: flex; 
     justify-content: center;
     
@@ -57,53 +54,56 @@ const Detail1 = () => {
         width: 70vw;
       }
   `;
-  const ReserveButtonWrapper = styled.button`
-    background: #1768ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 0.7rem 3.5rem;
-    margin: 0.5rem;
-    cursor: pointer;
-  `;
-  const ButtonContainer = styled.div`
-    text-align: end;
-    button:hover {
-      background-color: black;
-    }
-  `;
-  const FormCheckText = styled.span`
-    font-size: 20px;
-    height: 3rem;
-    background: #e6e6e6;
-    border-radius: 50px;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #777;
-  `;
+const ReserveButtonWrapper = styled.button`
+  background: #1768ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0.7rem 3.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+`;
+const ButtonContainer = styled.div`
+  text-align: end;
+  button:hover {
+    background-color: black;
+  }
+`;
+const FormCheckText = styled.span`
+  font-size: 20px;
+  height: 3rem;
+  background: #e6e6e6;
+  border-radius: 50px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #777;
+`;
 
-  const FormCheckLeft = styled.input.attrs({ type: "radio" })`
-    &:checked {
-      display: inline-block;
-      background: none;
-      padding: 0px 10px;
-      text-align: center;
-      height: 35px;
-      line-height: 33px;
-      font-weight: 500;
-      display: none;
-    }
-    &:checked + ${FormCheckText} {
-      // background: #1768FF;
-      background: black;
-      color: #fff;
-    }
+const FormCheckLeft = styled.input.attrs({ type: "radio" })`
+  &:checked {
+    display: inline-block;
+    background: none;
+    padding: 0px 10px;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+    font-weight: 500;
     display: none;
-  `;
+  }
+  &:checked + ${FormCheckText} {
+    // background: #1768FF;
+    background: black;
+    color: #fff;
+  }
+  display: none;
+`;
+
+const Detail1 = (props) => {
+  const navigator = useNavigate();
 
   const [selectedValue, setSelectedValue] = useState(new Date());
   const [checkedInputs, setCheckedInputs] = useState([]);
@@ -158,7 +158,13 @@ const Detail1 = () => {
         </div>
       </DetailContainer>
       <ButtonContainer>
-        <ReserveButtonWrapper onClick={() => {navigator("/book")}}>예매하기</ReserveButtonWrapper>
+        <ReserveButtonWrapper
+          onClick={() => {
+            navigator("/book/2/" + props.data.id);
+          }}
+        >
+          예매하기
+        </ReserveButtonWrapper>
       </ButtonContainer>
     </div>
   );

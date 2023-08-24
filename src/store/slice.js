@@ -51,8 +51,8 @@ const booksSlice = createSlice({
   initialState: initialBooksState,
   reducers: {
     getBooksInfo: (state, action) => {
-      const findData = initialBooksState.filter(data => (data.id === state.id));
-      console.log('(booksSlice) findData : ', state, findData);
+      const findData = initialBooksState.filter((data) => data.id === state.id);
+      console.log("(booksSlice) findData : ", state, findData);
       return findData;
     },
     // 액션 정의

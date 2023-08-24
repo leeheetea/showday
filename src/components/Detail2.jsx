@@ -53,9 +53,6 @@ const Detail2 = (props) => {
     { id: 5, name: "예매/취소", content: "내용5" },
   ];
 
-  console.log("props", props);
-  console.log(props.detail);
-
   const selectMenuHandler = (index) => {
     clickTab(index);
   };

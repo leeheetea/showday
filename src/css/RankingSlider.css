@@ -1,6 +1,7 @@
 .ranking-slider-container {
   text-align: center;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

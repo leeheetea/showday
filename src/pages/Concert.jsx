@@ -8,7 +8,7 @@ import { useRankingType } from "../store/RankingTypeContext";
 
 const Concert = () => {
   const concerts = useSelector((state) => state.concerts);
-  const { rankingType, setRankingType } = useRankingType();
+  const { setRankingType } = useRankingType();
   setRankingType("concert");
 
   return (
@@ -19,7 +19,7 @@ const Concert = () => {
       <div className="concert-title-container">
         <h1>콘서트</h1>
       </div>
-      <div className="muscial-header">
+      <div className="concert-header">
         <div className="concert-text-container">
           <h2>랭킹</h2>
         </div>

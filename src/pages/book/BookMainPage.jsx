@@ -3,7 +3,6 @@ import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Header from "../../components/Header";
-import BookButton from "../../components/book/BookButton";
 import BookHeader from "../../components/book/BookHeader";
 import ChangeDatePage from "../../pages/book/ChangeDatePage";
 import ChooseSeatsPage from "../../pages/book/ChooseSeatsPage";
@@ -23,11 +22,6 @@ const BookMainPage = (data) => {
   console.log("(BookMainPage) : ", dispatch(getBooksInfo(id)));
 
   // const [isVisibleBookContainer, setIsVisibleBookContainer] = useState(false);
-
-  const handleBookBtnClick = () => {
-    // setIsVisibleBookContainer(!isVisibleBookContainer);
-    // console.log('예약하기');
-  };
 
   const handleStepClick = (index) => {
     // console.log('[BookMainPage] onBookStepClick index : ', currentTab, index);

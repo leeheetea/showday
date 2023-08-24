@@ -9,14 +9,11 @@ import { useParams } from "react-router-dom";
 import pagesData from "../totalData.json";
 import { styled } from "styled-components";
 
-
 const DetailMainContainer = styled.div`
   margin: 10%;
   margin-top: 0;
-`
+`;
 const DetailPage = (props) => {
-
-const DetailPage = () => {
   const { id } = useParams();
   const pageData = pagesData.find((data) => data.id === id);
 

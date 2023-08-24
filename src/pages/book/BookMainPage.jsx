@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
 
 import Header from '../../components/Header';
 import BookButton from '../../components/book/BookButton';
@@ -11,23 +12,29 @@ import CheckBooksPage from '../../pages/book/CheckBooksPage';
 import PaymentPage from './PaymentPage';
 import BookInfoView from '../../components/book/BookInfoView'
 import './BookMainPage.css'
+import { getBooksInfo } from '../../store/slice';
 
-const BookMainPage = () => {
+const BookMainPage = (data) => {
+  const { id } = useParams();
   const navigator = useNavigate();
+  const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(1);
+
+  console.log('(BookMainPage) : ', dispatch(getBooksInfo(id)));
 
   // const [isVisibleBookContainer, setIsVisibleBookContainer] = useState(false);
 
   const handleBookBtnClick = () => {
     // setIsVisibleBookContainer(!isVisibleBookContainer);
-    console.log('예약하기');
+    // console.log('예약하기');
   }
 
   const handleStepClick = (index) => {
       // console.log('[BookMainPage] onBookStepClick index : ', currentTab, index);
       setCurrentTab(index);
-      console.log('==== index : ', index);
-      navigator("/book/" + index);
+      // console.log('==== index : ', index);
+      // console.log('==== data2 : ', data);
+      navigator('/book/' + index + '/' + id);
   }
   
 /*   function TabContent() {
@@ -51,8 +58,7 @@ const BookMainPage = () => {
       <div className='bookLeftContainer'>
        {/*  <TabContent/> */}
        <Routes>
-          {/* <Route path="/" element={<BookMainPage />}></Route> */}
-          <Route path="1" element={<ChangeDatePage />}></Route>
+          <Route path='1' element={<ChangeDatePage />}></Route>
           <Route path="2" element={<ChooseSeatsPage />}></Route>
           <Route path="3" element={<DiscountPricePage />}></Route>
           <Route path="4" element={<CheckBooksPage />}></Route>

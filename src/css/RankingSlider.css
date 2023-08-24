@@ -3,10 +3,6 @@
   margin: 0 auto;
 }
 
-.ranking-slider {
-  cursor: pointer;
-}
-
 @media (max-width: 767px) {
   .ranking-slider {
     width: 10rem;

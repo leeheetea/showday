@@ -42,12 +42,19 @@ const Detail2 = (props) => {
   const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
-    { id: 1, name: "상세정보", content: <img src={props.detail} alt="" /> },
+    {
+      id: 1,
+      name: "상세정보",
+      content: <img src={props.data.detail} alt="" />,
+    },
     { id: 2, name: "관람후기", content: "내용2" },
     { id: 3, name: "기대평가", content: "내용3" },
     { id: 4, name: "장소정보", content: "내용4" },
     { id: 5, name: "예매/취소", content: "내용5" },
   ];
+
+  console.log("props", props);
+  console.log(props.detail);
 
   const selectMenuHandler = (index) => {
     clickTab(index);
@@ -67,9 +74,7 @@ const Detail2 = (props) => {
             </li>
           ))}
         </TabMenuContainter>
-        <div>
-          <p>{menuArr[currentTab].content}</p>
-        </div>
+        <div>{menuArr[currentTab].content}</div>
       </DetailContainer>
     </>
   );

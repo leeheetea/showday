@@ -3,7 +3,6 @@ import { FaShareAlt } from "react-icons/fa";
 import "../App.css";
 import { useState } from "react";
 import Modal from "react-modal";
-import show from "../concertData.json";
 
 const Main = ({ data }) => {
   const MainImgTextContainer = styled.div`

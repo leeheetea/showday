@@ -10,6 +10,11 @@ import { Provider } from "react-redux";
 import store from "../src/store/store";
 import { RankingTypeProvider } from "./store/RankingTypeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import Login from './page/Login'
+import FindId from './page/FindId'
+import AccountCreate from './page/AccountCreate'
+import AccountTerm from './page/AccountTerm'
+import AccountForm from './page/AccountForm'
 
 function App() {
   return (
@@ -24,6 +29,11 @@ function App() {
             <Route path="/theatre" element={<Theatre />}></Route>
             <Route path="/detailpage/:id?" element={<DetailPage />} />
             <Route path="/servicepage" element={<ServicePage />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/findid" element={<FindId />}></Route>
+            <Route path="/accountcreate" element={<AccountCreate />}></Route>
+            <Route path="/accountterm" element={<AccountTerm />}></Route>
+            <Route path="/accountform" element={<AccountForm />}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

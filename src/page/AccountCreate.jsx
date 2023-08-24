@@ -13,7 +13,7 @@ const AccountCreate = () => {
           <h2 className='title'>기분최고조 회원가입</h2>
           <p className='text'>지금 회원가입 하신 후 다양한 서비스를 경험해보세요</p>
           <button type='button' className='IMBtn' onClick={() => {
-            window.location.href = '/account-term';
+            window.location.href = '/accountterm';
           }}>개인 회원가입</button>
           <div className='snsLoginDiv'>
             <ul className='snsLoginUl'>

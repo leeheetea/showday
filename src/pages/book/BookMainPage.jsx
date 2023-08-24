@@ -14,17 +14,9 @@ const BookMainPage = (data) => {
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(1);
 
-<<<<<<< HEAD
-  const handleBookBtnClick = () => {};
-
-  const handleStepClick = (index) => {
-    setCurrentTab(index);
-    navigator(`/book/${index}/${id}`);
-=======
   const handleStepClick = (index) => {
     setCurrentTab(index);
     navigator("/book/" + id + "/" + index);
->>>>>>> main
   };
 
   return (
@@ -34,17 +26,7 @@ const BookMainPage = (data) => {
         <BookHeader id={id} onBookStepClick={handleStepClick} />
       </div>
       <div className="bookLeftContainer">
-<<<<<<< HEAD
-        <Routes>
-          <Route path="1" element={<ChangeDatePage />}></Route>
-          <Route path="2" element={<ChooseSeatsPage />}></Route>
-          <Route path="3" element={<DiscountPricePage />}></Route>
-          <Route path="4" element={<CheckBooksPage />}></Route>
-          <Route path="5" element={<PaymentPage />}></Route>
-        </Routes>
-=======
         <Outlet />
->>>>>>> main
       </div>
       {currentTab !== 5 && <BookInfoView />}
     </>

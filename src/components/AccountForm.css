@@ -1,0 +1,407 @@
+.AccountFormWrapper {
+  width: 500px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 75px;
+  padding-bottom: 40px;
+  display: block;
+}
+
+.uBlock {
+  margin: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  margin-bottom: 15px;
+}
+
+/* ************************************* */
+.uBlock .inputArea_id {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock .inputArea_id label {
+  font-weight: bold;
+  width: 13%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_id input {
+  border: none;
+  width: 100%;
+}
+
+/* ************************************** */
+.uBlock .inputArea_password {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.uBlock .inputArea_password .inputAreaLabel {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  font-weight: bold;
+  width: 60px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_password label {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.uBlock .inputArea_password input {
+  border: none;
+  width: 100%;
+}
+
+/* ******************************* */
+.uBlock .inputArea_password_verify {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.uBlock .inputArea_password_verify .inputAreaLabel {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  font-weight: bold;
+  width: 60px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_password_verify label {
+  width: 32%;
+  text-align: left;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_password_verify input {
+  border: none;
+  width: 100%;
+}
+
+/* ******************************* */
+.uBlock .inputArea_name {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock .inputArea_name label {
+  font-weight: bold;
+  width: 8%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_name input {
+  border: none;
+  width: 100%;
+}
+
+/* ******************************* */
+
+.uBlock .inputArea_email {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock .inputArea_email label {
+  font-weight: bold;
+  width: 18%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_email input {
+  border: none;
+  width: 100%;
+}
+
+.uBlock .inputArea_email select {
+  text-align: left;
+}
+
+/* ******************************* */
+.uBlock .inputArea_phone {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock .inputArea_phone label {
+  font-weight: bold;
+  width: 18%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock .inputArea_phone input {
+  border: none;
+  width: 100%;
+}
+
+.uBlock .inputArea_phone button {
+  width: 28%;
+}
+
+/* ******************************* */
+
+
+/* ********************** display: none********************** */
+.errorText {
+  font-size: 13px;
+  line-height: 20px;
+  margin-top: 5px;
+  padding: 0 5px;
+  color: #dc941b;
+  display: none;
+}
+
+.accountValidBlock {
+  display: none;
+}
+
+.uBlock_certification {
+  display: none;
+}
+
+.uBlock_agreeBlock {
+  display: none;
+}
+
+.uBlock_under14{
+  margin: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  margin-bottom: 15px;
+  display: none;
+}
+
+/* *************************************************************************** */
+.uBlock_under14 .inputArea_name {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock_under14 .inputArea_name label {
+  font-weight: bold;
+  width: 8%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock_under14 .inputArea_name input {
+  border: none;
+  width: 100%;
+}
+
+.uBlock_under14 .inputArea_email {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.uBlock_under14 .inputArea_email label {
+  font-weight: bold;
+  width: 18%;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.uBlock_under14 .inputArea_email input {
+  border: none;
+  width: 100%;
+}
+
+.uBlock_under14 .inputArea_email select {
+  text-align: left;
+}
+/* *************************************************************************** */
+
+/* ********************** */
+
+.radioBoxWrapper {
+  display: flex;
+  background-color: #f3f3f3;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.radioBox {
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.radioBox input[type=radio] {
+  display: none;
+}
+
+.radioBox label {
+  height: 100%;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 38px;
+}
+
+.radioBox input[type=radio]:checked+label span {
+  background: #fff;
+  color: #000;
+}
+
+.radioBox label:hover {
+  color: #666;
+  background-color: #fff;
+}
+
+.radioBox input[type=radio]+label {
+  background: #F9FAFC;
+  color: #666;
+}
+
+.noticeText {
+  font-size: 13px;
+  color: #999;
+  margin-top: 5px;
+  padding: 0 5px;
+}
+
+/* *************************************** */
+.uBlock_validation_bold {
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.accountValidBlockLogin {
+  display: flex;
+  align-items: center;
+}
+
+.agreeBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ******************************* */
+
+/* Basic styling */
+
+[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+  color: dodgerblue;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  outline: 0;
+  flex-grow: 0;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  transition: background 300ms;
+  cursor: pointer;
+}
+
+/* Pseudo element for check styling */
+
+[type=checkbox]::before {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: transparent;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px #CCD3D8;
+}
+
+/* Checked */
+
+[type=checkbox]:checked {
+  background-color: currentcolor;
+}
+
+[type=checkbox]:checked::before {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+
+/* Disabled */
+
+[type=checkbox]:disabled {
+  background-color: #CCD3D8;
+  opacity: 0.84;
+  cursor: not-allowed;
+}
+
+/* IE */
+
+[type=checkbox]::-ms-check {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: transparent;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px #CCD3D8;
+}
+
+[type=checkbox]:checked::-ms-check {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+
+/* ******************************* */
+.submitBtn {
+  margin-top: 45px;
+}
+
+.submitBtn button {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+}

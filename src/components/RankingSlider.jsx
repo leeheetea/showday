@@ -3,11 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from "../img/slide1.webp";
-import img2 from "../img/slide2.webp";
-import img3 from "../img/slide3.webp";
-import img4 from "../img/slide4.webp";
-import img5 from "../img/slide5.webp";
-import img6 from "../img/slide6.webp";
 import "../css/RankingSlider.css";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
@@ -34,14 +29,7 @@ const RankingSlider = () => {
     [theatres]
   );
 
-  const [slideData, setSlidData] = useState([
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-  ]);
+  const [slideData, setSlidData] = useState([img1]);
   const { rankingType } = useRankingType();
 
   useEffect(() => {
@@ -99,7 +87,6 @@ const RankingSlider = () => {
         {slideData.map((data, index) => (
           <div className="ranking-slider-container" key={index}>
             <span className="ranking-text">{index + 1}</span>
-
             <div
               onClick={() => navigator("/detailpage/" + data.id)}
               key={index}

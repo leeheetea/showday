@@ -6,10 +6,12 @@ import MobileNavigator from "../components/MobileNavigator";
 import "../css/Muscial.css";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
+import { useNavigate } from "react-router-dom";
 
 const Musical = () => {
   const musicals = useSelector((state) => state.musicals);
-  const { rankingType, setRankingType } = useRankingType();
+  const { setRankingType } = useRankingType();
+  const navigator = useNavigate();
   setRankingType("musical");
 
   return (
@@ -33,7 +35,12 @@ const Musical = () => {
         <div className="musical-item-grid">
           {musicals.map((musical, index) => (
             <div className="musical-item-container" key={index}>
-              <img className="musical-item" src={musical.url} alt="" />
+              <img
+                onClick={() => navigator("/detailpage/" + musical.id)}
+                className="musical-item"
+                src={musical.url}
+                alt=""
+              />
               <span className="musical-item-title">{musical.title}</span>
             </div>
           ))}

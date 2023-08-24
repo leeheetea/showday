@@ -5,15 +5,13 @@ import Header from "../components/Header";
 import LaptopNavigator from "../components/LaptopNavigator";
 import MobileNavigator from "../components/MobileNavigator";
 import "../css/Theatre.css";
+import { useSelector } from "react-redux";
+import { useRankingType } from "../store/RankingTypeContext";
 
 const Theatre = () => {
-  const theatreItem = [1, 2, 3, 4, 5, 6, 7, 8];
-
-  const Itemimg = styled.img`
-    width: 100%;
-    heigh: 100%;
-    object-fit: cover;
-  `;
+  const theatres = useSelector((state) => state.theatres);
+  const { setRankingType } = useRankingType();
+  setRankingType("theatre");
 
   return (
     <div>
@@ -23,7 +21,7 @@ const Theatre = () => {
       <div className="theatre-title-container">
         <h1>연극</h1>
       </div>
-      <div className="muscial-header">
+      <div className="theatre-header">
         <div className="theatre-text-container">
           <h2>랭킹</h2>
         </div>
@@ -32,16 +30,14 @@ const Theatre = () => {
         </div>
       </div>
       <div className="theatre-article">
-        <h2 className="theatre-subtitle">추천 작품</h2>
+        <div>
+          <h2 className="theatre-subtitle">추천 작품</h2>
+        </div>
         <div className="theatre-item-grid">
-          {theatreItem.map((number, index) => (
+          {theatres.map((theatre, index) => (
             <div className="theatre-item-container" key={index}>
-              <Itemimg
-                className="muscial-item"
-                src="../img/slide1.webp"
-                alt=""
-              />
-              <span>{number}</span>
+              <img className="theatre-item" src={theatre.url} alt="" />
+              <span className="concert-item-title">{theatre.title}</span>
             </div>
           ))}
         </div>

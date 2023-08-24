@@ -40,6 +40,7 @@ const Main = ({ data }) => {
   `;
   const DetailInfo = styled.div`
     margin: 0 0 0 2rem;
+    white-space: nowrap;
     .product_heading {
       display: flex;
       justify-content: space-between;

@@ -52,6 +52,9 @@ const Detail2 = (props) => {
     { id: 5, name: "예매/취소", content: "내용5" },
   ];
 
+  console.log("props", props);
+  console.log(props.detail);
+
   const selectMenuHandler = (index) => {
     clickTab(index);
   };
@@ -70,9 +73,7 @@ const Detail2 = (props) => {
             </li>
           ))}
         </TabMenuContainter>
-        <div>
-          <p>{menuArr[currentTab].content}</p>
-        </div>
+        <div>{menuArr[currentTab].content}</div>
       </DetailContainer>
     </>
   );

@@ -4,6 +4,9 @@
 .sc-fLBbxL{
   min-width: 22rem; 
 }
+.sc-fnOeiS{
+  min-width: 22rem;
+}
 .sc-hHvkSs{
   min-width: 28rem;
 }
@@ -37,6 +40,7 @@
   transition:200ms ease all;
 }
 .detailLabelContainer span{
+  white-space: nowrap;
   font-size: 20px;
   padding: 0.5rem 2.5rem;
 }

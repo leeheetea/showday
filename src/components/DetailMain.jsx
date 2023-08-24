@@ -5,7 +5,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import show from "../concertData.json";
 
-const Main = ({ data }) => {
+const Main = (props) => {
   const MainImgTextContainer = styled.div`
     width: 100%;
     display: flex;
@@ -97,12 +97,12 @@ const Main = ({ data }) => {
     <div>
       <MainImgTextContainer id="content">
         <div>
-          <ImgSizeWrapper src={data.url} alt="/" />
+          <ImgSizeWrapper src={show[1].url} alt="/" />
         </div>
 
         <DetailInfo className="product_detail_info">
           <div className="product_heading">
-            <h2 className="product_title">{data.title}</h2>
+            <h2 className="product_title">{show[1].title}</h2>
             <span className="product_shareButton">
               <button onClick={() => setShareModalIsOpen(true)}>
                 <FaShareAlt size="20" />
@@ -120,19 +120,19 @@ const Main = ({ data }) => {
           <ProductInfoListContainer className="product_info_list1">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">장소</InfoTitle>
-              <div>{data.place}</div>
+              <div>{show[1].place}</div>
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">기간</InfoTitle>
-              <div>{data.period}</div>
+              <div>{show[1].period}</div>
             </li>
           </ProductInfoListContainer>
 
           <ProductInfoListContainer className="product_info_list2 ">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
-              <div>{data.price}</div>
+              <div>{show[1].price}</div>
             </li>
           </ProductInfoListContainer>
         </DetailInfo>

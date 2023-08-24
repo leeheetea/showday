@@ -1,0 +1,17 @@
+.helpContIconContainer{
+  margin: 20px;
+}
+.helpContIconContainer div{
+  margin: 30px auto;
+}
+
+.helpmain_list ul{
+  margin: 50px 20px;
+  padding: 0;
+}
+.helpmain_list li {
+  margin: 20px 0;
+}
+.smallIcon{
+  font-size: 40px;
+}

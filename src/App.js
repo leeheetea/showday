@@ -40,7 +40,7 @@ function App() {
             <Route path="/accountcreate" element={<AccountCreate />}></Route>
             <Route path="/accountterm" element={<AccountTerm />}></Route>
             <Route path="/accountform" element={<AccountForm />}></Route>
-            <Route path="/book/:index/:id" element={<BookMainPage />}></Route>
+            <Route path="/book/:index/:id/*" element={<BookMainPage />}></Route>
             <Route path="/mypage" element={<MyPage />}></Route>
             <Route path="/mypage/point" element={<MyPointPage />}></Route>
             <Route path="*" element={<NotFound />} />

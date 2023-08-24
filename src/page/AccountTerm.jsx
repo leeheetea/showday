@@ -1,7 +1,9 @@
 import React from 'react'
 import '../components/AccountTerm.css'
+import { useNavigate } from 'react-router-dom'
 
 const AccountTerm = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className='termContent'>
@@ -134,7 +136,9 @@ const AccountTerm = () => {
 
           {/* 다음 단계 버튼 */}
           <div className='termsSubmit'>
-            <button className='termsSubmitBtn'>다음 단계</button>
+            <button  className='termsSubmitBtn' onClick={() => {
+               navigate("/accountform");
+            }}>다음 단계</button>
           </div>
         </div>
       </div>

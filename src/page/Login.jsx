@@ -4,6 +4,7 @@ import NaverLogin from '../components/NaverLogin'
 // import GoogleLogin from '../components/GoogleLogin'
 import { GoogleLogin } from '@react-oauth/google'
 import '../components/Login.css'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -99,7 +100,7 @@ const Login = () => {
         <div className='StyledHelp'>
           <a className='StyledHelpMenu' onClick={findIdPopup}>아이디 찾기 | </a>
           <a className='StyledHelpMenu' onClick={findPwdPopup}>비밀번호 찾기 | </a>
-          <a className='StyledHelpMenu' href="/accountcreate">회원가입</a>
+          <Link to='/accountcreate' className='StyledHelpMenu'>회원가입</Link>
         </div>
       </div>
     </div>

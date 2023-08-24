@@ -27,6 +27,24 @@ const Login = () => {
     console.log(data);
   }
 
+  const findIdPopup = () => {
+    const width = 380;
+    const height = 600;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+
+    window.open('/findid', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+  };
+
+  const findPwdPopup = () => {
+    const width = 380;
+    const height = 600;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+
+    window.open('/findpwd', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+  };
+
   return (
     <div className='StyledLoginWrap'>
       <div className='StyledBody' >
@@ -79,9 +97,9 @@ const Login = () => {
         </div>
 
         <div className='StyledHelp'>
-          <a className='StyledHelpMenu' href="">아이디 찾기 | </a>
-          <a className='StyledHelpMenu' href="">비밀번호 찾기 | </a>
-          <a className='StyledHelpMenu' href="">회원가입</a>
+          <a className='StyledHelpMenu' onClick={findIdPopup}>아이디 찾기 | </a>
+          <a className='StyledHelpMenu' onClick={findPwdPopup}>비밀번호 찾기 | </a>
+          <a className='StyledHelpMenu' href="/accountcreate">회원가입</a>
         </div>
       </div>
     </div>

@@ -1,111 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import img1 from "../img/slide1.webp";
-import img2 from "../img/slide2.webp";
-import img3 from "../img/slide3.webp";
-import img4 from "../img/slide4.webp";
-import img5 from "../img/slide5.webp";
-import img6 from "../img/slide6.webp";
-import "../css/RankingSlider.css";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useRankingType } from "../store/RankingTypeContext";
+import jsonData from "../musicalData.json";
 import { useNavigate } from "react-router-dom";
+import "../css/ResponsiveSlider.css";
 
-const RankingSlider = () => {
+const ResponsiveSlider = () => {
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
   const navigator = useNavigate();
 
-  const musicals = useSelector((state) => state.musicals);
-  const concerts = useSelector((state) => state.concerts);
-  const theatres = useSelector((state) => state.theatres);
-
-  const musicalItems = useMemo(
-    () => musicals.map((musical) => ({ url: musical.url, id: musical.id })),
-    [musicals]
-  );
-  const concertItems = useMemo(
-    () => concerts.map((concert) => ({ url: concert.url, id: concert.id })),
-    [concerts]
-  );
-  const theatreItems = useMemo(
-    () => theatres.map((theatre) => ({ url: theatre.url, id: theatre.id })),
-    [theatres]
-  );
-
-  const [slideData, setSlidData] = useState([
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-  ]);
-  const { rankingType } = useRankingType();
-
   useEffect(() => {
-    switch (rankingType) {
-      case "musical":
-        setSlidData(musicalItems);
-        break;
-      case "concert":
-        setSlidData(concertItems);
-        break;
-      default:
-        setSlidData(theatreItems);
-        break;
-    }
-  }, [rankingType, musicalItems, concertItems, theatreItems]);
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const defaultImages = jsonData
+    .filter((state) => state.smallBannerUrl && state.smallBannerUrl !== "")
+    .map((state) => ({
+      bannerUrl: state.bannerUrl,
+      url: state.smallBannerUrl,
+      id: state.id,
+    }));
+
+  const images = isLargeScreen
+    ? defaultImages.map((item) => ({ url: item.bannerUrl, id: item.id }))
+    : defaultImages.map((item) => ({ url: item.url, id: item.id }));
 
   const settings = {
-    dots: false,
-    infinite: false,
-    slidesToShow: 6,
-    slidesToScroll: 2,
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     initialSlide: 0,
+    autoplay: true,
+    centerMode: false,
+    centerPadding: "500px",
     responsive: [
-      {
-        breakpoint: 2048,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 3,
-          infinite: false,
-          dots: true,
-        },
-      },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 500,
+        breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          initialSlide: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
         },
       },
     ],
   };
 
   return (
-    <div className="ranking-slider-container">
+    <div className="responsive-slider-container">
       <Slider {...settings}>
-        {slideData.map((data, index) => (
-          <div className="ranking-slider-container" key={index}>
-            <span className="ranking-text">{index + 1}</span>
-
-            <div
-              onClick={() => navigator("/detailpage/" + data.id)}
-              key={index}
-            >
-              <img className="ranking-slider" src={data.url} alt="" />
-            </div>
+        {images.map((item, index) => (
+          <div key={index}>
+            <img
+              onClick={() => {
+                navigator("/detailpage/" + item.id);
+              }}
+              className="responsive-slider"
+              src={item.url}
+              alt=""
+            />
           </div>
         ))}
       </Slider>
@@ -113,4 +96,4 @@ const RankingSlider = () => {
   );
 };
 
-export default RankingSlider;
+export default ResponsiveSlider;

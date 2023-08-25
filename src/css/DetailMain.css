@@ -1,17 +1,7 @@
-.body {
+.detailMainBody{
   margin-top: 50px;
-
   min-width: 28rem;
 }
-/* min-width: 22rem;  */
-
-/* .sc-fLBbxL{
-}
-.sc-fnOeiS{
-  min-width: 22rem;
-}
-.sc-hHvkSs{
-} */
 #content {
   min-width: 28rem;
   background: white;

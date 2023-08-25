@@ -5,6 +5,7 @@ header {
   width: 100%;
   z-index: 40;
   background-color: white;
+  padding-bottom: 1rem;
 }
 
 @media (max-width: 767px) {

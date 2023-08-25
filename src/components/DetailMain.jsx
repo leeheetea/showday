@@ -96,7 +96,7 @@ const Main = ({ data }) => {
   
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
   return (
-    <div className="body">
+    <div className="detailMainBody">
       <MainImgTextContainer id="content">
         <div>
           <ImgSizeWrapper src={data.url} alt="/" />

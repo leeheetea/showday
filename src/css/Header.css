@@ -83,6 +83,7 @@ header {
   }
 
   .searchbar-container {
+    width: 30%;
     position: relative;
   }
 
@@ -99,9 +100,13 @@ header {
     padding-left: 1rem;
   }
 
+  .search-container-menu {
+    width: 48%;
+  }
+
   .search-container-menu-text {
     cursor: pointer;
-    display: block;
+    display: inline-block;
     margin: 0 0.8rem;
   }
 

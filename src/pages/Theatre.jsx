@@ -41,7 +41,7 @@ const Theatre = () => {
           {theatres.map((theatre, index) => (
             <div className="theatre-item-container" key={index}>
               <img
-                onClick={() => navigator("/detailpage" + theatre.id)}
+                onClick={() => navigator("/detailpage/" + theatre.id)}
                 className="theatre-item"
                 src={theatre.url}
                 alt=""

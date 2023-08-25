@@ -22,7 +22,6 @@ import {
 import StyledLink from "./styled";
 
 const ServiceCenterMainContainer = styled.div`
-  
   background: rgb(246, 246, 246);
   padding: 80px;
 `;
@@ -33,6 +32,7 @@ const ServiceCenterContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   border: 1px solid black;
   text-align: center;
+  margin: 0 auto;
 
   .serviceCenterTitle {
     color: white;
@@ -70,7 +70,6 @@ const HelpContContainer = styled.div`
   margin-top: 15px;
   display: grid;
   grid-template-columns: 240px 440px 440px;
-
 `;
 const ButtonContainer = styled.div`
   ul {
@@ -191,45 +190,58 @@ const ServiceMain = () => {
         <div className="helpContIconContainer">
           <div>
             <a href="/servicepage">
-              <strong>예매 도움 받기<FaSearch></FaSearch><FaAngleRight /></strong>
-              <hr/>
+              <strong>
+                예매 도움 받기<FaSearch></FaSearch>
+                <FaAngleRight />
+              </strong>
+              <hr />
               <span>예매 안내를 통해서 편리한 예매방법을 알아보세요.</span>
             </a>
           </div>
           <div>
             <a href="/servicepage">
               <strong>
-                <span color="red">1:1 상담</span> 받기<FaRocketchat ></FaRocketchat><FaAngleRight />
+                <span color="red">1:1 상담</span> 받기
+                <FaRocketchat></FaRocketchat>
+                <FaAngleRight />
               </strong>
-              <hr/>
+              <hr />
               <span>빠르고 간편한 온라인 1:1문의를 이용해보세요.</span>
             </a>
           </div>
           <div>
             <a href="/servicepage">
-              <strong>FAQ 보기<FaQuestionCircle></FaQuestionCircle><FaAngleRight /></strong>
-              <hr/>
+              <strong>
+                FAQ 보기<FaQuestionCircle></FaQuestionCircle>
+                <FaAngleRight />
+              </strong>
+              <hr />
               <span>궁금한 질문들을 쉽고 편하게 한번에 알아보세요.</span>
             </a>
           </div>
           <div>
             <a href="/servicepage">
-              <strong>티켓 소실 알아보기<FaQuora ></FaQuora><FaAngleRight /></strong>
-              <hr/>
+              <strong>
+                티켓 소실 알아보기<FaQuora></FaQuora>
+                <FaAngleRight />
+              </strong>
+              <hr />
               <span>티켓링크의 새로운 소식들을 빠르게 접해보세요.</span>
             </a>
           </div>
           <div>
-            <strong>예매상담하기<FaMicroblog></FaMicroblog></strong>
-            <hr/>
-            <strong>1111-1111</strong>{' '}
-            <span>10:00~19:00 (월~일)</span>
+            <strong>
+              예매상담하기<FaMicroblog></FaMicroblog>
+            </strong>
+            <hr />
+            <strong>1111-1111</strong> <span>10:00~19:00 (월~일)</span>
           </div>
           <div>
-            <strong>문의하기<FaTeamspeak></FaTeamspeak></strong>
-            <hr/>
-            <strong>2222-2222</strong>{' '}
-            <span>10:00~19:00 (월~일)</span>
+            <strong>
+              문의하기<FaTeamspeak></FaTeamspeak>
+            </strong>
+            <hr />
+            <strong>2222-2222</strong> <span>10:00~19:00 (월~일)</span>
           </div>
         </div>
 
@@ -237,7 +249,7 @@ const ServiceMain = () => {
           <div>
             <ul>
               <strong>자주 묻는 질문</strong>
-              <hr/>
+              <hr />
               <li>
                 <a href="#">비밀번호 변경을 하고 싶어요.</a>
               </li>
@@ -259,7 +271,7 @@ const ServiceMain = () => {
           <div>
             <ul>
               <strong>최근 공지 사항</strong>
-              <hr/>
+              <hr />
               <li>
                 <a href="#">
                   {"[단독판매]제 33기 TBC 가요아카데미 (선착순 ..."}

@@ -3,7 +3,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import "../css/ServiceMain.css";
 import "../css/MyPage.css";
 
 import { FaCoins, FaTicketAlt, FaAngleRight, FaCartPlus } from "react-icons/fa";
@@ -22,6 +21,7 @@ const ServiceCenterContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   border: 1px solid black;
   text-align: center;
+  margin: 0 auto;
 
   .serviceCenterTitle {
     color: white;

@@ -99,6 +99,7 @@ header {
   }
 
   .search-container-menu-text {
+    cursor: pointer;
     display: block;
     margin: 0 0.8rem;
   }
@@ -136,6 +137,7 @@ header {
   }
 
   .search-container-menu-text {
+    cursor: pointer;
     margin: 0 0.8rem;
   }
 

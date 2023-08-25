@@ -34,7 +34,7 @@ const Musical = () => {
         </div>
       </div>
       <div className="musical-article">
-        <h2 className="musical-subtitle">추천 작품</h2>
+        <h2 className="musical-subtitle">추천 뮤지컬</h2>
         <div className="musical-item-grid">
           {musicals.map((musical, index) => (
             <div className="musical-item-container" key={index}>

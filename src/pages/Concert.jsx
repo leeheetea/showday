@@ -35,7 +35,7 @@ const Concert = () => {
       </div>
       <div className="concert-article">
         <div>
-          <h2 className="concert-subtitle">추천 작품</h2>
+          <h2 className="concert-subtitle">추천 콘서트</h2>
         </div>
         <div className="concert-item-grid">
           {concerts.map((concert, index) => (

@@ -26,14 +26,11 @@
   margin-top: 10px;
   padding: 0 20px;
 }
-.title{
+.footer_title{
   font-size: 12px;
   font-weight: bold;
 }
 
-.footer_address{
-
-}
 .footer_address p{
   font-size: 12px;
   margin: 8px;

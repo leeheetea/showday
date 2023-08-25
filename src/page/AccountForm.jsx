@@ -136,6 +136,14 @@ const AccountForm = () => {
     return !showErrorId && !showErrorPassword && !showErrorPasswordVerify && !showErrorEmail && !showErrorUnder14Email;
   }, [showErrorId, showErrorPassword, showErrorPasswordVerify, showErrorEmail, showErrorUnder14Email]);
 
+//   const areFieldsValid = useCallback(() => {
+//     if (isCheckedUnder14) {
+//         return !showErrorId && !showErrorPassword && !showErrorPasswordVerify && !showErrorEmail && !showErrorUnder14Email;
+//     } else {
+//         return !showErrorId && !showErrorPassword && !showErrorPasswordVerify && !showErrorEmail;
+//     }
+// }, [showErrorId, showErrorPassword, showErrorPasswordVerify, showErrorEmail, showErrorUnder14Email, isCheckedUnder14]);
+
   useEffect(() => {
     setIsSubmitEnabled(
       isAllFieldsValid() &&

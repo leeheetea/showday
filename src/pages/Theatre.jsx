@@ -7,10 +7,12 @@ import MobileNavigator from "../components/MobileNavigator";
 import "../css/Theatre.css";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
+import { useNavigate } from "react-router-dom";
 
 const Theatre = () => {
   const theatres = useSelector((state) => state.theatres);
   const { setRankingType } = useRankingType();
+  const navigator = useNavigate();
   setRankingType("theatre");
 
   return (
@@ -37,6 +39,12 @@ const Theatre = () => {
           {theatres.map((theatre, index) => (
             <div className="theatre-item-container" key={index}>
               <img className="theatre-item" src={theatre.url} alt="" />
+              <img
+                onClick={() => navigator("/detailpage" + theatre.id)}
+                className="theatre-item"
+                src={theatre.url}
+                alt=""
+              />
               <span className="concert-item-title">{theatre.title}</span>
             </div>
           ))}

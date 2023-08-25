@@ -15,6 +15,7 @@ import MyPage from "./pages/MyPage"
 import MyPointPage from "./pages/MyPointPage";
 import SearchPage from "./pages/SearchPage";
 
+
 function App() {
   return (
     <div className="App">

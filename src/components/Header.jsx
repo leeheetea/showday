@@ -23,18 +23,23 @@ const SearchBar = () => {
           </div>
         </div>
         <div className="searchbar-container">
-         <form onSubmit={(e)=>{
-          e.preventDefault();
-          navigate(`/search?query=${encodeURIComponent(searchValue)}`);
-         }}>
-            <input className="searchbar" type="text" 
-                            placeholder="검색어 입력" 
-                            value={searchValue} 
-                            onChange={(e)=>setSearchValue(e.target.value)}/>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate(`/search?query=${encodeURIComponent(searchValue)}`);
+            }}
+          >
+            <input
+              className="searchbar"
+              type="text"
+              placeholder="검색어 입력"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
             <div className="search-icon">
               <RiSearchLine />
             </div>
-         </form>
+          </form>
         </div>
         <div className="search-container-menu">
           <span
@@ -54,7 +59,7 @@ const SearchBar = () => {
             회원가입
           </span>
           <span className="search-container-menu-text">
-            <Link to="/mypage">마이페이지</Link>
+            <Link to="/mypage/point">마이페이지</Link>
           </span>
           <span className="search-container-menu-text">
             <Link to="/servicepage">고객센터</Link>

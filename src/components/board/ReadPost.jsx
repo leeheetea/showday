@@ -21,7 +21,7 @@ function ReadPost() {
 
   const handleDelete = () => {
     dispatch(deletePost(post.id));
-    navigator(-1);
+    navigator(basePath);
   };
 
   return (

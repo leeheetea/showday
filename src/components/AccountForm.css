@@ -220,6 +220,12 @@
   display: none;
 }
 
+.uBlock .p_under14 {
+  font-size: 13px;
+}
+
+
+
 /* *************************************************************************** */
 .uBlock_under14 .inputArea_name {
   border-bottom: 1px solid black;
@@ -319,6 +325,10 @@
 }
 
 /* *************************************** */
+.uBlock_validation {
+  margin-top: 20px;
+}
+
 .uBlock_validation_bold {
   font-weight: bold;
   padding: 10px 0;
@@ -332,6 +342,10 @@
 .agreeBlock {
   display: flex;
   justify-content: space-between;
+}
+
+.agreeBlock span {
+  font-weight: bold;
 }
 
 /* ******************************* */

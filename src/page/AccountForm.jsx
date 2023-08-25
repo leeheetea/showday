@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import '../components/AccountForm.css'
 
 const AccountForm = () => {
@@ -51,9 +51,10 @@ const AccountForm = () => {
   const togglePasswordVerifyVisibility = () => {
     setPasswordVerifyVisible(!passwordVerifyVisible);
   }
-  /////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
   const [email, setEmail] = useState('');
   const [showErrorEmail, setShowErrorEmail] = useState(false);
+
 
   const onChangeEmail = useCallback((e) => {
     setEmail(e.target.value);
@@ -62,16 +63,61 @@ const AccountForm = () => {
     const isValidEmail = emailPattern.test(e.target.value);
     setShowErrorEmail(!isValidEmail);
   }, [])
+
+  const emailInputRef = useRef(null);
+
+  const onChangeEmailSelect = useCallback((e) => {
+    const selectedDomain = e.target.value;
+    setEmail((prevEmail) => {
+      const emailWithoutDomain = prevEmail.split('@')[0];
+      return `${emailWithoutDomain}${selectedDomain}`;
+    });
+
+    if (emailInputRef.current) {
+      emailInputRef.current.focus();
+    }
+  },[])
+
   ////////////////////////////////////////////////////////////////////////////////////
   const [phone, setPhone] = useState('');
 
   const onChangePhone = useCallback((e) => {
-    e.target.value.replace(/[^0-9]/g, '');
+    setPhone(e.target.value.replace(/[^0-9]/g, ''));
+  }, [])
+  /////////////////////////////////////////////////////////
+  const [isCheckedUnder14, setIsCheckedUnder14] = useState(false);
+  const onChangeUnder14 = useCallback((e) => {
+    setIsCheckedUnder14(e.target.checked);
+  }, []);
+  /////////////////////////////////////////////////////////
+  const [under14Email, setUnder14Email] = useState('');
+  const [showErrorUnder14Email, setShowErrorUnder14Email] = useState(false);
+
+  const onChangeUnder14Email = useCallback((e) => {
+    setUnder14Email(e.target.value);
+
+    const under14EmailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidUnder14Email = under14EmailPattern.test(e.target.value);
+    setShowErrorUnder14Email(!isValidUnder14Email);
+  }, []);
+  
+  const under14EmailInputRef = useRef(null);
+
+  const onChangeUnder14EmailSelect = useCallback((e) => {
+    const selectedDomain14 = e.target.value;
+    setUnder14Email((prevUnder14Email) => {
+      const under14EmailWithoutDomain = prevUnder14Email.split('@')[0];
+      return `${under14EmailWithoutDomain}${selectedDomain14}`;
+    });
+
+    if (under14EmailInputRef.current) {
+      under14EmailInputRef.current.focus();
+    }
   },[])
 
 
 
-
+  ///////////////////////////////////////////////////////////////////
 
 
 
@@ -86,6 +132,7 @@ const AccountForm = () => {
               type="text"
               placeholder='6~20자 영문, 숫자'
               name='id'
+              id='id'
               onChange={onChangeId}
             />
           </div>
@@ -103,6 +150,7 @@ const AccountForm = () => {
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder='8~12자 영문, 숫자, 특수문자'
                 name='password'
+                id='password'
                 value={password}
                 onChange={onChangePassword}
               />
@@ -125,6 +173,7 @@ const AccountForm = () => {
                 type={passwordVerifyVisible ? 'text' : 'password'}
                 placeholder='8~12자 영문, 숫자, 특수문자'
                 name='passwordVerify'
+                id='passwordVerify'
                 onChange={onChangePasswordVerify}
               />
             </div>
@@ -140,8 +189,8 @@ const AccountForm = () => {
         {/* 이름 */}
         <div className='uBlock'>
           <div className="inputArea_name">
-            <label htmlFor="">이름</label>
-            <input type="text" />
+            <label htmlFor="name">이름</label>
+            <input type="text" id='name' name='name' />
           </div>
           <div className='errorText'>
             한글과 영문 대,소문자를 사용해주세요.
@@ -153,20 +202,23 @@ const AccountForm = () => {
           <div className="inputArea_email">
             <label htmlFor="email">이메일</label>
             <input
-              type="email"
+              type="text"
               placeholder='someone@example.com'
               name='email'
+              id='email'
+              value={email}
               onChange={onChangeEmail}
+              ref={emailInputRef}
             />
             <div>
               <label htmlFor="">
-                <select name="" id="">
+                <select name="" id="" onChange={onChangeEmailSelect}>
                   <option value="">직접입력</option>
-                  <option value="">@naver.com</option>
-                  <option value="">@hanmail.net</option>
-                  <option value="">@gmail.com</option>
-                  <option value="">@nate.com</option>
-                  <option value="">@hotmail.com</option>
+                  <option value="@naver.com">@naver.com</option>
+                  <option value="@hanmail.net">@hanmail.net</option>
+                  <option value="@gmail.com">@gmail.com</option>
+                  <option value="@nate.com">@nate.com</option>
+                  <option value="@hotmail.com">@hotmail.com</option>
                 </select>
               </label>
             </div>
@@ -189,6 +241,8 @@ const AccountForm = () => {
               placeholder='010 1234 5678'
               maxLength='11'
               name='phone'
+              id='phone'
+              value={phone}
               onChange={onChangePhone}
             />
             <button>인증번호받기</button>
@@ -230,20 +284,24 @@ const AccountForm = () => {
           </div>
           <div className='checkBox'>
             <label htmlFor="">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={isCheckedUnder14}
+                onChange={onChangeUnder14}
+              />
               <span>14세 미만입니다.</span>
             </label>
           </div>
-          <div className='errorText'>
+          <div className='errorText' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
             14세 미만 가입시 법정대리인 동의 필수입니다.
           </div>
         </div>
         <div className='uBlock'>
-          <p>만 14세 미만 회원은 법정대리인(부모님) 동의를 받은 경우만 회원가입 가능합니다.</p>
+          <p className='p_under14'>만 14세 미만 회원은 법정대리인(부모님) 동의를 받은 경우만 회원가입 가능합니다.</p>
         </div>
 
         {/* 만 14세 미만 법정대리인 이름 */}
-        <div className='uBlock_under14'>
+        <div className='uBlock_under14' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
           <div className="inputArea_name">
             <label htmlFor="">이름</label>
             <input type="text" />
@@ -254,24 +312,32 @@ const AccountForm = () => {
         </div>
 
         {/* 만 14세 미만 법정대리인 이메일 */}
-        <div className='uBlock_under14'>
+        <div className='uBlock_under14' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
           <div className="inputArea_email">
-            <label htmlFor="">이메일</label>
-            <input type="email" />
+            <label htmlFor="under14Email">이메일</label>
+            <input
+              type="email"
+              placeholder='someone@example.com'
+              name='under14Email'
+              id='under14Email'
+              value={under14Email}
+              onChange={onChangeUnder14Email}
+              ref={under14EmailInputRef}
+            />
             <div>
               <label htmlFor="">
-                <select name="" id="">
+                <select name="" id="" onChange={onChangeUnder14EmailSelect}>
                   <option value="">직접입력</option>
-                  <option value="">@naver.com</option>
-                  <option value="">@hanmail.net</option>
-                  <option value="">@gmail.com</option>
-                  <option value="">@nate.com</option>
-                  <option value="">@hotmail.com</option>
+                  <option value="@naver.com">@naver.com</option>
+                  <option value="@hanmail.net">@hanmail.net</option>
+                  <option value="@gmail.com">@gmail.com</option>
+                  <option value="@nate.com">@nate.com</option>
+                  <option value="@hotmail.com">@hotmail.com</option>
                 </select>
               </label>
             </div>
           </div>
-          <div className="errorText">
+          <div className="errorText" style={{ display: showErrorUnder14Email ? 'block' : 'none' }}>
             이메일 주소 양식에 맞게 작성해주세요.
           </div>
           <div className='accountValidBlock'>
@@ -281,7 +347,7 @@ const AccountForm = () => {
         </div>
 
         {/* 만 14세 미만 법정대리인 가입동의받기 */}
-        <div className='uBlock_agreeBlock'>
+        <div className='uBlock_agreeBlock' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
           <div className="inputArea">
             <div className='agreeBlock'>
               <span>가입동의받기</span>

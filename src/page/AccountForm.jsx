@@ -1,17 +1,95 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import '../components/AccountForm.css'
 
 const AccountForm = () => {
+  /////////////////////////////////////////////////////////////////////////////////////
+  const [id, setId] = useState('');
+  const [showErrorId, setShowErrorId] = useState(false);
+
+  const onChangeId = useCallback((e) => {
+    setId(e.target.value);
+    const isLengthOutOfRange = e.target.value.length < 6 || e.target.value.length > 20;
+    const hasNonEnglishCharacters = /[^\x00-\x7F]+/.test(e.target.value);
+
+    setShowErrorId(hasNonEnglishCharacters || isLengthOutOfRange);
+  }, []);
+  //////////////////////////////////////////////////////////////////////////////////////
+  const [password, setPassword] = useState('');
+  const [showErrorPassword, setShowErrorPassword] = useState(false);
+
+  const onChangePassword = useCallback((e) => {
+    setPassword(e.target.value);
+    const lengthCondition = e.target.value.length >= 8 && e.target.value.length <= 12;
+    const uppercaseCondition = /[A-Z]+/.test(e.target.value);
+    const lowercaseCondition = /[a-z]+/.test(e.target.value);
+    const numberCondition = /[0-9]+/.test(e.target.value);
+    const specialCharacterCondition = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]+/.test(e.target.value);
+
+    const conditionsMet = lengthCondition && (
+      (uppercaseCondition + lowercaseCondition + numberCondition + specialCharacterCondition) >= 2
+    );
+
+    setShowErrorPassword(!conditionsMet);
+  }, [])
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  }
+  ////////////////////////////////////////////////////////////////////////////////
+  const [passwordVerify, setPasswordVerify] = useState('');
+  const [showErrorPasswordVerify, setShowErrorPasswordVerify] = useState(false);
+
+  const onChangePasswordVerify = useCallback((e) => {
+    setPasswordVerify(e.target.value);
+    const isSamePassword = e.target.value === password ? true : false;
+
+    setShowErrorPasswordVerify(!isSamePassword);
+  }, [password]);
+
+  const [passwordVerifyVisible, setPasswordVerifyVisible] = useState(false);
+  const togglePasswordVerifyVisibility = () => {
+    setPasswordVerifyVisible(!passwordVerifyVisible);
+  }
+  /////////////////////////////////////////////////////////////////////////////////
+  const [email, setEmail] = useState('');
+  const [showErrorEmail, setShowErrorEmail] = useState(false);
+
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidEmail = emailPattern.test(e.target.value);
+    setShowErrorEmail(!isValidEmail);
+  }, [])
+  ////////////////////////////////////////////////////////////////////////////////////
+  const [phone, setPhone] = useState('');
+
+  const onChangePhone = useCallback((e) => {
+    e.target.value.replace(/[^0-9]/g, '');
+  },[])
+
+
+
+
+
+
+
   return (
     <div className='AccountForm'>
       <div className='AccountFormWrapper'>
         {/* 아이디 */}
         <div className='uBlock'>
           <div className="inputArea_id">
-            <label htmlFor="">아이디</label>
-            <input type="text" placeholder='6~20자 영문, 숫자' />
+            <label htmlFor="id">아이디</label>
+            <input
+              type="text"
+              placeholder='6~20자 영문, 숫자'
+              name='id'
+              onChange={onChangeId}
+            />
           </div>
-          <div className="errorText">
+          <div className="errorText" style={{ display: showErrorId ? 'block' : 'none' }}>
             영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다.
           </div>
         </div>
@@ -20,14 +98,20 @@ const AccountForm = () => {
         <div className='uBlock'>
           <div className="inputArea_password">
             <div className='inputAreaLabel'>
-              <label htmlFor="">비밀번호</label>
-              <input type="password" placeholder='8~12자 영문, 숫자, 특수문자' />
+              <label htmlFor="password">비밀번호</label>
+              <input
+                type={passwordVisible ? 'text' : 'password'}
+                placeholder='8~12자 영문, 숫자, 특수문자'
+                name='password'
+                value={password}
+                onChange={onChangePassword}
+              />
             </div>
             <div>
-              <button>보기</button>
+              <button onClick={togglePasswordVisibility}>보기</button>
             </div>
           </div>
-          <div className="errorText">
+          <div className="errorText" style={{ display: showErrorPassword ? 'block' : 'none' }}>
             8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다.
           </div>
         </div>
@@ -36,15 +120,20 @@ const AccountForm = () => {
         <div className='uBlock'>
           <div className="inputArea_password_verify">
             <div className='inputAreaLabel'>
-              <label htmlFor="">비밀번호 확인</label>
-              <input type="password" placeholder='8~12자 영문, 숫자, 특수문자' />
+              <label htmlFor="passwordVerify">비밀번호 확인</label>
+              <input
+                type={passwordVerifyVisible ? 'text' : 'password'}
+                placeholder='8~12자 영문, 숫자, 특수문자'
+                name='passwordVerify'
+                onChange={onChangePasswordVerify}
+              />
             </div>
             <div>
-              <button>보기</button>
+              <button onClick={togglePasswordVerifyVisibility}>보기</button>
             </div>
           </div>
-          <div className="errorText">
-            8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다.
+          <div className="errorText" style={{ display: showErrorPasswordVerify ? 'block' : 'none' }}>
+            비밀번호가 일치하지 않습니다. 다시 입력해주세요.
           </div>
         </div>
 
@@ -62,8 +151,13 @@ const AccountForm = () => {
         {/* 이메일 */}
         <div className='uBlock'>
           <div className="inputArea_email">
-            <label htmlFor="">이메일</label>
-            <input type="email" />
+            <label htmlFor="email">이메일</label>
+            <input
+              type="email"
+              placeholder='someone@example.com'
+              name='email'
+              onChange={onChangeEmail}
+            />
             <div>
               <label htmlFor="">
                 <select name="" id="">
@@ -77,7 +171,7 @@ const AccountForm = () => {
               </label>
             </div>
           </div>
-          <div className="errorText">
+          <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
             이메일 주소 양식에 맞게 작성해주세요.
           </div>
           <div className='accountValidBlock'>
@@ -89,8 +183,14 @@ const AccountForm = () => {
         {/* 휴대폰 */}
         <div className='uBlock'>
           <div className='inputArea_phone'>
-            <label htmlFor="">휴대폰</label>
-            <input type="tel" placeholder='010 1234 5678' />
+            <label htmlFor="phone">휴대폰</label>
+            <input
+              type="tel"
+              placeholder='010 1234 5678'
+              maxLength='11'
+              name='phone'
+              onChange={onChangePhone}
+            />
             <button>인증번호받기</button>
           </div>
           <div className='errorText'>

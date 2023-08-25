@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../components/AccountTerm.css'
 import { useNavigate } from 'react-router-dom'
+import Header from '../components/Header'
 
 const AccountTerm = () => {
   const navigate = useNavigate();
@@ -74,8 +75,8 @@ const AccountTerm = () => {
     setMarketingTerm(isAllSubTermsChecked);
   }
   ////////////////////////////////////////////////////////////////////////
-  console.log('termsChecked.term10: ', termsChecked.term10);
-  console.log('marketingTerm: ', marketingTerm);
+  // console.log('termsChecked.term10: ', termsChecked.term10);
+  // console.log('marketingTerm: ', marketingTerm);
   // useEffect(() => {
   //   if (termsChecked.term10 === true) {
   //     setMarketingTerm(true);
@@ -86,6 +87,7 @@ const AccountTerm = () => {
 
   return (
     <div>
+      <Header></Header>
       <div className='termContent'>
         <div className='termWrapper'>
           <div className='checkBox_allAgree'>

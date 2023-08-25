@@ -1,0 +1,65 @@
+.board {
+  width: 90%;
+  margin: 50px auto;
+}
+
+.board table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.board tr {
+  background-color: rgb(248, 249, 250);
+}
+
+.board th,
+.board td {
+  border-bottom: 1px solid #e1e1e1;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.board th {
+  background-color: #f5f5f5;
+}
+
+.write-button {
+  width: 3rem;
+  display: block;
+  padding: 10px 20px;
+  margin: 20px auto;
+  background-color: blue;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.write-button:hover {
+  background-color: darkblue;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #e1e1e1;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+}

@@ -1,0 +1,43 @@
+.write-container {
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  width: 600px;
+  margin: 50px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.write-container div {
+  margin-bottom: 15px;
+}
+
+.write-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.write-container input,
+.write-container textarea {
+  width: 96%;
+  padding: 10px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+
+.write-container textarea {
+  height: 10rem;
+}
+
+.write-container button {
+  padding: 5px 15px;
+  margin-top: 20px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.write-container button:hover {
+  background-color: darkgreen;
+}

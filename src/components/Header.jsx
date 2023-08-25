@@ -62,7 +62,7 @@ const SearchBar = () => {
             <Link to="/mypage/point">마이페이지</Link>
           </span>
           <span className="search-container-menu-text">
-            <Link to="/servicepage">고객센터</Link>
+            <Link to="/servicepage/servicefirst">고객센터</Link>
           </span>
         </div>
       </div>

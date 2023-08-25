@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-
 import React from "react";
 import styled from "styled-components";
 import "../css/ServiceMain.css";
@@ -11,15 +10,10 @@ import {
   FaTruck,
   FaTicketAlt,
   FaRegCreditCard,
-  FaRocketchat,
-  FaSearch,
   FaAngleRight,
-  FaTeamspeak,
-  FaQuestionCircle,
-  FaMicroblog,
-  FaQuora,
 } from "react-icons/fa";
 import StyledLink from "./styled";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const ServiceCenterMainContainer = styled.div`
   background: rgb(246, 246, 246);
@@ -88,6 +82,7 @@ const ButtonContainer = styled.div`
   }
 `;
 const ServiceMain = () => {
+  const navigator = useNavigate();
   return (
     <ServiceCenterMainContainer>
       <ServiceCenterContainer className="serviceCenterContainer">
@@ -155,12 +150,12 @@ const ServiceMain = () => {
       <HelpContContainer className="serviceCenterButton">
         <ButtonContainer className="help_cont service_cont">
           <ul>
-            <StyledLink to="/servicepage">
+            <StyledLink to="/servicepage/servicefirst">
               <li>
                 고객센터 홈<FaAngleRight />
               </li>
             </StyledLink>
-            <StyledLink to="/servicepage">
+            <StyledLink to="/servicepage/announcement">
               <li>
                 공지사항
                 <FaAngleRight />
@@ -186,120 +181,7 @@ const ServiceMain = () => {
             </StyledLink>
           </ul>
         </ButtonContainer>
-
-        <div className="helpContIconContainer">
-          <div>
-            <a href="/servicepage">
-              <strong>
-                예매 도움 받기<FaSearch></FaSearch>
-                <FaAngleRight />
-              </strong>
-              <hr />
-              <span>예매 안내를 통해서 편리한 예매방법을 알아보세요.</span>
-            </a>
-          </div>
-          <div>
-            <a href="/servicepage">
-              <strong>
-                <span color="red">1:1 상담</span> 받기
-                <FaRocketchat></FaRocketchat>
-                <FaAngleRight />
-              </strong>
-              <hr />
-              <span>빠르고 간편한 온라인 1:1문의를 이용해보세요.</span>
-            </a>
-          </div>
-          <div>
-            <a href="/servicepage">
-              <strong>
-                FAQ 보기<FaQuestionCircle></FaQuestionCircle>
-                <FaAngleRight />
-              </strong>
-              <hr />
-              <span>궁금한 질문들을 쉽고 편하게 한번에 알아보세요.</span>
-            </a>
-          </div>
-          <div>
-            <a href="/servicepage">
-              <strong>
-                티켓 소실 알아보기<FaQuora></FaQuora>
-                <FaAngleRight />
-              </strong>
-              <hr />
-              <span>티켓링크의 새로운 소식들을 빠르게 접해보세요.</span>
-            </a>
-          </div>
-          <div>
-            <strong>
-              예매상담하기<FaMicroblog></FaMicroblog>
-            </strong>
-            <hr />
-            <strong>1111-1111</strong> <span>10:00~19:00 (월~일)</span>
-          </div>
-          <div>
-            <strong>
-              문의하기<FaTeamspeak></FaTeamspeak>
-            </strong>
-            <hr />
-            <strong>2222-2222</strong> <span>10:00~19:00 (월~일)</span>
-          </div>
-        </div>
-
-        <div className="helpmain_list">
-          <div>
-            <ul>
-              <strong>자주 묻는 질문</strong>
-              <hr />
-              <li>
-                <a href="#">비밀번호 변경을 하고 싶어요.</a>
-              </li>
-              <li>
-                <a href="#">내 정보를 변경하고 싶어요.</a>
-              </li>
-              <li>
-                <a href="#">뮤지컬 예매를 빨리 하려면?</a>
-              </li>
-              <li>
-                <a href="#">할인수단을 알고 싶어요.</a>
-              </li>
-              <li>
-                <a href="#">티켓링크에서 할인이 되는 신용카드는?</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <ul>
-              <strong>최근 공지 사항</strong>
-              <hr />
-              <li>
-                <a href="#">
-                  {"[단독판매]제 33기 TBC 가요아카데미 (선착순 ..."}
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  {"[단독판매] 극단 코끼리들이웃는다 ‘물질’ - ..."}
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  {"[단독판매] 공감각적 클래식 콘서트 < Playlist ..."}
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  {"[단독판매]제 33기 TBC 가요아카데미 (선착순 ..."}
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  {"[티켓오픈] PUBG NATIONS CUP 2023 티켓오픈 ..."}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <Outlet />
       </HelpContContainer>
     </ServiceCenterMainContainer>
   );

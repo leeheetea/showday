@@ -27,7 +27,7 @@ const FindId = () => {
   };
 
   return (
-    <div className='body'>
+    <div className='findIdBody'>
       <form className='findAccountForm'>
         <div className="searchWrap">
           <div className="popHeaderWrap">

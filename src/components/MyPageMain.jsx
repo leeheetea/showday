@@ -66,7 +66,7 @@ const ButtonContainer = styled.div`
 const MyPageMain = () => {
   return (
     <ServiceCenterMainContainer className="myPageMainContainer">
-        <ServiceCenterContainer>
+        <ServiceCenterContainer className="serviceCenterTitleContainer"> 
           <div className="serviceCenterTitle">
             <h2>마이페이지</h2>
           </div>

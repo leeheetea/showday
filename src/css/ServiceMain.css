@@ -24,7 +24,7 @@
 .service_cont ul a:hover {
   color: purple;
 }
-.serviceCenterContainer ul a li{
-  overflow: hidden;
-  position: relative;
+
+.serviceCenterContainer ul a li:hover{
+ font-weight: bold;
 }

@@ -20,6 +20,7 @@ import NotFound from "./page/NotFound";
 import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage";
 import MyPointPage from "./pages/MyPointPage";
+import SearchPage from "./pages/SearchPage";
 
 import ChangeDatePage from "./pages/book/ChangeDatePage";
 import ChooseSeatsPage from "./pages/book/ChooseSeatsPage";
@@ -55,6 +56,7 @@ function App() {
             </Route>
             <Route path="/mypage" element={<MyPage />}></Route>
             <Route path="/mypage/point" element={<MyPointPage />}></Route>
+            <Route path="/search" element={<SearchPage />}></Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </RankingTypeProvider>

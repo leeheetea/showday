@@ -1,0 +1,18 @@
+.searchPageContainer{
+  text-align: center;
+}
+.searchPageContainer a{
+  display: flex;
+  justify-content: center;
+}
+.searchPageContainer a dl{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.searchImg{
+  width: 140px;
+}
+
+.title{
+  font-size: 15px;
+}

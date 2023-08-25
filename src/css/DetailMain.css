@@ -1,14 +1,20 @@
 .body{
   margin-top: 50px;
+  
+  min-width: 28rem;
 }
-.sc-fLBbxL{
-  min-width: 22rem; 
+/* min-width: 22rem;  */
+
+/* .sc-fLBbxL{
 }
 .sc-fnOeiS{
   min-width: 22rem;
 }
 .sc-hHvkSs{
+} */
+#content{
   min-width: 28rem;
+  background: white;
 }
 .product_shareButton button{
   background: purple;

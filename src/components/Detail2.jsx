@@ -14,7 +14,7 @@ const TabMenuContainter = styled.ul`
   margin-top: 10px;
   text-align: center;
   padding-left: 5px;
-
+  min-width: 28rem;
   }
 
   .submenu {

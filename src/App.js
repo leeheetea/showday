@@ -21,13 +21,15 @@ import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage";
 import MyPagePoint from "./components/MyPagePoint";
 import SearchPage from "./pages/SearchPage";
-
+import SimpleBoard from "./components/board/SimpleBoard";
+import ReadPost from "./components/board/ReadPost";
 import ChangeDatePage from "./pages/book/ChangeDatePage";
 import ChooseSeatsPage from "./pages/book/ChooseSeatsPage";
 import DiscountPricePage from "./pages/book/DiscountPricePage";
 import CheckBooksPage from "./pages/book/CheckBooksPage";
 import PaymentPage from "./pages/book/PaymentPage";
 import TicketingCancle from "./components/TicketingCancle";
+import WritePost from "./components/board/WritePost";
 
 function App() {
   return (
@@ -59,6 +61,9 @@ function App() {
               <Route path="ticketingcancle" element={<TicketingCancle />} />
               <Route path="point" element={<MyPagePoint />}></Route>
             </Route>
+            <Route path="simpleboard" element={<SimpleBoard />}></Route>
+            <Route path="write" element={<WritePost />}></Route>
+            <Route path="read/:id" element={<ReadPost />}></Route>
             <Route path="/search" element={<SearchPage />}></Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

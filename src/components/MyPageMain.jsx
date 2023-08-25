@@ -120,7 +120,7 @@ const MyPageMain = () => {
                   </StyledLink>
                 </li>
                 <li>
-                  <StyledLink to="/servicepage">
+                  <StyledLink to="mypage/simpleboard">
                     공지사항
                     <FaAngleRight />
                   </StyledLink>

@@ -59,26 +59,6 @@ const booksSlice = createSlice({
   },
 });
 
-// const initialBookInfoState = {
-//   bookId: 0,
-//   id: 0,
-//   title: '',
-//   url: '',
-//   price: 0,
-//   ticketCnt: 0,
-//   seats: [],
-// };
-
-// const bookInfoSlice = createSlice({
-//   name: 'bookInfo',
-//   initialState: initialBookInfoState,
-//   reducers: {
-//     setBookInfo: (state, action) => {
-//       return action.payload;
-//     }
-//   },
-// });
-
 const musicalsReducer = musicalsSlice.reducer;
 const concertsReducer = concertSlice.reducer;
 const theatresReducer = theatreSlice.reducer;

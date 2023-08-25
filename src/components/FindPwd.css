@@ -1,5 +1,5 @@
 .body {
-  height: 100%;
+  width: 544px;
   background-color: #f8f8f8;
   color: #202020;
 }
@@ -47,6 +47,7 @@
   font-size: 15px;
   border-bottom: 1px solid #ef3e42;
   justify-content: center;
+  cursor: pointer;
 }
 
 .contentsWrap .searchTab .current {

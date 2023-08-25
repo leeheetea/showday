@@ -50,8 +50,19 @@
   padding-bottom: 1px;
   font-size: 15px;
   border: none;
-  color: #fff;
+  
   font-weight: bold;
+}
+
+.termsSubmitBtn:disabled {
+  cursor: not-allowed;
+  color: #fff;
+}
+
+.termsSubmitBtn:enabled {
+  cursor: pointer;
+  background-color: #1769ff; 
+  color: #fff;
 }
 
 .checkboxDiv .noticeText {

@@ -4,11 +4,13 @@ import KakaoLogin from '../components/KakaoLogin'
 import NaverLogin from '../components/NaverLogin'
 import { GoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom'
+import Header from '../components/Header'
 
 const AccountCreate = () => {
   const navigate = useNavigate();
   return (
     <div>
+      <Header></Header>
       <div className='joinWrapper'>
         <div className='joinBlock'>
           <h2 className='title'>기분최고조 회원가입</h2>

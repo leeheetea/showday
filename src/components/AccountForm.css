@@ -34,6 +34,7 @@
 
 .uBlock .inputArea_id input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -43,6 +44,12 @@
   padding: 10px 0;
   display: flex;
   align-items: center;
+}
+
+.uBlock .inputArea_password button {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .uBlock .inputArea_password .inputAreaLabel {
@@ -63,6 +70,7 @@
 
 .uBlock .inputArea_password input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -72,6 +80,12 @@
   padding: 10px 0;
   display: flex;
   align-items: center;
+}
+
+.uBlock .inputArea_password_verify button {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .uBlock .inputArea_password_verify .inputAreaLabel {
@@ -93,6 +107,7 @@
 
 .uBlock .inputArea_password_verify input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -114,6 +129,7 @@
 
 .uBlock .inputArea_name input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -136,6 +152,7 @@
 
 .uBlock .inputArea_email input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -161,6 +178,7 @@
 
 .uBlock .inputArea_phone input {
   border: none;
+  outline: none;
   width: 100%;
 }
 
@@ -201,6 +219,12 @@
   margin-bottom: 15px;
   display: none;
 }
+
+.uBlock .p_under14 {
+  font-size: 13px;
+}
+
+
 
 /* *************************************************************************** */
 .uBlock_under14 .inputArea_name {
@@ -284,7 +308,7 @@
 }
 
 .radioBox label:hover {
-  color: #666;
+  color: #000;
   background-color: #fff;
 }
 
@@ -301,6 +325,10 @@
 }
 
 /* *************************************** */
+.uBlock_validation {
+  margin-top: 20px;
+}
+
 .uBlock_validation_bold {
   font-weight: bold;
   padding: 10px 0;
@@ -314,6 +342,10 @@
 .agreeBlock {
   display: flex;
   justify-content: space-between;
+}
+
+.agreeBlock span {
+  font-weight: bold;
 }
 
 /* ******************************* */
@@ -395,7 +427,7 @@
   margin-top: 45px;
 }
 
-.submitBtn button {
+.submitBtn button:disabled {
   height: 50px;
   width: 100%;
   border-radius: 10px;
@@ -404,4 +436,17 @@
   border: none;
   font-size: 15px;
   font-weight: bold;
+  cursor: not-allowed;
+}
+
+.submitBtn button:enabled {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #1769ff;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
 }

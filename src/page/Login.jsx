@@ -5,6 +5,7 @@ import NaverLogin from "../components/NaverLogin";
 import { GoogleLogin } from "@react-oauth/google";
 import "../components/Login.css";
 import { Link } from "react-router-dom";
+import Header from '../components/Header'
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -27,8 +28,8 @@ const Login = () => {
   };
 
   const findIdPopup = () => {
-    const width = 380;
-    const height = 600;
+    const width = 573;
+    const height = 681;
     const left = window.screenX + (window.outerWidth - width) / 2;
     const top = window.screenY + (window.outerHeight - height) / 2;
 
@@ -40,8 +41,8 @@ const Login = () => {
   };
 
   const findPwdPopup = () => {
-    const width = 380;
-    const height = 600;
+    const width = 573;
+    const height = 681;
     const left = window.screenX + (window.outerWidth - width) / 2;
     const top = window.screenY + (window.outerHeight - height) / 2;
 
@@ -53,77 +54,81 @@ const Login = () => {
   };
 
   return (
-    <div className="StyledLoginWrap">
-      <div className="StyledBody">
-        <form onSubmit={handleSubmit}>
-          <div className="StyledLoginBox">
-            <div className="StyledLogo">
-              <img src="https://placehold.it/119x30" alt="logo" />
-            </div>
-            <ul className="StyledUl">
-              <li className="StyledLi">
+    <div>
+      <Header></Header>
+      <div className="StyledLoginWrap">
+        <div className="StyledBody">
+          <form onSubmit={handleSubmit}>
+            <div className="StyledLoginBox">
+              <div className="StyledLogo">
+                <img src="../img/Showday_logo.png" alt="logo" style={{ width: '119px', height: '30px', background: 'cover' }}/>
+              </div>
+              <ul className="StyledUl">
+                <li className="StyledLi">
+                  <input
+                    className="StyledInput"
+                    type="text"
+                    placeholder="아이디"
+                    value={username}
+                    onChange={handleUsernameChange}
+                  />
+                </li>
+                <li className="StyledLi">
+                  <input
+                    className="StyledInput"
+                    type="password"
+                    placeholder="비밀번호"
+                    autoComplete="off"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </li>
+              </ul>
+              <div>
                 <input
-                  className="StyledInput"
-                  type="text"
-                  placeholder="아이디"
-                  value={username}
-                  onChange={handleUsernameChange}
+                  className="StyledInputButton"
+                  type="submit"
+                  value="로그인"
                 />
-              </li>
-              <li className="StyledLi">
-                <input
-                  className="StyledInput"
-                  type="password"
-                  placeholder="비밀번호"
-                  autoComplete="off"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-              </li>
-            </ul>
-            <div>
-              <input
-                className="StyledInputButton"
-                type="submit"
-                value="로그인"
-              />
+              </div>
+              <p className="StyledP">
+                <span>
+                  <input type="checkbox" id="autoLogin" />
+                  <label htmlFor="autoLogin">자동로그인</label>
+                </span>
+                <span>
+                  <input type="checkbox" id="saveId" />
+                  <label htmlFor="saveId">아이디 저장</label>
+                </span>
+              </p>
             </div>
-            <p className="StyledP">
-              <span>
-                <input type="checkbox" id="autoLogin" />
-                <label htmlFor="autoLogin">자동로그인</label>
-              </span>
-              <span>
-                <input type="checkbox" id="saveId" />
-                <label htmlFor="saveId">아이디 저장</label>
-              </span>
-            </p>
+          </form>
+  
+          <div className="SnsLoginWrap">
+            <div className="SnsLoginNaver">
+              <NaverLogin></NaverLogin>
+            </div>
+            <div className="SnsLoginKakao">
+              <KaKaoLogin></KaKaoLogin>
+            </div>
+            <GoogleLogin></GoogleLogin>
           </div>
-        </form>
-
-        <div className="SnsLoginWrap">
-          <div className="SnsLoginNaver">
-            <NaverLogin></NaverLogin>
+  
+          <div className="StyledHelp">
+            <a className="StyledHelpMenu" onClick={findIdPopup}>
+              아이디 찾기 |{" "}
+            </a>
+            <a className="StyledHelpMenu" onClick={findPwdPopup}>
+              비밀번호 찾기 |{" "}
+            </a>
+            <Link to="/accountcreate" className="StyledHelpMenu">
+              회원가입
+            </Link>
           </div>
-          <div className="SnsLoginKakao">
-            <KaKaoLogin></KaKaoLogin>
-          </div>
-          <GoogleLogin></GoogleLogin>
-        </div>
-
-        <div className="StyledHelp">
-          <a className="StyledHelpMenu" onClick={findIdPopup}>
-            아이디 찾기 |{" "}
-          </a>
-          <a className="StyledHelpMenu" onClick={findPwdPopup}>
-            비밀번호 찾기 |{" "}
-          </a>
-          <Link to="/accountcreate" className="StyledHelpMenu">
-            회원가입
-          </Link>
         </div>
       </div>
     </div>
+   
   );
 };
 

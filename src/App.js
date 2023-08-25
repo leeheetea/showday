@@ -13,6 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage"
 import MyPointPage from "./pages/MyPointPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/book" element={<BookMainPage />}></Route>
             <Route path="/mypage" element={<MyPage/>}></Route>
             <Route path="/mypage/point" element={<MyPointPage/>}></Route>
+            <Route path="/search" element={<SearchPage/>}></Route>
           </Routes>
         </RankingTypeProvider>
       </Provider>

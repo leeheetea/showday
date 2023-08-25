@@ -1,14 +1,14 @@
-.hmPiaK, .cIGGbR {
+.serviceCenterTitleContainer {
   margin: 0 10%;
 }
-.serviceCenterContainer, .serviceCenterButton{
+.serviceCenterButton{
   margin: 0 10%;
 }
-.eeMogx ul{
+.help_cont ul{
   padding-bottom: 20px;
   border-bottom: 1px solid lightgrey;
 }
-.eeMogx ul:first-child{
+.help_cont ul:first-child{
   border-bottom: none;
 }
 .myPageIconsContainer ul{ 

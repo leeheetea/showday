@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import StyledLink from "./styled";
+// import StyledLink from "./styled";
 import "../css/DetailMain.css"
 
 const DetailContainer = styled.div`
@@ -59,8 +59,8 @@ const DetailContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
-  div{
-    
+  button{
+    border: none;
     background: purple;
     color: white;
     border-radius: 5px;
@@ -68,7 +68,7 @@ const ButtonContainer = styled.div`
     padding: 0.7rem 3.5rem;
     cursor: pointer;
   }
-  div:hover {
+  button:hover {
     background-color: black;
   }
 `;
@@ -150,11 +150,11 @@ const Detail1 = () => {
         </div>
       </DetailContainer>
       <ButtonContainer>
-              <StyledLink to="/book">
-                <div>
+              <button 
+              // onClick={}
+              >
                   예매하기
-                </div>
-              </StyledLink>
+              </button>
       </ButtonContainer>
     </div>
   );

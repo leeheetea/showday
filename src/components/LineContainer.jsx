@@ -19,8 +19,6 @@ const StyleDiv = styled.div`
 function LineContainer({ 
   children, width, height, tpadding, tMargin, lineColor, isfrontcenter, bgColor, padding,
   ...rest }) {
-  console.log({ children }); //{children: "Button"}
-  console.log({ ...rest }); //{} (빈 객체--props가 딱히 없으므로)
   return <StyleDiv 
     width={width} 
     height={height} 

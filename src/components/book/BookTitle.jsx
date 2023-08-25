@@ -19,8 +19,6 @@ const StyleTitle = styled.h3`
 `;
 
 function BookTitle({ children, isleft, issubtitle, isBottomLine, tPadding, ...rest }) {
-  console.log({ children }); //{children: "Button"}
-  console.log({ ...rest }); //{} (빈 객체--props가 딱히 없으므로)
   return <StyleTitle 
     padding-top={tPadding} 
     text-align= {issubtitle || isleft ? 'left' : 'center'}

@@ -7,7 +7,7 @@ import LineContainer from "../../components/LineContainer";
 const DiscountPricePage = () => {
   return (
     <div className="discountPriceContainer">
-      <BookTitle width="100%" isleft>
+      <BookTitle width="100%" isleft='true'>
         티켓할인, 매수 선택
       </BookTitle>
       <table className="bookDiscountTable">

@@ -12,15 +12,15 @@ const BookInfoView = () => {
       <div className="titleContainer">
         <img className="titleLeft" src="/assets/images/musical_small.jpg" />
       </div>
-      <BookTitle width='90%' tPadding='15px'>{BOOKDATA[0].title}</BookTitle>
-         <BookTitle isLeft tPadding='30px'>예매정보</BookTitle>
+      <BookTitle width='90%' tpadding='30px'>{BOOKDATA[0].title}</BookTitle>
+         <BookTitle isleft='true' tPadding='100px'>예매정보</BookTitle>
          <LineContainer width='94%' padding='10px' tMargin='10px'>
          <ul>
-                <li className='textLine'>
-                  <span className='textLeft'>R석</span>
-                  <span className='textRight'>1층F열3번</span>
-                </li>
-              </ul>
+            <li className='textLine'>
+              <span className='textLeft'>R석</span>
+              <span className='textRight'>1층F열3번</span>
+            </li>
+          </ul>
         </LineContainer>
         <table className='bookResultTable'>
           {/* <caption>예매정보</caption> */}
@@ -54,7 +54,7 @@ const BookInfoView = () => {
         </table>
         <div className='bookButtonContainer'>
           <LineButton width='48%' height='60px'>이전</LineButton>
-          <LineButton width='48%' height='60px' order={true}>결제하기</LineButton>
+          <LineButton width='48%' height='60px' order='true'>결제하기</LineButton>
         </div>
     </div>
   );

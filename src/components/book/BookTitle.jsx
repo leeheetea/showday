@@ -13,31 +13,22 @@ const StyleTitle = styled.h1`
   cursor: pointer;
   padding-left: 1rem;
   padding-right: 1rem; */
-  text-align: ${(props) =>
-    props.isSubTitle || props.isleft ? "left" : "center"};
-  font-weight: ${(props) => (props.isSubTitle ? "" : "bold")};
-  padding-top: ${(props) => props.tpadding || ""};
+  text-align: ${props => props.isSubTitle || props.isLeft ? 'left' : 'center'};
+  font-weight: ${props => props.isSubTitle ? '' : 'bold'};
+  padding-top: ${props => props.tPadding || ''};
 `;
 
-function BookTitle({
-  children,
-  isleft,
-  isSubTitle,
-  isBottomLine,
-  tpadding,
-  ...rest
-}) {
-  return (
-    <StyleTitle
-      tpadding={tpadding}
-      isleft={isleft}
-      isSubTitle={isSubTitle}
-      {...rest}
-    >
-      {children}
-      {isBottomLine ? <Line /> : <></>}
-    </StyleTitle>
-  );
+function BookTitle({ children, isLeft, isSubTitle, isBottomLine, tPadding, ...rest }) {
+  console.log({ children }); //{children: "Button"}
+  console.log({ ...rest }); //{} (빈 객체--props가 딱히 없으므로)
+  return <StyleTitle 
+    tPadding={tPadding} 
+    isLeft={isLeft} 
+    isSubTitle={isSubTitle} 
+    {...rest}>
+      {children} 
+    {isBottomLine ? <Line/> : <></>}
+  </StyleTitle>
 }
 
 export default BookTitle;

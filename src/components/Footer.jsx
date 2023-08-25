@@ -15,7 +15,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className='footer_inner'>
-        <span className='title'>
+        <span className='footer_title'>
           쇼데이 주식회사
         </span>
         <address className='footer_address'>

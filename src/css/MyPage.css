@@ -1,24 +1,21 @@
-.hmPiaK, .cIGGbR {
-  margin: 0 10%;
+.serviceCenterButton {
+  margin: 0 auto;
 }
-.serviceCenterContainer, .serviceCenterButton{
-  margin: 0 10%;
-}
-.eeMogx ul{
+.help_cont ul {
   padding-bottom: 20px;
   border-bottom: 1px solid lightgrey;
 }
-.eeMogx ul:first-child{
+.help_cont ul:first-child {
   border-bottom: none;
 }
-.myPageIconsContainer ul{ 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0 10px;
+.myPageIconsContainer ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 10px;
 }
 .myPageIconsContainer ul a {
   width: 180px;
-  
+
   border-left: 2px dotted gray;
   padding: 0 18px;
 }
@@ -36,7 +33,7 @@
 .myPageIconsContainer ul a li div h5:nth-child(2):hover {
   text-decoration: underline;
 }
-.myPageIconsContainer ul a li{
+.myPageIconsContainer ul a li {
   height: 90px;
   display: flex;
   align-items: center;
@@ -45,27 +42,27 @@
 .icon {
   font-size: 40px;
 }
-.help_cont{
+.help_cont {
   margin: 20px;
 }
-.help_cont ul li{
+.help_cont ul li {
   margin: 20px auto;
 }
-.help_cont ul li span{
+.help_cont ul li span {
   font-size: 1.2rem;
   font-weight: bold;
 }
-.help_cont ul li ul li a{
+.help_cont ul li ul li a {
   font-size: 1rem;
 }
-.help_cont ul li ul li a:hover{
+.help_cont ul li ul li a:hover {
   color: red;
 }
 
-.myPageCheckContainer{
+.myPageCheckContainer {
   margin: 30px;
 }
-.myPageCheckContainer p{
+.myPageCheckContainer p {
   font-size: 0.8rem;
   margin: 25px auto;
 }
@@ -74,64 +71,62 @@
   border-bottom: 2px solid lightgray;
 }
 
-.textRedColor{
+.textRedColor {
   color: red;
 }
-.sortbx{
+.sortbx {
   margin-top: 50px;
   margin-bottom: 5px;
 }
-.sortbx dl{ 
+.sortbx dl {
   display: flex;
   margin-bottom: 5px;
   justify-content: space-between;
 }
-.sortbx dl div{ 
+.sortbx dl div {
   display: flex;
 }
-.sortbx dt{ 
+.sortbx dt {
   font-weight: bold;
 }
 
-
-.sortbx p{ 
+.sortbx p {
   margin: 0 0 5px 0;
 }
-.sortbx p{
+.sortbx p {
   text-align: end;
 }
-.sortbx table{
+.sortbx table {
   width: 100%;
   border-collapse: collapse;
   border-top: 1px solid rgb(156, 156, 156);
   border-bottom: 1px solid rgb(235, 235, 235);
-  
 }
 .sortbx thead {
   background-color: rgb(235, 235, 235);
 }
-.sortbx th, .sortbx td{
+.sortbx th,
+.sortbx td {
   text-align: center;
   padding: 10px 15px;
   border: none;
 }
 
-
-.ticketGuideTableBody{
+.ticketGuideTableBody {
   background-color: rgb(235, 235, 235);
   border-radius: 5px;
   padding: 10px 30px;
   margin: 50px 0;
 }
-.ticketGuideTableBody h5{
+.ticketGuideTableBody h5 {
   color: rgb(70, 70, 70);
   margin-bottom: 0;
 }
 
-.ticketGuideTableBody ol{
+.ticketGuideTableBody ol {
   padding: 0;
 }
-.ticketGuideTableBody li{
+.ticketGuideTableBody li {
   color: gray;
   font-size: 13px;
   margin: 8px;

@@ -15,13 +15,13 @@ const ChangeDatePage = () => {
   return (
     <div className="changeDateContainer">
       <div className="topContainer">
-        <LineContainer width="40%" height="320px" isFontCenter={true}>
+        <LineContainer width="40%" height="320px" isfrontcenter={true}>
           <BookTitle isBottomLine>날짜선택</BookTitle>
           <div>
             <Calendar onChange={onChange} value={value} />
           </div>
         </LineContainer>
-        <LineContainer width="30%" height="320px" isFontCenter={true}>
+        <LineContainer width="30%" height="320px" isfrontcenter={true}>
           <BookTitle isBottomLine>회차선택</BookTitle>
           <LineContainer lineColor="black" padding="5px">
             <ul>
@@ -38,7 +38,7 @@ const ChangeDatePage = () => {
             </ul>
           </LineContainer>
         </LineContainer>
-        <LineContainer width="30%" height="320px" isFontCenter={true}>
+        <LineContainer width="30%" height="320px" isfrontcenter={true}>
           <BookTitle isBottomLine>잔여석</BookTitle>
           <ul>
             <li className="textLine">

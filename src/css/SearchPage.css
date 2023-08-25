@@ -1,0 +1,128 @@
+body{
+  background-color: rgb(246, 246, 246);
+}
+.searchPageContainer{
+  margin: 50px 10%;
+}
+.red{
+  color: red;
+  font-weight: bold;
+}
+.result_lst{
+  cursor: pointer;
+}
+.searchImg{
+  width: 200px;
+  border-radius: 5px;
+  height: auto;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+.result_lst:hover .searchImg{
+  width: 250px;
+}
+.detail_box_top{
+  min-width: 970px;
+  max-width: 1200px;
+  background-color:white;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+.detail_box_top ul {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}
+.box_text dl{
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.box_text .title{
+  width: 220px;
+  text-align: start;
+  font-size: 20px;
+}
+.box_text dl{
+  width: 10%;
+  font-size: 13px;
+}
+.box_text dl dd{
+  margin: 0;
+}
+
+@media screen and (max-width: 1024px){
+  .detail_box_top ul {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .box_text dl{
+    white-space: nowrap;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .detail_box_top{
+    min-width: 680px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .searchPageContainer{
+    margin: 0 10%;
+    margin-bottom: 50px;
+  }
+  .searchPageContainer a{
+    display: flex;
+    justify-content: center;
+  }
+  .detail_box_top ul{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    justify-items: start;
+  }
+  .searchPageContainer a dl dd{
+    margin-left: 5px;
+  }
+  .searchImg{
+    width: 120px;
+  }
+  .result_lst:hover .searchImg{
+    width: 180px;
+  }
+  .box_text {
+    margin-left: 15px;
+  }
+  .title{
+    font-size: 15px;
+  }
+  .box_text .title {
+    text-align: left;
+  }
+  .searchPageContainer a dl{
+    width: 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .detail_box_top {
+    min-width: 460px;
+  }
+  .detail_box_top ul li{
+    border-bottom: 1px solid lightgray;
+    padding: 15px 0;
+  }
+  .detail_box_top ul li:last-child{
+    border-bottom: none;
+    padding: 15px 0;
+  }
+  .box_text dl {
+    font-size: 12px;
+  }
+  .box_text dl dt{
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: gray;
+  }
+  .box_text dl dd{
+    color: gray;
+  }
+}
+

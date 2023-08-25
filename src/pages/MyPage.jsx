@@ -1,15 +1,17 @@
-import React from 'react'
+import React from "react";
 import Header from "../components/Header";
-import MyPageMain from '../components/MyPageMain';
-import "../css/MyPage.css"
+import MyPageMain from "../components/MyPageMain";
+import Footer from "../components/Footer";
+import "../css/MyPage.css";
 
 const MyPage = () => {
   return (
     <div>
-      <Header/>
-        <MyPageMain></MyPageMain>
+      <Header />
+      <MyPageMain></MyPageMain>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default MyPage
+export default MyPage;

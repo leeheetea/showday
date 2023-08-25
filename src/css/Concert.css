@@ -1,3 +1,29 @@
+.concert-header {
+  background-color: rgb(128, 128, 128);
+  height: 23rem;
+}
+
+.concert-title {
+  font-size: 3rem; /* 큰 글자 크기 */
+  font-weight: 700; /* 굵은 글자체 */
+  color: #2c3e50; /* 진한 색상 */
+  text-transform: uppercase; /* 대문자 변환 */
+  letter-spacing: 2px; /* 글자 간격 추가 */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+  margin-bottom: 1rem; /* 하단 마진으로 다른 요소와의 간격을 줌 */
+}
+
+.concert-subtitle {
+  color: white;
+  font-size: 1.5rem; /* 중간 크기의 글자 크기 */
+  font-weight: 500; /* 중간 굵기의 글자체 */
+  letter-spacing: 1px; /* 약간의 글자 간격 */
+  margin-bottom: 2rem; /* 하단 마진으로 다른 요소와의 간격을 줌 */
+  z-index: 2; /* 오버레이 위에 텍스트가 오도록 z-index 값을 조절 */
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .concert-slider-container {
   width: 90%;
   margin: 0 auto;
@@ -14,30 +40,60 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 3rem;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://shop.jonasbrothers.com/cdn/shop/files/V8A8671.jpg?v=1692031981&width=1920");
+  background-size: cover; /* 이미지가 요소를 완전히 채우도록 합니다. */
+  background-repeat: no-repeat; /* 이미지 반복을 방지합니다. */
+  background-position: center; /* 이미지가 요소의 중앙에 위치하도록 합니다. */
+  padding: 50px; /* 이미지와 내용 사이에 간격을 주기 위한 패딩 */
 }
 
 .concert-item-grid {
   width: 80%;
   margin: 0 auto;
   display: grid;
-  place-items: center;
+  /* place-items: center; */
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
   text-align: center;
   gap: 1rem;
   margin-top: 3rem;
 }
 
 .concert-item-container {
-  width: 90%;
+  width: 100%;
+  height: auto;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 2rem;
+  transition: transform 0.3s;
+}
+
+.concert-item-container:hover {
+  transform: scale(1.1);
 }
 
 .concert-item {
+  width: 15rem;
   margin: 0 auto;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.concert-item-title {
+  max-width: 100%;
+  display: block;
+  color: white;
+  display: block;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bold; /* 글자를 굵게 표시 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트에 그림자 효과 적용 */
 }

@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import RankingSlider from "../components/RankingSlider";
 import Header from "../components/Header";
 import LaptopNavigator from "../components/LaptopNavigator";
@@ -11,7 +12,10 @@ const Concert = () => {
   const concerts = useSelector((state) => state.concerts);
   const navigator = useNavigate();
   const { setRankingType } = useRankingType();
-  setRankingType("concert");
+
+  useEffect(() => {
+    setRankingType("concert");
+  });
 
   return (
     <div>

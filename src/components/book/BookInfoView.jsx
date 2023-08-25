@@ -12,13 +12,13 @@ const BookInfoView = () => {
       <div className="titleContainer">
         <img className="titleLeft" src="/assets/images/musical_small.jpg" />
       </div>
-      <BookTitle width="90%" tPadding="15px">
+      <BookTitle width="90%" tpadding="15px">
         {BOOKDATA[0].title}
       </BookTitle>
-      <BookTitle isLeft tPadding="30px">
+      <BookTitle isleft tpadding="30px">
         예매정보
       </BookTitle>
-      <LineContainer width="94%" padding="10px" tMargin="10px">
+      <LineContainer width="94%" padding="10px" tmargin="10px">
         <ul>
           <li className="textLine">
             <span className="textLeft">R석</span>

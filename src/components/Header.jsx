@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Header.css";
 import { RiSearchLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
   return (
     <header>
       <div className="header-container">
@@ -22,10 +23,23 @@ const SearchBar = () => {
           </div>
         </div>
         <div className="searchbar-container">
-          <input className="searchbar" type="text" placeholder="검색어 입력" />
-          <div className="search-icon">
-            <RiSearchLine />
-          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate(`/search?query=${encodeURIComponent(searchValue)}`);
+            }}
+          >
+            <input
+              className="searchbar"
+              type="text"
+              placeholder="검색어 입력"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+            <div className="search-icon">
+              <RiSearchLine />
+            </div>
+          </form>
         </div>
         <div className="search-container-menu">
           <span
@@ -45,10 +59,10 @@ const SearchBar = () => {
             회원가입
           </span>
           <span className="search-container-menu-text">
-            <Link to="/mypage">마이페이지</Link>
+            <Link to="/mypage/point">마이페이지</Link>
           </span>
           <span className="search-container-menu-text">
-            <Link to="/servicepage">고객센터</Link>
+            <Link to="/servicepage/servicefirst">고객센터</Link>
           </span>
         </div>
       </div>

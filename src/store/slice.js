@@ -4,6 +4,7 @@ import concertData from "../concertData.json";
 import theatreData from "../theatreData.json";
 import totalData from "../totalData.json";
 import { combineReducers } from "@reduxjs/toolkit";
+import postsSlice from "./postSlice";
 
 const initialMusicalState = musicalData;
 
@@ -69,6 +70,7 @@ const rootReducer = combineReducers({
   concerts: concertsReducer,
   theatres: theatresReducer,
   booksData: booksReducer,
+  posts: postsSlice,
 });
 
 export const { setMusicals } = musicalsSlice.actions;

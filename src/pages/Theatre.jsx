@@ -23,11 +23,11 @@ const Theatre = () => {
       <MobileNavigator />
       <LaptopNavigator />
       <div className="theatre-title-container">
-        <h1>연극</h1>
+        <h1 className="theatre-title">연극</h1>
       </div>
       <div className="theatre-header">
         <div className="theatre-text-container">
-          <h2>랭킹</h2>
+          <h2 className="theatre-subtitle">랭킹</h2>
         </div>
         <div className="theatre-slider-container">
           <RankingSlider />
@@ -35,18 +35,18 @@ const Theatre = () => {
       </div>
       <div className="theatre-article">
         <div>
-          <h2 className="theatre-subtitle">추천 작품</h2>
+          <h2 className="theatre-subtitle">추천 연극</h2>
         </div>
         <div className="theatre-item-grid">
           {theatres.map((theatre, index) => (
             <div className="theatre-item-container" key={index}>
               <img
-                onClick={() => navigator("/detailpage" + theatre.id)}
+                onClick={() => navigator("/detailpage/" + theatre.id)}
                 className="theatre-item"
                 src={theatre.url}
                 alt=""
               />
-              <span className="concert-item-title">{theatre.title}</span>
+              <span className="theatre-item-title">{theatre.title}</span>
             </div>
           ))}
         </div>

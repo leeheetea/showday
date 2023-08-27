@@ -11,6 +11,7 @@ const PurpleBtn = styled.button`
   background-color: none;
   border: 1px solid rgb(0, 0, 0, 0.3);
   margin: 0 1rem;
+  cursor: pointer;
 
   &:active,
   &:hover,
@@ -26,16 +27,13 @@ const MainAtricle = () => {
     setActiveBtn(genre);
   };
 
-
   const { setRankingType } = useRankingType();
-
 
   return (
     <div className="article-container">
       <h1>장르별 랭킹</h1>
       <div>
         <PurpleBtn
-
           className={activeBtn === "musical" ? "active" : ""}
           onClick={() => {
             setRankingType("musical");
@@ -49,7 +47,6 @@ const MainAtricle = () => {
           onClick={() => {
             handleBtnClick("concert");
             setRankingType("concert");
-
           }}
         >
           콘서트

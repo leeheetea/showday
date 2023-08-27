@@ -4,7 +4,7 @@ import { BiLinkAlt } from "react-icons/bi";
 import "../App.css";
 import { useState } from "react";
 import Modal from "react-modal";
-import "../css/DetailMain.css"
+import "../css/DetailMain.css";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -82,7 +82,6 @@ const InfoTitle = styled.div`
   padding: 0 10px 0 0;
 `;
 
-
 const customModalStyles = {
   content: {
     width: "20%",
@@ -93,10 +92,9 @@ const customModalStyles = {
   },
 };
 const Main = ({ data }) => {
-  
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
   return (
-    <div className="body">
+    <div className="detailMainBody">
       <MainImgTextContainer id="content">
         <div>
           <ImgSizeWrapper src={data.url} alt="/" />
@@ -106,16 +104,16 @@ const Main = ({ data }) => {
           <div className="product_heading">
             <h2 className="product_title">{data.title}</h2>
             <span className="product_shareButton">
-                <button onClick={() => setShareModalIsOpen(true)}>
-                  <FaShareAlt size="20" />
-                </button>
+              <button onClick={() => setShareModalIsOpen(true)}>
+                <FaShareAlt size="20" />
+              </button>
               <Modal
                 isOpen={shareModalIsOpen}
                 onRequestClose={() => setShareModalIsOpen(false)}
                 style={customModalStyles}
               >
                 <button>
-                    <BiLinkAlt></BiLinkAlt>
+                  <BiLinkAlt></BiLinkAlt>
                 </button>
               </Modal>
             </span>
@@ -131,9 +129,7 @@ const Main = ({ data }) => {
               <InfoTitle className="product_info_title">기간</InfoTitle>
               <div>{data.period}</div>
             </li>
-          </ProductInfoListContainer>
 
-          <ProductInfoListContainer className="product_info_list2 ">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
               <div>{data.price}</div>

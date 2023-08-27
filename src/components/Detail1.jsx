@@ -13,7 +13,7 @@ const DetailContainer = styled.div`
   border: 1.5px solid gray;
   border-radius: 5px;
   padding: 10px;
-
+  min-width: 28rem;
 
   .detailBox{
     width:500px;
@@ -60,7 +60,8 @@ const DetailContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
-  div {
+  button{
+    border: none;
     background: purple;
     color: white;
     border-radius: 5px;
@@ -68,7 +69,7 @@ const ButtonContainer = styled.div`
     padding: 0.7rem 3.5rem;
     cursor: pointer;
   }
-  div:hover {
+  button:hover {
     background-color: black;
   }
 `;

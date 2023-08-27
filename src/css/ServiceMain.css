@@ -1,15 +1,11 @@
-
-.serviceCenterContainer, .serviceCenterButton{
-  margin: 0 10%;
-}
-.helpContIconContainer{
+.helpContIconContainer {
   margin: 20px;
 }
-.helpContIconContainer div{
+.helpContIconContainer div {
   margin: 30px auto;
 }
 
-.helpmain_list ul{
+.helpmain_list ul {
   margin: 50px 20px;
   padding: 0;
 }
@@ -17,14 +13,14 @@
   padding: 18px 0;
   border-bottom: 1px solid lightgray;
 }
-.smallIcon{
+.smallIcon {
   font-size: 40px;
 }
 
 .service_cont ul a:hover {
   color: purple;
 }
-.serviceCenterContainer ul a li{
-  overflow: hidden;
-  position: relative;
+
+.serviceCenterContainer ul a li:hover {
+  font-weight: bold;
 }

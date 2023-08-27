@@ -5,6 +5,10 @@ import theatreData from "../theatreData.json";
 import totalData from "../totalData.json";
 import { combineReducers } from "@reduxjs/toolkit";
 import postsSlice from "./postSlice";
+import moment from "moment";
+import util from "../utils";
+
+const DISCOUNT_RATE = 15;
 
 const initialMusicalState = musicalData;
 
@@ -15,15 +19,23 @@ const musicalsSlice = createSlice({
     setMusicals: (state, action) => {
       return action.payload;
     },
+    getMusicalInfoById: (state, action) => {
+      console.log("(musicalsSlice) action : ", action.payload.id);
+      const findData = initialMusicalState.filter(
+        (data) => data.id === action.payload.id
+      );
+      console.log("(musicalsSlice) findData : ", findData);
+      return findData;
+    },
     // 액션 정의
   },
 });
 
-const initialConcetState = concertData;
+const initialConcertState = concertData;
 
 const concertSlice = createSlice({
   name: "concerts",
-  initialState: initialConcetState,
+  initialState: initialConcertState,
   reducers: {
     setConcerts: (state, action) => {
       return action.payload;
@@ -45,18 +57,83 @@ const theatreSlice = createSlice({
   },
 });
 
-const initialBooksState = totalData;
+const initialBooksState = {
+  bookId: 1, // 예약번호
+  userId: 1, // 예약자번호
+  showInfo: [
+    // 예약 선택 공연 정보
+    {
+      id: "1001",
+      ranking: 1,
+      title: "노엘 갤러거 하이 플라잉 버즈",
+      url: "https://ticketimage.interpark.com/Play/image/large/23/23010643_p.gif",
+      place: "잠실 실내체육관",
+      // "period": "2023.11.27 ~2023.11.28",
+      price: "143000",
+    },
+  ],
+  bookDate: "2023.04.01", // 예약 선택 날짜
+  bookCompleteTime: "12:30", // 예약 선택 시간
+  bookShowTime: "12:30", // 예약 선택 시간
+  bookStep: 2,
+  youtDiscount: -15,
+  seats: [
+    { seat: "R1", seatType: "A" },
+    { seat: "R2", seatType: "C" },
+  ],
+};
 
 const booksSlice = createSlice({
   name: "booksData",
   initialState: initialBooksState,
   reducers: {
-    getBooksInfo: (state, action) => {
-      const findData = initialBooksState.filter((data) => data.id === state.id);
-      console.log("(booksSlice) findData : ", state, findData);
-      return findData;
+    getShowInfoById: (state, action) => {
+      console.log("(booksSlice-getShowInfoById) payload : ", action.payload);
+      const findData = initialBooksState.totalData.filter(
+        (data) => data.id === action.payload.id
+      );
+      // console.log("(booksSlice) findData : ", state, findData);
+      //console.log("(booksSlice) state.showInfo(before) : ", state.showInfo);
+      state.showInfo = findData;
+      //console.log("(booksSlice) state.showInfo(after) : ", state.showInfo);
     },
-    // 액션 정의
+    setShowInfo: (state, action) => {
+      console.log("(booksSlice-setShowInfo) payload : ", action.payload);
+      state.showInfo[0] = action.payload.props.data;
+      //state.bookDate = util.dateFormat(action.payload.selectedValue);
+      state.bookDate = moment(action.payload.selectedValue).format(
+        "YYYY.MM.DD"
+      );
+      state.bookShowTime = util.getItemFromString(
+        action.payload.choosedShowTime
+      );
+    },
+  },
+});
+
+const userInfoState = [
+  {
+    userId: "1",
+    name: "홍박사",
+    phone: "01022223333",
+    email: "abctest@test.com",
+  },
+];
+
+const userInfoSlice = createSlice({
+  name: "userInfo",
+  initialState: userInfoState,
+  reducers: {
+    getUserInfo: (state, action) => {
+      //\console.log("(booksSlice) payload : ", action.payload);
+      const findData = userInfoState.filter(
+        (data) => data.userId === action.payload.userId
+      );
+      // console.log("(booksSlice) findData : ", state, findData);
+      //console.log("(booksSlice) state.showInfo(before) : ", state.showInfo);
+      state.showInfo = findData;
+      //console.log("(booksSlice) state.showInfo(after) : ", state.showInfo);
+    },
   },
 });
 
@@ -73,9 +150,9 @@ const rootReducer = combineReducers({
   posts: postsSlice,
 });
 
-export const { setMusicals } = musicalsSlice.actions;
+export const { setMusicals, getMusicalInfoById } = musicalsSlice.actions;
 export const { setConcerts } = concertSlice.actions;
 export const { setTheatres } = theatreSlice.actions;
-export const { getBooksInfo } = booksSlice.actions;
+export const { getShowInfoById, setShowInfo } = booksSlice.actions;
 
 export default rootReducer;

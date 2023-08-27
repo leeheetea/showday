@@ -10,7 +10,7 @@
   margin-top: 15px;
   line-height: 1.4rem;
 
-  > p {
+  >p {
     width: 100px;
   }
 }
@@ -26,16 +26,16 @@
   display: flex;
   line-height: 1.6rem;
 
-  > input {
+  >input {
     width: 100%;
     height: 20px;
   }
 
-  > p:nth-child(2n+1) {
+  >p:nth-child(2n+1) {
     width: 300px;
-  }                                                                                                                                                                            
+  }
 
-  > p:nth-child(2n) {
+  >p:nth-child(2n) {
     width: 100%;
   }
 }

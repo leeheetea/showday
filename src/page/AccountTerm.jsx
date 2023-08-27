@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../components/AccountTerm.css'
 import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
+import AccountHeader from '../components/AccountHeader'
 
 const AccountTerm = () => {
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ const AccountTerm = () => {
 
   return (
     <div>
-      <Header></Header>
+      <AccountHeader></AccountHeader>
       <div className='termContent'>
         <div className='termWrapper'>
           <div className='checkBox_allAgree'>

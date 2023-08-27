@@ -244,6 +244,7 @@
 
 .uBlock_under14 .inputArea_name input {
   border: none;
+  outline: 0;
   width: 100%;
 }
 
@@ -264,6 +265,7 @@
 
 .uBlock_under14 .inputArea_email input {
   border: none;
+  outline: 0;
   width: 100%;
 }
 

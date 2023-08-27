@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
-// import GoogleLogin from '../components/GoogleLogin'
-import { GoogleLogin } from "@react-oauth/google";
+import GoogleSnsLogin from '../components/GoogleSnsLogin'
 import "../components/Login.css";
 import { Link } from "react-router-dom";
 import Header from '../components/Header'
@@ -61,7 +60,7 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="StyledLoginBox">
               <div className="StyledLogo">
-                <img src="../img/Showday_logo.png" alt="logo" style={{ width: '119px', height: '30px', background: 'cover' }}/>
+                <img src="../img/Showday_logo.png" alt="logo" style={{ width: '119px', height: '30px', background: 'cover' }} />
               </div>
               <ul className="StyledUl">
                 <li className="StyledLi">
@@ -103,7 +102,7 @@ const Login = () => {
               </p>
             </div>
           </form>
-  
+
           <div className="SnsLoginWrap">
             <div className="SnsLoginNaver">
               <NaverLogin></NaverLogin>
@@ -111,9 +110,11 @@ const Login = () => {
             <div className="SnsLoginKakao">
               <KaKaoLogin></KaKaoLogin>
             </div>
-            <GoogleLogin></GoogleLogin>
+            <div className="SnsLoginGoogle">
+              <GoogleSnsLogin></GoogleSnsLogin>
+            </div>
           </div>
-  
+
           <div className="StyledHelp">
             <a className="StyledHelpMenu" onClick={findIdPopup}>
               아이디 찾기 |{" "}
@@ -128,7 +129,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-   
+
   );
 };
 

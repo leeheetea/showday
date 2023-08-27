@@ -2,15 +2,15 @@ import React from 'react'
 import '../components/AccountCreate.css'
 import KakaoLogin from '../components/KakaoLogin'
 import NaverLogin from '../components/NaverLogin'
-import { GoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
+import AccountHeader from '../components/AccountHeader'
+import GoogleSnsLogin400 from '../components/GoogleSnsLogin400'
 
 const AccountCreate = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <Header></Header>
+      <AccountHeader></AccountHeader>
       <div className='joinWrapper'>
         <div className='joinBlock'>
           <h2 className='title'>기분최고조 회원가입</h2>
@@ -27,7 +27,7 @@ const AccountCreate = () => {
                 <KakaoLogin></KakaoLogin>
               </li>
               <li className='snsLoginli'>
-                <GoogleLogin></GoogleLogin>
+                <GoogleSnsLogin400></GoogleSnsLogin400>
               </li>
             </ul>
             <p className='text'>SNS계정 회원가입(만 14세 이상 가능)</p>

@@ -24,6 +24,7 @@ const Login = () => {
       username: username,
       password: password,
     };
+    console.log(data);
   };
 
   const findIdPopup = () => {
@@ -85,7 +86,7 @@ const Login = () => {
               </ul>
               <div>
                 <input
-                  className="StyledInputButton"
+                  className="StyledSubmitInputButton"
                   type="submit"
                   value="로그인"
                 />

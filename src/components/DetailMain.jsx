@@ -129,9 +129,7 @@ const Main = ({ data }) => {
               <InfoTitle className="product_info_title">기간</InfoTitle>
               <div>{data.period}</div>
             </li>
-          </ProductInfoListContainer>
 
-          <ProductInfoListContainer className="product_info_list2 ">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
               <div>{data.price}</div>

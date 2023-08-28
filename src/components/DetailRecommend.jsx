@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import "../css/DetailRecommend.css";
 
 const CommendContainer = styled.div`
   display: grid;
@@ -18,11 +19,11 @@ const ImgCommendContainer = styled.img`
 const Commend = () => {
   return (
     <div>
-      <div className="DetailRecommendTitleWrapper">
+      <div className="detailRecommendTitleWrapper">
         <h3>추천 공연 / 전시</h3>
       </div>
       <CommendContainer>
-        <a href="/">
+        <div className="recommend-item-container">
           <ImgCommendContainer
             src="https://image.toast.com/aaaaab/ticketlink/TKL_4/222_poster_0713.jpg"
             alt=""
@@ -30,8 +31,8 @@ const Commend = () => {
           <div>
             <span>{"뮤지컬<22년 2개월>"}</span>
           </div>
-        </a>
-        <a href="/">
+        </div>
+        <div className="recommend-item-container">
           <ImgCommendContainer
             src="https://image.toast.com/aaaaab/ticketlink/TKL_9/m0808.jpg"
             alt=""
@@ -39,17 +40,17 @@ const Commend = () => {
           <div>
             <span>{"박재정 콘서트 < Alone >"}</span>
           </div>
-        </a>
-        <a href="/">
+        </div>
+        <div className="recommend-item-container">
           <ImgCommendContainer
             src="https://image.toast.com/aaaaab/ticketlink/TKL_4/suf-mimori-kr.jpg"
             alt=""
           />
           <div>
-            <span>미모리스즈코 팬미팅</span>
+            <span>미모리 스즈코 팬미팅</span>
           </div>
-        </a>
-        <a href="/">
+        </div>
+        <div className="recommend-item-container">
           <ImgCommendContainer
             src="https://image.toast.com/aaaaab/ticketlink/TKL_8/manbok_230704.jpg"
             alt=""
@@ -57,7 +58,16 @@ const Commend = () => {
           <div>
             <span>{"<만복이네 떡집> - 김천"}</span>
           </div>
-        </a>
+        </div>
+        <div className="recommend-item-container">
+          <ImgCommendContainer
+            src="https://image.toast.com/aaaaab/ticketlink/TKL_5/g_0822.jpg"
+            alt=""
+          />
+          <div>
+            <span>지브리 페스티벌</span>
+          </div>
+        </div>
       </CommendContainer>
     </div>
   );

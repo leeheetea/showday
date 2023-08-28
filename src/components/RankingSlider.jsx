@@ -87,11 +87,13 @@ const RankingSlider = () => {
         {slideData.map((data, index) => (
           <div className="ranking-slider-container" key={index}>
             <span className="ranking-text">{index + 1}</span>
-            <div
-              onClick={() => navigator("/detailpage/" + data.id)}
-              key={index}
-            >
-              <img className="ranking-slider" src={data.url} alt="" />
+            <div key={index}>
+              <img
+                onClick={() => navigator("/detailpage/" + data.id)}
+                className="ranking-slider"
+                src={data.url}
+                alt=""
+              />
             </div>
           </div>
         ))}

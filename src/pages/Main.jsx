@@ -5,6 +5,7 @@ import MainAtricle from "../components/MainAtricle";
 import RankingSlider from "../components/RankingSlider";
 import LaptopNavigator from "../components/LaptopNavigator";
 import LaptopBanner from "../components/LaptopBanner";
+import Footer from "../components/Footer";
 
 const Main = () => {
   return (
@@ -16,6 +17,7 @@ const Main = () => {
       <MobileNavigator />
       <MainAtricle />
       <RankingSlider />
+      <Footer />
     </div>
   );
 };

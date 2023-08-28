@@ -1,6 +1,9 @@
 .ranking-slider-container {
   text-align: center;
   margin: 0 auto;
+}
+
+.ranking-slider {
   cursor: pointer;
 }
 

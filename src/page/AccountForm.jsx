@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import '../components/AccountForm.css'
-import Header from '../components/Header';
+import AccountHeader from '../components/AccountHeader'
 
 const AccountForm = () => {
-  /////////////////////////////////////////////////////////////////////////////////////
+  // 아이디 유효성 검사
   const [id, setId] = useState('');
   const [showErrorId, setShowErrorId] = useState(false);
 
@@ -14,7 +14,7 @@ const AccountForm = () => {
 
     setShowErrorId(hasNonEnglishCharacters || isLengthOutOfRange);
   }, []);
-  //////////////////////////////////////////////////////////////////////////////////////
+  // 비밀번호 유효성 검사
   const [password, setPassword] = useState('');
   const [showErrorPassword, setShowErrorPassword] = useState(false);
 
@@ -37,7 +37,7 @@ const AccountForm = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   }
-  ////////////////////////////////////////////////////////////////////////////////
+  // 비밀번호 확인 유효성 검사
   const [passwordVerify, setPasswordVerify] = useState('');
   const [showErrorPasswordVerify, setShowErrorPasswordVerify] = useState(false);
 
@@ -52,7 +52,14 @@ const AccountForm = () => {
   const togglePasswordVerifyVisibility = () => {
     setPasswordVerifyVisible(!passwordVerifyVisible);
   }
-  //////////////////////////////////////////////////////////////////////
+  // 이름 입력 확인용
+  const [name, setName] = useState('');
+
+  const onChangeName = useCallback((e) => {
+    setName(e.target.value);
+  }, [])
+
+  // 이메일 유효성 검사
   const [email, setEmail] = useState('');
   const [showErrorEmail, setShowErrorEmail] = useState(false);
 
@@ -79,18 +86,26 @@ const AccountForm = () => {
     }
   }, [])
 
-  ////////////////////////////////////////////////////////////////////////////////////
+  // 휴대폰 숫자만 입력으로 받음
   const [phone, setPhone] = useState('');
 
   const onChangePhone = useCallback((e) => {
     setPhone(e.target.value.replace(/[^0-9]/g, ''));
   }, [])
-  /////////////////////////////////////////////////////////
+  // 14세 미만인 경우 체크박스
   const [isCheckedUnder14, setIsCheckedUnder14] = useState(false);
   const onChangeUnder14 = useCallback((e) => {
     setIsCheckedUnder14(e.target.checked);
   }, []);
-  /////////////////////////////////////////////////////////
+
+  // 14세 미만 법정대리인 이름
+  const [under14Name, setUnder14Name] = useState('');
+
+  const onChangeUnder14Name = useCallback((e) => {
+    setUnder14Name(e.target.value);
+  }, [])
+
+  // 14세 미만 법정대리인 이메일 유효성 검사
   const [under14Email, setUnder14Email] = useState('');
   const [showErrorUnder14Email, setShowErrorUnder14Email] = useState(false);
 
@@ -116,39 +131,52 @@ const AccountForm = () => {
     }
   }, [])
 
-  ///////////////////////////////////////////////////////////////////
+  // 라디오 체크 확인용
+  const [isRadioChecked, setIsRadioChecked] = useState(false);
+
+  const onChangeRadio = (event) => {
+    setIsRadioChecked(event.target.checked);
+  };
+
+  // submit 버튼 활성화 조건, 빈칸, 모든 칸 입력, 에러텍스트 검사, 14세 미만 체크 일 때
 
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
 
   const areAllFieldsEmpty = useCallback(() => {
-    return !id && !password && !passwordVerify && !email && !phone && !under14Email;
-  }, [id, password, passwordVerify, email, phone, under14Email]);
+    return !id && !password && !passwordVerify && name && !email && !phone;
+  }, [id, password, passwordVerify, name, email, phone]);
+
+  const areAllFieldsFilled = useCallback(() => {
+    return id && password && passwordVerify && name && email && phone && isRadioChecked;
+  }, [id, password, passwordVerify, name, email, phone, isRadioChecked]);
 
   const isAllFieldsValid = useCallback(() => {
     return !showErrorId && !showErrorPassword && !showErrorPasswordVerify && !showErrorEmail;
   }, [showErrorId, showErrorPassword, showErrorPasswordVerify, showErrorEmail]);
 
   const areAllFieldsEmpty14 = useCallback(() => {
-    return !under14Email;
-  }, [under14Email]);
+    return !under14Name && !under14Email;
+  }, [under14Name, under14Email]);
+
+  const areAllFieldsFilled14 = useCallback(() => {
+    return under14Name && under14Email;
+  }, [under14Name, under14Email]);
 
   const isAllFieldsValid14 = useCallback(() => {
-    return !showErrorId && !showErrorPassword && !showErrorPasswordVerify && !showErrorEmail && !showErrorUnder14Email;
-  }, [showErrorId, showErrorPassword, showErrorPasswordVerify, showErrorEmail, showErrorUnder14Email]);
+    return !showErrorUnder14Email;
+  }, [showErrorUnder14Email]);
 
   useEffect(() => {
     setIsSubmitEnabled(
-      isAllFieldsValid() &&
-      !areAllFieldsEmpty() &&
-      (!isCheckedUnder14 || (isCheckedUnder14 && isAllFieldsValid14() && !areAllFieldsEmpty14()))
+      !areAllFieldsEmpty() && areAllFieldsFilled() && isAllFieldsValid() &&
+      (!isCheckedUnder14 || (isCheckedUnder14 && !areAllFieldsEmpty14() && areAllFieldsFilled14() && isAllFieldsValid14()))
     );
-  }, [isAllFieldsValid, areAllFieldsEmpty, isCheckedUnder14, isAllFieldsValid14, areAllFieldsEmpty14]);
 
-  /////////////////////////////////////////////////////////////////////////
+  }, [areAllFieldsEmpty, isAllFieldsValid, isCheckedUnder14, areAllFieldsEmpty14, isAllFieldsValid14, areAllFieldsFilled, areAllFieldsFilled14]);
 
   return (
     <div>
-      <Header></Header>
+      <AccountHeader></AccountHeader>
       <form className='AccountForm'>
         <div className='AccountFormWrapper'>
           {/* 아이디 */}
@@ -219,7 +247,13 @@ const AccountForm = () => {
           <div className='uBlock'>
             <div className="inputArea_name">
               <label htmlFor="name">이름</label>
-              <input type="text" id='name' name='name' />
+              <input
+                type="text"
+                id='name'
+                name='name'
+                value={name}
+                onChange={onChangeName}
+              />
             </div>
             <div className='errorText'>
               한글과 영문 대,소문자를 사용해주세요.
@@ -241,7 +275,7 @@ const AccountForm = () => {
               />
               <div>
                 <label htmlFor="">
-                  <select name="" id="" onChange={onChangeEmailSelect}>
+                  <select name="" id="emailSelectOption" onChange={onChangeEmailSelect}>
                     <option value="">직접입력</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@hanmail.net">@hanmail.net</option>
@@ -332,8 +366,14 @@ const AccountForm = () => {
           {/* 만 14세 미만 법정대리인 이름 */}
           <div className='uBlock_under14' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
             <div className="inputArea_name">
-              <label htmlFor="">이름</label>
-              <input type="text" />
+              <label htmlFor="under14Name">이름</label>
+              <input
+                type="text"
+                name='under14Name'
+                id='under14Name'
+                value={under14Name}
+                onChange={onChangeUnder14Name}
+              />
             </div>
             <div className='errorText'>
               한글과 영문 대,소문자를 사용해주세요.
@@ -355,7 +395,7 @@ const AccountForm = () => {
               />
               <div>
                 <label htmlFor="">
-                  <select name="" id="" onChange={onChangeUnder14EmailSelect}>
+                  <select name="" id="emailSelectOptionUnder14" onChange={onChangeUnder14EmailSelect}>
                     <option value="">직접입력</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@hanmail.net">@hanmail.net</option>
@@ -391,13 +431,23 @@ const AccountForm = () => {
             <div className='radioBoxWrapper'>
               <div className='radioBox'>
                 <label htmlFor="radio1">
-                  <input type="radio" name='radio' id='radio1' />
+                  <input
+                    type="radio"
+                    name='radio'
+                    id='radio1'
+                    onChange={onChangeRadio}
+                  />
                   <span>탈퇴 시까지</span>
                 </label>
               </div>
               <div className='radioBox'>
                 <label htmlFor="radio2">
-                  <input type="radio" name='radio' id='radio2' />
+                  <input
+                    type="radio"
+                    name='radio'
+                    id='radio2'
+                    onChange={onChangeRadio}
+                  />
                   <span>1년</span>
                 </label>
               </div>

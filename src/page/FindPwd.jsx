@@ -132,7 +132,7 @@ const FindPwd = () => {
                   {/* 본인인증으로 찾기 */}
                   <li>
                     <div className="title">
-                      <button type="button" onClick={toggleInputVerify}>본인인증으로 찾기 (아이디 전체 확인 가능)</button>
+                      <button type="button" onClick={toggleInputVerify}>본인인증으로 찾기</button>
                     </div>
                     {isInputVerifyOpen && (<div className="inputEnter">
                       <div className="inputBox">

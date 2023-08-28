@@ -1,22 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import RankingSlider from "../components/RankingSlider";
 import Header from "../components/Header";
 import LaptopNavigator from "../components/LaptopNavigator";
 import MobileNavigator from "../components/MobileNavigator";
+import ToTopButton from "../components/ToTopButton ";
+import RecommendItem from "../components/RecommendItem";
 import "../css/Concert.css";
-import { useSelector } from "react-redux";
-import { useRankingType } from "../store/RankingTypeContext";
-import { useNavigate } from "react-router-dom";
 
 const Concert = () => {
-  const concerts = useSelector((state) => state.concerts);
-  const navigator = useNavigate();
-  const { setRankingType } = useRankingType();
-
-  useEffect(() => {
-    setRankingType("concert");
-  });
-
   return (
     <div>
       <Header />
@@ -37,20 +28,9 @@ const Concert = () => {
         <div>
           <h2 className="concert-subtitle">추천 콘서트</h2>
         </div>
-        <div className="concert-item-grid">
-          {concerts.map((concert, index) => (
-            <div className="concert-item-container" key={index}>
-              <img
-                onClick={() => navigator("/detailpage/" + concert.id)}
-                className="concert-item"
-                src={concert.url}
-                alt=""
-              />
-              <span className="concert-item-title">{concert.title}</span>
-            </div>
-          ))}
-        </div>
+        <RecommendItem />
       </div>
+      <ToTopButton />
     </div>
   );
 };

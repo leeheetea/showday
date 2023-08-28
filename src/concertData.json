@@ -8,7 +8,12 @@
     "place": "잠실 실내체육관",
     "period": "2023.11.27 ~2023.11.28",
     "price": "143,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010643-05.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010643-05.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1002",
@@ -19,7 +24,12 @@
     "place": "엑스코 5층 컨벤션홀",
     "period": "2024.01.06 ~2024.01.07",
     "price": "154,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011599-01.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011599-01.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1003",
@@ -30,7 +40,12 @@
     "place": "부산 아시아드 보조경기장",
     "period": "2023.08.26 ~2023.08.27",
     "price": "154,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007291-05.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007291-05.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1004",
@@ -41,7 +56,12 @@
     "place": "가평 자라섬 중도",
     "period": "2023.09.02",
     "price": "10,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010762-03.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010762-03.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1005",
@@ -52,7 +72,12 @@
     "place": "난지 한강공원 일대",
     "period": "2023.09.02 ~2023.09.03",
     "price": "99,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011408-02.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011408-02.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1006",
@@ -63,7 +88,12 @@
     "place": "KSPO DOME (올림픽체조경기장)",
     "period": "2023.10.07 ~2023.10.15",
     "price": "176,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011026-02.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011026-02.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1007",
@@ -74,7 +104,12 @@
     "place": "블루스퀘어 마스터카드홀",
     "period": "2023.08.25 ~2023.08.27",
     "price": " 115,000",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011003-05.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011003-05.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1008",
@@ -85,7 +120,12 @@
     "place": "구리아트홀 코스모스 대극장(자세히)",
     "period": "2023.09.16",
     "price": "30,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011436-03.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011436-03.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1009",
@@ -96,7 +136,12 @@
     "place": "엑스코 동관 6홀",
     "period": "2023.09.16 ~2023.09.17",
     "price": "132,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011356-02.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23011356-02.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   },
   {
     "id": "1010",
@@ -107,6 +152,11 @@
     "place": "KSPO DOME",
     "period": "2023.09.02 ~2023.09.03",
     "price": "132,000",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010177-02.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010177-02.jpg",
+    "showType": "concert",
+    "showTime": [
+      11,
+      13
+    ]
   }
 ]

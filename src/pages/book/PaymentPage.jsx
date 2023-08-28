@@ -5,7 +5,7 @@ import './PaymentPage.css'
 const PaymentPage = () => {
   return (
     <div className='paymentContainer'>
-      <img src='/assets/images/pay.jpeg'/>
+      <img src='/img/pay.jpeg' />
     </div>
   )
 }

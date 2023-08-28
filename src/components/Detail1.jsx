@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
+import utils from '../utils.js'
+import { setShowInfo } from '../store/slice'
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -105,8 +108,34 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 `;
 const Detail1 = (props) => {
   const navigator = useNavigate();
+  const bookDispatch = useDispatch();
+  const state = useSelector((state) => state.booksData);
 
   const [selectedValue, setSelectedValue] = useState(new Date());
+  const [choosedShowTime, setChoosedShowTime] = useState(null);
+
+  /* 날짜 선택이 변경 될때 이벤트 */
+  const handleChangedDate = (e) => {
+    setSelectedValue(e);
+    setChoosedShowTime(null);
+  }
+
+  /* 예매하기 버튼 선택 클릭 이벤트 */
+  const handleClickBookBtn = () => {
+    let selectedValueMs = selectedValue.getTime(); // 직렬화 하라느 오류때문에 getTime 함수 한 번 변환 거침
+    // 회차 선택 여부 체크
+    if (choosedShowTime === null) {
+      alert('관람을 원하시는 공연 시간(회차)을 선택해주세요.');
+      return;
+    } else {
+      console.log(choosedShowTime);
+
+      // 현재 뮤지컬 정보를 예약정보 업데이트
+      // console.log(props);
+      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
+      navigator("/book/" + props.data.id + "/2");
+    }
+  }
 
   return (
     <div>
@@ -115,7 +144,7 @@ const Detail1 = (props) => {
           <h3 className="detailTitle">STEP1</h3>
           <h3>날짜 선택</h3>
           <Calendar
-            onChange={setSelectedValue}
+            onChange={handleChangedDate}
             value={selectedValue}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
@@ -125,42 +154,35 @@ const Detail1 = (props) => {
           <h3 className="detailTitle">STEP2</h3>
           <h3>회차 선택</h3>
           <div className="detailLabel">
-            <label>
-              <div className="detailLabelContainer">
-                <FormCheckLeft
-                  className="inputRadioCheck"
-                  type="radio"
-                  name="radioButton"
-                  value="10월 3일 11시"
-                />
-                <FormCheckText>10월 3일 11시</FormCheckText>
+            {props.data.showTime.map((time, index) => (
+              <div key={index}>
+                <label>
+                  <div className="detailLabelContainer">
+                    <FormCheckLeft
+                      className="inputRadioCheck"
+                      type="radio"
+                      name="radioButton"
+                      onClick={(e) => setChoosedShowTime(e.target.value)}
+                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                    />
+                    <FormCheckText>
+                      {utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                    </FormCheckText>
+                  </div>
+                </label>
+                <br />
               </div>
-            </label>
-            <br />
-            <label>
-              <div className="detailLabelContainer">
-                <FormCheckLeft
-                  className="inputRadioCheck"
-                  type="radio"
-                  name="radioButton"
-                  value="10월 3일 18시"
-                />
-                <FormCheckText>10월 3일 18시</FormCheckText>
-              </div>
-            </label>
+            ))}
           </div>
         </div>
       </DetailContainer>
       <ButtonContainer>
         <button
-          onClick={() => {
-            navigator("/book/" + props.data.id + "/2");
-          }}
-        >
+          onClick={handleClickBookBtn}>
           예매하기
         </button>
       </ButtonContainer>
-    </div>
+    </div >
   );
 };
 

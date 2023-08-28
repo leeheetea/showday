@@ -1,3 +1,11 @@
+.AccountForm {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: none;
+  box-sizing: border-box;
+}
 .AccountFormWrapper {
   width: 500px;
   box-sizing: border-box;
@@ -6,6 +14,7 @@
   padding-top: 75px;
   padding-bottom: 40px;
   display: block;
+  background-color: #fff;
 }
 
 .uBlock {
@@ -244,6 +253,7 @@
 
 .uBlock_under14 .inputArea_name input {
   border: none;
+  outline: 0;
   width: 100%;
 }
 
@@ -264,6 +274,7 @@
 
 .uBlock_under14 .inputArea_email input {
   border: none;
+  outline: 0;
   width: 100%;
 }
 

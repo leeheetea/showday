@@ -23,11 +23,11 @@ const Concert = () => {
       <MobileNavigator />
       <LaptopNavigator />
       <div className="concert-title-container">
-        <h1>콘서트</h1>
+        <h1 className="concert-title">콘서트</h1>
       </div>
       <div className="concert-header">
         <div className="concert-text-container">
-          <h2>랭킹</h2>
+          <h2 className="concert-subtitle">랭킹</h2>
         </div>
         <div className="concert-slider-container">
           <RankingSlider />
@@ -35,7 +35,7 @@ const Concert = () => {
       </div>
       <div className="concert-article">
         <div>
-          <h2 className="concert-subtitle">추천 작품</h2>
+          <h2 className="concert-subtitle">추천 콘서트</h2>
         </div>
         <div className="concert-item-grid">
           {concerts.map((concert, index) => (

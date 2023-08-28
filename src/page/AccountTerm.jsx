@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../components/AccountTerm.css'
 import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
+import AccountHeader from '../components/AccountHeader'
 
 const AccountTerm = () => {
   const navigate = useNavigate();
@@ -17,17 +17,25 @@ const AccountTerm = () => {
     term7: false,
     term8: false,
     term9: false,
-    term10: false,
+    term10: false
   });
 
   const handleAllAgreeChange = () => {
-    setAllAgree(!allAgree);
 
     const updatedTermsChecked = {};
     for (const key in termsChecked) {
       updatedTermsChecked[key] = !allAgree;
     }
     setTermsChecked(updatedTermsChecked);
+
+    const updatedSubTermsChecked = {};
+    for (const key in subTermsChecked) {
+      updatedSubTermsChecked[key] = !allAgree;
+    }
+    setSubTermsChecked(updatedSubTermsChecked);
+
+    setAllAgree(!allAgree);
+    setMarketingTerm(!allAgree);
   }
 
   const handleTermChange = (term) => {
@@ -35,13 +43,13 @@ const AccountTerm = () => {
       ...termsChecked,
       [term]: !termsChecked[term]
     };
+    setTermsChecked(updatedTermsChecked);
 
     const isAllTermsChecked = Object.values(updatedTermsChecked).every(
       (checked) => checked);
-    setTermsChecked(updatedTermsChecked);
     setAllAgree(isAllTermsChecked);
-
   }
+
   /////////////////////////////////////////////////////////////////////
   const [marketingTerm, setMarketingTerm] = useState(false);
   const [subTermsChecked, setSubTermsChecked] = useState({
@@ -54,9 +62,9 @@ const AccountTerm = () => {
 
   const handleMarketingTerm = () => {
     const newMarketingTerm = !marketingTerm;
+    const updatedSubTermsChekced = {};
     setMarketingTerm(newMarketingTerm);
 
-    const updatedSubTermsChekced = {};
     for (const key in subTermsChecked) {
       updatedSubTermsChekced[key] = !marketingTerm;
     }
@@ -73,21 +81,19 @@ const AccountTerm = () => {
       (checked) => checked);
     setSubTermsChecked(updatedSubTermsChekced);
     setMarketingTerm(isAllSubTermsChecked);
+    if (!isAllSubTermsChecked) {
+      setTermsChecked({ ...termsChecked, term10: false });
+    }
   }
   ////////////////////////////////////////////////////////////////////////
   // console.log('termsChecked.term10: ', termsChecked.term10);
-  // console.log('marketingTerm: ', marketingTerm);
-  // useEffect(() => {
-  //   if (termsChecked.term10 === true) {
-  //     setMarketingTerm(true);
-  //   }
-  // }, [termsChecked.term10]);
+  // console.log('marketingTerm: ', marketingTerm); 
 
   const areAllRequiredTermsChecked = ['term1', 'term2', 'term3', 'term4', 'term5', 'term6', 'term7'].every((term) => termsChecked[term]);
 
   return (
     <div>
-      <Header></Header>
+      <AccountHeader></AccountHeader>
       <div className='termContent'>
         <div className='termWrapper'>
           <div className='checkBox_allAgree'>
@@ -280,6 +286,7 @@ const AccountTerm = () => {
         </div>
       </div>
     </div>
+
   )
 }
 

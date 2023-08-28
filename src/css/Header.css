@@ -5,6 +5,7 @@ header {
   width: 100%;
   z-index: 40;
   background-color: white;
+  padding-bottom: 1rem;
 }
 
 @media (max-width: 767px) {
@@ -82,6 +83,7 @@ header {
   }
 
   .searchbar-container {
+    width: 30%;
     position: relative;
   }
 
@@ -98,8 +100,13 @@ header {
     padding-left: 1rem;
   }
 
+  .search-container-menu {
+    width: 48%;
+  }
+
   .search-container-menu-text {
-    display: block;
+    cursor: pointer;
+    display: inline-block;
     margin: 0 0.8rem;
   }
 
@@ -136,6 +143,7 @@ header {
   }
 
   .search-container-menu-text {
+    cursor: pointer;
     margin: 0 0.8rem;
   }
 

@@ -147,6 +147,7 @@ const Detail1 = (props) => {
             onChange={handleChangedDate}
             minDate={new Date()}
             value={selectedValue}
+            minDate={new Date()}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
@@ -170,6 +171,16 @@ const Detail1 = (props) => {
                         time +
                         "시"
                       }
+                      checked={
+                        choosedShowTime ===
+                        utils.dateFormatForButton(selectedValue) +
+                          " " +
+                          time +
+                          "시"
+                      }
+                      onChange={(e) => {
+                        setChoosedShowTime(e.target.value);
+                      }}
                     />
                     <FormCheckText>
                       {utils.dateFormatForButton(selectedValue) +

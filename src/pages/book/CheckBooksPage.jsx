@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 
 import "./CheckBooksPage.css";
 import BookTitle from "../../components/book/BookTitle";
 import LineContainer from "../../components/LineContainer";
+import LineButton from "../../components/LineButton";
 
 const CheckBooksPage = () => {
+  const state = useSelector((state) => state.userInfo);
   const [values, setValues] = useState({
     name: "",
     phoneNumber: "",
     email: "",
   });
+  // 이메일 유효성 검사
+  const [showErrorEmail, setShowErrorEmail] = useState(false);
+
+  // const onChangeEmail = useCallback((e) => {
+  //   setEmail(e.target.value);
+
+  //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  //   const isValidEmail = emailPattern.test(e.target.value);
+  //   setShowErrorEmail(!isValidEmail);
+  // }, [])
+
+  useEffect(() => {
+    setValues(state);
+  }, []);
 
   const handleChange = (e) => {
-    setValues({
-      ...values,
+
+    if (e.target.name === 'email') {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isValidEmail = emailPattern.test(e.target.value);
+      setShowErrorEmail(!isValidEmail);
+    }
+
+    setValues((prevValues) => ({
+      ...prevValues,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
+
+
+
 
   return (
     <div className="checkBooksContainer">
@@ -25,7 +52,8 @@ const CheckBooksPage = () => {
       </BookTitle>
       <LineContainer className="getTicketContainer" tmargin="10px">
         <p>티켓</p>
-        <button>현장수령</button>
+        <LineButton>현장수령</LineButton>
+        <span>&nbsp;&nbsp;현재는 현장 수령만 가능합니다.</span>
       </LineContainer>
       <BookTitle width='100%' tpadding='40px' isleft='true'>주문자 정보</BookTitle>
       <form action="">
@@ -36,17 +64,57 @@ const CheckBooksPage = () => {
             <p className='required'>휴대폰번호</p>
             <input
               value={values.phoneNumber}
-              placeholder='전화번호'
+              name='phoneNumber'
+              inputMode="numeric"
+              maxLength={11}
+              placeholder="휴대폰번호 (-없이 입력)"
               onChange={handleChange}></input>
           </div>
         </LineContainer>
         <LineContainer tMargin='-2px'>
           <div className='checkBookFormName'>
             <p>이메일</p>
-            <input
+            {/*  <input
               value={values.email}
+              name='email'
               placeholder='이메일'
-              onChange={handleChange}></input>
+              onChange={handleChange}></input> */}
+            <div className='emailContainer'>
+              <div className="emailInput">
+                <input
+                  value={values.email}
+                  name='email'
+                  onChange={handleChange}
+                />
+                <span
+                  id="inputTelClear"
+                  className="delBtn"
+                ></span>
+              </div>
+              <div className="emailSelect">
+                <select name="memEmail2" id="memEmail2">
+                  <option value="etc">직접입력</option>
+                  <option value="naver.com">naver.com</option>
+                  <option value="hanmail.net">hanmail.net</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <option value="nate.com">nate.com</option>
+                  <option value="hotmail.com">hotmail.com</option>
+                </select>
+                <div className="newSelect">{/* todo */}</div>
+                <ul className="options">
+                  <li className="option">직접입력</li>
+                  <li className="option">naver.com</li>
+                  <li className="option">hanmail.net</li>
+                  <li className="option">gmail.com</li>
+                  <li className="option">nate.com</li>
+                  <li className="option">hotmail.com</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
+            이메일 주소 양식에 맞게 작성해주세요.
           </div>
         </LineContainer>
       </form>

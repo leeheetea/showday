@@ -88,7 +88,7 @@ const FindPwd = () => {
                     <div className='title'>
                       <button type="button" onClick={toggleInputEmail}>등록된 이메일로 찾기</button>
                     </div>
-                    {isInputEmailOpen &&(<div className='inputEnter'>
+                    {isInputEmailOpen && (<div className='inputEnter'>
                       <div className='inputBox'>
                         <div className="styleInput">
                           <input type="text" id='memNm2' className='iInput' placeholder='이름' />

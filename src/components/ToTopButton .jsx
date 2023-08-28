@@ -3,7 +3,6 @@ import { BsArrowUpCircleFill } from "react-icons/bs";
 import "../css/ToTopButton.css";
 
 const ToTopButton = () => {
-  console.log("버튼");
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

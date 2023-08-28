@@ -6,6 +6,7 @@ import AccountHeader from '../components/AccountHeader'
 const AccountTerm = () => {
   const navigate = useNavigate();
 
+  // 전체 동의와 동의항목 10가지 처리
   const [allAgree, setAllAgree] = useState(false);
   const [termsChecked, setTermsChecked] = useState({
     term1: false,
@@ -50,7 +51,7 @@ const AccountTerm = () => {
     setAllAgree(isAllTermsChecked);
   }
 
-  /////////////////////////////////////////////////////////////////////
+  // 선택동의항목의 하위동의항목
   const [marketingTerm, setMarketingTerm] = useState(false);
   const [subTermsChecked, setSubTermsChecked] = useState({
     subTerm1: false,
@@ -85,10 +86,10 @@ const AccountTerm = () => {
       setTermsChecked({ ...termsChecked, term10: false });
     }
   }
-  ////////////////////////////////////////////////////////////////////////
   // console.log('termsChecked.term10: ', termsChecked.term10);
   // console.log('marketingTerm: ', marketingTerm); 
 
+  // 필수 동의 항목 7가지 체크
   const areAllRequiredTermsChecked = ['term1', 'term2', 'term3', 'term4', 'term5', 'term6', 'term7'].every((term) => termsChecked[term]);
 
   return (

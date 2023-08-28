@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +6,7 @@ import "./BookInfoView.css";
 import BookTitle from "./BookTitle";
 import LineContainer from "../LineContainer";
 import LineButton from "../LineButton";
-import util from "../../utils";
+import utils from "../../utils";
 
 const BookInfoView = () => {
   const navigate = useNavigate();
@@ -15,12 +15,13 @@ const BookInfoView = () => {
 
   // state에서 화면에 표시할 공연 정보 선언
   const { title, price, url } = state.showInfo[0];
-  const { bookDate, youtDiscount, bookShowTime } = state;
+  const { bookDate, bookShowTime, totalPrice } = state;
 
   useEffect(() => {
-    //dispatch(getShowInfoById({ id: id }));
-    console.log('(BookInfoView) info : ', state);
-  }, []);
+    console.log('(BookInfoView) 가격업뎃!! : ', totalPrice.sumPrice);
+    console.log('(BookInfoView) 가격업뎃!! : ', totalPrice.sumDiscount);
+    console.log('(BookInfoView) 가격업뎃!! : ', totalPrice.resultTotalPrice);
+  }, [totalPrice]);
 
   // 이전버튼 클릭시(예매 스텝에 따라 버튼 및 예매 빠져나가기 처리)
   const handlePrevBtn = () => {
@@ -54,13 +55,15 @@ const BookInfoView = () => {
           </tr>
           <tr>
             <th className='bookResultTh'>티켓금액</th>
-            <td className='bookResultTd' id="_price_ticket">{util.getMarkThousand(price)}</td>
+            <td className='bookResultTd' id="_price_ticket">
+              {utils.getMarkThousand(totalPrice.sumPrice)}
+            </td>
           </tr>
           <tr>
             <th className='bookResultTh'>할인</th>
             <td className='bookResultTd' id="_coupon_discount">
               {/* 청소년 할인 매수 고려한 할인금액 인지 체크 */}
-              {'-' + util.getMarkThousand(util.getRemoveMarkThousand(price) * (-youtDiscount / 100))}
+              {utils.getMarkThousand(totalPrice.sumDiscount)}
             </td>
           </tr>
           <tr>
@@ -71,7 +74,7 @@ const BookInfoView = () => {
         <tfoot className='bookResultTfoot'>
           <tr>
             <th className='bookResultThLast'>총결제</th>
-            <td className='bookResultTdLast'>60,000</td>
+            <td className='bookResultTdLast'>{utils.getMarkThousand(totalPrice.resultTotalPrice)}</td>
           </tr>
         </tfoot>
       </table>

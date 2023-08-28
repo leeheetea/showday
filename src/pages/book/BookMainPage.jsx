@@ -24,6 +24,10 @@ const BookMainPage = () => {
     console.log('날짜 변경됨 : ', e.target.value);
   }
 
+  const handleChangePrice = (e) => {
+    alert('가격변경');
+  }
+
   return (
     <>
       <Header />

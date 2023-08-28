@@ -32,7 +32,7 @@ const MyPageMain = () => {
                 </div>
               </li>
             </StyledLink>
-            <StyledLink to="/mypage">
+            <StyledLink to="/mypage/advanceticket">
               <li>
                 <FaCartPlus className="icon" />
                 <div>
@@ -41,7 +41,7 @@ const MyPageMain = () => {
                 </div>
               </li>
             </StyledLink>
-            <StyledLink to="/mypage">
+            <StyledLink to="/mypage/coupon">
               <li>
                 <FaTicketAlt className="icon" />
                 <div>
@@ -91,19 +91,19 @@ const MyPageMain = () => {
                   </StyledLink>
                 </li>
                 <li>
-                  <StyledLink to="/mypage">
+                  <StyledLink to="/mypage/advanceticket">
                     예매권
                     <FaAngleRight />
                   </StyledLink>
                 </li>
                 <li>
-                  <StyledLink to="/mypage">
+                  <StyledLink to="/mypage/giftcard">
                     상품권
                     <FaAngleRight />
                   </StyledLink>
                 </li>
                 <li>
-                  <StyledLink to="/mypage">
+                  <StyledLink to="/mypage/coupon">
                     쿠폰
                     <FaAngleRight />
                   </StyledLink>

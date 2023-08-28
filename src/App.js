@@ -34,6 +34,9 @@ import ServiceFirst from "./components/ServiceFirst";
 import AnnouncementPage from "./pages/AnnouncementPage";
 import FAQPage from "./pages/FAQPage";
 import MyMemberInfo from "./pages/MyMemberInfo";
+import Advanceticket from "./components/Advanceticket";
+import Giftcard from "./components/Giftcard";
+import Coupon from "./components/Coupon";
 
 function App() {
   return (
@@ -74,6 +77,9 @@ function App() {
               <Route path="ticketingcancle" element={<TicketingCancle />} />
               <Route path="point" element={<MyPagePoint />}></Route>
               <Route path="memberInfo" element={<MyMemberInfo/>}></Route>
+              <Route path="advanceticket" element={<Advanceticket/>}></Route>
+              <Route path="giftcard" element={<Giftcard/>}></Route>
+              <Route path="coupon" element={<Coupon/>}></Route>
             </Route>
 
             <Route path="/search" element={<SearchPage />}></Route>

@@ -11,7 +11,7 @@ const MyPagePoint = () => {
       <p>
         <span className="textRedColor">SHOWDAY</span> 아이디로 차곡차곡 쌓아둔
         포인트와 캐쉬 입니다.
-        <br />
+        <br/>
         자세한 내역은 SHOWDAY 페이지를 통해 확인하실 수 있습니다.
       </p>
 

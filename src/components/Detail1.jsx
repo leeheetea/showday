@@ -122,6 +122,7 @@ const Detail1 = (props) => {
 
   /* 예매하기 버튼 선택 클릭 이벤트 */
   const handleClickBookBtn = () => {
+    let selectedValueMs = selectedValue.getTime(); // 직렬화 하라느 오류때문에 getTime 함수 한 번 변환 거침
     // 회차 선택 여부 체크
     if (choosedShowTime === null) {
       alert('관람을 원하시는 공연 시간(회차)을 선택해주세요.');
@@ -131,7 +132,7 @@ const Detail1 = (props) => {
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
       // console.log(props);
-      bookDispatch(setShowInfo({ props, selectedValue, choosedShowTime }));
+      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
       navigator("/book/" + props.data.id + "/2");
     }
   }

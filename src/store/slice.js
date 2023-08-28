@@ -66,10 +66,15 @@ const initialBooksState = {
       id: "1001",
       ranking: 1,
       title: "노엘 갤러거 하이 플라잉 버즈",
+      bannerUrl: "",
       url: "https://ticketimage.interpark.com/Play/image/large/23/23010643_p.gif",
       place: "잠실 실내체육관",
-      // "period": "2023.11.27 ~2023.11.28",
-      price: "143000",
+      period: "2023.11.27 ~2023.11.28",
+      price: "143,000원",
+      detail:
+        "https://ticketimage.interpark.com/Play/image/etc/23/23010643-05.jpg",
+      showType: "concert",
+      showTime: [11, 13],
     },
   ],
   bookDate: "2023.04.01", // 예약 선택 날짜
@@ -77,31 +82,31 @@ const initialBooksState = {
   bookShowTime: "12:30", // 예약 선택 시간
   bookStep: 2,
   youtDiscount: -15,
-  seats: [
-    { seat: "R1", seatType: "A" },
-    { seat: "R2", seatType: "C" },
-  ],
+  seats: {
+    leftSeats: [188, 200], //
+    bookSeats: ["1_R1_A", "1_R2_C"], // A는 일반, C는 청소년 할인 자리 구분
+  }, // R석 자리만 있고, 200개 좌석으로 일단 한정(R1 ~ R200)
 };
 
 const booksSlice = createSlice({
   name: "booksData",
   initialState: initialBooksState,
   reducers: {
-    getShowInfoById: (state, action) => {
-      console.log("(booksSlice-getShowInfoById) payload : ", action.payload);
+    /*     getShowInfoById: (state, action) => {
+      console.log("(booksSlice-getShowInfoById) payload : ", action.payload.id);
       const findData = initialBooksState.totalData.filter(
         (data) => data.id === action.payload.id
       );
-      // console.log("(booksSlice) findData : ", state, findData);
+      console.log("(booksSlice) findData : ", state, findData);
       //console.log("(booksSlice) state.showInfo(before) : ", state.showInfo);
       state.showInfo = findData;
       //console.log("(booksSlice) state.showInfo(after) : ", state.showInfo);
-    },
+    }, */
     setShowInfo: (state, action) => {
       console.log("(booksSlice-setShowInfo) payload : ", action.payload);
       state.showInfo[0] = action.payload.props.data;
       //state.bookDate = util.dateFormat(action.payload.selectedValue);
-      state.bookDate = moment(action.payload.selectedValue).format(
+      state.bookDate = moment(action.payload.selectedValueMs).format(
         "YYYY.MM.DD"
       );
       state.bookShowTime = util.getItemFromString(
@@ -153,6 +158,6 @@ const rootReducer = combineReducers({
 export const { setMusicals, getMusicalInfoById } = musicalsSlice.actions;
 export const { setConcerts } = concertSlice.actions;
 export const { setTheatres } = theatreSlice.actions;
-export const { getShowInfoById, setShowInfo } = booksSlice.actions;
+export const { setShowInfo } = booksSlice.actions;
 
 export default rootReducer;

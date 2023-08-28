@@ -27,10 +27,13 @@ const getItemFromString = (time) => {
 };
 
 const getMarkThousand = (number) => {
+  const checkingValue = "원";
   let toNumberString = number
     .toString()
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  toNumberString = toNumberString + "원";
+  toNumberString = !toNumberString.includes(checkingValue)
+    ? toNumberString + "원"
+    : toNumberString;
   return toNumberString;
 };
 

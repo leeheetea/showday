@@ -9,25 +9,29 @@ const StyleDiv = styled.div`
   padding-top: ${props => props.tpadding ? props.tpadding : '20px'};
   margin: ${props => props.margin || ''};
   margin-top: ${props => props.tMargin || ''};
-  border: 1px solid ${props => props.lineColor || '#ECEDFC'}; ;
-  background-color: ${props => props.bgColor || 'white'};
+  border: 1px solid ${props => props.linecolor || '#ECEDFC'}; ;
+  background-color: ${props => props.bgcolor || 'white'};
   text-align: ${props => props.isfrontcenter ? 'center' : ''};
+  cursor: ${props => props.cursor ? 'pointer' : 'undefined'};
+  color: ${props => props.txtcolor || ''};
   /* display: flex;
   flex-direction: row; */
 `;
 
-function LineContainer({ 
-  children, width, height, tpadding, tMargin, lineColor, isfrontcenter, bgColor, padding,
+function LineContainer({
+  children, width, height, tpadding, tMargin, linecolor, isfrontcenter, bgcolor, txtcolor, padding, cursor,
   ...rest }) {
-  return <StyleDiv 
-    width={width} 
-    height={height} 
-    padding-top={tpadding} 
+  return <StyleDiv
+    width={width}
+    height={height}
+    padding-top={tpadding}
     margin-top={tMargin}
-    lineColor={lineColor} 
-    bgColor={bgColor} 
+    linecolor={linecolor}
+    bgcolor={bgcolor}
+    txtcolor={txtcolor}
     isfrontcenter={isfrontcenter}
     padding={padding}
+    cursor={cursor}
     {...rest}>
     {children}
   </StyleDiv>;

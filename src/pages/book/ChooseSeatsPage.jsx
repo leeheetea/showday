@@ -12,8 +12,8 @@ const Line = styled.hr`
 `;
 
 const ChooseSeatsPage = () => {
-  const id = useOutletContext();
-  const dispatch = useDispatch();
+  // const id = useOutletContext();
+  // const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
 
   // state에서 화면에 표시할 공연 정보 선언

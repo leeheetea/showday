@@ -13,10 +13,16 @@ const BookMainPage = () => {
   const navigator = useNavigate();
   const [currentTab, setCurrentTab] = useState(1);
 
+  console.log('BookMainPage : ', currentTab);
+
   const handleStepClick = (index) => {
     setCurrentTab(index);
     navigator("/book/" + id + "/" + index);
   };
+
+  const handleChangDate = (e) => {
+    console.log('날짜 변경됨 : ', e.target.value);
+  }
 
   return (
     <>
@@ -24,8 +30,8 @@ const BookMainPage = () => {
       <div className="rootWrapper">
         <BookHeader id={id} onBookStepClick={handleStepClick} />
       </div>
-      <div className="bookLeftContainer">
-        <Outlet context={id} />
+      <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
+        <Outlet context={id} onChangeDate={(e) => handleChangDate(e)} />
       </div>
       {currentTab !== 5 && <BookInfoView />}
     </>

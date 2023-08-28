@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import "./CheckBooksPage.css";
@@ -11,11 +11,17 @@ const CheckBooksPage = () => {
   const [values, setValues] = useState({
     name: "",
     phoneNumber: "",
-    email: "",
   });
+  const [email, setEmail] = useState('');
   // 이메일 유효성 검사
   const [showErrorEmail, setShowErrorEmail] = useState(false);
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
 
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidEmail = emailPattern.test(e.target.value);
+    setShowErrorEmail(!isValidEmail);
+  }, [])
   // const onChangeEmail = useCallback((e) => {
   //   setEmail(e.target.value);
 
@@ -42,6 +48,19 @@ const CheckBooksPage = () => {
     }));
   };
 
+  const emailInputRef = useRef(null);
+
+  const onChangeEmailSelect = useCallback((e) => {
+    const selectedDomain = e.target.value;
+    setEmail((prevEmail) => {
+      const emailWithoutDomain = prevEmail.split('@')[0];
+      return `${emailWithoutDomain}${selectedDomain}`;
+    });
+
+    if (emailInputRef.current) {
+      emailInputRef.current.focus();
+    }
+  }, [])
 
 
 
@@ -82,9 +101,11 @@ const CheckBooksPage = () => {
             <div className='emailContainer'>
               <div className="emailInput">
                 <input
-                  value={values.email}
+                  value={email}
                   name='email'
-                  onChange={handleChange}
+                  id="email"
+                  onChange={onChangeEmail}
+                  ref={emailInputRef}
                 />
                 <span
                   id="inputTelClear"
@@ -92,13 +113,13 @@ const CheckBooksPage = () => {
                 ></span>
               </div>
               <div className="emailSelect">
-                <select name="memEmail2" id="memEmail2">
-                  <option value="etc">직접입력</option>
-                  <option value="naver.com">naver.com</option>
-                  <option value="hanmail.net">hanmail.net</option>
-                  <option value="gmail.com">gmail.com</option>
-                  <option value="nate.com">nate.com</option>
-                  <option value="hotmail.com">hotmail.com</option>
+                <select name="memEmail2" id="memEmail2" onChange={onChangeEmailSelect}>
+                  <option value="@etc">직접입력</option>
+                  <option value="@naver.com">@naver.com</option>
+                  <option value="@hanmail.net">@hanmail.net</option>
+                  <option value="@gmail.com">@gmail.com</option>
+                  <option value="@nate.com">@nate.com</option>
+                  <option value="@hotmail.com">@hotmail.com</option>
                 </select>
                 <div className="newSelect">{/* todo */}</div>
                 <ul className="options">
@@ -120,11 +141,11 @@ const CheckBooksPage = () => {
       </form>
       <BookTitle width='100%' tpadding='40px' isleft='true'>예매자 확인</BookTitle>
       <LineContainer tMargin='15px'>
-        <input type='radio' name='checkInfo' value='checkInfo1' />
+        <input type='radio' name='checkInfo1' value='checkInfo1' />
         <span className='guideText'>주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일, &#40;배송수령 시&#41;, 주소, &#40;입력필요 시&#41; 생년월일을 수집하며, 이용목적 달성 이후 파기합니다.</span>
       </LineContainer>
       <LineContainer tMargin='-2px'>
-        <input type='radio' name='checkInfo' value='checkInfo2' />
+        <input type='radio' name='checkInfo2' value='checkInfo2' />
         <span className='guideText'>개인정보 제3자 제공에 동의합니다. (고객응대 및 관람정보안내 등을 위함)</span>
       </LineContainer>
     </div>

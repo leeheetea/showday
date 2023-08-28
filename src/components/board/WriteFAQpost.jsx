@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addPost } from "../../store/postSlice";
+import { addFAQPost } from "../../store/faqSlice";
 import { useNavigate } from "react-router-dom";
 import "./WritePost.css";
 
-function WritePost() {
+function WriteFAQpost() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
@@ -19,7 +19,7 @@ function WritePost() {
       content,
       date: new Date().toISOString().split("T")[0],
     };
-    dispatch(addPost(post));
+    dispatch(addFAQPost(post));
     navigator(-1);
   };
 
@@ -31,7 +31,7 @@ function WritePost() {
           <input value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
-          <label>작성자: </label>
+          <label>종류: </label>
           <input value={author} onChange={(e) => setAuthor(e.target.value)} />
         </div>
         <div>
@@ -56,4 +56,4 @@ function WritePost() {
   );
 }
 
-export default WritePost;
+export default WriteFAQpost;

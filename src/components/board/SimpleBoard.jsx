@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./SimpleBoard.css";
 
-function SimpleBoard() {
+function SimpleBoard({ selector }) {
   const posts = useSelector((state) =>
-    state.posts.slice().sort((a, b) => b.id - a.id)
+    selector(state)
+      .slice()
+      .sort((a, b) => b.id - a.id)
   );
 
   // 페이징에 필요한 상태 정의
@@ -35,7 +37,7 @@ function SimpleBoard() {
     <div className="board">
       <table>
         <thead>
-          <tr>
+          <tr className="bord-table-tr">
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>

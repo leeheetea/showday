@@ -8,7 +8,12 @@
     "place": "충무아트센터 중극장 블랙",
     "period": "2023.06.28 ~2023.09.24",
     "price": "66,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006433-19.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006433-19.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1202",
@@ -19,7 +24,12 @@
     "place": "세종문화회관 M씨어터",
     "period": "2023.07.19 ~2023.09.02",
     "price": "90,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006686-13.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23006686-13.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1203",
@@ -30,7 +40,12 @@
     "place": "콘텐츠박스(KONTENTZ BOX)",
     "period": "2015.11.12 ~오픈런",
     "price": "40,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/19018229-269.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/19018229-269.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1204",
@@ -41,7 +56,12 @@
     "place": "이해랑예술극장",
     "period": "2023.07.25 ~2023.10.01",
     "price": "70,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007658-12.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007658-12.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1205",
@@ -52,7 +72,12 @@
     "place": "정극장",
     "period": "2023.05.01 ~2023.09.30",
     "price": "40,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23005704-17.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23005704-17.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1206",
@@ -63,7 +88,12 @@
     "place": "대학로 TOM(티오엠) 1관",
     "period": "2023.07.08 ~2023.09.10",
     "price": "66,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007040-14.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23007040-14.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1207",
@@ -74,7 +104,12 @@
     "place": "대학로 바탕골 소극장",
     "period": "2022.01.14 ~2023.10.03",
     "price": "40,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/21013249-105.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/21013249-105.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1208",
@@ -85,7 +120,12 @@
     "place": "대학로 오마이갓 전용관",
     "period": "2023.04.11 ~2023.10.03",
     "price": "45,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23004562-03.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23004562-03.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1209",
@@ -96,7 +136,12 @@
     "place": "성수아트홀",
     "period": "2023.08.19 ~2023.08.27",
     "price": "20,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010161-06.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/23010161-06.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   },
   {
     "id": "1210",
@@ -107,6 +152,11 @@
     "place": "라온아트홀",
     "period": "2017.03.01 ~오픈런",
     "price": "50,000원",
-    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/22014277-42.jpg"
+    "detail": "https://ticketimage.interpark.com/Play/image/etc/23/22014277-42.jpg",
+    "showType": "theatre",
+    "showTime": [
+      11,
+      16
+    ]
   }
 ]

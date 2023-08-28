@@ -22,9 +22,34 @@
 
 }
 
-.textLeft, .textRight {
+.textLeft,
+.textRight {
   font-size: 13px;
   line-height: 20px;
   letter-spacing: -1px;
   word-break: break-all;
+}
+
+/* 선택된 항목의 스타일 */
+.timeInfoUl .selected {
+  background-color: #3498db;
+  /* 배경색 변경 */
+  color: #fff;
+  /* 글자색 변경 */
+}
+
+/* 나머지 항목들의 기본 스타일 */
+.timeInfoUl {
+  list-style: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+/* li 내용의 스타일 */
+.textLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

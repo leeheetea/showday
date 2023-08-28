@@ -1,0 +1,26 @@
+.to-top-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: 50%;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.to-top-icon-container:hover {
+  transform: translateY(0);
+}
+
+.to-top-icon {
+  color: black;
+}
+
+.to-top-icon:hover {
+  color: white;
+}

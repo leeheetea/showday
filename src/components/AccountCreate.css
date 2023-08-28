@@ -27,7 +27,8 @@
 }
 
 .IMBtn {
-  width: 100%;
+  width: 400px;
+  margin-left: 3.1rem;
   margin-top: 30px;
   font-size: 17px;
   color: #fff;
@@ -49,8 +50,8 @@
   grid-template-rows: 50px 50px 50px;
 }
 
-.snsLoginli{
-  margin-bottom: 10px ;
+.snsLoginli {
+  margin-bottom: 10px;
   width: 400px;
   padding-left: 50px;
 }

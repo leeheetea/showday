@@ -6,8 +6,8 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import utils from '../utils.js'
-import { setShowInfo } from '../store/slice'
+import utils from "../utils.js";
+import { setShowInfo } from "../store/slice";
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -63,7 +63,7 @@ const DetailContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
-  button{
+  button {
     border: none;
     background: purple;
     color: white;
@@ -118,14 +118,14 @@ const Detail1 = (props) => {
   const handleChangedDate = (e) => {
     setSelectedValue(e);
     setChoosedShowTime(null);
-  }
+  };
 
   /* 예매하기 버튼 선택 클릭 이벤트 */
   const handleClickBookBtn = () => {
     let selectedValueMs = selectedValue.getTime(); // 직렬화 하라느 오류때문에 getTime 함수 한 번 변환 거침
     // 회차 선택 여부 체크
     if (choosedShowTime === null) {
-      alert('관람을 원하시는 공연 시간(회차)을 선택해주세요.');
+      alert("관람을 원하시는 공연 시간(회차)을 선택해주세요.");
       return;
     } else {
       console.log(choosedShowTime);
@@ -135,7 +135,7 @@ const Detail1 = (props) => {
       bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
       navigator("/book/" + props.data.id + "/2");
     }
-  }
+  };
 
   return (
     <div>
@@ -145,6 +145,7 @@ const Detail1 = (props) => {
           <h3>날짜 선택</h3>
           <Calendar
             onChange={handleChangedDate}
+            minDate={new Date()}
             value={selectedValue}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
@@ -163,10 +164,18 @@ const Detail1 = (props) => {
                       type="radio"
                       name="radioButton"
                       onClick={(e) => setChoosedShowTime(e.target.value)}
-                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      value={
+                        utils.dateFormatForButton(selectedValue) +
+                        " " +
+                        time +
+                        "시"
+                      }
                     />
                     <FormCheckText>
-                      {utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      {utils.dateFormatForButton(selectedValue) +
+                        " " +
+                        time +
+                        "시"}
                     </FormCheckText>
                   </div>
                 </label>
@@ -177,12 +186,9 @@ const Detail1 = (props) => {
         </div>
       </DetailContainer>
       <ButtonContainer>
-        <button
-          onClick={handleClickBookBtn}>
-          예매하기
-        </button>
+        <button onClick={handleClickBookBtn}>예매하기</button>
       </ButtonContainer>
-    </div >
+    </div>
   );
 };
 

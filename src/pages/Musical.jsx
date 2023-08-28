@@ -7,9 +7,13 @@ import "../css/Muscial.css";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
 import { useNavigate } from "react-router-dom";
+import ToTopButton from "../components/ToTopButton ";
 
 const Musical = () => {
   const musicals = useSelector((state) => state.musicals);
+  const sortedMusicals = [...musicals].sort((a, b) =>
+    a.title.localeCompare(b.title)
+  );
   const { setRankingType } = useRankingType();
   const navigator = useNavigate();
 
@@ -36,7 +40,7 @@ const Musical = () => {
       <div className="musical-article">
         <h2 className="musical-subtitle">추천 뮤지컬</h2>
         <div className="musical-item-grid">
-          {musicals.map((musical, index) => (
+          {sortedMusicals.map((musical, index) => (
             <div className="musical-item-container" key={index}>
               <img
                 onClick={() => navigator("/detailpage/" + musical.id)}
@@ -49,6 +53,7 @@ const Musical = () => {
           ))}
         </div>
       </div>
+      <ToTopButton />
     </div>
   );
 };

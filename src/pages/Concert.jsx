@@ -7,9 +7,13 @@ import "../css/Concert.css";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
 import { useNavigate } from "react-router-dom";
+import ToTopButton from "../components/ToTopButton ";
 
 const Concert = () => {
   const concerts = useSelector((state) => state.concerts);
+  const sortedConcerts = [...concerts].sort((a, b) =>
+    a.title.localeCompare(b.title)
+  );
   const navigator = useNavigate();
   const { setRankingType } = useRankingType();
 
@@ -38,7 +42,7 @@ const Concert = () => {
           <h2 className="concert-subtitle">추천 콘서트</h2>
         </div>
         <div className="concert-item-grid">
-          {concerts.map((concert, index) => (
+          {sortedConcerts.map((concert, index) => (
             <div className="concert-item-container" key={index}>
               <img
                 onClick={() => navigator("/detailpage/" + concert.id)}
@@ -51,6 +55,7 @@ const Concert = () => {
           ))}
         </div>
       </div>
+      <ToTopButton />
     </div>
   );
 };

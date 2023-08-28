@@ -1,3 +1,7 @@
+.banner-img {
+  box-shadow: 2px 3px 4px;
+}
+
 @media (max-width: 1023px) {
   .banner-container {
     display: none;

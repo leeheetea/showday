@@ -1,0 +1,21 @@
+.myMemberContainer{
+  width: 55rem;
+}
+.myMemberBoxBody{
+  background-color: rgb(235, 235, 235);
+  border-radius: 5px;
+  padding: 10px 30px;
+  margin: 50px 0;
+  text-align: center;
+}
+.myMemberTable {
+  width: 55rem;
+  height: 250px;
+  border-top: 2px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+.myMemberTbody td, 
+.myMemberTbody th {
+  border-bottom: 2px dotted gray; 
+}
+

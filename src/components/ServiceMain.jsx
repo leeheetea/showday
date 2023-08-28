@@ -13,7 +13,7 @@ import {
   FaAngleRight,
 } from "react-icons/fa";
 import StyledLink from "./styled";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const ServiceCenterMainContainer = styled.div`
   background: rgb(246, 246, 246);
@@ -23,7 +23,7 @@ const ServiceCenterContainer = styled.div`
   background: white;
   width: 1120px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 240px 880px;
   border: 1px solid black;
   text-align: center;
   margin: 0 auto;
@@ -54,8 +54,6 @@ const ServiceCenterContainer = styled.div`
     font-size: 40px;
   }
 
-  @media screen and (max-width: 800px) {
-  }
 `;
 
 const HelpContContainer = styled.div`
@@ -82,7 +80,19 @@ const ButtonContainer = styled.div`
   }
 `;
 const ServiceMain = () => {
-  const navigator = useNavigate();
+  const findIdPopup = () => {
+    const width = 573;
+    const height = 681;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+
+    window.open(
+      "/findid",
+      "_blank",
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+  };
+
   return (
     <ServiceCenterMainContainer>
       <ServiceCenterContainer className="serviceCenterContainer">
@@ -90,7 +100,7 @@ const ServiceMain = () => {
           <h2>고객센터</h2>
         </div>
         <ul>
-          <a href="/servicepage">
+          <div className="serviceCenterFindId" onClick={findIdPopup}>
             <li>
               <FaUnlockAlt className="smallIcon" />
               <br />
@@ -98,8 +108,8 @@ const ServiceMain = () => {
               <br />
               패스워드 찾기
             </li>
-          </a>
-          <a href="/servicepage">
+          </div>
+          <Link to="/servicepage/servicefirst">
             <li>
               <FaRegNewspaper className="smallIcon" />
               <br />
@@ -107,8 +117,8 @@ const ServiceMain = () => {
               <br />
               확인하기
             </li>
-          </a>
-          <a href="/servicepage">
+          </Link>
+          <Link to="/servicepage/servicefirst">
             <li>
               <FaCoins className="smallIcon" />
               <br />
@@ -116,8 +126,8 @@ const ServiceMain = () => {
               <br />
               환불 문의
             </li>
-          </a>
-          <a href="/servicepage">
+          </Link>
+          <Link to="/servicepage/servicefirst">
             <li>
               <FaTruck className="smallIcon" />
               <br />
@@ -125,8 +135,8 @@ const ServiceMain = () => {
               <br />
               배송문의
             </li>
-          </a>
-          <a href="/servicepage">
+          </Link>
+          <Link to="/servicepage/servicefirst">
             <li>
               <FaTicketAlt className="smallIcon" />
               <br />
@@ -134,8 +144,8 @@ const ServiceMain = () => {
               <br />
               안내
             </li>
-          </a>
-          <a href="/servicepage">
+          </Link>
+          <Link to="/servicepage/servicefirst">
             <li>
               <FaRegCreditCard className="smallIcon" />
               <br />
@@ -143,7 +153,7 @@ const ServiceMain = () => {
               <br />
               안내보기
             </li>
-          </a>
+          </Link>
         </ul>
       </ServiceCenterContainer>
 
@@ -167,13 +177,13 @@ const ServiceMain = () => {
                 <FaAngleRight />
               </li>
             </StyledLink>
-            <StyledLink to="/servicepage">
+            <StyledLink to="/servicepage/servicefirst">
               <li>
                 1:1상담
                 <FaAngleRight />
               </li>
             </StyledLink>
-            <StyledLink to="/servicepage">
+            <StyledLink to="/servicepage/servicefirst">
               <li>
                 1:1문의내역
                 <FaAngleRight />

@@ -1,3 +1,5 @@
+
+
 .helpContIconContainer {
   margin: 20px;
 }
@@ -21,6 +23,7 @@
   color: purple;
 }
 
-.serviceCenterContainer ul a li:hover {
+.serviceCenterContainer ul a:hover,
+.serviceCenterContainer ul div:hover {
   font-weight: bold;
 }

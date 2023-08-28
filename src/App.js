@@ -32,6 +32,8 @@ import TicketingCancle from "./components/TicketingCancle";
 import WritePost from "./components/board/WritePost";
 import ServiceFirst from "./components/ServiceFirst";
 import AnnouncementPage from "./pages/AnnouncementPage";
+import FAQPage from "./pages/FAQPage";
+import MyMemberInfo from "./pages/MyMemberInfo";
 
 function App() {
   return (
@@ -54,6 +56,7 @@ function App() {
             <Route path="/servicepage" element={<ServicePage />}>
               <Route path="servicefirst" element={<ServiceFirst />}></Route>
               <Route path="announcement" element={<AnnouncementPage />} />
+              <Route path="faq" element={<FAQPage/>} />
               <Route path="announcement/write" element={<WritePost />}></Route>
               <Route
                 path="announcement/read/:id"
@@ -70,6 +73,7 @@ function App() {
             <Route path="/mypage/:id?" element={<MyPage />}>
               <Route path="ticketingcancle" element={<TicketingCancle />} />
               <Route path="point" element={<MyPagePoint />}></Route>
+              <Route path="memberInfo" element={<MyMemberInfo/>}></Route>
             </Route>
 
             <Route path="/search" element={<SearchPage />}></Route>

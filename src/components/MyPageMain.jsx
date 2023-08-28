@@ -50,7 +50,7 @@ const MyPageMain = () => {
                 </div>
               </li>
             </StyledLink>
-            <StyledLink to="/mypage">
+            <StyledLink to="/mypage/memberInfo">
               <li>
                 <GoPerson className="icon" />
                 <div>
@@ -105,6 +105,23 @@ const MyPageMain = () => {
                 <li>
                   <StyledLink to="/mypage">
                     쿠폰
+                    <FaAngleRight />
+                  </StyledLink>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span>고객센터</span>
+              <br />
+              <ul>
+                <li>
+                  <StyledLink to="/servicepage">
+                    고객센터 홈<FaAngleRight />
+                  </StyledLink>
+                </li>
+                <li>
+                  <StyledLink to="mypage/simpleboard">
+                    공지사항
                     <FaAngleRight />
                   </StyledLink>
                 </li>

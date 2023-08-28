@@ -161,7 +161,7 @@ const ServiceMain = () => {
                 <FaAngleRight />
               </li>
             </StyledLink>
-            <StyledLink to="/servicepage">
+            <StyledLink to="/servicepage/faq">
               <li>
                 FAQ
                 <FaAngleRight />

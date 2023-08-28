@@ -28,7 +28,7 @@ const FindPwd = () => {
 
 
   return (
-    <div className='body'>
+    <div className='findPwdBody'>
       <form className='findAccountForm'>
         <div className="searchWrap">
           <div className="popHeaderWrap">

@@ -211,7 +211,7 @@
   display: none;
 }
 
-.uBlock_under14{
+.uBlock_under14 {
   margin: 0;
   border: 0;
   outline: 0;
@@ -270,6 +270,7 @@
 .uBlock_under14 .inputArea_email select {
   text-align: left;
 }
+
 /* *************************************************************************** */
 
 /* ********************** */
@@ -300,21 +301,19 @@
   margin: 0 auto;
   text-align: center;
   line-height: 38px;
+  cursor: pointer;
 }
 
-.radioBox input[type=radio]:checked+label span {
+.radioBox label:has(input[type=radio]:checked) {
   background: #fff;
   color: #000;
+  box-shadow: 1px 1px 1px gray;
 }
 
 .radioBox label:hover {
-  color: #000;
   background-color: #fff;
-}
-
-.radioBox input[type=radio]+label {
-  background: #F9FAFC;
-  color: #666;
+  color: #000;
+  box-shadow: 1px 1px 1px gray;
 }
 
 .noticeText {

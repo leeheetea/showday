@@ -13,6 +13,7 @@ const Button = styled.button`
 
 const KakaoLogin = () => {
   const REST_API_KEY = "98fb1054fadbc801e5b9337e8492549d";
+  //https://developers.kakao.com/docs/latest/ko/index
   const REDIRECT_URL = "https://localhost:3000/auth";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
 
@@ -21,9 +22,12 @@ const KakaoLogin = () => {
   // }
   // const code = new URL(window.location.href).searchParams.get("code");
   // console.log(code);
-
+  const width = 500;
+  const height = 600;
+  const left = window.screenX + (window.outerWidth - width) / 2;
+  const top = window.screenY + (window.outerHeight - height) / 2;
   const handleLogin = () => {
-    const popup = window.open(kakaoURL, "_blank", "width=500,height=600");
+    const popup = window.open(kakaoURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
     window.addEventListener("message", (event) => {
       if (event.source === popup) {
         const data = event.data; // 로그인 결과 데이터
@@ -34,7 +38,7 @@ const KakaoLogin = () => {
 
   return (
     <>
-      <Button onClick={handleLogin}>카카오 로그인</Button>
+      <Button onClick={handleLogin}>카카오 계정으로 로그인</Button>
     </>
   );
 };

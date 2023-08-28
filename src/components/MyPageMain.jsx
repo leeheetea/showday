@@ -110,23 +110,6 @@ const MyPageMain = () => {
                 </li>
               </ul>
             </li>
-            <li>
-              <span>고객센터</span>
-              <br />
-              <ul>
-                <li>
-                  <StyledLink to="/servicepage">
-                    고객센터 홈<FaAngleRight />
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink to="mypage/simpleboard">
-                    공지사항
-                    <FaAngleRight />
-                  </StyledLink>
-                </li>
-              </ul>
-            </li>
           </ul>
         </ButtonContainer>
         <Outlet />

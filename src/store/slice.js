@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import musicalData from "../musicalData.json";
 import concertData from "../concertData.json";
 import theatreData from "../theatreData.json";
+import faqSlice from "./faqSlice";
 import totalData from "../totalData.json";
 import { combineReducers } from "@reduxjs/toolkit";
 import postsSlice from "./postSlice";
@@ -172,6 +173,7 @@ const rootReducer = combineReducers({
   booksData: booksReducer,
   posts: postsSlice,
   userInfo: userInfoReducer,
+  faq: faqSlice,
 });
 
 export const { setMusicals, getMusicalInfoById } = musicalsSlice.actions;

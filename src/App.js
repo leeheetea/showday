@@ -21,7 +21,6 @@ import BookMainPage from "./pages/book/BookMainPage";
 import MyPage from "./pages/MyPage";
 import MyPagePoint from "./components/MyPagePoint";
 import SearchPage from "./pages/SearchPage";
-import SimpleBoard from "./components/board/SimpleBoard";
 import ReadPost from "./components/board/ReadPost";
 import ChangeDatePage from "./pages/book/ChangeDatePage";
 import ChooseSeatsPage from "./pages/book/ChooseSeatsPage";
@@ -37,6 +36,8 @@ import MyMemberInfo from "./pages/MyMemberInfo";
 import Advanceticket from "./components/Advanceticket";
 import Giftcard from "./components/Giftcard";
 import Coupon from "./components/Coupon";
+import ReadFAQpost from "./components/board/ReadFAQpost";
+import WriteFAQpost from "./components/board/WriteFAQpost";
 
 function App() {
   return (
@@ -58,8 +59,10 @@ function App() {
             <Route path="/accountform" element={<AccountForm />}></Route>
             <Route path="/servicepage" element={<ServicePage />}>
               <Route path="servicefirst" element={<ServiceFirst />}></Route>
+              <Route path="faq" element={<FAQPage />} />
+              <Route path="faq/write" element={<WriteFAQpost />} />
+              <Route path="faq/read/:id?" element={<ReadFAQpost />} />
               <Route path="announcement" element={<AnnouncementPage />} />
-              <Route path="faq" element={<FAQPage/>} />
               <Route path="announcement/write" element={<WritePost />}></Route>
               <Route
                 path="announcement/read/:id"
@@ -76,12 +79,11 @@ function App() {
             <Route path="/mypage/:id?" element={<MyPage />}>
               <Route path="ticketingcancle" element={<TicketingCancle />} />
               <Route path="point" element={<MyPagePoint />}></Route>
-              <Route path="memberInfo" element={<MyMemberInfo/>}></Route>
-              <Route path="advanceticket" element={<Advanceticket/>}></Route>
-              <Route path="giftcard" element={<Giftcard/>}></Route>
-              <Route path="coupon" element={<Coupon/>}></Route>
+              <Route path="memberInfo" element={<MyMemberInfo />}></Route>
+              <Route path="advanceticket" element={<Advanceticket />}></Route>
+              <Route path="giftcard" element={<Giftcard />}></Route>
+              <Route path="coupon" element={<Coupon />}></Route>
             </Route>
-
             <Route path="/search" element={<SearchPage />}></Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

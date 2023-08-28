@@ -6,11 +6,6 @@
   height: auto;
 }
 
-.serviceCenterButton{
-  display: grid;
-  grid-template-columns: 200px 2fr;
-}
-
 .faqMenucontianer {
   background: white;
   display: grid;
@@ -21,13 +16,13 @@
   padding: 0;
 }
 
-.faqMenucontianer a{
+.faqMenucontianer a {
   border-left: 1px solid lightgray;
 }
-.faqMenucontianer a:first-child{
+.faqMenucontianer a:first-child {
   border: none;
 }
-.faqMenucontianer li h4{
+.faqMenucontianer li h4 {
   margin: 10px;
   padding: 0 10px;
 }

@@ -7,9 +7,9 @@ import "../css/MyPage.css";
 const MyPage = () => {
   return (
     <div>
-      <Header />
+      <Header/>
       <MyPageMain></MyPageMain>
-      <Footer />
+      <Footer/>
     </div>
   );
 };

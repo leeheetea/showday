@@ -20,7 +20,7 @@ const LaptopBanner = () => {
   return (
     <div className="banner-container">
       {banners.map((banner, index) => (
-        <Link to={"detailpage/" + banner.url}>
+        <Link key={banner.url} to={"detailpage/" + banner.url}>
           <div
             key={index}
             className="banner-img"

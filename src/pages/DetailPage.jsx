@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import pagesData from "../totalData.json";
 import { styled } from "styled-components";
+import ToTopButton from "../components/ToTopButton ";
 
 const DetailMainContainer = styled.div`
   margin: 10%;
@@ -23,6 +24,7 @@ const DetailPage = (props) => {
       <Detail1 data={pageData} />
       <Detail2 data={pageData} />
       <DetailRecommend />
+      <ToTopButton />
     </DetailMainContainer>
   );
 };

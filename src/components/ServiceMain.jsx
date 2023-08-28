@@ -53,7 +53,6 @@ const ServiceCenterContainer = styled.div`
   .smallIcon {
     font-size: 40px;
   }
-
 `;
 
 const HelpContContainer = styled.div`
@@ -191,7 +190,9 @@ const ServiceMain = () => {
             </StyledLink>
           </ul>
         </ButtonContainer>
+        {/* <div className="servicepage-contents-container"> */}
         <Outlet />
+        {/* </div> */}
       </HelpContContainer>
     </ServiceCenterMainContainer>
   );

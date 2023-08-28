@@ -16,7 +16,11 @@
 .board td {
   border-bottom: 1px solid #e1e1e1;
   padding: 10px 20px;
-  text-align: left;
+  text-align: center;
+}
+
+.bord-table-tr > th {
+  text-align: center;
 }
 
 .board th {
@@ -28,15 +32,11 @@
   display: block;
   padding: 10px 20px;
   margin: 20px auto;
-  background-color: blue;
+  background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.write-button:hover {
-  background-color: darkblue;
 }
 
 .pagination {

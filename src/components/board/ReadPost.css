@@ -1,10 +1,21 @@
 .read-container {
+  width: 100%;
   padding: 20px;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
   width: 600px;
-  margin: 50px auto;
+  margin: 50px;
+  margin-left: 7rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.read-continaer-author {
+  display: flex;
+}
+
+.read-continaer-author > p {
+  display: block;
+  margin-right: 0.5rem;
 }
 
 .read-container h2 {
@@ -15,7 +26,7 @@
 .read-container button {
   padding: 5px 15px;
   margin-top: 20px;
-  background-color: red;
+  background-color: black;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -24,4 +35,9 @@
 
 .read-container button:hover {
   background-color: darkred;
+}
+
+.read-button-container {
+  display: flex;
+  justify-content: space-between;
 }

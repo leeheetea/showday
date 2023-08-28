@@ -1,4 +1,7 @@
-
+.servicepage-contents-container {
+  width: 100%;
+  display: flex;
+}
 
 .helpContIconContainer {
   margin: 20px;

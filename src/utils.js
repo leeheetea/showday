@@ -27,6 +27,8 @@ const getItemFromString = (time) => {
 };
 
 const getMarkThousand = (number) => {
+  console.log("(getMarkThousand) number : ", number);
+
   const checkingValue = "원";
   let toNumberString = number
     .toString()

@@ -31,8 +31,8 @@
 }
 
 /* 선택된 항목의 스타일 */
-.timeInfoUl .selected {
-  background-color: #3498db;
+.timeInfoUl.selected {
+  background-color: black;
   /* 배경색 변경 */
   color: #fff;
   /* 글자색 변경 */

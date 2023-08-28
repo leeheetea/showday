@@ -146,6 +146,7 @@ const Detail1 = (props) => {
           <Calendar
             onChange={handleChangedDate}
             value={selectedValue}
+            minDate={new Date()}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
@@ -164,6 +165,10 @@ const Detail1 = (props) => {
                       name="radioButton"
                       onClick={(e) => setChoosedShowTime(e.target.value)}
                       value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
+                      onChange={(e) => {
+                        setChoosedShowTime(e.target.value)
+                      }}
                     />
                     <FormCheckText>
                       {utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}

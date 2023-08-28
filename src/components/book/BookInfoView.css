@@ -17,7 +17,7 @@
 }
 
 .titleLeft {
-  width:65%;
+  width: 65%;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -28,17 +28,22 @@
   box-sizing: border-box;
 } */
 
-.bookResultTh, .bookResultTd, .bookResultThLast, .bookResultTdLast  {
-  border-bottom:  1px solid #ECEDFC;
+.bookResultTh,
+.bookResultTd,
+.bookResultThLast,
+.bookResultTdLast {
+  border-bottom: 1px solid #ECEDFC;
   padding: 10px;
 }
 
-.bookResultTh, .bookResultThLast {
+.bookResultTh,
+.bookResultThLast {
   width: 40%;
   text-align: left;
 }
 
-.bookResultTd, .bookResultTdLast {
+.bookResultTd,
+.bookResultTdLast {
   width: 60%;
   text-align: right;
 }
@@ -46,16 +51,16 @@
 .bookResultThLast,
 .bookResultTdLast {
   font-weight: bold;
-  
+
 }
 
 .bookResultTdLast {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #C82020;
 }
 
 .bookResultTable {
-  width: 100%;  
+  width: 100%;
   margin-top: 30px;
 }
 

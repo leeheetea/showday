@@ -62,6 +62,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
 
   /* 회차선택 */
   const handleChooseTime = (index) => {
+    setSelectedTimeIndex(index);
     console.log(showTime, choosedShowTime, bookShowTime, seats);
     console.log(showTime.filter(value => value === choosedShowTime));
     //setSelectedValue(e);
@@ -79,6 +80,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
             <Calendar
               onChange={handleChangedDate}
               value={selectedValue}
+              minDate={new Date()}
               formatDay={(locale, date) => moment(date).format("DD")}
             />
           </div>
@@ -113,7 +115,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
           <ul>
             <li className="textLine">
               <span className="textLeft">R석</span>
-              <span className="textRight">{seats.leftSeats[0]}</span>
+              <span className="textRight">{seats.leftSeats[selectedTimeIndex]}</span>
             </li>
             {/*   
               현재는 R석만 있는 가정

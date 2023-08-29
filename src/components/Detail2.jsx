@@ -2,6 +2,10 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import "../css/DetailMain.css";
+import img1 from "../img/reviewPage.PNG"
+import img2 from "../img/review2Page.PNG"
+import img3 from "../img/mapPage.PNG"
+import img4 from "../img/cancel.PNG"
 // import show from '../data'
 
 const TabMenuContainter = styled.ul`
@@ -50,10 +54,18 @@ const Detail2 = (props) => {
       name: "상세정보",
       content: <img className="detailImg" src={props.data.detail} alt="" />,
     },
-    { id: 2, name: "관람후기", content: "내용2" },
-    { id: 3, name: "기대평가", content: "내용3" },
-    { id: 4, name: "장소정보", content: "내용4" },
-    { id: 5, name: "예매/취소", content: "내용5" },
+    { id: 2, 
+      name: "관람후기", 
+      content: <img className="reviewPage" src={img1} style={{width:"100%"}} alt="" /> , },
+    { id: 3, 
+      name: "기대평가", 
+      content: <img className="review2Page" src={img2}  style={{width:"100%"}}  alt="" /> },
+    { id: 4, 
+      name: "장소정보", 
+      content: <img className="mapPage" src={img3} style={{width:"100%"}}  alt="" /> },
+    { id: 5, 
+      name: "예매/취소", 
+      content: <img className="cancel" src={img4}  style={{width:"100%"}}  alt="" /> },
   ];
 
   const selectMenuHandler = (index) => {

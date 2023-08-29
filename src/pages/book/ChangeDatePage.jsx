@@ -78,7 +78,6 @@ const ChangeDatePage = ({ onChangeDate }) => {
               onChange={handleChangedDate}
               minDate={new Date()}
               value={selectedValue}
-              minDate={new Date()}
               formatDay={(locale, date) => moment(date).format("DD")}
             />
           </div>
@@ -122,7 +121,9 @@ const ChangeDatePage = ({ onChangeDate }) => {
           <ul>
             <li className="textLine">
               <span className="textLeft">R석</span>
-              <span className="textRight">{seats.leftSeats[selectedTimeIndex]}</span>
+              <span className="textRight">
+                {seats.leftSeats[selectedTimeIndex]}
+              </span>
             </li>
             {/*   
               현재는 R석만 있는 가정

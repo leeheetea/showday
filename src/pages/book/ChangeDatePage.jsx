@@ -6,17 +6,14 @@ import moment from "moment";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import "react-calendar/dist/Calendar.css";
-
-import { getShowInfoById } from '../../store/slice'
 import LineContainer from "../../components/LineContainer";
 import BookTitle from "../../components/book/BookTitle";
 import theme from "../../styles/theme";
-import utils from '../../utils.js'
 import "./ChangeDatePage.css";
 
 const StepSpan = styled.span`
   color: ${theme.accentLightColor};
-`
+`;
 const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   &:checked {
     display: inline-block;
@@ -58,16 +55,16 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const handleChangedDate = (e) => {
     setSelectedValue(e);
     setChoosedShowTime(null);
-  }
+  };
 
   /* 회차선택 */
   const handleChooseTime = (index) => {
     setSelectedTimeIndex(index);
     console.log(showTime, choosedShowTime, bookShowTime, seats);
-    console.log(showTime.filter(value => value === choosedShowTime));
+    console.log(showTime.filter((value) => value === choosedShowTime));
     //setSelectedValue(e);
     //setChoosedShowTime(null);
-  }
+  };
 
   return (
     <div className="changeDateContainer">
@@ -79,8 +76,8 @@ const ChangeDatePage = ({ onChangeDate }) => {
           <div>
             <Calendar
               onChange={handleChangedDate}
-              value={selectedValue}
               minDate={new Date()}
+              value={selectedValue}
               formatDay={(locale, date) => moment(date).format("DD")}
             />
           </div>
@@ -90,32 +87,43 @@ const ChangeDatePage = ({ onChangeDate }) => {
             <StepSpan>STEP2&nbsp;</StepSpan>
             회차선택
           </BookTitle>
-          {showTime && showTime.map((time, index) => (
-            // <LineContainer linecolor="black" cursor='pointer'
-            //   bgcolor={bookShowTime.indexOf(time) !== -1 && choosedShowTime ? 'black' : 'white'}
-            //   txtcolor={bookShowTime.indexOf(time) !== -1 && choosedShowTime ? 'white' : 'black'}>
-            <ul className={`timeInfoUl ${selectedTimeIndex === index ? 'selected' : ''}`}
-              key={index}
-              onClick={() => handleChooseTime(index)}>
-              <li className="textLine" >
-                <span className="textLeft">{index + 1}회</span>
-                <span className="textRight">{time}:00</span>
-              </li>
-              <li className="textLine">
-                <span className="textLeft">
-                  { /* 배우 정보는 변화만 보여주고자 넣은 임시 코드 */
-                    (selectedValue.getDate() % 2 === 0) ? '유승현, 최수진, 유성재, 청호준, 박세훈, 성재, 정종환, 박상선, 신요셉' : '성재, 정종환, 박상선, 신요셉'}
-                </span>
-              </li>
-            </ul>
-          ))}
+          {showTime &&
+            showTime.map((time, index) => (
+              // <LineContainer linecolor="black" cursor='pointer'
+              //   bgcolor={bookShowTime.indexOf(time) !== -1 && choosedShowTime ? 'black' : 'white'}
+              //   txtcolor={bookShowTime.indexOf(time) !== -1 && choosedShowTime ? 'white' : 'black'}>
+              <ul
+                className={`timeInfoUl ${
+                  selectedTimeIndex === index ? "selected" : ""
+                }`}
+                key={index}
+                onClick={() => handleChooseTime(index)}
+              >
+                <li className="textLine">
+                  <span className="textLeft">{index + 1}회</span>
+                  <span className="textRight">{time}:00</span>
+                </li>
+                <li className="textLine">
+                  <span className="textLeft">
+                    {
+                      /* 배우 정보는 변화만 보여주고자 넣은 임시 코드 */
+                      selectedValue.getDate() % 2 === 0
+                        ? "유승현, 최수진, 유성재, 청호준, 박세훈, 성재, 정종환, 박상선, 신요셉"
+                        : "성재, 정종환, 박상선, 신요셉"
+                    }
+                  </span>
+                </li>
+              </ul>
+            ))}
         </LineContainer>
         <LineContainer width="30%" height="380px" isfrontcenter="true">
           <BookTitle isBottomLine>잔여석</BookTitle>
           <ul>
             <li className="textLine">
               <span className="textLeft">R석</span>
-              <span className="textRight">{seats.leftSeats[selectedTimeIndex]}</span>
+              <span className="textRight">
+                {seats.leftSeats[selectedTimeIndex]}
+              </span>
             </li>
             {/*   
               현재는 R석만 있는 가정
@@ -126,7 +134,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
           </ul>
         </LineContainer>
       </div>
-    </div >
+    </div>
   );
 };
 

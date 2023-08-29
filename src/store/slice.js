@@ -104,20 +104,9 @@ const booksSlice = createSlice({
   name: "booksData",
   initialState: initialBooksState,
   reducers: {
-    /*     getShowInfoById: (state, action) => {
-      console.log("(booksSlice-getShowInfoById) payload : ", action.payload.id);
-      const findData = initialBooksState.totalData.filter(
-        (data) => data.id === action.payload.id
-      );
-      console.log("(booksSlice) findData : ", state, findData);
-      //console.log("(booksSlice) state.showInfo(before) : ", state.showInfo);
-      state.showInfo = findData;
-      //console.log("(booksSlice) state.showInfo(after) : ", state.showInfo);
-    }, */
     setShowInfo: (state, action) => {
       console.log("(booksSlice-setShowInfo) payload : ", action.payload);
       state.showInfo[0] = action.payload.props.data;
-      //state.bookDate = util.dateFormat(action.payload.selectedValue);
       state.bookDate = moment(action.payload.selectedValueMs).format(
         "YYYY.MM.DD"
       );
@@ -125,13 +114,8 @@ const booksSlice = createSlice({
         action.payload.choosedShowTime
       );
     },
-
     setTotalPrice: (state, action) => {
       state.totalPrice = action.payload;
-      // state.totalPrice.sumPrice = action.payload.sumPrice;
-      // state.totalPrice.sumYoutPrice = action.payload.sumYoutPrice;
-      // state.totalPrice.sumDiscount = action.payload.sumDiscount;
-      // state.totalPrice.resultTotalPrice = action.payload.resultTotalPrice;
     },
   },
 });

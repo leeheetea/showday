@@ -48,50 +48,60 @@ const BookInfoView = () => {
   return (
     <div className="bookInfoViewWrapper">
       <div className="titleContainer">
-        <img className="titleLeft" src={url} />
+        <img className="titleLeft" src={url} alt="" />
       </div>
-      <BookTitle width='90%' tpadding='30px'>{title}</BookTitle>
-      <BookTitle isleft='true' tpadding='100px'>예매정보</BookTitle>
-      <LineContainer width='94%' padding='10px' tmargin='10px'>
+      <BookTitle width="90%" tpadding="30px">
+        {title}
+      </BookTitle>
+      <BookTitle isleft="true" tPadding="100px">
+        예매정보
+      </BookTitle>
+      <LineContainer width="94%" padding="10px" tMargin="10px">
         <ul>
-          <li className='textLine'>
-            <span className='textLeft'>R석</span>
-            <span className='textRight'>1층F열3번</span>
+          <li className="textLine">
+            <span className="textLeft">R석</span>
+            <span className="textRight">1층F열3번</span>
           </li>
         </ul>
       </LineContainer>
-      <table className='bookResultTable'>
+      <table className="bookResultTable">
         {/* <caption>예매정보</caption> */}
         <colgroup>
           <col width="70px" />
         </colgroup>
         <tbody>
-          <tr className='bookResultTable'>
-            <th className='bookResultTh'>일시</th>
-            <td className='bookResultTd' id="_startDateTime">{bookDate} {bookShowTime}</td>
+          <tr className="bookResultTable">
+            <th className="bookResultTh">일시</th>
+            <td className="bookResultTd" id="_startDateTime">
+              {bookDate} {bookShowTime}
+            </td>
           </tr>
           <tr>
-            <th className='bookResultTh'>티켓금액</th>
-            <td className='bookResultTd' id="_price_ticket">
+            <th className="bookResultTh">티켓금액</th>
+            <td className="bookResultTd" id="_price_ticket">
               {utils.getMarkThousand(totalPrice.sumPrice)}
             </td>
           </tr>
           <tr>
-            <th className='bookResultTh'>할인</th>
-            <td className='bookResultTd' id="_coupon_discount">
+            <th className="bookResultTh">할인</th>
+            <td className="bookResultTd" id="_coupon_discount">
               {/* 청소년 할인 매수 고려한 할인금액 인지 체크 */}
               {utils.getMarkThousand(totalPrice.sumDiscount)}
             </td>
           </tr>
           <tr>
-            <th className='bookResultTh'>포인트 사용</th>
-            <td className='bookResultTd' id="_price_discount">0</td>
+            <th className="bookResultTh">포인트 사용</th>
+            <td className="bookResultTd" id="_price_discount">
+              0
+            </td>
           </tr>
         </tbody>
-        <tfoot className='bookResultTfoot'>
+        <tfoot className="bookResultTfoot">
           <tr>
-            <th className='bookResultThLast'>총결제</th>
-            <td className='bookResultTdLast'>{utils.getMarkThousand(totalPrice.resultTotalPrice)}</td>
+            <th className="bookResultThLast">총결제</th>
+            <td className="bookResultTdLast">
+              {utils.getMarkThousand(totalPrice.resultTotalPrice)}
+            </td>
           </tr>
         </tfoot>
       </table>

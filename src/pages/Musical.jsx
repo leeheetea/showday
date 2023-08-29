@@ -5,6 +5,7 @@ import LaptopNavigator from "../components/LaptopNavigator";
 import MobileNavigator from "../components/MobileNavigator";
 import ToTopButton from "../components/ToTopButton ";
 import RecommendItem from "../components/RecommendItem";
+import Footer from "../components/Footer";
 import "../css/Muscial.css";
 
 const Musical = () => {
@@ -31,6 +32,7 @@ const Musical = () => {
         <RecommendItem />
       </div>
       <ToTopButton />
+      <Footer />
     </div>
   );
 };

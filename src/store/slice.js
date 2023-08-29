@@ -118,7 +118,6 @@ const booksSlice = createSlice({
         action.payload.choosedShowTime
       );
     },
-
     setTotalPrice: (state, action) => {
       state.totalPrice = action.payload;
     },

@@ -5,6 +5,7 @@ import LaptopNavigator from "../components/LaptopNavigator";
 import MobileNavigator from "../components/MobileNavigator";
 import ToTopButton from "../components/ToTopButton ";
 import RecommendItem from "../components/RecommendItem";
+import Footer from "../components/Footer";
 import "../css/Theatre.css";
 
 const Theatre = () => {
@@ -31,6 +32,7 @@ const Theatre = () => {
         <RecommendItem />
       </div>
       <ToTopButton />
+      <Footer />
     </div>
   );
 };

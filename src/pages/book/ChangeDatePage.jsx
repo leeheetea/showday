@@ -11,12 +11,11 @@ import { setBookDateTime } from '../../store/slice'
 import LineContainer from "../../components/LineContainer";
 import BookTitle from "../../components/book/BookTitle";
 import theme from "../../styles/theme";
-import utils from '../../utils.js'
 import "./ChangeDatePage.css";
 
 const StepSpan = styled.span`
   color: ${theme.accentLightColor};
-`
+`;
 const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   &:checked {
     display: inline-block;
@@ -60,17 +59,13 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const handleChangedDate = (e) => {
     setSelectedValue(e);
     setChoosedShowTime(null);
-  }
+  };
 
   /* 회차선택 될때 이벤트 */
   const handleChooseTime = useCallback((time, index) => {
 
     let selectedValueMs = selectedValue.getTime();
     setSelectedTimeIndex(index);
-    console.log("selectedValueMs : ", selectedValueMs);
-    console.log("choosedShowTime : ", choosedShowTime);
-    console.log("choosedShowTime1111 : ", showTime[selectedTimeIndex] + ':00');
-    console.log("choosedShowTime time : ", time + ':00');
     bookDispatch(setBookDateTime({
       selectedValueMs: selectedValueMs,
       choosedShowTime: time + ":00",
@@ -89,8 +84,8 @@ const ChangeDatePage = ({ onChangeDate }) => {
           <div>
             <Calendar
               onChange={handleChangedDate}
-              value={selectedValue}
               minDate={new Date()}
+              value={selectedValue}
               formatDay={(locale, date) => moment(date).format("DD")}
             />
           </div>
@@ -135,7 +130,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
           </ul>
         </LineContainer>
       </div>
-    </div >
+    </div>
   );
 };
 

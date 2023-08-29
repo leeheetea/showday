@@ -25,7 +25,7 @@ function LineContainer({
     width={width}
     height={height}
     padding-top={tpadding}
-    margin-top={tMargin}
+    tMargin={tMargin}
     linecolor={linecolor}
     bgcolor={bgcolor}
     txtcolor={txtcolor}

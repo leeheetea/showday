@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
@@ -7,7 +7,7 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 import "react-calendar/dist/Calendar.css";
 
-import { getShowInfoById } from '../../store/slice'
+import { setBookDateTime } from '../../store/slice'
 import LineContainer from "../../components/LineContainer";
 import BookTitle from "../../components/book/BookTitle";
 import theme from "../../styles/theme";
@@ -38,11 +38,11 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 const ChangeDatePage = ({ onChangeDate }) => {
   const { id } = useParams();
   const navigator = useNavigate();
-  const dispatch = useDispatch();
+  const bookDispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
   const timesRef = useRef({});
   const [selectedValue, setSelectedValue] = useState(new Date());
-  const [choosedShowTime, setChoosedShowTime] = useState(selectedValue);
+  const [choosedShowTime, setChoosedShowTime] = useState(null);
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
   const [isTimeClear, setIsTimeClear] = useState(false);
 
@@ -51,6 +51,8 @@ const ChangeDatePage = ({ onChangeDate }) => {
 
   useEffect(() => {
     setSelectedValue(new Date(bookDate)); // 예약되어 있는 날짜로 세팅
+    setSelectedTimeIndex(bookShowTime);
+    setChoosedShowTime(bookShowTime);
     console.log(showTime, choosedShowTime, bookShowTime, seats);
   }, []);
 
@@ -60,14 +62,22 @@ const ChangeDatePage = ({ onChangeDate }) => {
     setChoosedShowTime(null);
   }
 
-  /* 회차선택 */
-  const handleChooseTime = (index) => {
+  /* 회차선택 될때 이벤트 */
+  const handleChooseTime = useCallback((time, index) => {
+
+    let selectedValueMs = selectedValue.getTime();
     setSelectedTimeIndex(index);
-    console.log(showTime, choosedShowTime, bookShowTime, seats);
-    console.log(showTime.filter(value => value === choosedShowTime));
-    //setSelectedValue(e);
-    //setChoosedShowTime(null);
-  }
+    console.log("selectedValueMs : ", selectedValueMs);
+    console.log("choosedShowTime : ", choosedShowTime);
+    console.log("choosedShowTime1111 : ", showTime[selectedTimeIndex] + ':00');
+    console.log("choosedShowTime time : ", time + ':00');
+    bookDispatch(setBookDateTime({
+      selectedValueMs: selectedValueMs,
+      choosedShowTime: time + ":00",
+      bookShowTimeOrder: (selectedTimeIndex)
+    }
+    ));
+  }, [selectedValue, choosedShowTime]);
 
   return (
     <div className="changeDateContainer">
@@ -96,7 +106,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
             //   txtcolor={bookShowTime.indexOf(time) !== -1 && choosedShowTime ? 'white' : 'black'}>
             <ul className={`timeInfoUl ${selectedTimeIndex === index ? 'selected' : ''}`}
               key={index}
-              onClick={() => handleChooseTime(index)}>
+              onClick={() => handleChooseTime(time, index)}>
               <li className="textLine" >
                 <span className="textLeft">{index + 1}회</span>
                 <span className="textRight">{time}:00</span>
@@ -114,15 +124,14 @@ const ChangeDatePage = ({ onChangeDate }) => {
           <BookTitle isBottomLine>잔여석</BookTitle>
           <ul>
             <li className="textLine">
-              <span className="textLeft">R석</span>
-              <span className="textRight">{seats.leftSeats[selectedTimeIndex]}</span>
+              {seats.leftSeats[selectedTimeIndex]?.count &&
+                <>
+                  <span span className="textLeft">R석</span>
+                  <span className="textRight">
+                    {seats.leftSeats[selectedTimeIndex]?.count}
+                  </span>
+                </>}
             </li>
-            {/*   
-              현재는 R석만 있는 가정
-              <li className="textLine">
-              <span className="textLeft">전체</span>
-              <span className="textRight">234석</span>
-            </li> */}
           </ul>
         </LineContainer>
       </div>

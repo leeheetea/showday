@@ -7,7 +7,7 @@ import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
 import utils from '../utils.js'
-import { setShowInfo } from '../store/slice'
+import { setBookInfo, setBookStep, setBookDateTime } from '../store/slice'
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -132,7 +132,8 @@ const Detail1 = (props) => {
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
       // console.log(props);
-      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookStep({ bookStep: 2 }));
       navigator("/book/" + props.data.id + "/2");
     }
   }
@@ -163,7 +164,15 @@ const Detail1 = (props) => {
                       className="inputRadioCheck"
                       type="radio"
                       name="radioButton"
-                      onClick={(e) => setChoosedShowTime(e.target.value)}
+                      onClick={(e) => {
+                        let selectedValueMs = selectedValue.getTime();
+                        bookDispatch(setBookDateTime({
+                          selectedValueMs: selectedValueMs,
+                          choosedShowTime: time + ":00",
+                          bookShowTimeOrder: (index)
+                        }))
+                        setChoosedShowTime(e.target.value)
+                      }}
                       value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
                       checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
                       onChange={(e) => {

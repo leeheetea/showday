@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import utils from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,6 +7,7 @@ import BookTitle from "../../components/book/BookTitle";
 import "./DiscountPricePage.css";
 import { setTotalPrice } from '../../store/slice'
 import LineContainer from "../../components/LineContainer";
+import { useParams } from 'react-router-dom';
 
 const DiscountPricePage = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,10 @@ const DiscountPricePage = () => {
   const { youtDiscount } = state;
 
   const unMarkedPrice = utils.getRemoveMarkThousand(price);
-  const youtPrice = utils.getMarkThousand((Number(unMarkedPrice) + unMarkedPrice * (youtDiscount / 100)))
-  const disCountPrice = utils.getMarkThousand((unMarkedPrice * (youtDiscount / 100)))
+  const youtPrice = utils.getMarkThousand(
+    (Number(unMarkedPrice) + unMarkedPrice * (youtDiscount / 100)))
+  const disCountPrice = utils.getMarkThousand(
+    (unMarkedPrice * (youtDiscount / 100)))
 
   const [values, setValues] = useState({
     aNumber: "0",
@@ -24,9 +27,7 @@ const DiscountPricePage = () => {
   });
 
   const handleChange = (e) => {
-
     if (e.target.value < 0) return;
-
     setValues((prevValues) => ({
       ...prevValues,
       [e.target.name]: e.target.value,

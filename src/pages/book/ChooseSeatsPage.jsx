@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useOutletContext } from 'react-router-dom';
@@ -18,12 +18,23 @@ const ChooseSeatsPage = () => {
 
   // state에서 화면에 표시할 공연 정보 선언
   const { title, place } = state.showInfo[0];
-  const { bookDate, bookShowTime } = state;
+  const { bookDate, bookShowTime, seats, bookShowTimeOrder } = state;
+  const displaySeats = new Array(200).fill(null);
+  const [seatsList, setSeatsList] = useState();
+  //const { count, leftSeats } = state.leftSeats[bookShowTimeOrder];
 
   useEffect(() => {
     //  dispatch(getShowInfoById({ id: id }));
-    //  console.log('(ChooseSeatsPage) info : ', state);
+    //console.log('(ChooseSeatsPage) seats : ', seats.leftSeats[bookShowTimeOrder].bookSeats, bookShowTimeOrder);
   }, []);
+
+  const handleChooseSeats = (index) => {
+    if (seatsList[index] === null) {
+      // 예약가능
+    } else {
+      // 예약 불가능
+    }
+  }
 
   return (
     <div className='chooseSeatsContainer'>
@@ -35,11 +46,10 @@ const ChooseSeatsPage = () => {
         <span>STAGE</span>
         <div className="stageBackground">
           <div className="seatContainer">
-            {/*    {seats.map((seat, idx) => {
-              return seat.map((s, idx) => {
-                return <div key={idx} className="seat">{idx}</div>;
-              });
-            })} */}
+            {displaySeats.map((seat, idx) => {
+              //seats.leftSeats[bookShowTimeOrder].bookSeats
+              return <div key={idx} className="seat" onClick={handleChooseSeats}></div>;
+            })}
           </div>
         </div>
       </div>

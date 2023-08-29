@@ -22,12 +22,13 @@ const dateFormatForButton = (date) => {
 };
 
 const getItemFromString = (time) => {
-  let result = time.slice(-3).replace("시", ":00");
+  console.log("(getItemFromString) time : ", time);
+  let result = time?.slice(-3).replace("시", ":00");
   return result;
 };
 
 const getMarkThousand = (number) => {
-  console.log("(getMarkThousand) number : ", number);
+  //console.log("(getMarkThousand) number : ", number);
 
   const checkingValue = "원";
   let toNumberString = number

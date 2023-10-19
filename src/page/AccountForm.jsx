@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
+import { register } from './ApiService';
 
 const AccountForm = () => {
   // 아이디 유효성 검사
@@ -174,10 +175,28 @@ const AccountForm = () => {
 
   }, [areAllFieldsEmpty, isAllFieldsValid, isCheckedUnder14, areAllFieldsEmpty14, isAllFieldsValid14, areAllFieldsFilled, areAllFieldsFilled14]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const username = data.get("id");
+    const password = data.get("password");
+    const name = data.get("name");
+    const email = data.get("email");
+    const phone = data.get("phone");
+    const smscheck = data.get("smscheck");
+    const validation = data.get("validation");
+
+    register({username: username, password: password, name: name, email: email, phone: phone, smscheck: smscheck, validation: validation })
+      .then((res) => {
+        alert("계정 생성 성공");
+        window.location.href='/';
+      });
+  }
+
   return (
     <div>
       <AccountHeader></AccountHeader>
-      <form className='AccountForm'>
+      <form className='AccountForm' onSubmit={handleSubmit}>
         <div className='AccountFormWrapper'>
           {/* 아이디 */}
           <div className='uBlock'>

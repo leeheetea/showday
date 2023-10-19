@@ -91,8 +91,17 @@ const customModalStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-const Main = ({ data }) => {
+
+
+const DetailMain = ({ data }) => {
+  
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
+
+  //공연이미지 url, title, place, period, price 필요 정보.
+  
+  const [showItems, setShowItems] = useState(data.item);
+
+
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="content">
@@ -141,4 +150,4 @@ const Main = ({ data }) => {
   );
 };
 
-export default Main;
+export default DetailMain;

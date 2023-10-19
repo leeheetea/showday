@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, Outlet } from "react-router-dom";
 
 import Header from "../../components/Header";
@@ -9,11 +10,9 @@ import "./BookMainPage.css";
 
 const BookMainPage = () => {
   const { id } = useParams();
-
   const navigator = useNavigate();
-  const [currentTab, setCurrentTab] = useState(1);
-
-  console.log('BookMainPage : ', currentTab);
+  const booksDatas = useSelector((state) => state.booksData);
+  const [currentTab, setCurrentTab] = useState(booksDatas.bookStep);
 
   const handleStepClick = (index) => {
     setCurrentTab(index);
@@ -32,10 +31,10 @@ const BookMainPage = () => {
     <>
       <Header />
       <div className="rootWrapper">
-        <BookHeader id={id} onBookStepClick={handleStepClick} />
+        <BookHeader id={id} step={currentTab} onBookStepClick={handleStepClick} />
       </div>
       <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
-        <Outlet context={id} onChangeDate={(e) => handleChangDate(e)} />
+        <Outlet context={id} onChangeDate={handleChangDate} />
       </div>
       {currentTab !== 5 && <BookInfoView />}
     </>

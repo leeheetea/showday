@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setBookStep } from '../../store/slice'
 
 import "./BookInfoView.css";
 import BookTitle from "./BookTitle";
@@ -14,19 +15,35 @@ const BookInfoView = () => {
   const state = useSelector((state) => state.booksData);
 
   // state에서 화면에 표시할 공연 정보 선언
-  const { title, price, url } = state.showInfo[0];
-  const { bookDate, bookShowTime, totalPrice } = state;
+  const { id, title, price, url } = state.showInfo[0];
+  const { bookDate, bookShowTime, totalPrice, bookStep } = state;
+
+  const handleInfoUpdate = useCallback(() => {
+    console.log(
+      '(BookInfoView) 가격업뎃!! ',
+      'sumPrice : ',
+      totalPrice.sumPrice,
+      'sumDiscount : ',
+      totalPrice.sumDiscount,
+      'resultTotalPrice : ',
+      totalPrice.resultTotalPrice
+    );
+  }, [totalPrice, bookShowTime]);
 
   useEffect(() => {
-    console.log("(BookInfoView) 가격업뎃!! : ", totalPrice.sumPrice);
-    console.log("(BookInfoView) 가격업뎃!! : ", totalPrice.sumDiscount);
-    console.log("(BookInfoView) 가격업뎃!! : ", totalPrice.resultTotalPrice);
-  }, [totalPrice]);
+    handleInfoUpdate();
+  }, [handleInfoUpdate]);
 
   // 이전버튼 클릭시(예매 스텝에 따라 버튼 및 예매 빠져나가기 처리)
   const handlePrevBtn = () => {
     navigate(-1);
-  };
+  }
+
+  const handleNextBtn = () => {
+    console.log('handleNextBtn - bookStep : ', bookStep);
+    dispatch(setBookStep({ bookStep: bookStep + 1 }))
+    navigate('/book/' + id + '/' + (bookStep + 1));
+  }
 
   return (
     <div className="bookInfoViewWrapper">
@@ -88,13 +105,11 @@ const BookInfoView = () => {
           </tr>
         </tfoot>
       </table>
-      <div className="bookButtonContainer">
-        <LineButton width="48%" height="60px" onClick={handlePrevBtn}>
-          이전
-        </LineButton>
-        <LineButton width="48%" height="60px" order="true">
-          결제하기
-        </LineButton>
+      <div className='bookButtonContainer'>
+        <LineButton width='48%' height='60px' onClick={handlePrevBtn}>이전단계</LineButton>
+        {(bookStep !== 4) ?
+          <LineButton width='48%' height='60px' order='true' onClick={handleNextBtn}>다음단계</LineButton>
+          : <LineButton width='48%' height='60px' point='true' onClick={handleNextBtn}>다음단계</LineButton>}
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import utils from "../../utils";
+import React, { useEffect, useState } from "react";
+import utils from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 
 import BookTitle from "../../components/book/BookTitle";
 
 import "./DiscountPricePage.css";
-import { setTotalPrice } from "../../store/slice";
+import { setTotalPrice } from '../../store/slice'
+import LineContainer from "../../components/LineContainer";
+import { useParams } from 'react-router-dom';
 
 const DiscountPricePage = () => {
   const dispatch = useDispatch();

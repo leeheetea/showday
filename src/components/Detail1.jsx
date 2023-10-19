@@ -6,8 +6,8 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import utils from "../utils.js";
-import { setShowInfo } from "../store/slice";
+import utils from '../utils.js'
+import { setBookInfo, setBookStep, setBookDateTime } from '../store/slice'
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -28,7 +28,7 @@ const DetailContainer = styled.div`
     color: red;
   }
   hr {
-    width: 100%
+    width: 100%;
     padding: 0;
     margin: 0 2rem 0 2rem ;
   }
@@ -45,7 +45,7 @@ const DetailContainer = styled.div`
     flex-direction: column; 
     padding: 2rem;
     hr {
-      width: 100%
+      width: 100%;
       padding: 0;
       margin: 2rem 0 2rem 0;
     }
@@ -58,6 +58,7 @@ const DetailContainer = styled.div`
     .detailBox2{
       width: 70vw;
     }
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -132,7 +133,8 @@ const Detail1 = (props) => {
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
       // console.log(props);
-      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookStep({ bookStep: 2 }));
       navigator("/book/" + props.data.id + "/2");
     }
   };
@@ -147,7 +149,6 @@ const Detail1 = (props) => {
             onChange={handleChangedDate}
             minDate={new Date()}
             value={selectedValue}
-            minDate={new Date()}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
@@ -165,19 +166,8 @@ const Detail1 = (props) => {
                       type="radio"
                       name="radioButton"
                       onClick={(e) => setChoosedShowTime(e.target.value)}
-                      value={
-                        utils.dateFormatForButton(selectedValue) +
-                        " " +
-                        time +
-                        "시"
-                      }
-                      checked={
-                        choosedShowTime ===
-                        utils.dateFormatForButton(selectedValue) +
-                          " " +
-                          time +
-                          "시"
-                      }
+                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
                       onChange={(e) => {
                         setChoosedShowTime(e.target.value);
                       }}

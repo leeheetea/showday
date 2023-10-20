@@ -5,6 +5,7 @@ import GoogleSnsLogin from "../components/GoogleSnsLogin";
 import "../components/Login.css";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import { login } from "./ApiService";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -18,13 +19,13 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      username: username,
-      password: password,
-    };
-    console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const username = data.get("username");
+    const password = data.get("password");
+
+    login({ username: username, password: password });
   };
 
   const findIdPopup = () => {

@@ -39,3 +39,17 @@ export function call(api, method, request) {
 export function register(userDTO) {
   return call("/user", "POST", userDTO);
 }
+
+export function login(userDTO) {
+  return call("/user/login", "POST", userDTO)
+    .then((response) => {
+      localStorage.setItem("ACCESS_TOKEN", response.token);
+      console.log("response : ", response);
+      window.location.href = "/";
+    })
+}
+
+export function logout() {
+  localStorage.setItem("ACCESS_TOKEN", null);
+  window.location.href = "/";
+}

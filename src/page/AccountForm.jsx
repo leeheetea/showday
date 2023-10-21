@@ -192,11 +192,7 @@ const AccountForm = () => {
     const email = data.get("email");
     const phone = data.get("phone");
 
-    register({username: username, password: password, name: name, email: email, phone: phone, smscheck: smscheck, isRadioChecked: isRadioChecked })
-      .then((res) => {
-        alert("계정 생성 성공");
-        window.location.href='/';
-      });
+    register({ username: username, password: password, name: name, email: email, phone: phone, smscheck: smscheck, isRadioChecked: isRadioChecked });
   }
 
   return (

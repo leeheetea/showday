@@ -21,11 +21,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const username = data.get("username");
-    const password = data.get("password");
+    login({ username, password })
+    
+    // const data = new FormData(e.target);
+    // const username = data.get("username");
+    // const password = data.get("password");
 
-    login({ username: username, password: password });
+    // login({ username: username, password: password });
   };
 
   const findIdPopup = () => {

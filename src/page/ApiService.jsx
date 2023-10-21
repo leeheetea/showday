@@ -10,11 +10,11 @@ export function call(api, method, request) {
     headers.append("Authorization", "Bearer " + accessToken);
   }
 
-    let options = {
-      headers: headers,
-      url: API_BASE_URL + api,
-      method: method,
-    };
+  let options = {
+    headers: headers,
+    url: API_BASE_URL + api,
+    method: method,
+  };
 
   if (request) {
     options.body = JSON.stringify(request);
@@ -27,7 +27,10 @@ export function call(api, method, request) {
       } else if (response.status === 403) {
         window.location.href = "/";
       } else {
-        throw Error(response);
+        // throw Error(response);
+        return response.text().then(text => {
+          throw new Error(text);
+        });
       }
 
     }).catch((error) => {
@@ -37,7 +40,11 @@ export function call(api, method, request) {
 
 
 export function register(userDTO) {
-  return call("/user", "POST", userDTO);
+  return call("/user", "POST", userDTO)
+    .then((response) => {
+      alert(response.name + "님, 회원 가입이 완료되었습니다.");
+      window.location.href = '/';
+    });
 }
 
 export function login(userDTO) {
@@ -45,8 +52,9 @@ export function login(userDTO) {
     .then((response) => {
       localStorage.setItem("ACCESS_TOKEN", response.token);
       console.log("response : ", response);
+      alert(response.username + "님이 로그인했습니다.");
       window.location.href = "/";
-    })
+    });
 }
 
 export function logout() {

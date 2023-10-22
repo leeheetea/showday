@@ -47,17 +47,29 @@ export function register(userDTO) {
     });
 }
 
+const tokenExpirationTime = 1 * 60 * 1000; // ms
+
 export function login(userDTO) {
   return call("/user/login", "POST", userDTO)
     .then((response) => {
       localStorage.setItem("ACCESS_TOKEN", response.token);
-      console.log("response : ", response);
+      // console.log("response : ", response);
+      // setTimeout(() => {
+      //   logout();
+      // }, tokenExpirationTime); 
+
       alert(response.username + "님이 로그인했습니다.");
       window.location.href = "/";
     });
 }
 
+
+
 export function logout() {
-  localStorage.setItem("ACCESS_TOKEN", null);
-  window.location.href = "/";
+  // localStorage.setItem("ACCESS_TOKEN", null); 
+  // localStorage.removeItem("ACCESS_TOKEN");
+  return new Promise((resolve) => {
+    localStorage.removeItem("ACCESS_TOKEN");
+    resolve();
+  })
 }

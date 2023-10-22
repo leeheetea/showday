@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import "../css/Header.css";
 import { RiSearchLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../page/ApiService";
+import LogoutCounter from "./LogoutCounter";
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const isLogin = !!localStorage.getItem("ACCESS_TOKEN");
   return (
     <header>
       <div className="header-container">
@@ -42,22 +45,45 @@ const SearchBar = () => {
           </form>
         </div>
         <div className="search-container-menu">
-          <span
-            className="search-container-menu-text"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            로그인
-          </span>
-          <span
-            className="search-container-menu-text"
-            onClick={() => {
-              navigate("/accountcreate");
-            }}
-          >
-            회원가입
-          </span>
+          {!isLogin && (<>
+            <span
+              className="search-container-menu-text"
+              onClick={() => {
+                navigate("/login");
+              }}>
+              로그인
+            </span>
+            <span
+              className="search-container-menu-text"
+              onClick={() => {
+                navigate("/accountcreate");
+              }}>
+              회원가입
+            </span>
+          </>
+          )}
+          {isLogin && (<>
+            <LogoutCounter/>
+            <span
+              className="search-container-menu-text"
+              onClick={() => {
+                logout()
+                  .then(() => {
+                    navigate('/login');
+                    // window.location.href="/login";
+                  });
+              }}>
+              로그아웃
+            </span>
+            <span
+              className="search-container-menu-text"
+              onClick={() => {
+                // navigate("/accountcreate");
+              }}>
+              회원정보
+            </span>
+          </>
+          )}
           <span className="search-container-menu-text">
             <Link to="/mypage/memberInfo">마이페이지</Link>
           </span>

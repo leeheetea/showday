@@ -17,38 +17,11 @@ const DetailContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   min-width: 28rem;
-
-  .detailBox{
-    width:500px;
-  }
-  .detailBox2{
-    padding: 0 0 0 3rem;
-  }
-  .detailTitle{
-    color: red;
-  }
-  hr {
-    width: 100%
-    padding: 0;
-    margin: 0 2rem 0 2rem ;
-  }
-  input{
-    margin-bottom: 2rem;
-  }
-  input, label{
-    cursor:pointer;
-  }
-
-
+  
   @media screen and (max-width: 800px) {
     width: 80%;
     flex-direction: column; 
     padding: 2rem;
-    hr {
-      width: 100%
-      padding: 0;
-      margin: 2rem 0 2rem 0;
-    }
     .detailBox2{
       padding: 0;
     }
@@ -82,8 +55,6 @@ const FormCheckText = styled.span`
   background: #e6e6e6;
   border-radius: 50px;
   border: none;
-  display: flex;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   color: #777;
@@ -106,6 +77,7 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   }
   display: none;
 `;
+
 const Detail1 = (props) => {
   const navigator = useNavigate();
   const bookDispatch = useDispatch();
@@ -138,12 +110,13 @@ const Detail1 = (props) => {
   };
 
   return (
-    <div>
-      <DetailContainer>
+    <div className="detailPageBox">
+      <DetailContainer className="detailContainer">
         <div className="detailBox detailBox1">
           <h3 className="detailTitle">STEP1</h3>
-          <h3>날짜 선택</h3>
+          <h3>{" "}날짜 선택</h3>
           <Calendar
+            className={"calendarCustom"}
             onChange={handleChangedDate}
             minDate={new Date()}
             value={selectedValue}
@@ -151,10 +124,9 @@ const Detail1 = (props) => {
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
-        <hr />
         <div className="detailBox detailBox2">
           <h3 className="detailTitle">STEP2</h3>
-          <h3>회차 선택</h3>
+          <h3>{" "}회차 선택</h3>
           <div className="detailLabel">
             {props.data.showTime.map((time, index) => (
               <div key={index}>

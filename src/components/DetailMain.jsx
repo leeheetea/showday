@@ -36,45 +36,6 @@ const ImgSizeWrapper = styled.img`
   height: 500px;
   border-radius: 5px;
 `;
-const DetailInfo = styled.div`
-  margin: 0 0 0 2rem;
-  white-space: nowrap;
-  .product_heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0 1rem 0;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid black;
-  }
-  .product_heading div {
-    width: 1000px;
-  }
-`;
-
-const ProductInfoListContainer = styled.ul`
-  float: left;
-  display: grid;
-  width: 100%
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50px 50px;
-  list-style: none;
-  padding-left: 0;
-  li{
-    margin-top: 1rem;
-    display: flex;
-    padding: 1rem;  
-  }
-  .product_info_title{
-    width: 5rem;
-  }
-  li InfoTitle{
-    margin: 0 1.0rem 0 0;
-  }
-  @media screen and (max-width: 1100px) {
-    float: none;
-  }
-  `;
 
 const InfoTitle = styled.div`
   font-weight: bold;
@@ -93,23 +54,27 @@ const customModalStyles = {
 };
 
 
-const DetailMain = ({ data }) => {
+const DetailMain = ({data}) => {
   
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
 
   //공연이미지 url, title, place, period, price 필요 정보.
   
-  const [showItems, setShowItems] = useState(data.item);
-
+  const [showItems, setShowItems] = useState(data.showId);
+  console.log("data======= " + data.toString );
+  console.log("showItems======= " +showItems );
 
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="content">
         <div>
           <ImgSizeWrapper src={data.url} alt="/" />
+          {/* {showItems.map((item)=>(
+            <span key={showItems.id}/>
+          ))} */}
         </div>
 
-        <DetailInfo className="product_detail_info">
+        <div className="product_detail_info">
           <div className="product_heading">
             <h2 className="product_title">{data.title}</h2>
             <span className="product_shareButton">
@@ -128,23 +93,23 @@ const DetailMain = ({ data }) => {
             </span>
           </div>
 
-          <ProductInfoListContainer className="product_info_list1">
+          <div className="product_info_list1">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">장소</InfoTitle>
-              <div>{data.place}</div>
+              {/* <div>{showItems.place}</div> */}
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">기간</InfoTitle>
-              <div>{data.period}</div>
+              {/* <div>{showItems.period}</div> */}
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
-              <div>{data.price}</div>
+              {/* <div>{showItems.price}</div> */}
             </li>
-          </ProductInfoListContainer>
-        </DetailInfo>
+          </div>
+        </div>
       </MainImgTextContainer>
     </div>
   );

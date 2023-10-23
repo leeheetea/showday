@@ -1,10 +1,16 @@
 .detailMainBody{
   margin-top: 50px;
-  min-width: 28rem;
+  width: 1000px;
+  @media screen and (max-width: 800px) {
+    width:500px;
+  }
 }
 #content {
-  min-width: 28rem;
+  width: 1000px;
   background: white;
+  @media screen and (max-width: 800px) {
+    width:500px;
+  }
 }
 .product_shareButton button {
   background: purple;
@@ -99,6 +105,7 @@ button:after {
 
 /* detail1 components css */
 .detailPageBox{
+  width: 1000px;
   @media screen and (max-width: 800px) {
     width:500px;
   }
@@ -128,9 +135,8 @@ button:after {
   display: flex;
   align-items: flex-start;
   margin-left: 10px;
-  /* padding: 20px 0 20px 24px; */
   @media screen and (max-width: 800px){
-    display: none;
+    margin-bottom: 2rem;
   }
 }
 .detailBox2{
@@ -141,7 +147,9 @@ button:after {
   border-left: 1px dotted gray;
 
   @media screen and (max-width: 800px){
+    padding-right: 200px;
     border-left: none;
+    justify-content: start;
     border-top: 1px dotted gray;
   }
 }

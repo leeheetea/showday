@@ -29,7 +29,7 @@ const DetailContainer = styled.div`
       padding: 0 ;
     }
     .detailBox2{
-      width: 70vw;
+      width: 100%;
     }
 `;
 
@@ -114,24 +114,24 @@ const Detail1 = (props) => {
       <DetailContainer className="detailContainer">
         <div className="detailBox detailBox1">
           <h3 className="detailTitle">STEP1</h3>
-          <h3>{" "}날짜 선택</h3>
+          <h3>날짜 선택</h3>
           <Calendar
             className={"calendarCustom"}
             onChange={handleChangedDate}
             minDate={new Date()}
             value={selectedValue}
-            minDate={new Date()}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
         <div className="detailBox detailBox2">
           <h3 className="detailTitle">STEP2</h3>
-          <h3>{" "}회차 선택</h3>
+          <h3>회차 선택</h3>
           <div className="detailLabel">
             {props.data.showTime.map((time, index) => (
               <div key={index}>
                 <label>
                   <div className="detailLabelContainer">
+                    
                     <FormCheckLeft
                       className="inputRadioCheck"
                       type="radio"
@@ -154,6 +154,7 @@ const Detail1 = (props) => {
                         setChoosedShowTime(e.target.value);
                       }}
                     />
+
                     <FormCheckText>
                       {utils.dateFormatForButton(selectedValue) +
                         " " +

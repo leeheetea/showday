@@ -88,7 +88,7 @@ const AccountForm = () => {
     }
   }, [])
 
-  // 이메일 모달
+  // 이메일 인증
   const [isEmailVerifiedOpen, setisEmailVerifiedOpen] = useState(false);
   const [serverCode, setServerCode] = useState("");
   const [isEmailVerified, setIsEmailVerified] = useState(false);

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const API_BASE_URL = "http://localhost:80"
 
 export function call(api, method, request) {
@@ -47,7 +49,7 @@ export function register(userDTO) {
     });
 }
 
-const tokenExpirationTime = 1 * 60 * 1000; // ms
+const tokenExpirationTime = 10 * 60 * 1000; // ms
 
 export function login(userDTO) {
   return call("/user/login", "POST", userDTO)
@@ -63,8 +65,6 @@ export function login(userDTO) {
     });
 }
 
-
-
 export function logout() {
   // localStorage.setItem("ACCESS_TOKEN", null); 
   // localStorage.removeItem("ACCESS_TOKEN");
@@ -72,4 +72,11 @@ export function logout() {
     localStorage.removeItem("ACCESS_TOKEN");
     resolve();
   })
+}
+
+export function emailAuth(emailDTO) {
+  return call("/auth/email/verify", "POST", emailDTO)
+    .then((response) => {
+      return response;
+    })
 }

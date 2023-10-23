@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
-import { register } from './ApiService';
+import { emailAuth, register } from './ApiService';
+import EmailConfirm from './EmailConfirm';
 
 const AccountForm = () => {
   // 아이디 유효성 검사
@@ -86,6 +87,37 @@ const AccountForm = () => {
       emailInputRef.current.focus();
     }
   }, [])
+
+  // 이메일 모달
+  const [isEmailVerifiedOpen, setisEmailVerifiedOpen] = useState(false);
+  const [serverCode, setServerCode] = useState("");
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+
+  const isEmailVerifiedClose = () => {
+    setisEmailVerifiedOpen(false);
+  }
+
+  const handleEmailConfirm = (isConfirmed) => {
+    if(isConfirmed) {
+      alert("이메일 인증이 완료되었습니다.");
+      setisEmailVerifiedOpen(false);
+      setIsEmailVerified(true);
+    } else {
+      alert("인증 번호가 일치하지 않습니다.");
+    }
+  }
+
+  const handleEmailAuth = (emailDTO) => {
+    emailAuth(emailDTO)
+      .then((response) => {
+        setServerCode(response.confirmCode);
+        setisEmailVerifiedOpen(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("인증 중 오류가 발생했습니다. 다시 시도해주세요.");
+      })
+  }
 
   // 휴대폰 숫자만 입력으로 받음
   const [phone, setPhone] = useState('');
@@ -233,7 +265,7 @@ const AccountForm = () => {
                 />
               </div>
               <div>
-                <button type='button' onClick={togglePasswordVisibility}>보기</button>
+                <button type='button'>보기</button>
               </div>
             </div>
             <div className="errorText" style={{ display: showErrorPassword ? 'block' : 'none' }}>
@@ -293,10 +325,14 @@ const AccountForm = () => {
                 value={email}
                 onChange={onChangeEmail}
                 ref={emailInputRef}
+                readOnly={isEmailVerified}
               />
               <div>
+                <button type='button' disabled={isEmailVerified} onClick={() => handleEmailAuth({email})}>인증</button>
+              </div>
+              <div>
                 <label htmlFor="">
-                  <select name="" id="emailSelectOption" onChange={onChangeEmailSelect}>
+                  <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
                     <option value="">직접입력</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@hanmail.net">@hanmail.net</option>
@@ -310,6 +346,12 @@ const AccountForm = () => {
             <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
               이메일 주소 양식에 맞게 작성해주세요.
             </div>
+            <EmailConfirm
+              isOpen={isEmailVerifiedOpen}
+              onClose={isEmailVerifiedClose}
+              onConfirm={handleEmailConfirm}
+              serverCode={serverCode}
+            />
             <div className='accountValidBlock'>
               <p className='blockText'>동일 정보로 가입된 계정으로 로그인 하시겠습니까?</p>
               <a href="#" className='accountValidBlockLogin'>로그인하기</a>
@@ -329,7 +371,7 @@ const AccountForm = () => {
                 value={phone}
                 onChange={onChangePhone}
               />
-              <button type='button'>인증번호받기</button>
+              {/* <button type='button'>인증번호받기</button> */}
             </div>
             <div className='errorText'>
               점유인증을 하여 휴대폰 번호를 등록해주세요. 등록한 번호는 로그인 이후 변경 가능합니다.

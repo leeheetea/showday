@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setBookStep } from "../../store/slice";
 import styled from "styled-components";
 
 const BookHeaderWrapper = styled.div`
@@ -11,7 +13,7 @@ const BookHeaderWrapper = styled.div`
 const ItemContainer = styled.div`
   /*clip-path: polygon(0% 0%, 92% 0, 100% 50%, 91% 100%, 0% 100%);*/
   clip-path: polygon(90% 0, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
-  background-color: ${(props) => (props.isAccent ? "#333333" : "#999999")};
+  background-color: ${(props) => (props.isaccent === 'true' ? "#333333" : "#999999")};
 `;
 const HeaderList = styled.ul`
   width: 100%;
@@ -37,10 +39,17 @@ const headerList = [
   { step: 5, title: "결재하기" },
 ];
 
-const BookHeader = ({ onBookStepClick, id }) => {
+const BookHeader = ({ onBookStepClick, id, step }) => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.booksData);
+  const { bookStep } = state;
+
   const handleStepClick = (index) => {
+    dispatch(setBookStep({ bookStep: index }));
     onBookStepClick(index, id);
-  };
+  }
+
+  console.log('step : ', step, bookStep);
 
   return (
     <BookHeaderWrapper>
@@ -51,7 +60,8 @@ const BookHeader = ({ onBookStepClick, id }) => {
               key={index + 1}
               onClick={() => handleStepClick(index + 1)}
             >
-              <ItemContainer>{menu.title}</ItemContainer>
+              {/* <ItemContainer>{menu.title}</ItemContainer> */}
+              <ItemContainer isaccent={(step === (index + 1)) ? 'true' : 'false'}>{menu.title}</ItemContainer>
             </HeaderListItem>
           );
         })}

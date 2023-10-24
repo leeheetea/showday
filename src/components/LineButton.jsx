@@ -22,8 +22,8 @@ const StyleButton = styled.button`
     props.point || props.order
       ? css`
           background-color: ${props.point
-            ? theme.button.accentBgColor
-            : theme.button.baseTextColor};
+          ? theme.button.accentBgColor
+          : theme.button.baseTextColor};
           color: ${theme.button.accentTextColor};
           height: ${props.height || undefined};
         `
@@ -31,17 +31,7 @@ const StyleButton = styled.button`
           border: 1px solid ${theme.button.baseBorderColor};
           color: ${theme.button.baseTextColor};
           height: ${props.height || undefined};
-        `}/*${(props) =>
-    props.point
-      ? css`
-      background-color: ${theme.button.accentBgColor}
-      color: ${theme.button.accentTextColor}
-    `
-      : css`
-      background-color: ${theme.button.baseBgColor}
-      color: ${theme.button.baseTextColor}
-    `}
-    */
+        `}
 `;
 
 function LineButton({ children, width, height, order, point, ...rest }) {

@@ -90,7 +90,7 @@ const CheckBooksPage = () => {
               onChange={handleChange}></input>
           </div>
         </LineContainer>
-        <LineContainer tMargin='-2px'>
+        <LineContainer tmargin='-2px'>
           <div className='checkBookFormName'>
             <p>이메일</p>
             {/*  <input

@@ -6,8 +6,8 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import utils from "../utils.js";
-import { setShowInfo } from "../store/slice";
+import utils from '../utils.js'
+import { setBookInfo, setBookStep, setBookDateTime } from '../store/slice'
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -17,11 +17,45 @@ const DetailContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   min-width: 28rem;
+<<<<<<< HEAD
   
+=======
+
+  .detailBox{
+    width:500px;
+  }
+  .detailBox2{
+    padding: 0 0 0 3rem;
+  }
+  .detailTitle{
+    color: red;
+  }
+  hr {
+    width: 100%;
+    padding: 0;
+    margin: 0 2rem 0 2rem ;
+  }
+  input{
+    margin-bottom: 2rem;
+  }
+  input, label{
+    cursor:pointer;
+  }
+
+
+>>>>>>> 9a1717408486efaee4f55f17d15d3a709a909413
   @media screen and (max-width: 800px) {
     width: 80%;
     flex-direction: column; 
     padding: 2rem;
+<<<<<<< HEAD
+=======
+    hr {
+      width: 100%;
+      padding: 0;
+      margin: 2rem 0 2rem 0;
+    }
+>>>>>>> 9a1717408486efaee4f55f17d15d3a709a909413
     .detailBox2{
       padding: 0;
     }
@@ -31,6 +65,7 @@ const DetailContainer = styled.div`
     .detailBox2{
       width: 100%;
     }
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -104,7 +139,8 @@ const Detail1 = (props) => {
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
       // console.log(props);
-      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookStep({ bookStep: 2 }));
       navigator("/book/" + props.data.id + "/2");
     }
   };
@@ -137,19 +173,8 @@ const Detail1 = (props) => {
                       type="radio"
                       name="radioButton"
                       onClick={(e) => setChoosedShowTime(e.target.value)}
-                      value={
-                        utils.dateFormatForButton(selectedValue) +
-                        " " +
-                        time +
-                        "시"
-                      }
-                      checked={
-                        choosedShowTime ===
-                        utils.dateFormatForButton(selectedValue) +
-                          " " +
-                          time +
-                          "시"
-                      }
+                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
                       onChange={(e) => {
                         setChoosedShowTime(e.target.value);
                       }}

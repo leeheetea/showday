@@ -129,8 +129,8 @@ button:after {
   input, label{
     cursor:pointer;
   }
-
 }
+
 .detailBox1{
   display: flex;
   align-items: flex-start;

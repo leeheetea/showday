@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { FaShareAlt } from "react-icons/fa";
 import { BiLinkAlt } from "react-icons/bi";
 import "../App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
+import { call } from "../ApiService";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -22,7 +23,8 @@ const MainImgTextContainer = styled.div`
       border-top: 1px solid lightgray;
     }
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
+    width: 480px;
     .product_detail_info {
       width: 450px;
     }
@@ -54,29 +56,30 @@ const customModalStyles = {
 };
 
 
-const DetailMain = ({data}) => {
+const DetailMain = () => {
   
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
 
   //공연이미지 url, title, place, period, price 필요 정보.
-  
-  const [showItems, setShowItems] = useState(data.showId);
-  console.log("data======= " + data.toString );
-  console.log("showItems======= " +showItems );
+  const [showItems, setShowItems] = useState([]);
+  // useEffect(()=>{ 
+  //   const fetchShowItem = async()=>{
+  //     const res = await fetch("").then((res)=>res.json());
+  //   }
+  // },[]);
+
+  console.log("showItems===" +showItems);
 
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="content">
         <div>
-          <ImgSizeWrapper src={data.url} alt="/" />
-          {/* {showItems.map((item)=>(
-            <span key={showItems.id}/>
-          ))} */}
+          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
         </div>
 
         <div className="product_detail_info">
           <div className="product_heading">
-            <h2 className="product_title">{data.title}</h2>
+            <h2 className="product_title">{showItems.title}</h2>
             <span className="product_shareButton">
               <button onClick={() => setShareModalIsOpen(true)}>
                 <FaShareAlt size="20" />
@@ -96,17 +99,17 @@ const DetailMain = ({data}) => {
           <div className="product_info_list1">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">장소</InfoTitle>
-              {/* <div>{showItems.place}</div> */}
+              <div>{showItems.venueId}</div>
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">기간</InfoTitle>
-              {/* <div>{showItems.period}</div> */}
+              <div>{showItems.period}</div>
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
-              {/* <div>{showItems.price}</div> */}
+              <div>{showItems.price}</div>
             </li>
           </div>
         </div>

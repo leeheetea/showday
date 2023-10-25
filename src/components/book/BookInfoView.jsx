@@ -56,7 +56,7 @@ const BookInfoView = () => {
       <BookTitle isleft="true" tPadding="100px">
         예매정보
       </BookTitle>
-      <LineContainer width="94%" padding="10px" tMargin="10px">
+      <LineContainer width="94%" padding="10px" tmargin="10px">
         <ul>
           <li className="textLine">
             <span className="textLeft">R석</span>

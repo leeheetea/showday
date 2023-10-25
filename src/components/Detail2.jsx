@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import "../css/DetailMain.css";
 import img1 from "../img/reviewPage.PNG"
-import img2 from "../img/review2Page.PNG"
 import img3 from "../img/mapPage.PNG"
 import img4 from "../img/cancel.PNG"
-// import show from '../data'
+import callAxios from "../util/callAxios";
+import Review from "./Review";
 
 const TabMenuContainter = styled.ul`
   font-weight: bold;
@@ -49,16 +49,37 @@ const DetailContainer = styled.div`
   }
 `;
 
+
+
+
 const Detail2 = (props) => {
   const [currentTab, clickTab] = useState(0);
+  
+  const [showItems, setShowItems] = useState([]);
+  
+  const showId = props.data.id;
+  // const showId = 1;
+  const url = "/show/"+showId;
+  
+  useEffect(()=>{ 
+    fetchShowItem();
+  },[showId]);
+
+  const fetchShowItem = async()=>{
+    callAxios(url, setShowItems);
+  }
 
   const menuArr = [
     { id: 1,
       name: "상세정보",
-      content: <img className="detailImg" src={props.data.detail} alt="" />,},
+      content: <div>
+      {(showItems.contentDetail|| []).map((url, index) => (
+        <img className="detailImg" src={url} style={{width:"90%"}} alt="" key={index} />
+      ))}
+    </div>},
     { id: 2, 
       name: "관람후기", 
-      content: <img className="reviewPage" src={img1} style={{width:"100%"}} alt="" /> , },
+      content: <Review/> , },
     { id: 3, 
       name: "장소정보", 
       content: <img className="mapPage" src={img3} style={{width:"100%"}}  alt="" /> },

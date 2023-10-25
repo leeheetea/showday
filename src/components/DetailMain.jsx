@@ -5,7 +5,7 @@ import "../App.css";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
-import { call } from "../ApiService";
+import callAxios from "../util/callAxios";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -13,16 +13,10 @@ const MainImgTextContainer = styled.div`
   justify-content: center;
   margin-bottom: 45px;
 
-  .product_detail_info {
-    width: 1000px;
+  .product_detail_info{
+    width: 500px;
   }
 
-  @media screen and (max-width: 1100px) {
-    align-items: center;
-    .product_info_list2 {
-      border-top: 1px solid lightgray;
-    }
-  }
   @media screen and (max-width: 800px) {
     width: 480px;
     .product_detail_info {
@@ -56,24 +50,29 @@ const customModalStyles = {
 };
 
 
-const DetailMain = () => {
-  
+
+
+const DetailMain = ({ data }) => {
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
 
-  //공연이미지 url, title, place, period, price 필요 정보.
   const [showItems, setShowItems] = useState([]);
-  // useEffect(()=>{ 
-  //   const fetchShowItem = async()=>{
-  //     const res = await fetch("").then((res)=>res.json());
-  //   }
-  // },[]);
+  
+  const showId = data.id; 
+  // const showId = 1;  //test id
 
-  console.log("showItems===" +showItems);
+  const url = "/show/"+showId;
 
+  useEffect(()=>{ 
+    fetchShowItem();
+  },[showId]);
+
+  const fetchShowItem = async()=>{
+    callAxios(url, setShowItems);
+  }
   return (
     <div className="detailMainBody">
-      <MainImgTextContainer id="content">
-        <div>
+      <MainImgTextContainer id="detailMainBodyContent">
+        <div className="detailMain_content_img">
           <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
         </div>
 
@@ -104,7 +103,7 @@ const DetailMain = () => {
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">기간</InfoTitle>
-              <div>{showItems.period}</div>
+              {/* <div>{showItems.showSchedules}</div> */}
             </li>
 
             <li className="product_info_item">

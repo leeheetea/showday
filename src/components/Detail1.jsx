@@ -17,23 +17,12 @@ const DetailContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   min-width: 28rem;
-<<<<<<< HEAD
-  
-=======
 
   .detailBox{
     width:500px;
   }
-  .detailBox2{
-    padding: 0 0 0 3rem;
-  }
   .detailTitle{
     color: red;
-  }
-  hr {
-    width: 100%;
-    padding: 0;
-    margin: 0 2rem 0 2rem ;
   }
   input{
     margin-bottom: 2rem;
@@ -42,20 +31,11 @@ const DetailContainer = styled.div`
     cursor:pointer;
   }
 
-
->>>>>>> 9a1717408486efaee4f55f17d15d3a709a909413
   @media screen and (max-width: 800px) {
     width: 80%;
     flex-direction: column; 
     padding: 2rem;
-<<<<<<< HEAD
-=======
-    hr {
-      width: 100%;
-      padding: 0;
-      margin: 2rem 0 2rem 0;
-    }
->>>>>>> 9a1717408486efaee4f55f17d15d3a709a909413
+
     .detailBox2{
       padding: 0;
     }

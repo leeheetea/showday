@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { API_BASE_URL } from "../page/ApiService";
+import { decodeIdToken } from "./DecodeIdToken";
 
 const Button = styled.button`
   width: 100%;
@@ -14,7 +16,7 @@ const Button = styled.button`
 const KakaoLogin = () => {
   const REST_API_KEY = "98fb1054fadbc801e5b9337e8492549d";
   //https://developers.kakao.com/docs/latest/ko/index
-  const REDIRECT_URL = "https://localhost:3000/auth";
+  const REDIRECT_URL = "http://localhost:3000/user/oauth/kakao";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
 
   // const handleLogin = () => {
@@ -29,8 +31,27 @@ const KakaoLogin = () => {
   const handleLogin = () => {
     const popup = window.open(kakaoURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
     window.addEventListener("message", (event) => {
-      if (event.source === popup) {
-        const data = event.data; // 로그인 결과 데이터
+      if (event.data.type === "KAKAO_AUTH") {
+        // console.log(event.data.code);
+        // Fetch to your backend
+        fetch("http://localhost:80/user/oauth/kakao?code=" + event.data.code, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({ code: event.data.code }),
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            console.log(data.id_token);
+            decodeIdToken(data.id_token);
+
+          })
+          .catch(error => {
+            console.error("Error:", error);
+          });
+
         popup.close();
       }
     });

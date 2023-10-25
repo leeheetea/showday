@@ -38,6 +38,7 @@ import Giftcard from "./components/Giftcard";
 import Coupon from "./components/Coupon";
 import ReadFAQpost from "./components/board/ReadFAQpost";
 import WriteFAQpost from "./components/board/WriteFAQpost";
+import KakaoRedirect from "./components/KakaoRedirect";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             <Route path="/theatre" element={<Theatre />}></Route>
             <Route path="/detailpage/:id?/*" element={<DetailPage />} />
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/user/oauth/kakao" element={<KakaoRedirect />}></Route>
             <Route path="/findid" element={<FindId />}></Route>
             <Route path="/findpwd" element={<FindPwd />}></Route>
             <Route path="/accountcreate" element={<AccountCreate />}></Route>

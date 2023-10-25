@@ -10,11 +10,13 @@ import seatImg from "../../img/seat.PNG";
 import Loading from '../../styles/loading';
 
 // 임의 값
-const MAX_ROW = 25; // 알파벳 최대 26개 이므로
+const MAX_ROW = 26; // 알파벳 최대 26개 이므로
 const MAX_COL = 20;
 const T_MAX_ROW = (MAX_ROW + 1);
 const T_MAX_COL = (MAX_COL + 1);
 const GRID_GAP = 2;
+const MAX_CAN_RESERVE_CNT = 5;
+const SEAT_DELIMITER = '@';
 
 const Line = styled.hr`
   border: 0.1px solid #ecedfc;
@@ -26,8 +28,8 @@ const SeatContainer = styled.div`
   max-width: ${(props) => `${props.pwidth || 100}px`};
   max-height: ${(props) => `${props.pheight || 100}px`};
   display: grid;
-  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(10px, auto));
-  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(10px, auto));
+  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(12px, auto));
+  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(13px, auto));
   grid-auto-rows: 100px;
   text-align: center;
   grid-gap: ${GRID_GAP}px;
@@ -38,12 +40,17 @@ const SeatContainer = styled.div`
 const Seat = styled.div`
   width: ${(props) => `(${props.width || 10} - ${GRID_GAP})px`};
   height: ${(props) => `(${props.height || 10} - ${GRID_GAP})px`};
-  background-color: violet;
+  background-color: ${(props) => (props.canreserve === 1) ? "#00008BFF" : "#D37EB9FF"};
   display: flex;
   justify-content: center;
   align-items: center; 
   box-sizing: border-box;
   font-size: 0.4rem;
+  &:hover {
+    background-color: darkblue; 
+    border: ${GRID_GAP}px outset darkblue;// 마우스 오버 시 배경색을 변경
+    margin: -${GRID_GAP}px;
+  }
 `;
 
 const SeatTitle = styled.div`
@@ -61,31 +68,62 @@ const ChooseSeatsPage = () => {
   // state에서 화면에 표시할 공연 정보 선언
   const { title, place } = state.showInfo[0];
   const { bookDate, bookShowTime, seats, bookShowTimeOrder } = state;
-  const displaySeats = new Array((MAX_COL + 1) * (MAX_ROW + 1)).fill(null);
-  const [seatsList, setSeatsList] = useState();
   const [loading, setLoading] = useState(true);
   const stageBackgroundRef = useRef(null);
   //const { count, leftSeats } = state.leftSeats[bookShowTimeOrder];
 
+  const initialSeatsInfo = new Array((MAX_COL + 1) * (MAX_ROW + 1)).fill(0);
+  const [displaySeatList, setDisplaySeatList] = useState(initialSeatsInfo);
+  const choosedSeatListRef = useRef(new Array().fill(null));
+
+  useEffect(() => {
+
+  }, []);
+
   useEffect(() => {
     const stageBackgroundElement = stageBackgroundRef.current;
 
+    // 극장 영역 완료전 오류 방지위한 체크
     if (stageBackgroundElement) {
       const width = stageBackgroundElement.offsetWidth;
       const height = stageBackgroundElement.offsetHeight;
-      console.log(`너비: ${width}px, 높이: ${height}px`);
       setLoading(false);
     }
   }, [loading, setLoading]);
 
-  const handleChooseSeat = () => {
-    console.log(">>> handleChooseSeat <<<");
-    /*
-    if (seatsList[index] === null) {
-      // 예약가능
-    } else {
-      // 예약 불가능
-    }*/
+  const handleChooseSeat = (key) => {
+    console.log(">>> handleChooseSeat <<< ", key, typeof (key));
+
+    if (typeof (key) === 'string') {
+      const seatPosition = key.split(SEAT_DELIMITER);
+      console.log(seatPosition);
+
+      const indexRow = parseInt(seatPosition[0], 10);
+      const indexCol = parseInt(seatPosition[1], 10);
+
+      // 좌석 선택 막는 조건
+      // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
+      if(choosedSeatListRef.current.includes(indexRow + SEAT_DELIMITER + indexCol)) {
+        console.log(choosedSeatListRef.current, indexRow + SEAT_DELIMITER + indexCol);
+        alert('이미 선택한 자리 입니다.');
+        return;
+      } else if(choosedSeatListRef.current.length >= MAX_CAN_RESERVE_CNT) {
+        alert('최대 5자리까지 선택 가능 합니다.');
+        return;
+      }
+
+      choosedSeatListRef.current.push(key);
+
+      const newDisplaySeatList = [...displaySeatList];
+      newDisplaySeatList[(indexRow * T_MAX_COL) + indexCol] = 1;
+      // setDisplaySeatList((prev) => {
+      //   const newDisplaySeatLit = [...displaySeatList];
+      //   newDisplaySeatLit[seatPosition[0] * seatPositionㅋ[]
+      // });
+      setDisplaySeatList(newDisplaySeatList);
+      console.log(displaySeatList);
+      console.log(choosedSeatListRef.current);
+    }
   }
 
   function configureSeats() {
@@ -96,38 +134,44 @@ const ChooseSeatsPage = () => {
         pwidth={stageBackgroundRef?.current?.offsetWidth}
         pheight={stageBackgroundRef?.current?.offsetHeight}
       >
-        {displaySeats.map((rowItems, idx) => {
-          // console.log(`row === ${idx}`);
+        {displaySeatList.map((rowItems, idx) => {
+          //console.log(`row === ${idx}`);
           // console.log(`size === ${displaySeats.length}`);
           // console.log(`width === ${stageBackgroundRef?.current?.offsetWidth / T_MAX_COL}`);
           // console.log(`height === ${stageBackgroundRef?.current?.offsetWidth / T_MAX_ROW}`);
 
-          const indexRow = parseInt(idx / T_MAX_COL);
-          const indexCol = parseInt(idx % T_MAX_COL);
+          const indexRow = parseInt(idx / T_MAX_COL, 10);
+          const indexCol = parseInt(idx % T_MAX_COL, 10);
 
-          console.log(`row === ${indexRow},  ${indexCol}`);
-          if ((indexCol === 0) && (indexRow === 0)) {
+          if ((indexCol === 0) && (indexRow === 0)) { // 첫행, 첫열은 공백 표시
             return <SeatTitle key={idx}></SeatTitle>
-          } else if ((indexCol === 0) || (indexRow === 0)) {
-            console.log(`row title!!!!!!!! === ${idx}`);
-            return <SeatTitle key={idx}>{idx}</SeatTitle>
+          } else if ((indexCol === 0) || (indexRow === 0)) { // 각행, 각열의 첫 시작 이름 표시
+            if (indexCol === 0) { // 행 첫 시작은 알파벳(A~Z) 변환 표시를 위한 조건
+              let rowChar = 'A';
+              rowChar = String.fromCharCode((65 + indexRow) - 1); // 'A' 아스키 코드 65
+              return <SeatTitle key={idx}>{rowChar}</SeatTitle>
+            } else { // 열의 첫 시작은 숫자 그대로 표신
+              return <SeatTitle key={idx}>{idx}</SeatTitle>
+            }
           } else {
             if (loading) {
               <Loading />
             } else {
               return (
-                <Seat key={idx}
+                <Seat key={indexRow + SEAT_DELIMITER + indexCol}
                   width={stageBackgroundRef?.current?.offsetWidth / T_MAX_COL}
                   height={stageBackgroundRef?.current?.offsetWidth / T_MAX_ROW}
-                  onClick={handleChooseSeat()}
+                  canreserve={rowItems}
+                  onClick={() =>
+                    handleChooseSeat(indexRow + SEAT_DELIMITER + indexCol)}
                 >
-                  {/*`${idx},${indexRow}열 ${indexCol}번`*/}
+                  {rowItems}
                 </Seat>
               )
             }
           }
         })}
-      </SeatContainer>
+      </SeatContainer >
     );
   }
 

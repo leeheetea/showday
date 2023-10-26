@@ -65,14 +65,25 @@ export function login(userDTO) {
     });
 }
 
+// export function logout() {
+//   // localStorage.setItem("ACCESS_TOKEN", null); 
+//   // localStorage.removeItem("ACCESS_TOKEN");
+//   return new Promise((resolve) => {
+//     localStorage.removeItem("ACCESS_TOKEN");
+//     resolve();
+//   })
+// }
+
 export function logout() {
-  // localStorage.setItem("ACCESS_TOKEN", null); 
-  // localStorage.removeItem("ACCESS_TOKEN");
-  return new Promise((resolve) => {
-    localStorage.removeItem("ACCESS_TOKEN");
-    resolve();
-  })
+  // 액세스 토큰 제거
+  localStorage.removeItem("ACCESS_TOKEN");
+  
+  // 백엔드 로그아웃 엔드포인트 호출
+  window.location.href = "http://localhost:80/user/oauth/kakao/logout";
 }
+
+
+
 
 export function emailAuth(emailDTO) {
   return call("/auth/email/verify", "POST", emailDTO)

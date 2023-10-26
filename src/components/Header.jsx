@@ -63,7 +63,7 @@ const SearchBar = () => {
           </>
           )}
           {isLogin && (<>
-            <LogoutCounter/>
+            <LogoutCounter />
             <span
               className="search-container-menu-text"
               onClick={() => {
@@ -72,7 +72,8 @@ const SearchBar = () => {
                     navigate('/login');
                     // window.location.href="/login";
                   });
-              }}>
+              }}
+            >
               로그아웃
             </span>
             <span

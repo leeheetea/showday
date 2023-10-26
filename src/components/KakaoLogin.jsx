@@ -42,10 +42,20 @@ const KakaoLogin = () => {
           // body: JSON.stringify({ code: event.data.code }),
         })
           .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            console.log(data.id_token);
-            decodeIdToken(data.id_token);
+          // .then(res => res.text())
+          .then(response => {
+            // console.log(data);
+            // console.log(data.id_token);
+            // decodeIdToken(data.id_token);
+            // console.log(response);
+            localStorage.setItem("ACCESS_TOKEN", response.token);
+            console.log("response : ", response);
+            // setTimeout(() => {
+            //   logout();
+            // }, tokenExpirationTime); 
+
+            alert(response.username + "님이 로그인했습니다.");
+            window.location.href = "/";
 
           })
           .catch(error => {

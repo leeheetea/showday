@@ -1,0 +1,42 @@
+/* component */
+.product_detail_tabcontent{
+  
+}
+.comment_star_rate{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.blind{
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+.comment_star{
+  display: flex;
+}
+.comment_star_select {
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  text-align:center;
+  width:5em;
+  color:#ccc;
+  cursor:pointer;
+}
+.comment_star_select input {
+  display:none;
+}
+
+.comment_star_select :checked ~ label {
+  color:#f90;
+}
+
+.comment_star_select label:hover,
+.comment_star_select label:hover ~ label {
+  cursor:pointer;
+}

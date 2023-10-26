@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import "../css/Review.css";
 
 
 
 const Review = (props) => {
-  
+  const [selectedRating, setSelectedRating] = useState(null);
+
+  const handleRatingChange = (event) => {
+    setSelectedRating(event.target.value);
+  }
+
+  const [textarea, settexTarea] = useState('');
+  const handleTextareaChange = (event) => {
+    const text = event.target.value;
+    settexTarea(text);
+  }
 
   return (
     <div className='product_detail_tabcontent review_comment'>
@@ -14,7 +25,7 @@ const Review = (props) => {
               <div className='review_star'></div>
               <span className='review_star_score'>
                 <span className='product_star_current'>4.9</span>
-                " / 5"
+                 / 5
               </span>
             </div> {/* review_star_rate */}
           </div> {/* review_content_heading */}
@@ -25,24 +36,42 @@ const Review = (props) => {
           <div className='product_comment_form '>
             <div className='comment_content'>
               <div className='comment_star_rate'>
-                <span className='blind'> {/*별점 확인*/}
-                  5점
-                </span>
-                <div className='comment_star_select'>
-                  <input type='radio' name='star' id='star_1' className='star_radio' value="1" />
-                    <label for="star_1" className='star_label'>
-                      <span className='blind'>
-                        1점
-                      </span>
-                    </label>
-
-                    <p className='comment_star_desc'>5점</p>
+                {/* <span className='blind'>5점</span> */}
+                <div className='comment_star'>
+                 <div className='comment_star_select'>
+                    <input type="radio" id="5-stars" name="rating" value="5" onChange={handleRatingChange}/>
+                    <label for="5-stars" className="star">&#9733;</label>
+                    <input type="radio" id="4-stars" name="rating" value="4" onChange={handleRatingChange}/>
+                    <label for="4-stars" className="star">&#9733;</label>
+                    <input type="radio" id="3-stars" name="rating" value="3" onChange={handleRatingChange}/>
+                    <label for="3-stars" className="star">&#9733;</label>
+                    <input type="radio" id="2-stars" name="rating" value="2" onChange={handleRatingChange}/>
+                    <label for="2-stars" className="star">&#9733;</label>
+                    <input type="radio" id="1-star" name="rating" value="1" onChange={handleRatingChange}/>
+                    <label for="1-star" className="star">&#9733;</label>  
+                 </div>
+                  {selectedRating === null ? (
+                    <p className='comment_star_desc'>별점을 선택해주세요.</p>)
+                   : (<p className='comment_star_desc'>{selectedRating}점</p>)}  
                 </div>
+
                 <div className='comment_input_box'>
-                  <label className='comment blind'>관람후기 작성란</label>
-                  <textarea className='comment_textarea' placeholder='관람후기를 남겨보세요!' maxLength={1000}></textarea>
+                  {/* <label className='comment blind'>관람후기 작성란</label> */}
+                  <textarea className='comment_textarea' placeholder='관람후기를 남겨보세요!' 
+                    maxLength={300} onChange={handleTextareaChange}>
+                  </textarea>
                 </div>
-
+                <div className='comment_util'>
+                  <div className='comment_util_right'>
+                    <div className='comment_length'>
+                      <span className='text_length'>{textarea.length}</span>
+                      <span className='limit_length'>/300</span>
+                    </div>
+                    <div className='comment_btn_box'>
+                      <button type='button'>등록</button>
+                    </div>
+                  </div>
+                </div>
               </div>{/*comment_content*/}
             </div>{/*comment_content*/}
           </div> {/* product_comment_form */}

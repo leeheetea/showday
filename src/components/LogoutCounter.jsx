@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { logout } from '../page/ApiService';
 
 const LogoutCounter = () => {
-    const INIT_TIME = 10;
+    const INIT_TIME = 1000000;
     const [remainingTime, setRemainingTime] = useState(INIT_TIME);
 
     useEffect(() => {

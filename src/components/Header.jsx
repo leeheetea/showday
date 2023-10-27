@@ -79,7 +79,7 @@ const SearchBar = () => {
             <span
               className="search-container-menu-text"
               onClick={() => {
-                // navigate("/accountcreate");
+                navigate("/userinfo");
               }}>
               회원정보
             </span>

@@ -75,11 +75,57 @@ export function login(userDTO) {
 // }
 
 export function logout() {
-  // 액세스 토큰 제거
-  localStorage.removeItem("ACCESS_TOKEN");
-  
-  // 백엔드 로그아웃 엔드포인트 호출
-  window.location.href = "http://localhost:80/user/oauth/kakao/logout";
+  // const token = localStorage.getItem('ACCESS_TOKEN');
+  // let payloadData = {};
+  // if (token) {
+  //   const payloadBase64 = token.split('.')[1];
+  //   payloadData = JSON.parse(atob(payloadBase64));
+  // }
+  // if (payloadData.loginType == 1) {
+  //   // 백엔드 로그아웃 엔드포인트 호출
+  //   window.open("http://localhost:80/user/oauth/kakao/logout", 'logoutPopup', 'width=600,height=500');
+  // }
+  // // 액세스 토큰 제거
+  // localStorage.removeItem("ACCESS_TOKEN");
+
+  return new Promise((resolve, reject) => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    let payloadData = {};
+    if (token) {
+      const payloadBase64 = token.split('.')[1];
+      payloadData = JSON.parse(atob(payloadBase64));
+    }
+
+    if (payloadData.loginType == 1) {
+      const popupURL = "http://localhost:80/user/oauth/kakao/logout";
+      const width = 600;
+      const height = 765;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+      const logoutPopup = window.open(popupURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
+
+      // const checkPopupURLChange = setInterval(() => {
+      //   if (logoutPopup.location.href === "http://localhost:3000/user/oauth/kakao/logout") {
+      //     clearInterval(checkPopupURLChange);
+      //     logoutPopup.close();
+      //     localStorage.removeItem("ACCESS_TOKEN");
+      //     resolve();
+      //   }  
+      // }, 100);
+
+      window.addEventListener("message", (e) => {
+        console.log("----------", e);
+        if (e.data === "logoutCompleted") {
+          localStorage.removeItem("ACCESS_TOKEN");
+          resolve();
+        }
+      })
+
+    } else {
+      localStorage.removeItem("ACCESS_TOKEN");
+      resolve();
+    }
+  });
 }
 
 

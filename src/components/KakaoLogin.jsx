@@ -28,43 +28,32 @@ const KakaoLogin = () => {
   const height = 600;
   const left = window.screenX + (window.outerWidth - width) / 2;
   const top = window.screenY + (window.outerHeight - height) / 2;
+
+  const messageHandler = (event) => {
+    if (event.data.type === "KAKAO_AUTH") {
+      fetch("http://localhost:80/user/oauth/kakao?code=" + event.data.code, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(res => res.json())
+        .then(response => {
+          localStorage.setItem("ACCESS_TOKEN", response.token);
+          alert(response.username + "님이 로그인했습니다.");
+          window.location.href = "/";
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+
+      window.removeEventListener("message", messageHandler);
+    }
+  };
+
   const handleLogin = () => {
     const popup = window.open(kakaoURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
-    window.addEventListener("message", (event) => {
-      if (event.data.type === "KAKAO_AUTH") {
-        // console.log(event.data.code);
-        // Fetch to your backend
-        fetch("http://localhost:80/user/oauth/kakao?code=" + event.data.code, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify({ code: event.data.code }),
-        })
-          .then(res => res.json())
-          // .then(res => res.text())
-          .then(response => {
-            // console.log(data);
-            // console.log(data.id_token);
-            // decodeIdToken(data.id_token);
-            // console.log(response);
-            localStorage.setItem("ACCESS_TOKEN", response.token);
-            console.log("response : ", response);
-            // setTimeout(() => {
-            //   logout();
-            // }, tokenExpirationTime); 
-
-            alert(response.username + "님이 로그인했습니다.");
-            window.location.href = "/";
-
-          })
-          .catch(error => {
-            console.error("Error:", error);
-          });
-
-        popup.close();
-      }
-    });
+    window.addEventListener("message", messageHandler);
   };
 
   return (

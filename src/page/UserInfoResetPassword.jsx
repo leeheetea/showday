@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react'
-import '../css/UserInfoModify.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { getUserInfo } from './ApiService'
+import { resetPassword } from './ApiService';
 
-const UserInfoModify = () => {
-  
+const UserInfoResetPassword = () => {
+
   const [password, setPassword] = useState('');
 
   const onChangePassword = useCallback((e) => {
@@ -15,22 +14,21 @@ const UserInfoModify = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(password);
-    getUserInfo({password: password})
+    resetPassword({ password: password });
   }
-
   return (
     <div>
       <Header />
       <div class="grid-container">
         <form onSubmit={handleSubmit}>
           {/* <div>
-            <label htmlFor="password">비밀번호 </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder='비밀번호를 입력해주세요.'
-            /> */}
+          <label htmlFor="password">비밀번호 </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder='비밀번호를 입력해주세요.'
+          /> */}
           <div className='uBlock'>
             <div className="inputArea_password">
               <div className='inputAreaLabel'>
@@ -58,4 +56,4 @@ const UserInfoModify = () => {
   )
 }
 
-export default UserInfoModify
+export default UserInfoResetPassword

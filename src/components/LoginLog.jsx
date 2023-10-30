@@ -75,7 +75,7 @@ const LoginLog = () => {
     //   const OS = getOS(payloadData.userAgent);
     //   const browser = getBrowser(payloadData.userAgent);
     const token = localStorage.getItem('ACCESS_TOKEN');
-    const payloadData = {};
+    let payloadData = {};
     if (token) {
         const payloadBase64 = token.split('.')[1];
         payloadData = JSON.parse(atob(payloadBase64));

@@ -25,7 +25,15 @@ export function call(api, method, request) {
   return fetch(options.url, options)
     .then((response) => {
       if (response.status === 200) {
-        return response.json();
+        // return response.json();
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          return response.json();
+        } else {
+          return response.text();
+        }
+
       } else if (response.status === 403) {
         window.location.href = "/";
       } else {
@@ -128,12 +136,25 @@ export function logout() {
   });
 }
 
-
-
-
 export function emailAuth(emailDTO) {
   return call("/auth/email/verify", "POST", emailDTO)
     .then((response) => {
+      return response;
+    })
+}
+
+export function getUserInfo(userDTO) {
+  return call("/user/userinfo/authentication", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+}
+
+export function resetPassword(userDTO) {
+  return call("/user/password/authentication", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
       return response;
     })
 }

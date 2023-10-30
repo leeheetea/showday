@@ -29,7 +29,9 @@ const UserInfo = () => {
                 <p>회원정보수정</p>
                 <span>본인인증, 휴대폰번호 등<br />내정보를 수정하세요.</span>
               </div>
-              <div className='menuBox'>
+              <div className='menuBox' onClick={() => {
+                navigate('/userinforesetpassword');
+              }}>
                 <p>비밀번호변경</p>
                 <span>주기적인 변경으로<br />내정보를 보호하세요.</span>
               </div>

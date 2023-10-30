@@ -151,8 +151,16 @@ export function getUserInfo(userDTO) {
     })
 }
 
-export function resetPassword(userDTO) {
+export function matchPassword(userDTO) {
   return call("/user/password/authentication", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+}
+
+export function resetPassword(userDTO) {
+  return call("/user/password/reset", "POST", userDTO)
     .then((response) => {
       console.log(response);
       return response;

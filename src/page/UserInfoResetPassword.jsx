@@ -6,6 +6,7 @@ import { resetPassword } from './ApiService';
 const UserInfoResetPassword = () => {
 
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
@@ -14,8 +15,33 @@ const UserInfoResetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(password);
-    resetPassword({ password: password });
+    resetPassword({ password: password })
+      .then((data) => {
+        setMessage(data);
+      })
   }
+
+  const [showErrorPassword, setShowErrorPassword] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  }
+  // 비밀번호 확인 유효성 검사
+  const [passwordVerify, setPasswordVerify] = useState('');
+  const [showErrorPasswordVerify, setShowErrorPasswordVerify] = useState(false);
+
+  const onChangePasswordVerify = useCallback((e) => {
+    setPasswordVerify(e.target.value);
+    const isSamePassword = e.target.value === password ? true : false;
+
+    setShowErrorPasswordVerify(!isSamePassword);
+  }, [password]);
+
+  const [passwordVerifyVisible, setPasswordVerifyVisible] = useState(false);
+  const togglePasswordVerifyVisibility = () => {
+    setPasswordVerifyVisible(!passwordVerifyVisible);
+  }
+
   return (
     <div>
       <Header />
@@ -50,6 +76,59 @@ const UserInfoResetPassword = () => {
 
           {/* </div> */}
         </form>
+        {message && (
+          <form className="response">
+            {/* 비밀번호 */}
+            <div className='uBlock'>
+              <div className="inputArea_password">
+                <div className='inputAreaLabel'>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    type={passwordVisible ? 'text' : 'password'}
+                    placeholder='8~12자 영문, 숫자, 특수문자'
+                    name='password'
+                    id='password'
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                </div>
+                <div>
+                  <button type='button'>보기</button>
+                </div>
+              </div>
+              <div className="errorText" style={{ display: showErrorPassword ? 'block' : 'none' }}>
+                8~12자의 영문, 숫자, 특수문자 중 2가지 이상으로만 가능합니다.
+              </div>
+            </div>
+
+            {/* 비밀번호 확인 */}
+            <div className='uBlock'>
+              <div className="inputArea_password_verify">
+                <div className='inputAreaLabel'>
+                  <label htmlFor="passwordVerify">비밀번호 확인</label>
+                  <input
+                    type={passwordVerifyVisible ? 'text' : 'password'}
+                    placeholder='8~12자 영문, 숫자, 특수문자'
+                    name='passwordVerify'
+                    id='passwordVerify'
+                    value={passwordVerify}
+                    onChange={onChangePasswordVerify}
+                  />
+                </div>
+                <div>
+                  <button type='button' onClick={togglePasswordVerifyVisibility}>보기</button>
+                </div>
+              </div>
+              <div className="errorText" style={{ display: showErrorPasswordVerify ? 'block' : 'none' }}>
+                비밀번호가 일치하지 않습니다. 다시 입력해주세요.
+              </div>
+            </div>
+
+            <div className='submitBtn'>
+            <button type='submit' disabled={!password}>비밀번호 재설정</button>
+          </div>
+          </form>
+        )}
       </div >
       <Footer />
     </div >

@@ -7,6 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 const UserInfo = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem('ACCESS_TOKEN');
+  let payloadData = {};
+  if (token) {
+    const payloadBase64 = token.split('.')[1];
+    payloadData = JSON.parse(atob(payloadBase64));
+  }
+
   return (
     <div>
       <Header />
@@ -15,7 +22,7 @@ const UserInfo = () => {
           <div className='contentswrap'>
             <div className='memberClass'>
               <div className='myClass'>
-                <p>홍길동님은 현재 <span>Welcome</span> 등급입니다. </p>
+                <p>{payloadData.username}님은 현재 <span>Welcome</span> 등급입니다. </p>
               </div>
               <div className='benefit'>
                 <p><a href="">등급별 혜택보기</a></p>

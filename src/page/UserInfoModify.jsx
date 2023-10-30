@@ -5,8 +5,9 @@ import Footer from '../components/Footer'
 import { getUserInfo } from './ApiService'
 
 const UserInfoModify = () => {
-  
+
   const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState('');
 
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
@@ -15,7 +16,10 @@ const UserInfoModify = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(password);
-    getUserInfo({password: password})
+    getUserInfo({ password: password })
+      .then(data => {
+        setUserData(data);
+      })
   }
 
   return (
@@ -52,6 +56,17 @@ const UserInfoModify = () => {
 
           {/* </div> */}
         </form>
+        {userData && ( 
+          <div className="response">
+            <h2>User Data:</h2>
+            <p>아이디 : {userData.username}</p>
+            <p>이름 : {userData.name}</p>
+            <p>이메일 : {userData.email}</p>
+            <p>휴대폰번호 : {userData.phone}</p>
+            <p>sms수신여부 : {userData.smscheck ? '예' : '아니오'}</p>
+            <p>개인정보 유효기간 : {userData.isRadioChecked}</p>
+          </div>
+        )}
       </div >
       <Footer />
     </div >

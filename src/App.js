@@ -42,6 +42,7 @@ import KakaoRedirect from "./components/KakaoRedirect";
 import UserInfo from "./page/UserInfo";
 import UserInfoModify from "./page/UserInfoModify";
 import LoginLog from "./components/LoginLog";
+import KakaoRedirectLogout from "./components/KakaoRedirectLogout";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
             <Route path="/detailpage/:id?/*" element={<DetailPage />} />
             <Route path="/login" element={<Login />}></Route>
             <Route path="/user/oauth/kakao" element={<KakaoRedirect />}></Route>
+            <Route path="/user/oauth/kakao/logout" element={<KakaoRedirectLogout/>} ></Route>
             <Route path="/findid" element={<FindId />}></Route>
             <Route path="/findpwd" element={<FindPwd />}></Route>
             <Route path="/accountcreate" element={<AccountCreate />}></Route>

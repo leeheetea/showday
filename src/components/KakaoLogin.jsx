@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import kakaoImage from '../img/kakao_login_medium_narrow.png';
+
 import { API_BASE_URL } from "../page/ApiService";
 import { decodeIdToken } from "./DecodeIdToken";
 
@@ -58,6 +60,12 @@ const KakaoLogin = () => {
 
   return (
     <>
+      {/* <img src={kakaoImage} alt="kakao_login" onClick={handleLogin} style={{
+        width: '208px',
+        height: '40px',
+        cursor: "pointer",
+        objectFit: "cover"
+      }}/> */}
       <Button onClick={handleLogin}>카카오 계정으로 로그인</Button>
     </>
   );

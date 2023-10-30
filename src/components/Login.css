@@ -123,6 +123,17 @@
     cursor: pointer;
 }
 
+.StyledHelp span {
+    cursor: pointer;
+}
+
+.SnsLoginKakao img {
+    width: 208px;
+    height: 40px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
 .StyledHelpMenu {
     text-decoration: none;
     color: #707070;

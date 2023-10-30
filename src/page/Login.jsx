@@ -6,6 +6,7 @@ import "../components/Login.css";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { login } from "./ApiService";
+import kakaoImage from '../img/kakao_login_medium_narrow.png';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -121,6 +122,7 @@ const Login = () => {
             </div>
             <div className="SnsLoginKakao">
               <KaKaoLogin></KaKaoLogin>
+              {/* <img src={kakaoImage} alt="kakaoImage" /> */}
             </div>
             <div className="SnsLoginGoogle">
               <GoogleSnsLogin></GoogleSnsLogin>

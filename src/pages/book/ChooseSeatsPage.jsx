@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useOutletContext } from "react-router-dom";
 
-import { getShowInfoById } from "../../store/slice";
+import {setMyBookSeats} from "../../store/slice";
 import "./ChooseSeatsPage.css";
 import BookTitle from "../../components/book/BookTitle";
 import seatImg from "../../img/seat.PNG";
 import Loading from '../../styles/loading';
+import utils from '../../utils'
 
 // 임의 값
 const MAX_ROW = 26; // 알파벳 최대 26개 이므로
@@ -63,6 +64,7 @@ const SeatTitle = styled.div`
 `
 
 const ChooseSeatsPage = () => {
+  const bookDispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
 
   // state에서 화면에 표시할 공연 정보 선언
@@ -95,7 +97,7 @@ const ChooseSeatsPage = () => {
     console.log(">>> handleChooseSeat <<< ", key, typeof (key));
 
     if (typeof (key) === 'string') {
-      const seatPosition = key.split(SEAT_DELIMITER);
+      const seatPosition = utils.getAboutDelimiter('F', SEAT_DELIMITER, key);
       console.log(seatPosition);
 
       const indexRow = parseInt(seatPosition[0], 10);
@@ -103,8 +105,9 @@ const ChooseSeatsPage = () => {
 
       // 좌석 선택 막는 조건
       // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
-      if(choosedSeatListRef.current.includes(indexRow + SEAT_DELIMITER + indexCol)) {
-        console.log(choosedSeatListRef.current, indexRow + SEAT_DELIMITER + indexCol);
+      const fullySeatName = utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol);
+      if(choosedSeatListRef.current.includes(fullySeatName)) {
+        console.log(choosedSeatListRef.current, fullySeatName);
         alert('이미 선택한 자리 입니다.');
         return;
       } else if(choosedSeatListRef.current.length >= MAX_CAN_RESERVE_CNT) {
@@ -112,17 +115,18 @@ const ChooseSeatsPage = () => {
         return;
       }
 
+      console.log("+++ ",key, typeof(key));
       choosedSeatListRef.current.push(key);
 
       const newDisplaySeatList = [...displaySeatList];
       newDisplaySeatList[(indexRow * T_MAX_COL) + indexCol] = 1;
-      // setDisplaySeatList((prev) => {
-      //   const newDisplaySeatLit = [...displaySeatList];
-      //   newDisplaySeatLit[seatPosition[0] * seatPositionㅋ[]
-      // });
       setDisplaySeatList(newDisplaySeatList);
-      console.log(displaySeatList);
-      console.log(choosedSeatListRef.current);
+
+      // 복사해서 안보내고 바로 choosedSeatListRef.current 보내면
+      // Arrary.push() 할 때 에러남, Cannot add property 1, object is not extensible
+      // TypeError: Cannot add property 1, object is not extensible
+      const choosedSeatListTmp = [...choosedSeatListRef.current];
+      bookDispatch(setMyBookSeats({myBookSeats : choosedSeatListTmp}));
     }
   }
 
@@ -135,10 +139,6 @@ const ChooseSeatsPage = () => {
         pheight={stageBackgroundRef?.current?.offsetHeight}
       >
         {displaySeatList.map((rowItems, idx) => {
-          //console.log(`row === ${idx}`);
-          // console.log(`size === ${displaySeats.length}`);
-          // console.log(`width === ${stageBackgroundRef?.current?.offsetWidth / T_MAX_COL}`);
-          // console.log(`height === ${stageBackgroundRef?.current?.offsetWidth / T_MAX_ROW}`);
 
           const indexRow = parseInt(idx / T_MAX_COL, 10);
           const indexCol = parseInt(idx % T_MAX_COL, 10);
@@ -147,9 +147,11 @@ const ChooseSeatsPage = () => {
             return <SeatTitle key={idx}></SeatTitle>
           } else if ((indexCol === 0) || (indexRow === 0)) { // 각행, 각열의 첫 시작 이름 표시
             if (indexCol === 0) { // 행 첫 시작은 알파벳(A~Z) 변환 표시를 위한 조건
-              let rowChar = 'A';
-              rowChar = String.fromCharCode((65 + indexRow) - 1); // 'A' 아스키 코드 65
-              return <SeatTitle key={idx}>{rowChar}</SeatTitle>
+              // let rowChar = 'A';
+              // rowChar = String.fromCharCode((65 + indexRow) - 1); // 'A' 아스키 코드 65
+              return <SeatTitle key={idx}>
+                {utils.getAboutDelimiter('S', SEAT_DELIMITER, indexRow)}
+              </SeatTitle>
             } else { // 열의 첫 시작은 숫자 그대로 표신
               return <SeatTitle key={idx}>{idx}</SeatTitle>
             }
@@ -158,12 +160,12 @@ const ChooseSeatsPage = () => {
               <Loading />
             } else {
               return (
-                <Seat key={indexRow + SEAT_DELIMITER + indexCol}
+                <Seat key={utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol)}
                   width={stageBackgroundRef?.current?.offsetWidth / T_MAX_COL}
                   height={stageBackgroundRef?.current?.offsetWidth / T_MAX_ROW}
                   canreserve={rowItems}
                   onClick={() =>
-                    handleChooseSeat(indexRow + SEAT_DELIMITER + indexCol)}
+                    handleChooseSeat(utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol))}
                 >
                   {rowItems}
                 </Seat>

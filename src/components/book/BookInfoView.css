@@ -9,18 +9,24 @@
 }
 
 .titleContainer .tableContainer {
-  width: 90%;
-  align-content: center;
-  display: flex;
-  justify-content: center;
-  /*background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-retro-ticket-green-background-image_521704.jpg');*/
+    justify-content: center; /* 요소들을 수평으로 가운데 정렬합니다. */
+    //align-items: center; /* 요소들을 수직으로 가운데 정렬합니다. */
+    /*background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210115/pngtree-retro-ticket-green-background-image_521704.jpg');*/
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
 }
 
 .titleLeft {
-  width: 40%;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
+    width: 30%;
+    margin-right: 10px; /* 이미지와 다른 <div> 사이의 간격을 조절합니다. */
+
+}
+
+.reserveSeatInfo {
+    padding: 0 20px;
 }
 
 /* .titleRight {
@@ -33,7 +39,7 @@
 .bookResultThLast,
 .bookResultTdLast {
   border-bottom: 1px solid #ECEDFC;
-  padding: 10px;
+  padding: 5px;
 }
 
 .bookResultTh,
@@ -61,7 +67,9 @@
 
 .bookResultTable {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
+    font-size: small;
+
 }
 
 .bookButtonContainer {

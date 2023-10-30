@@ -15,14 +15,16 @@ const StyleTitle = styled.h3`
   padding-right: 1rem; */
   text-align: ${props => props.isleft};
   font-weight: ${props => props.issubtitle ? '' : 'bold'};
-  padding-top: ${props => props.tPadding || ''};
+  padding-top: ${props => props.tpadding || ''};
+  display: ${props => props.isflex ? 'flex' : 'block'};
 `;
 
-function BookTitle({ children, isleft, issubtitle, isBottomLine, tPadding, ...rest }) {
+function BookTitle({ children, isleft, issubtitle, isBottomLine, tpadding, isflex, ...rest }) {
   return <StyleTitle 
-    padding-top={tPadding} 
+    padding-top={tpadding}
     text-align= {issubtitle || isleft ? 'left' : 'center'}
-    issubtitle={issubtitle} 
+    issubtitle={issubtitle}
+    isflex={isflex}
     {...rest}>
       {children} 
     {isBottomLine ? <Line/> : <></>}

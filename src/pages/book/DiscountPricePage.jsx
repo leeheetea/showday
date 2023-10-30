@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import utils from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ const DiscountPricePage = () => {
   const state = useSelector((state) => state.booksData);
   const { price } = state.showInfo[0];
   const { youtDiscount } = state;
+  const myseatCnt = state.seats.myBookSeats.length;
 
   const unMarkedPrice = utils.getRemoveMarkThousand(price);
   const youtPrice = utils.getMarkThousand(
@@ -37,12 +38,11 @@ const DiscountPricePage = () => {
         [e.target.name]: e.target.value,
       };
 
-      const sumPrice = unMarkedPrice * updatedValues.aNumber;
-      const sumYoutPrice =
-        utils.getRemoveMarkThousand(youtPrice) * updatedValues.cNumber;
-      const sumDiscount =
-        utils.getRemoveMarkThousand(disCountPrice) * updatedValues.cNumber;
-      const resultTotalPrice = sumPrice + sumYoutPrice;
+      const sumPrice = unMarkedPrice *
+        (parseInt(updatedValues.aNumber, 10) + parseInt(updatedValues.cNumber, 10));
+      const sumDiscount = utils.getRemoveMarkThousand(disCountPrice) * updatedValues.cNumber;
+      const resultTotalPrice = sumPrice + sumDiscount;
+      console.log(">>> resultTotalPrice : " + resultTotalPrice);
 
       dispatch(
         setTotalPrice({
@@ -67,13 +67,13 @@ const DiscountPricePage = () => {
         </colgroup>
         <tbody>
           <tr>
-            <th className="bookDiscountTh">일반할인</th>
-            <td className="bookDiscountTd">일반</td>
+            <th className="bookDiscountTh">일반가</th>
+            <td className="bookDiscountTd">일반가(정가)</td>
             <td className="bookDiscountTd">{price}</td>
             <td className="bookDiscountTd">
               <input
                 type="number"
-                max={20}
+                max={myseatCnt}
                 name="aNumber"
                 value={values.aNumber}
                 onChange={handleChange}
@@ -81,9 +81,7 @@ const DiscountPricePage = () => {
             </td>
           </tr>
           <tr>
-            <th className="bookDiscountTh" rowSpan={2}>
-              청소년할인
-            </th>
+            <th className="bookDiscountTh" rowSpan={2}>할인종류</th>
             <td className="bookDiscountTd">청소년할인({youtDiscount}%)</td>
             <td className="bookDiscountTd">
               {utils.getMarkThousand(youtPrice)}
@@ -91,7 +89,7 @@ const DiscountPricePage = () => {
             <td className="bookDiscountTd">
               <input
                 type="number"
-                max={20}
+                max={myseatCnt}
                 name="cNumber"
                 value={values.cNumber}
                 onChange={handleChange}
@@ -102,7 +100,11 @@ const DiscountPricePage = () => {
             <td className="bookDiscountTd">&nbsp;</td>
             <td className="bookDiscountTd">&nbsp;</td>
             <td className="bookDiscountTd">
-              <input type="number" value="0" disabled={true}></input>
+              <input
+                type="number"
+                value="0"
+                disabled={true}
+              ></input>
             </td>
           </tr>
         </tbody>

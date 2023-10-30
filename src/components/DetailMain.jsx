@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
+import Review from "./Review";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -69,6 +70,7 @@ const DetailMain = ({ data }) => {
   const fetchShowItem = async()=>{
     callAxios(url, setShowItems);
   }
+
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
@@ -113,6 +115,7 @@ const DetailMain = ({ data }) => {
           </div>
         </div>
       </MainImgTextContainer>
+      <Review showId={showId} /> 
     </div>
   );
 };

@@ -1,19 +1,39 @@
 import React, { useState } from 'react'
 import "../css/Review.css";
+import callPostAxios from '../util/callPostAxios';
 
 
-
-const Review = (props) => {
+const Review = ( data ) => {
   const [selectedRating, setSelectedRating] = useState(null);
+  const [textarea, settexTarea] = useState('');
+  const [imageFile, setImageFile] = useState(null); 
 
   const handleRatingChange = (event) => {
-    setSelectedRating(event.target.value);
+    const intValue = parseInt(event.target.value, 10);
+    setSelectedRating(intValue);
   }
-
-  const [textarea, settexTarea] = useState('');
   const handleTextareaChange = (event) => {
     const text = event.target.value;
     settexTarea(text);
+  }
+  const showId = data; 
+  
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  }
+  const addReview = () => {
+    const data = new FormData();
+    data.append('reviewGrade', selectedRating);
+    data.append('reviewText', textarea);
+    data.append('showId', showId);
+    if (imageFile) {
+      data.append('reviewImgUrl', imageFile);
+    }
+    callPostAxios("/review", data, (response) => {
+      console.log("리뷰가 성공적으로 등록되었습니다.", response);
+      alert("리뷰가 성공적으로 등록되었습니다.");
+    });
   }
 
   return (
@@ -61,21 +81,29 @@ const Review = (props) => {
                     maxLength={300} onChange={handleTextareaChange}>
                   </textarea>
                 </div>
+
                 <div className='comment_util'>
                   <div className='comment_util_right'>
                     <div className='comment_length'>
                       <span className='text_length'>{textarea.length}</span>
                       <span className='limit_length'>/300</span>
-                    </div>
+                    </div>{/*comment_length */}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
                     <div className='comment_btn_box'>
-                      <button type='button'>등록</button>
-                    </div>
-                  </div>
+                      <button type='button' onClick={addReview}>등록</button>
+                    </div>{/*comment_btn_box*/}
+                  </div>{/*comment_util_right*/}
                 </div>
+
               </div>{/*comment_content*/}
             </div>{/*comment_content*/}
           </div> {/* product_comment_form */}
       </div> {/* review_comment_write */}
+      
     </div> 
   )
 }

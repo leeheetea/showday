@@ -6,9 +6,6 @@
 .comment_textarea:focus{
   border: none;
 }
-.comment_textarea:focus + .comment_star_rate {
-  border: 1px solid black; 
-}
 .blind{
   overflow: hidden;
   width: 1px;
@@ -46,8 +43,7 @@
 
 .product_detail_tabcontent.review_comment {
   padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
 }
 
 .review_comment_write {

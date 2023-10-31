@@ -115,7 +115,6 @@ const DetailMain = ({ data }) => {
           </div>
         </div>
       </MainImgTextContainer>
-      <Review showId={showId} /> 
     </div>
   );
 };

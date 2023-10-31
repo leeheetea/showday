@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../css/Review.css";
 import callPostAxios from '../util/callPostAxios';
+import axios from 'axios';
 
 
 const Review = ( data ) => {
@@ -22,18 +23,29 @@ const Review = ( data ) => {
     const file = event.target.files[0];
     setImageFile(file);
   }
+
   const addReview = () => {
-    const data = new FormData();
-    data.append('reviewGrade', selectedRating);
-    data.append('reviewText', textarea);
-    data.append('showId', showId);
-    if (imageFile) {
-      data.append('reviewImgUrl', imageFile);
-    }
-    callPostAxios("/review", data, (response) => {
-      console.log("리뷰가 성공적으로 등록되었습니다.", response);
+    const requestData = {
+      reviewText: textarea,
+      reviewImgUrl: "test url 1",
+      reviewGrade: selectedRating,
+      showId: 1 //임시 showid
+    };
+  
+    axios.post("/review", requestData, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((response) => {
+      console.log("리뷰가 성공적으로 등록되었습니다.", response.data);
       alert("리뷰가 성공적으로 등록되었습니다.");
+    })
+    .catch((error) => {
+      console.error("리뷰 등록 중 오류가 발생했습니다.", error);
+      alert("리뷰 등록 중 오류가 발생했습니다.");
     });
+
+
+
   }
 
   return (
@@ -44,7 +56,7 @@ const Review = ( data ) => {
             <div className='review_star_rate'>
               <div className='review_star'></div>
               <span className='review_star_score'>
-                <span className='product_star_current'>4.9</span>
+                <span className='product_star_current'></span>
                  / 5
               </span>
             </div> {/* review_star_rate */}
@@ -107,7 +119,6 @@ const Review = ( data ) => {
     </div> 
   )
 }
-
 
 
 export default Review

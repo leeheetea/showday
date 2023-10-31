@@ -27,7 +27,7 @@ const DetailPage = (props) => {
       <DetailMain data={pageData} />
       <Detail1 data={pageData} />
       <Detail2 data={pageData} />
-      <DetailRecommend />
+      <DetailRecommend data={pageData} />
       <ToTopButton />
     </DetailMainContainer>
   );

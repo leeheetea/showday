@@ -107,6 +107,7 @@ const FindPwd = () => {
                 </li>
               </ul>
             </div>
+            
             <div className="idSearchWrap">
               <div className="notiArea">
                 <span>비밀번호를 찾을 방법을 선택해주세요.</span>

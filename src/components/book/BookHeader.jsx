@@ -8,7 +8,7 @@ const BookHeaderWrapper = styled.div`
   width: 80%;
   padding: 0px;
   margin: 0px;
-  background-color: "#999999";
+  background-color: #999999;
 `;
 const ItemContainer = styled.div`
   /*clip-path: polygon(0% 0%, 92% 0, 100% 50%, 91% 100%, 0% 100%);*/

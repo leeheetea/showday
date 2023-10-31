@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import '../components/FindPwd.css'
 import { useNavigate } from 'react-router-dom'
+import { emailAuth, findPassword } from './ApiService';
 
 const FindPwd = () => {
   const navigate = useNavigate();
@@ -26,10 +27,62 @@ const FindPwd = () => {
     setInputPhoneOpen(false);
   };
 
+  //------------------------------------------------------------------------------
+  const [username, setUserName] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [showFindPwd, setShowFindPwd] = useState(false);
+
+  const onChangeUserName = useCallback((e) => {
+    setUserName(e.target.value);
+  }, []);
+
+  const onChangeName = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const onChangeEmail = useCallback((e) => {
+    setEmail(e.target.value);
+  }, []);
+
+  const toggleFindPwd = () => {
+    setShowFindPwd(!showFindPwd);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    findPassword({ username: username, name: name, email: email })
+      .then((response) => {
+        if (response === "Password found") {
+          toggleFindPwd();
+          emailAuth({ email: email })
+            .then((res) => {
+              const confirmCode = res.confirmCode;
+              setConfirmCode(confirmCode);
+            })
+        } else {
+          alert("입력을 다시 확인해주세요.");
+        }
+      })
+  }
+
+  //-----------------------------------------------------------------------------------
+
+  const [clientCode, setClientCode] = useState('');
+  const [confirmCode, setConfirmCode] = useState('');
+  const [showResetPassword, setShowResetPassword] = useState(false);
+
+  const handleConfirmCode = () => {
+    if (clientCode === confirmCode) {
+      setShowResetPassword(!showResetPassword);
+    }
+  }
+
+
 
   return (
     <div className='findPwdBody'>
-      <form className='findAccountForm'>
+      <form className='findAccountForm' onSubmit={handleSubmit}>
         <div className="searchWrap">
           <div className="popHeaderWrap">
             <h1 className='popTitle'>
@@ -91,12 +144,34 @@ const FindPwd = () => {
                     {isInputEmailOpen && (<div className='inputEnter'>
                       <div className='inputBox'>
                         <div className="styleInput">
-                          <input type="text" id='memNm2' className='iInput' placeholder='이름' />
+                          <input
+                            type="text"
+                            id='userNm2'
+                            className='iInput'
+                            value={username}
+                            onChange={onChangeUserName}
+                            placeholder='아이디' />
+                          <span id='memNm1Clear' className='delBtn'></span>
+                        </div>
+                        <div className="styleInput">
+                          <input
+                            type="text"
+                            id='memNm2'
+                            className='iInput'
+                            value={name}
+                            onChange={onChangeName}
+                            placeholder='이름' />
                           <span id='memNm1Clear' className='delBtn'></span>
                         </div>
                         <div className='emailContainer'>
                           <div className="emailInput">
-                            <input type="text" id='inputEmail' className='iInput' placeholder='이메일' />
+                            <input
+                              type="text"
+                              id='inputEmail'
+                              className='iInput'
+                              value={email}
+                              onChange={onChangeEmail}
+                              placeholder='이메일' />
                             <span id='inputTelClear' className='delBtn'></span>
                           </div>
                           <div className="emailSelect">
@@ -121,13 +196,28 @@ const FindPwd = () => {
                             </ul>
                           </div>
                         </div>
-                        <p className='error'>이름을 입력해주세요.</p>
-                        <p className='error'>잘못된 이메일 형식입니다.</p>
+
                       </div>
-                      <div className='btnArea'>
+
+                      {!showFindPwd && (<div className='btnArea'>
                         <button type='submit' className='btnRed'>확인</button>
+                      </div>)}
+                    </div>
+                    )}
+                    {showFindPwd && (
+                      <div className="inputBox">
+                        <div className="styleInput">
+                          <input
+                            type="text"
+                            value={clientCode}
+                            className='iInput'
+                            onChange={(e) => setClientCode(e.target.value)}
+                            placeholder="인증코드를 입력하세요"
+                          />
+                          <button type='submit' className='btnRed' onClick={handleConfirmCode}>비밀번호 찾기</button>
+                        </div>
                       </div>
-                    </div>)}
+                    )}
                   </li>
                   {/* 본인인증으로 찾기 */}
                   <li>

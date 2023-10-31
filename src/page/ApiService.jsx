@@ -139,6 +139,7 @@ export function logout() {
 export function emailAuth(emailDTO) {
   return call("/auth/email/verify", "POST", emailDTO)
     .then((response) => {
+      console.log(response);
       return response;
     })
 }
@@ -161,6 +162,30 @@ export function matchPassword(userDTO) {
 
 export function resetPassword(userDTO) {
   return call("/user/password/reset", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+}
+
+export function resetEmail(userDTO) {
+  return call("/user/email/update", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+}
+
+export function findId(userDTO){
+  return call("/user/username/retrieve", "POST", userDTO)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+}
+
+export function findPassword(userDTO) {
+  return call("/user/password/request", "POST", userDTO)
     .then((response) => {
       console.log(response);
       return response;

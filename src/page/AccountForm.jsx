@@ -98,7 +98,7 @@ const AccountForm = () => {
   }
 
   const handleEmailConfirm = (isConfirmed) => {
-    if(isConfirmed) {
+    if (isConfirmed) {
       alert("이메일 인증이 완료되었습니다.");
       setisEmailVerifiedOpen(false);
       setIsEmailVerified(true);
@@ -328,7 +328,10 @@ const AccountForm = () => {
                 readOnly={isEmailVerified}
               />
               <div>
-                <button type='button' disabled={isEmailVerified} onClick={() => handleEmailAuth({email})}>인증</button>
+                <button
+                  type='button'
+                  disabled={isEmailVerified}
+                  onClick={() => handleEmailAuth({ email })}>인증</button>
               </div>
               <div>
                 <label htmlFor="">

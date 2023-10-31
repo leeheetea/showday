@@ -7,6 +7,31 @@
   padding: 20px 30px 20px 20px;
   text-align: center;
 }
+.bookInfoViewWrapperRow {
+    width: 100%;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    padding: 20px 30px 20px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookLastInfoTop {
+    //width: 700px;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    padding: 20px 30px 20px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.paymentInfoContainer {
+    width: 100%;
+}
 
 .titleContainer .tableContainer {
     justify-content: center; /* 요소들을 수평으로 가운데 정렬합니다. */
@@ -19,10 +44,29 @@
     flex-direction: row;
 }
 
-.titleLeft {
-    width: 30%;
-    margin-right: 10px; /* 이미지와 다른 <div> 사이의 간격을 조절합니다. */
+.titleContainerRow {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    //background: #22b8cf;
+}
 
+.titleRowTime {
+    width:300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.titleLeft {
+    width: 60%;
+    margin-right: 10px; /* 이미지와 다른 <div> 사이의 간격을 조절합니다. */
+}
+
+.titleLeftSimple {
+    width: 21%;
+    height: 21%;
+    margin-right: 20px; /* 이미지와 다른 <div> 사이의 간격을 조절합니다. */
 }
 
 .reserveSeatInfo {
@@ -37,7 +81,8 @@
 .bookResultTh,
 .bookResultTd,
 .bookResultThLast,
-.bookResultTdLast {
+.bookResultTdLast,
+.bookResultTdException {
   border-bottom: 1px solid #ECEDFC;
   padding: 5px;
 }
@@ -69,11 +114,47 @@
   width: 100%;
   margin-top: 20px;
     font-size: small;
-
 }
+
+.bookResultTableSimple {
+    width: 100%;
+    margin-top: 20px;
+    font-size: medium;
+}
+
+.bookResultThSimple {
+    text-align: center;
+}
+
+.bookResultTdSimple{
+    text-align: right;
+}
+
 
 .bookButtonContainer {
   display: flex;
   padding-top: 15px;
   justify-content: space-between;
+}
+
+.bookButtonContainerRow {
+    width: 60%;
+    display: flex;
+    padding-top: 15px;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.payCheckBox {
+    margin-top: 18px;
+}
+
+.checkBookAccountInfo {
+    width: 290px;
+    height: 25px;
+    display: flex;
+    line-height: 0.2rem;
+    align-items: center;
+    justify-content: center;
+    text-align-last: center;
 }

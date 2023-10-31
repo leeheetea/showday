@@ -94,11 +94,9 @@ const ChooseSeatsPage = () => {
   }, [loading, setLoading]);
 
   const handleChooseSeat = (key) => {
-    console.log(">>> handleChooseSeat <<< ", key, typeof (key));
-
     if (typeof (key) === 'string') {
       const seatPosition = utils.getAboutDelimiter('F', SEAT_DELIMITER, key);
-      console.log(seatPosition);
+      //console.log(seatPosition);
 
       const indexRow = parseInt(seatPosition[0], 10);
       const indexCol = parseInt(seatPosition[1], 10);
@@ -115,7 +113,6 @@ const ChooseSeatsPage = () => {
         return;
       }
 
-      console.log("+++ ",key, typeof(key));
       choosedSeatListRef.current.push(key);
 
       const newDisplaySeatList = [...displaySeatList];

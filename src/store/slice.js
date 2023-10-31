@@ -131,7 +131,7 @@ const booksSlice = createSlice({
     },
 
     setBookStep: (state, action) => {
-      console.log("[booksSlice]", action.payload.bookStep);
+      //console.log("[booksSlice]", action.payload.bookStep);
       state.bookStep = action.payload.bookStep;
     },
 

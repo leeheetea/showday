@@ -15,7 +15,8 @@ const StyleTitle = styled.h3`
   padding-right: 1rem; */
   text-align: ${props => props.isleft};
   font-weight: ${props => props.issubtitle ? '' : 'bold'};
-  padding-top: ${props => props.tpadding || ''};
+  padding-top: ${props => props.tpadding ? props.tpadding : '0px'};
+  margin-top: ${props => props.tmargin ? props.tmargin : '0px'};
   display: ${props => props.isflex ? 'flex' : 'block'};
 `;
 

@@ -45,7 +45,7 @@ const BookHeader = ({ onBookStepClick, id, step }) => {
   const { bookStep } = state;
 
   const handleStepUpdate = useCallback(() => {
-    console.log('bookStep 확인 : ', bookStep);
+    //console.log('bookStep 확인 : ', bookStep);
     handleStepClick(bookStep);
   }, [bookStep, state]);
 

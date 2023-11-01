@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { logout } from '../page/ApiService';
 
 const LogoutCounter = () => {
-    const INIT_TIME = 1000000;
-    const [remainingTime, setRemainingTime] = useState(INIT_TIME);
+    const INIT_TIME = 3600;
+    const savedTime = localStorage.getItem("REMAINING_TIME");
+    const initialTime = savedTime ? parseInt(savedTime, 10) : INIT_TIME;
+    const [remainingTime, setRemainingTime] = useState(initialTime);
 
     useEffect(() => {
         const countDown = setInterval(() => {
@@ -21,6 +23,10 @@ const LogoutCounter = () => {
         return () => {
             clearTimeout(countDown);
         }
+    }, [remainingTime]);
+
+    useEffect(() => {
+        localStorage.setItem("REMAINING_TIME", remainingTime); // remainingTime이 변경될 때마다 로컬 저장소에 저장
     }, [remainingTime]);
 
     const resetINITTIME = () => {

@@ -125,12 +125,14 @@ export function logout() {
         console.log("----------", e);
         if (e.data === "logoutCompleted") {
           localStorage.removeItem("ACCESS_TOKEN");
+          localStorage.removeItem("REMAINING_TIME");
           resolve();
         }
       })
 
     } else {
       localStorage.removeItem("ACCESS_TOKEN");
+      localStorage.removeItem("REMAINING_TIME");
       resolve();
     }
   });

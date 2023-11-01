@@ -191,3 +191,11 @@ export function findPassword(userDTO) {
       return response;
     })
 }
+
+export function updatePassword(userDTO) {
+  return call("/user/password/retrieve", "POST", userDTO)
+    .then((response) =>{
+      console.log(response);
+      return response;
+    })
+}

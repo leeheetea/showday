@@ -1,6 +1,7 @@
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* 왼쪽 컬럼은 오른쪽 컬럼의 절반 크기로 설정 (또는 원하는 비율로 조절 가능) */
+  grid-template-columns: 1fr 2fr;
+  /* 왼쪽 컬럼은 오른쪽 컬럼의 절반 크기로 설정 (또는 원하는 비율로 조절 가능) */
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   background: white;
@@ -24,6 +25,15 @@
 
 .item3 {
   grid-column: 2;
-  grid-row: 1 / span 2; /* 1번 행에서 시작하여 2개의 행을 차지 */
+  grid-row: 1 / span 2;
+  /* 1번 행에서 시작하여 2개의 행을 차지 */
   background: lightblue;
+}
+
+.response h2,
+.response h3 {
+  text-align: left;
+}
+.response hr {
+  background-color: lightgray;
 }

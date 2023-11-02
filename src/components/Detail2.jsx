@@ -79,7 +79,7 @@ const Detail2 = (props) => {
     </div>},
     { id: 2, 
       name: "관람후기", 
-      content: <Review/> , },
+      content: <Review data={showId}/> , },
     { id: 3, 
       name: "장소정보", 
       content: <img className="mapPage" src={img3} style={{width:"100%"}}  alt="" /> },

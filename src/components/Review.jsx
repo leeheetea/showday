@@ -2,12 +2,26 @@ import React, { useEffect, useState } from 'react'
 import "../css/Review.css";
 import callPostAxios from '../util/callPostAxios';
 import axios from 'axios';
+import callAxios from '../util/callAxios';
 
 
-const Review = ( data ) => {
+const Review = ({data}) => {
   const [selectedRating, setSelectedRating] = useState(null);
   const [textarea, settexTarea] = useState('');
   const [imageFile, setImageFile] = useState(null); 
+  const [reviewItems, setReviewItems] = useState([]);
+
+  const showId = data; 
+  console.log("showid==================================="+data);
+  const url = "/review/"+showId;
+  useEffect(()=>{
+    fetchReviewItem();
+    console.log(reviewItems);
+  },[showId]);
+
+  const fetchReviewItem = async()=>{
+    callAxios(url,setReviewItems);
+  }
 
   const handleRatingChange = (event) => {
     const intValue = parseInt(event.target.value, 10);
@@ -17,7 +31,6 @@ const Review = ( data ) => {
     const text = event.target.value;
     settexTarea(text);
   }
-  const showId = data; 
   
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -29,7 +42,7 @@ const Review = ( data ) => {
       reviewText: textarea,
       reviewImgUrl: "test url 1",
       reviewGrade: selectedRating,
-      showId: 1 //임시 showid
+      showId: 1 //임시 showid===========================================
     };
   
     axios.post("/review", requestData, {
@@ -43,8 +56,7 @@ const Review = ( data ) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
-
-
+   
 
   }
 
@@ -56,7 +68,7 @@ const Review = ( data ) => {
             <div className='review_star_rate'>
               <div className='review_star'></div>
               <span className='review_star_score'>
-                <span className='product_star_current'></span>
+                <span className='product_star_current'> </span>
                  / 5
               </span>
             </div> {/* review_star_rate */}
@@ -114,10 +126,27 @@ const Review = ( data ) => {
               </div>{/*comment_content*/}
             </div>{/*comment_content*/}
           </div> {/* product_comment_form */}
+
+          <div className='product_comment_list'>
+          {reviewItems.map((review) => (
+            <div key={review.id} className='product_comment_item'>
+              <div className='comment_user_info'>
+                {/* <span className='comment_user_name'>{review.userName}</span> */}
+                <span className='comment_rating'>{review.reviewGrade}점</span>
+              </div>
+              <div className='comment_content'>
+                <p className='comment_text'>{review.reviewText}</p>
+                {/* {review.reviewImgUrl && (
+                  <img src={review.reviewImgUrl} alt='댓글 이미지' className='comment_image' />
+                )} */}
+              </div>
+            </div>
+          ))}
+        </div>        
+
       </div> {/* review_comment_write */}
-      
     </div> 
-  )
+  );
 }
 
 

@@ -5,6 +5,8 @@ import GoogleSnsLogin from "../components/GoogleSnsLogin";
 import "../components/Login.css";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import { login } from "./ApiService";
+import kakaoImage from '../img/kakao_login_medium_narrow.png';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -18,13 +20,15 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      username: username,
-      password: password,
-    };
-    console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({ username, password })
+    
+    // const data = new FormData(e.target);
+    // const username = data.get("username");
+    // const password = data.get("password");
+
+    // login({ username: username, password: password });
   };
 
   const findIdPopup = () => {
@@ -118,6 +122,7 @@ const Login = () => {
             </div>
             <div className="SnsLoginKakao">
               <KaKaoLogin></KaKaoLogin>
+              {/* <img src={kakaoImage} alt="kakaoImage" /> */}
             </div>
             <div className="SnsLoginGoogle">
               <GoogleSnsLogin></GoogleSnsLogin>

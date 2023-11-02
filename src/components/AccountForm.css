@@ -159,6 +159,12 @@
   margin-right: 10px;
 }
 
+.uBlock .inputArea_email button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .uBlock .inputArea_email input {
   border: none;
   outline: none;

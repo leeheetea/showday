@@ -38,6 +38,12 @@ import Giftcard from "./components/Giftcard";
 import Coupon from "./components/Coupon";
 import ReadFAQpost from "./components/board/ReadFAQpost";
 import WriteFAQpost from "./components/board/WriteFAQpost";
+import KakaoRedirect from "./components/KakaoRedirect";
+import UserInfo from "./page/UserInfo";
+import UserInfoModify from "./page/UserInfoModify";
+import LoginLog from "./components/LoginLog";
+import KakaoRedirectLogout from "./components/KakaoRedirectLogout";
+import UserInfoResetPassword from "./page/UserInfoResetPassword";
 
 function App() {
   return (
@@ -52,11 +58,17 @@ function App() {
             <Route path="/theatre" element={<Theatre />}></Route>
             <Route path="/detailpage/:id?/*" element={<DetailPage />} />
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/user/oauth/kakao" element={<KakaoRedirect />}></Route>
+            <Route path="/user/oauth/kakao/logout" element={<KakaoRedirectLogout/>} ></Route>
             <Route path="/findid" element={<FindId />}></Route>
             <Route path="/findpwd" element={<FindPwd />}></Route>
             <Route path="/accountcreate" element={<AccountCreate />}></Route>
             <Route path="/accountterm" element={<AccountTerm />}></Route>
             <Route path="/accountform" element={<AccountForm />}></Route>
+            <Route path="/userinfo" element={<UserInfo />}></Route>
+            <Route path="/userinfomodify" element={<UserInfoModify />}></Route>
+            <Route path="/userinforesetpassword" element={<UserInfoResetPassword />}></Route>
+            <Route path="/loginlog" element={<LoginLog />} ></Route>
             <Route path="/servicepage" element={<ServicePage />}>
               <Route path="servicefirst" element={<ServiceFirst />}></Route>
               <Route path="faq" element={<FAQPage />} />

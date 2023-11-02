@@ -3,8 +3,15 @@ import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
 import { emailAuth, register } from './ApiService';
 import EmailConfirm from './EmailConfirm';
+import { useLocation } from 'react-router-dom';
 
 const AccountForm = () => {
+
+  // 약관 동의 항목
+  const location = useLocation();
+  const {termsChecked} = location.state;
+  console.log({termsChecked});
+
   // 아이디 유효성 검사
   const [id, setId] = useState('');
   const [showErrorId, setShowErrorId] = useState(false);
@@ -224,7 +231,16 @@ const AccountForm = () => {
     const email = data.get("email");
     const phone = data.get("phone");
 
-    register({ username: username, password: password, name: name, email: email, phone: phone, smscheck: smscheck, isRadioChecked: isRadioChecked });
+    register(
+      { username: username, 
+        password: password, 
+        name: name, 
+        email: email, 
+        phone: phone, 
+        smscheck: smscheck, 
+        isRadioChecked: isRadioChecked,
+        termsChecked: termsChecked
+      });
   }
 
   return (
@@ -265,7 +281,7 @@ const AccountForm = () => {
                 />
               </div>
               <div>
-                <button type='button'>보기</button>
+                <button type='button' onClick={togglePasswordVisibility}>보기</button>
               </div>
             </div>
             <div className="errorText" style={{ display: showErrorPassword ? 'block' : 'none' }}>

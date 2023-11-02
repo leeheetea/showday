@@ -281,7 +281,7 @@ const AccountTerm = () => {
             <button className='termsSubmitBtn'
               disabled={!areAllRequiredTermsChecked}
               onClick={() => {
-                navigate("/accountform");
+                navigate("/accountform", {state: {termsChecked}});
               }}>다음 단계</button>
           </div>
         </div>

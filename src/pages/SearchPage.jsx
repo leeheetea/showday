@@ -7,14 +7,16 @@ import totalData from '../totalData.json';
 import { useNavigate } from "react-router-dom";
 
 
-const SearchPage = (props) => {
+const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('query');
   const navigator = useNavigate();
   console.log("검색어:",searchQuery);
+
   const searchResults = totalData.filter(result=>
       result.title.includes(searchQuery));
+      
   return (
     <div>
       <Header/>

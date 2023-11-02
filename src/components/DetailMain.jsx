@@ -59,7 +59,6 @@ const DetailMain = ({ data }) => {
   const [showItems, setShowItems] = useState([]);
   
   const showId = data.id; 
-  // const showId = 1;  //test id
 
   const url = "/show/"+showId;
 

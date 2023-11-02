@@ -3,20 +3,19 @@ import "../css/Review.css";
 import callPostAxios from '../util/callPostAxios';
 import axios from 'axios';
 import callAxios from '../util/callAxios';
+import { createReview } from '../page/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 
 const Review = ({data}) => {
   const [selectedRating, setSelectedRating] = useState(null);
   const [textarea, settexTarea] = useState('');
-  const [imageFile, setImageFile] = useState(null); 
   const [reviewItems, setReviewItems] = useState([]);
 
   const showId = data; 
-  console.log("showid==================================="+data);
   const url = "/review/"+showId;
   useEffect(()=>{
     fetchReviewItem();
-    console.log(reviewItems);
   },[showId]);
 
   const fetchReviewItem = async()=>{
@@ -31,42 +30,41 @@ const Review = ({data}) => {
     const text = event.target.value;
     settexTarea(text);
   }
-  
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-  }
 
+  const averageReviewGrade = reviewItems.length > 0
+  ? reviewItems.reduce((sum, review) => sum + review.reviewGrade, 0) / reviewItems.length
+  : 0;
+
+  const formatTimestamp = (review) => {
+    const timestamp = new Date(review.reviewTimestamp);
+    return timestamp.toISOString().slice(0, 19).replace('T', ' ');
+  };
   const addReview = () => {
+    const timestamp = new Date();
     const requestData = {
       reviewText: textarea,
-      reviewImgUrl: "test url 1",
       reviewGrade: selectedRating,
-      showId: 1 //임시 showid===========================================
+      showId: showId,
+      reviewTimestamp: timestamp.toISOString()
     };
   
-    axios.post("/review", requestData, {
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then((response) => {
-      console.log("리뷰가 성공적으로 등록되었습니다.", response.data);
-      alert("리뷰가 성공적으로 등록되었습니다.");
-    })
-    .catch((error) => {
+    createReview(requestData)
+      .then((res) => {
+        alert("리뷰가 성공적으로 등록되었습니다.");
+        window.location.href=`/detailpage/${showId}`;
+      }).catch((error) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
-   
-
   }
 
   return (
     <div className='product_detail_tabcontent review_comment'>
       <div className='review_comment_write'>
           <div className='review_content_heading'>
-            <h2 className='review_content_title'>관람후기<span className='text_number red'>161</span></h2>
+            <h2 className='review_content_title'>관람후기<span className='text_number red'>{reviewItems.length}</span></h2>
             <div className='review_star_rate'>
-              <div className='review_star'></div>
+              <div className='review_star'>{averageReviewGrade.toFixed(1)}</div>
               <span className='review_star_score'>
                 <span className='product_star_current'> </span>
                  / 5
@@ -84,15 +82,15 @@ const Review = ({data}) => {
                 <div className='comment_star'>
                  <div className='comment_star_select'>
                     <input type="radio" id="5-stars" name="rating" value="5" onChange={handleRatingChange}/>
-                    <label for="5-stars" className="star">&#9733;</label>
+                    <label htmlFor="5-stars" className="star">&#9733;</label>
                     <input type="radio" id="4-stars" name="rating" value="4" onChange={handleRatingChange}/>
-                    <label for="4-stars" className="star">&#9733;</label>
+                    <label htmlFor="4-stars" className="star">&#9733;</label>
                     <input type="radio" id="3-stars" name="rating" value="3" onChange={handleRatingChange}/>
-                    <label for="3-stars" className="star">&#9733;</label>
+                    <label htmlFor="3-stars" className="star">&#9733;</label>
                     <input type="radio" id="2-stars" name="rating" value="2" onChange={handleRatingChange}/>
-                    <label for="2-stars" className="star">&#9733;</label>
+                    <label htmlFor="2-stars" className="star">&#9733;</label>
                     <input type="radio" id="1-star" name="rating" value="1" onChange={handleRatingChange}/>
-                    <label for="1-star" className="star">&#9733;</label>  
+                    <label htmlFor="1-star" className="star">&#9733;</label>  
                  </div>
                   {selectedRating === null ? (
                     <p className='comment_star_desc'>별점을 선택해주세요.</p>)
@@ -112,11 +110,6 @@ const Review = ({data}) => {
                       <span className='text_length'>{textarea.length}</span>
                       <span className='limit_length'>/300</span>
                     </div>{/*comment_length */}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                    />
                     <div className='comment_btn_box'>
                       <button type='button' onClick={addReview}>등록</button>
                     </div>{/*comment_btn_box*/}
@@ -128,17 +121,26 @@ const Review = ({data}) => {
           </div> {/* product_comment_form */}
 
           <div className='product_comment_list'>
-          {reviewItems.map((review) => (
-            <div key={review.id} className='product_comment_item'>
+          {reviewItems.map((review, index) => (
+            <div key={index} className='product_comment_item'>
               <div className='comment_user_info'>
-                {/* <span className='comment_user_name'>{review.userName}</span> */}
-                <span className='comment_rating'>{review.reviewGrade}점</span>
+                <span className='comment_rating'>
+                  {Array.from({ length: review.reviewGrade }, (_, index) => (
+                    <span key={index} role="img" aria-label="별" className="comment_rating_star">&#9733;</span>
+                  ))} 
+                </span>
               </div>
               <div className='comment_content'>
                 <p className='comment_text'>{review.reviewText}</p>
-                {/* {review.reviewImgUrl && (
-                  <img src={review.reviewImgUrl} alt='댓글 이미지' className='comment_image' />
-                )} */}
+              </div>
+              <div className='product_comment_info'>
+                  <span className='comment_id'>
+                  {review.authId}
+                  </span>
+                  &nbsp; &nbsp; 
+                  <span className='comment_date'>
+                    {formatTimestamp(review)}
+                  </span>
               </div>
             </div>
           ))}

@@ -77,7 +77,7 @@ const Detail2 = (props) => {
         <img className="detailImg" src={url} style={{width:"90%"}} alt="" key={index} />
       ))}
     </div>},
-    { id: 2, 
+    { id: 2,     
       name: "관람후기", 
       content: <Review data={showId}/> , },
     { id: 3, 

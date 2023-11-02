@@ -175,10 +175,12 @@ input[type="file"] {
 /*  댓글 리스트 스타일 */
 .product_comment_list {
   margin-top: 20px;
+  text-align: start;
+  font-size: 15px;
 }
 
 .product_comment_item {
-  border: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   padding: 10px;
   margin-bottom: 10px;
   background-color: #fff;
@@ -189,7 +191,7 @@ input[type="file"] {
 }
 
 .comment_rating {
-  margin-left: 10px;
+  
 }
 
 .comment_content {
@@ -197,10 +199,22 @@ input[type="file"] {
 }
 
 .comment_text {
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .comment_image {
   max-width: 100%;
   margin-top: 10px;
+}
+
+.comment_rating_star {
+  color:#f90;
+  width: 24px;
+  height: 24px; 
+  display: inline-block; 
+}
+
+.product_comment_info{
+  font-size: 10px;
+  color: lightslategray;
 }

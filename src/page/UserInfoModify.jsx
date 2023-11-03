@@ -193,10 +193,9 @@ const UserInfoModify = () => {
                 <label htmlFor="email">이메일</label>
                 <input
                   type="text"
-                  placeholder='someone@example.com'
                   name='email'
                   id='email'
-                  value={email}
+                  value={userData.email}
                   onChange={onChangeEmail}
                   ref={emailInputRef}
                   readOnly={isEmailVerified}

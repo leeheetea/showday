@@ -49,8 +49,16 @@ const KakaoLogin = () => {
           // alert(response.username + "님이 로그인했습니다.");
           // window.location.href = "/";
           console.log(response);
-          setEmail(response.email);
-          navigate('/AccountTerm', { state: { email: response.email } });
+          // login
+          if (response.token != null) {
+            localStorage.setItem("ACCESS_TOKEN", response.token);
+            alert(response.username + "님이 로그인했습니다.");
+            navigate('/');
+          } else {
+            // join
+            setEmail(response.email);
+            navigate('/AccountTerm', { state: { email: response.email } });
+          }
         })
         .catch(error => {
           console.error("Error:", error);

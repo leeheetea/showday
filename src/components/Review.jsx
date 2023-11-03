@@ -32,12 +32,19 @@ const Review = ({data}) => {
   }
 
   const averageReviewGrade = reviewItems.length > 0
-  ? reviewItems.reduce((sum, review) => sum + review.reviewGrade, 0) / reviewItems.length
+  ? reviewItems.reduce((sum, review) => 
+    sum + review.reviewGrade, 0) / reviewItems.length
   : 0;
 
   const formatTimestamp = (review) => {
+    if (!review || !review.reviewTimestamp) {
+      return "날짜 없음";
+    }
     const timestamp = new Date(review.reviewTimestamp);
-    return timestamp.toISOString().slice(0, 19).replace('T', ' ');
+    if (isNaN(timestamp)) {
+      return "날짜 없음"; 
+    }
+    return timestamp.toISOString().slice(0, 23).replace('T', ' ');
   };
   const addReview = () => {
     const timestamp = new Date();
@@ -51,12 +58,15 @@ const Review = ({data}) => {
     createReview(requestData)
       .then((res) => {
         alert("리뷰가 성공적으로 등록되었습니다.");
-        window.location.href=`/detailpage/${showId}`;
+        // window.location.href=`/detailpage/${showId}`;
       }).catch((error) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
   }
+
+
+  
 
   return (
     <div className='product_detail_tabcontent review_comment'>
@@ -153,4 +163,3 @@ const Review = ({data}) => {
 
 
 export default Review
-

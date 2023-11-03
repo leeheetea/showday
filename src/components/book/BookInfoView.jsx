@@ -2,7 +2,7 @@ import React, {useEffect, useCallback, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookStep } from '../../store/slice'
-import Modal from "../Modal";
+//import Modal from "../Modal";
 
 import "./BookInfoView.css";
 import BookTitle from "./BookTitle";
@@ -31,7 +31,7 @@ const BookInfoView = ({childern}) => {
   const [payName,  setPayName] = useState('');
   const [payAccount, setPayAccount] = useState("");
   const [isCheckedPayAgree, setIsCheckedPayAgree] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleInfoUpdate = useCallback(() => {
     // console.log(
@@ -88,7 +88,8 @@ const BookInfoView = ({childern}) => {
             예금주 : 쇼데이\n
             입금기한 : {Date.now()}
           `;
-          setIsModalOpen(true);
+          //setIsModalOpen(true);
+          alert(message);
         } else {
           alert('구매 조건 및 결제 진행 동의 부탁드립니다.');
         }
@@ -414,12 +415,12 @@ const BookInfoView = ({childern}) => {
         </div>
         {getMoveStep()}
       </>
-        {isModalOpen && (
-          <Modal>
-            open={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          </Modal>
-        )}
+        {/*{isModalOpen && (*/}
+        {/*  <Modal>*/}
+        {/*    open={isModalOpen}*/}
+        {/*    onClose={() => setIsModalOpen(false)}*/}
+        {/*  </Modal>*/}
+        {/*)}*/}
     </div>
   );
 };

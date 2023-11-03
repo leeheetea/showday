@@ -53,7 +53,7 @@ export function register(userDTO) {
   return call("/user", "POST", userDTO)
     .then((response) => {
       alert(response.name + "님, 회원 가입이 완료되었습니다.");
-      window.location.href = '/';
+      // window.location.href = '/';
     });
 }
 
@@ -69,7 +69,7 @@ export function login(userDTO) {
       // }, tokenExpirationTime); 
 
       alert(response.username + "님이 로그인했습니다.");
-      window.location.href = "/";
+      // window.location.href = "/";
     });
 }
 

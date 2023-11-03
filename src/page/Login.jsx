@@ -3,12 +3,15 @@ import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
 import GoogleSnsLogin from "../components/GoogleSnsLogin";
 import "../components/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { login } from "./ApiService";
 import kakaoImage from '../img/kakao_login_medium_narrow.png';
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +26,13 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ username, password })
+    .then((res) => {
+      navigate('/');
+    })
+    .catch((error) => {
+      console.log("error", error);
+      alert("로그인 중 오류가 발생했습니다.")
+    })
     
     // const data = new FormData(e.target);
     // const username = data.get("username");

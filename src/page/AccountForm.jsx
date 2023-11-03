@@ -3,14 +3,19 @@ import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
 import { emailAuth, register } from './ApiService';
 import EmailConfirm from './EmailConfirm';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AccountForm = () => {
 
+  const navigate = useNavigate();
+
   // 약관 동의 항목
   const location = useLocation();
-  const {termsChecked} = location.state;
-  console.log({termsChecked});
+  const termsChecked = location.state?.termsChecked;
+  const initialEmail = location.state?.email || '';
+
+  // console.log({termsChecked, email});
+  // console.log({termsChecked});
 
   // 아이디 유효성 검사
   const [id, setId] = useState('');
@@ -69,7 +74,7 @@ const AccountForm = () => {
   }, [])
 
   // 이메일 유효성 검사
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [showErrorEmail, setShowErrorEmail] = useState(false);
 
 
@@ -240,7 +245,14 @@ const AccountForm = () => {
         smscheck: smscheck, 
         isRadioChecked: isRadioChecked,
         termsChecked: termsChecked
-      });
+      })
+      .then((res) => {
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log("error", error);
+        alert("회원가입 중 오류가 발생했습니다.")
+      })
   }
 
   return (

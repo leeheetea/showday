@@ -142,11 +142,10 @@ const Detail1 = (props) => {
           <h3 className="detailTitle">STEP2</h3>
           <h3>회차 선택</h3>
           <div className="detailLabel">
-            {props.data.showTime.map((time, index) => (
+            {/* {props.data.showTime.map((time, index) => (
               <div key={index}>
                 <label>
                   <div className="detailLabelContainer">
-                    
                     <FormCheckLeft
                       className="inputRadioCheck"
                       type="radio"
@@ -154,22 +153,16 @@ const Detail1 = (props) => {
                       onClick={(e) => setChoosedShowTime(e.target.value)}
                       value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
                       checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
-                      onChange={(e) => {
-                        setChoosedShowTime(e.target.value);
-                      }}
+                      onChange={(e) => {setChoosedShowTime(e.target.value);}}
                     />
-
                     <FormCheckText>
-                      {utils.dateFormatForButton(selectedValue) +
-                        " " +
-                        time +
-                        "시"}
+                      {utils.dateFormatForButton(selectedValue) +" " +time +"시"}
                     </FormCheckText>
                   </div>
                 </label>
                 <br />
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </DetailContainer>

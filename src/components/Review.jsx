@@ -36,34 +36,46 @@ const Review = ({data}) => {
     sum + review.reviewGrade, 0) / reviewItems.length
   : 0;
 
-  const formatTimestamp = (review) => {
+  const reviewTime = (review) => {
     if (!review || !review.reviewTimestamp) {
       return "날짜 없음";
     }
-    const timestamp = new Date(review.reviewTimestamp);
-    if (isNaN(timestamp)) {
-      return "날짜 없음"; 
-    }
-    return timestamp.toISOString().slice(0, 23).replace('T', ' ');
+    const timestamp = review.reviewTimestamp;
+    return timestamp;
   };
+
+  // 댓글 유저이메일
+  const reviewAuthEmail = (review)=>{
+    if(!review.authEmail){
+      return "익명";
+    }
+    
+
+    return review.authEmail;
+  }
+
+  //댓글 등록  
   const addReview = () => {
-    const timestamp = new Date();
+    const nowDate = new Date();
+    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    console.log(timestamp);
     const requestData = {
-      reviewText: textarea,
       reviewGrade: selectedRating,
+      reviewText: textarea,
       showId: showId,
-      reviewTimestamp: timestamp.toISOString()
+      reviewTimestamp: timestamp,
     };
-  
     createReview(requestData)
       .then((res) => {
         alert("리뷰가 성공적으로 등록되었습니다.");
+        console.log("res===" + res);
         // window.location.href=`/detailpage/${showId}`;
       }).catch((error) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
   }
+
 
 
   
@@ -145,11 +157,11 @@ const Review = ({data}) => {
               </div>
               <div className='product_comment_info'>
                   <span className='comment_id'>
-                  {review.authId}
+                  {reviewAuthEmail(review)}
                   </span>
                   &nbsp; &nbsp; 
                   <span className='comment_date'>
-                    {formatTimestamp(review)}
+                    {reviewTime(review)}
                   </span>
               </div>
             </div>

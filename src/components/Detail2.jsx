@@ -52,13 +52,12 @@ const DetailContainer = styled.div`
 
 
 
-const Detail2 = (props) => {
+const Detail2 = ({data}) => {
   const [currentTab, clickTab] = useState(0);
   
   const [showItems, setShowItems] = useState([]);
   
-  const showId = props.data.id;
-  // const showId = 1;
+  const showId = data;
   const url = "/show/"+showId;
   
   useEffect(()=>{ 

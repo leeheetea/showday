@@ -1,11 +1,23 @@
 .detailMainBody{
   margin-top: 50px;
-  min-width: 28rem;
+  width: 1000px;
+  @media screen and (max-width: 800px) {
+    width:500px;
+  }
 }
-#content {
-  min-width: 28rem;
+
+#detailMainBodyContent {
+  width: 1000px;
   background: white;
+  @media screen and (max-width: 800px) {
+    width:500px;
+  }
 }
+
+.detailMain_content_img{
+  margin: 30px;
+}
+
 .product_shareButton button {
   background: purple;
   color: #fff;
@@ -25,6 +37,7 @@
   background: #fff;
   color: purple;
 }
+
 .product_shareButton button:before,
 button:after {
   content: "";
@@ -36,6 +49,7 @@ button:after {
   background: purple;
   transition: 200ms ease all;
 }
+
 .detailLabelContainer span {
   white-space: nowrap;
   font-size: 20px;
@@ -53,4 +67,118 @@ button:after {
   @media screen and (max-width: 800px) {
     width: 100%;
   }
+}
+
+
+.product_detail_info{
+  white-space: nowrap;
+  .product_heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid black;
+  }
+  .product_heading div {
+    width: 500px;
+  }
+}
+.product_info_item{
+  display: flex;
+  justify-content: start;
+}
+.product_info_list1{
+  float: left;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 50px;
+  list-style: none;
+  padding-left: 0;
+  li{
+    margin-top: 1rem;
+    display: flex;
+    padding: 1rem;  
+  }
+  .product_info_title{
+    width: 5rem;
+  }
+  li InfoTitle{
+    margin: 0 1.0rem 0 0;
+  }
+  @media screen and (max-width: 1100px) {
+    float: none;
+  }
+}
+
+
+/* detail1 components css */
+.detailPageBox{
+  width: 1000px;
+  @media screen and (max-width: 800px) {
+    width:500px;
+  }
+}
+.detailContainer{
+  background-color: white;
+
+  .detailBox{
+    width:500px;
+  }
+  .detailBox2{
+    padding: 0;
+  }
+  .detailTitle{
+    color: red;
+    margin-right: 10px;
+  }
+  input{
+    margin: 2rem auto;
+  }
+  input, label{
+    cursor:pointer;
+  }
+}
+
+.detailBox1{
+  display: flex;
+  align-items: flex-start;
+  margin-left: 10px;
+  @media screen and (max-width: 800px){
+    margin-bottom: 2rem;
+  }
+}
+.detailBox2{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-left: 1px dotted gray;
+
+  @media screen and (max-width: 800px){
+    border-left: none;
+    justify-content: start;
+    border-top: 1px dotted gray;
+  }
+}
+.detailLabel{
+  padding: 1.5em;
+}
+.detailLabelContainer{
+  margin-bottom: 1.5em;
+}
+.react-calendar{
+  margin-left: 18px;
+  width: 18em;
+  height: auto;
+}
+.react-calendar__tile:disabled{
+  background-color: white;
+}
+.react-calendar__tile--now{
+  background-color: white;
+  color: black;
+}
+.react-calendar, .react-calendar__tile--now:hover{
+  border: none;
+  background-color: none;
 }

@@ -210,3 +210,11 @@ export function updatePassword(userDTO) {
       return response;
     })
 }
+
+export function createReview(reviewDTO) {
+  return call("/review", "POST", reviewDTO)
+    .then((res) => {
+      console.log("res: ", res);
+      return res;
+    })
+}

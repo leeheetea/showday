@@ -29,7 +29,7 @@ const SearchBar = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              navigate(`/search?query=${encodeURIComponent(searchValue)}`);
+              navigate(`/search?keyword=${encodeURIComponent(searchValue)}`);
             }}
           >
             <input

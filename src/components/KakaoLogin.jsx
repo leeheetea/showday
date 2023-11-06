@@ -3,6 +3,8 @@ import kakaoImage from '../img/kakao_login_medium_narrow.png';
 
 import { API_BASE_URL } from "../page/ApiService";
 import { decodeIdToken } from "./DecodeIdToken";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Button = styled.button`
   width: 100%;
@@ -30,6 +32,8 @@ const KakaoLogin = () => {
   const height = 600;
   const left = window.screenX + (window.outerWidth - width) / 2;
   const top = window.screenY + (window.outerHeight - height) / 2;
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
   const messageHandler = (event) => {
     if (event.data.type === "KAKAO_AUTH") {
@@ -41,9 +45,20 @@ const KakaoLogin = () => {
       })
         .then(res => res.json())
         .then(response => {
-          localStorage.setItem("ACCESS_TOKEN", response.token);
-          alert(response.username + "님이 로그인했습니다.");
-          window.location.href = "/";
+          // localStorage.setItem("ACCESS_TOKEN", response.token);
+          // alert(response.username + "님이 로그인했습니다.");
+          // window.location.href = "/";
+          console.log(response);
+          // login
+          if (response.token != null) {
+            localStorage.setItem("ACCESS_TOKEN", response.token);
+            alert(response.username + "님이 로그인했습니다.");
+            navigate('/');
+          } else {
+            // join
+            setEmail(response.email);
+            navigate('/AccountTerm', { state: { email: response.email } });
+          }
         })
         .catch(error => {
           console.error("Error:", error);

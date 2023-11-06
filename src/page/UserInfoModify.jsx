@@ -20,6 +20,11 @@ const UserInfoModify = () => {
     setPassword(e.target.value);
   }, [])
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(password);
@@ -96,32 +101,35 @@ const UserInfoModify = () => {
       })
   }
 
+  //////////////////////////////////////////////////////////////////////////
+  const handleRadioChange = (e) => {
+    setUserData(prev => ({
+      ...prev,
+      isRadioChecked: e.target.value
+    }));
+  };
+
 
   return (
     <div>
       <Header />
       <div class="grid-container">
         <form onSubmit={handleSubmit}>
-          {/* <div>
-            <label htmlFor="password">비밀번호 </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder='비밀번호를 입력해주세요.'
-            /> */}
           <div className='uBlock'>
             <div className="inputArea_password">
               <div className='inputAreaLabel'>
                 <label htmlFor="password">비밀번호</label>
                 <input
-                  type='password'
+                  type={passwordVisible ? 'text' : 'password'}
                   placeholder='비밀번호를 입력해주세요'
                   name='password'
                   id='password'
                   value={password}
                   onChange={onChangePassword}
                 />
+              </div>
+              <div>
+                <button type='button' onClick={togglePasswordVisibility}>보기</button>
               </div>
             </div>
           </div>
@@ -133,20 +141,61 @@ const UserInfoModify = () => {
         </form>
         {userData && (
           <div className="response">
-            <h2>User Data:</h2>
-            <p>아이디 : {userData.username}</p>
-            <p>이름 : {userData.name}</p>
-            <p>이메일 : {userData.email} <span><button onClick={toggleShowEmailform}>수정</button></span></p>
-            {/* 이메일 */}
-            {showResetEmail && (<div className='uBlock'>
+            <h2>회원정보수정</h2>
+            <hr />
+            <h3>기본정보</h3>
+            <hr />
+            {/* <p>아이디 : {userData.username}</p> */}
+            <div className='uBlock'>
+              <div className="inputArea_id">
+                <label htmlFor="id">아이디</label>
+                <input
+                  type="text"
+                  placeholder='6~20자 영문, 숫자'
+                  name='id'
+                  id='id'
+                  value={userData.username}
+                  readOnly
+                />
+              </div>
+            </div>
+            {/* <p>이름 : {userData.name}</p> */}
+            {/* 이름 */}
+            <div className='uBlock'>
+              <div className="inputArea_name">
+                <label htmlFor="name">이름</label>
+                <input
+                  type="text"
+                  id='name'
+                  name='name'
+                  value={userData.name}
+                />
+              </div>
+            </div>
+            {/* <p>휴대폰번호 : {userData.phone}</p> */}
+            <div className='uBlock'>
+              <div className='inputArea_phone'>
+                <label htmlFor="phone">휴대폰</label>
+                <input
+                  type="tel"
+                  placeholder='010 1234 5678'
+                  maxLength='11'
+                  name='phone'
+                  id='phone'
+                  value={userData.phone}
+                />
+              </div>
+            </div>
+
+            {/* <p>이메일 : {userData.email} <span><button onClick={toggleShowEmailform}>수정</button></span></p> */}
+            <div className='uBlock'>
               <div className="inputArea_email">
                 <label htmlFor="email">이메일</label>
                 <input
                   type="text"
-                  placeholder='someone@example.com'
                   name='email'
                   id='email'
-                  value={email}
+                  value={userData.email}
                   onChange={onChangeEmail}
                   ref={emailInputRef}
                   readOnly={isEmailVerified}
@@ -155,7 +204,8 @@ const UserInfoModify = () => {
                   <button
                     type='button'
                     disabled={isEmailVerified}
-                    onClick={() => handleEmailAuth({ email })}>인증</button>
+                    onClick={toggleShowEmailform}
+                    >수정</button>
                 </div>
                 <div>
                   <label htmlFor="">
@@ -179,10 +229,95 @@ const UserInfoModify = () => {
                 onConfirm={handleEmailConfirm}
                 serverCode={serverCode}
               />
-            </div>)}
-            <p>휴대폰번호 : {userData.phone}</p>
-            <p>sms수신여부 : {userData.smscheck ? '예' : '아니오'}</p>
-            <p>개인정보 유효기간 : {userData.isRadioChecked}</p>
+            </div>
+
+            {/* 이메일 */}
+            {showResetEmail && (
+              <div className='uBlock'>
+                <div className="inputArea_email">
+                  <label htmlFor="email">새 이메일</label>
+                  <input
+                    type="text"
+                    placeholder='someone@example.com'
+                    name='email'
+                    id='email'
+                    value={email}
+                    onChange={onChangeEmail}
+                    ref={emailInputRef}
+                    readOnly={isEmailVerified}
+                  />
+                  <div>
+                    <button
+                      type='button'
+                      disabled={isEmailVerified}
+                      onClick={() => handleEmailAuth({ email })}>인증</button>
+                  </div>
+                  <div>
+                    <label htmlFor="">
+                      <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
+                        <option value="">직접입력</option>
+                        <option value="@naver.com">@naver.com</option>
+                        <option value="@hanmail.net">@hanmail.net</option>
+                        <option value="@gmail.com">@gmail.com</option>
+                        <option value="@nate.com">@nate.com</option>
+                        <option value="@hotmail.com">@hotmail.com</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
+                <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
+                  이메일 주소 양식에 맞게 작성해주세요.
+                </div>
+                <EmailConfirm
+                  isOpen={isEmailVerifiedOpen}
+                  onClose={isEmailVerifiedClose}
+                  onConfirm={handleEmailConfirm}
+                  serverCode={serverCode}
+                />
+              </div>)}
+            {/* <p>sms수신여부 : {userData.smscheck ? '예' : '아니오'}</p> */}
+            <div className='uBlock_checkBlock'>
+              <div className='checkBox'>
+                <label htmlFor="">
+                  <input type="checkbox" name='smsCheckBox' checked={userData.smscheck} />
+                  <span>SMS, 이메일로 상품 및 이벤트 정보를 받겠습니다.(선택)</span>
+                </label>
+              </div>
+            </div>
+            {/* <p>개인정보 유효기간 : {userData.isRadioChecked}</p> */}
+            <div className='uBlock_validation'>
+              <div className='uBlock_validation_bold'>개인정보 유효기간</div>
+              <div className='radioBoxWrapper'>
+                <div className='radioBox'>
+                  <label htmlFor="radio1">
+                    <input
+                      type="radio"
+                      name='radio'
+                      id='radio1'
+                      value={"탈퇴 시까지"}
+                      onChange={handleRadioChange}
+                      checked={userData.isRadioChecked === '탈퇴 시까지'}
+                      disabled={userData.isRadioChecked !== ''}
+                    />
+                    <span>탈퇴 시까지</span>
+                  </label>
+                </div>
+                <div className='radioBox'>
+                  <label htmlFor="radio2">
+                    <input
+                      type="radio"
+                      name='radio'
+                      id='radio2'
+                      value={'1년'}
+                      onChange={handleRadioChange}
+                      checked={userData.isRadioChecked === '1년'}
+                      disabled={userData.isRadioChecked !== ''}
+                    />
+                    <span>1년</span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div >

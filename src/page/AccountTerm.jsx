@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import '../components/AccountTerm.css'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AccountHeader from '../components/AccountHeader'
 
 const AccountTerm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const email = location.state ? location.state.email : null;
+  // console.log({email});
 
   // 전체 동의와 동의항목 10가지 처리
   const [allAgree, setAllAgree] = useState(false);
@@ -91,6 +95,11 @@ const AccountTerm = () => {
 
   // 필수 동의 항목 7가지 체크
   const areAllRequiredTermsChecked = ['term1', 'term2', 'term3', 'term4', 'term5', 'term6', 'term7'].every((term) => termsChecked[term]);
+
+  const handleNextStep = () => {
+    const nextStep = email ? {termsChecked, email} : {termsChecked};
+    navigate("/accountform", {state: nextStep});
+  }
 
   return (
     <div>
@@ -280,9 +289,7 @@ const AccountTerm = () => {
           <div className='termsSubmit'>
             <button className='termsSubmitBtn'
               disabled={!areAllRequiredTermsChecked}
-              onClick={() => {
-                navigate("/accountform");
-              }}>다음 단계</button>
+              onClick={handleNextStep}>다음 단계</button>
           </div>
         </div>
       </div>

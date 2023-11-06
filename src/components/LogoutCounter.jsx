@@ -8,14 +8,17 @@ const LogoutCounter = () => {
     const [remainingTime, setRemainingTime] = useState(initialTime);
     let worker;
 
+    const [extendLogin, setExtendLogin] = useState(false);
+
     useEffect(() => {
         worker = new Worker('/workers/LogoutWorker.js');
+        // console.log("new Worker()");
 
         const savedTime = localStorage.getItem("REMAINING_TIME");
         if (savedTime) {
             worker.postMessage({ type: 'setTime', time: parseInt(savedTime, 10) });
         } else {
-            worker.postMessage({ type: 'setTime', time: INIT_TIME});
+            worker.postMessage({ type: 'setTime', time: INIT_TIME });
         }
 
         worker.onmessage = (event) => {
@@ -32,15 +35,18 @@ const LogoutCounter = () => {
 
         return () => {
             worker.terminate();
+            // console.log("worker.terminate()");
         };
-    }, []);
+    }, [extendLogin]);
 
     const resetINITTIME = () => {
         setRemainingTime(INIT_TIME);
+        localStorage.setItem("REMAINING_TIME", INIT_TIME);
         if (worker) {
             worker.postMessage({ type: 'setTime', time: INIT_TIME });
         }
-    }
+        setExtendLogin(prev => !prev);
+    };
 
     return (
         <div>

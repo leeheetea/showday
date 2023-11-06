@@ -88,6 +88,7 @@ const initialBooksState = {
   bookShowTime: "12:30", // 예약 선택 시간
   bookShowTimeOrder: 1,
   bookStep: 2,
+  confirms : {step4: false},
   youtDiscount: -15,
   totalPrice: {
     sumPrice: 0,
@@ -96,13 +97,20 @@ const initialBooksState = {
     resultTotalPrice: 0,
   },
   seats: {
+    /*
     leftSeats: [
       { count: 198, bookSeats: ["1_R3_A", "1_R4_A"] },
       { count: 199, bookSeats: ["1_R7_A"] },
       { count: 200, bookSeats: [] },
     ],
-  }, // R석 자리만 있고, 200개 좌석으로 일단 한정(R1 ~ R200)
-  myBookSeats: ["1_R1_A", "1_R2_C"], // A는 일반, C는 청소년 할인 자리 구분
+    */
+    reservedSeats: [
+      { seat_id: 1, seat_row: 3, set_column: 3 },
+      { seat_id: 2, seat_row: 3, set_column: 4 },
+      { seat_id: 3, seat_row: 3, set_column: 5 },
+    ],
+    myBookSeats: ["5@1", "5@2", "5@3"],
+  },
 };
 
 const booksSlice = createSlice({
@@ -123,7 +131,7 @@ const booksSlice = createSlice({
     },
 
     setBookStep: (state, action) => {
-      console.log("[booksSlice]", action.payload.bookStep);
+      //console.log("[booksSlice]", action.payload.bookStep);
       state.bookStep = action.payload.bookStep;
     },
 
@@ -134,6 +142,15 @@ const booksSlice = createSlice({
       state.bookShowTime = action.payload.choosedShowTime;
       state.bookShowTimeOrder = action.payload.bookShowTimeOrder;
     },
+
+    setMyBookSeats: (state, action) => {
+      state.seats.myBookSeats = action.payload.myBookSeats;
+      //console.log(">>>2_after" + state.seats.myBookSeats);
+    },
+
+    setConfirms: (state, action) => {
+      state.confirms = action.payload;
+    }
   },
 });
 
@@ -178,11 +195,27 @@ const rootReducer = combineReducers({
   faq: faqSlice,
 });
 
-export const { setMusicals, getMusicalInfoById } = musicalsSlice.actions;
-export const { setConcerts } = concertSlice.actions;
-export const { setTheatres } = theatreSlice.actions;
-export const { setBookInfo, setTotalPrice, setBookStep, setBookDateTime } =
-  booksSlice.actions;
-export const { getUserInfo, setUserInfo } = userInfoSlice.actions;
+export const {
+  setMusicals,
+  getMusicalInfoById
+} = musicalsSlice.actions;
+export const {
+  setConcerts
+} = concertSlice.actions;
+export const {
+  setTheatres
+} = theatreSlice.actions;
+export const {
+  setBookInfo,
+  setTotalPrice,
+  setBookStep,
+  setBookDateTime,
+  setMyBookSeats,
+  setConfirms
+} = booksSlice.actions;
+export const {
+  getUserInfo,
+  setUserInfo
+} = userInfoSlice.actions;
 
 export default rootReducer;

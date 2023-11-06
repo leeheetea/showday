@@ -7,7 +7,9 @@
 
 .bookDiscountTable {
   width: 100%;  
-  margin-top: 30px;
+  margin-top: 15px;
+  border: 1px solid #ECEDFC;
+  border-collapse : collapse;
 }
 
 .bookDiscountTh, .bookDiscountTd, .bookDiscountThLast, .bookDiscountTdLast  {

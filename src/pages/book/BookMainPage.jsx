@@ -32,11 +32,11 @@ const BookMainPage = () => {
       <Header />
       <div className="rootWrapper">
         <BookHeader id={id} step={currentTab} onBookStepClick={handleStepClick} />
+        <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
+          <Outlet context={id} onChangeDate={handleChangDate} />
+        </div>
+        {currentTab !== 5 && <BookInfoView />}
       </div>
-      <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
-        <Outlet context={id} onChangeDate={handleChangDate} />
-      </div>
-      {currentTab !== 5 && <BookInfoView />}
     </>
   );
 };

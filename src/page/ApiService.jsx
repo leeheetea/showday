@@ -53,7 +53,7 @@ export function register(userDTO) {
   return call("/user", "POST", userDTO)
     .then((response) => {
       alert(response.name + "님, 회원 가입이 완료되었습니다.");
-      window.location.href = '/';
+      // window.location.href = '/';
     });
 }
 
@@ -69,7 +69,7 @@ export function login(userDTO) {
       // }, tokenExpirationTime); 
 
       alert(response.username + "님이 로그인했습니다.");
-      window.location.href = "/";
+      // window.location.href = "/";
     });
 }
 
@@ -124,16 +124,25 @@ export function logout() {
       window.addEventListener("message", (e) => {
         console.log("----------", e);
         if (e.data === "logoutCompleted") {
-          localStorage.removeItem("ACCESS_TOKEN");
-          localStorage.removeItem("REMAINING_TIME");
-          resolve();
+          call("/user/logout", "POST", { token })
+            .then((response) => {
+              alert(response + "님이 로그아웃했습니다.");
+              localStorage.removeItem("ACCESS_TOKEN");
+              localStorage.removeItem("REMAINING_TIME");
+              resolve();
+            })
         }
       })
 
     } else {
-      localStorage.removeItem("ACCESS_TOKEN");
-      localStorage.removeItem("REMAINING_TIME");
-      resolve();
+      call("/user/logout", "POST", { token })
+        .then((response) => {
+          console.log(response);
+          alert(response + "님이 로그아웃했습니다.");
+          localStorage.removeItem("ACCESS_TOKEN");
+          localStorage.removeItem("REMAINING_TIME");
+          resolve();
+        })
     }
   });
 }
@@ -178,7 +187,7 @@ export function resetEmail(userDTO) {
     })
 }
 
-export function findId(userDTO){
+export function findId(userDTO) {
   return call("/user/username/retrieve", "POST", userDTO)
     .then((response) => {
       console.log(response);
@@ -196,7 +205,7 @@ export function findPassword(userDTO) {
 
 export function updatePassword(userDTO) {
   return call("/user/password/retrieve", "POST", userDTO)
-    .then((response) =>{
+    .then((response) => {
       console.log(response);
       return response;
     })

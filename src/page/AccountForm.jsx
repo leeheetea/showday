@@ -3,8 +3,20 @@ import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
 import { emailAuth, register } from './ApiService';
 import EmailConfirm from './EmailConfirm';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AccountForm = () => {
+
+  const navigate = useNavigate();
+
+  // 약관 동의 항목
+  const location = useLocation();
+  const termsChecked = location.state?.termsChecked;
+  const initialEmail = location.state?.email || '';
+
+  // console.log({termsChecked, email});
+  // console.log({termsChecked});
+
   // 아이디 유효성 검사
   const [id, setId] = useState('');
   const [showErrorId, setShowErrorId] = useState(false);
@@ -62,7 +74,7 @@ const AccountForm = () => {
   }, [])
 
   // 이메일 유효성 검사
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [showErrorEmail, setShowErrorEmail] = useState(false);
 
 
@@ -224,7 +236,23 @@ const AccountForm = () => {
     const email = data.get("email");
     const phone = data.get("phone");
 
-    register({ username: username, password: password, name: name, email: email, phone: phone, smscheck: smscheck, isRadioChecked: isRadioChecked });
+    register(
+      { username: username, 
+        password: password, 
+        name: name, 
+        email: email, 
+        phone: phone, 
+        smscheck: smscheck, 
+        isRadioChecked: isRadioChecked,
+        termsChecked: termsChecked
+      })
+      .then((res) => {
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log("error", error);
+        alert("회원가입 중 오류가 발생했습니다.")
+      })
   }
 
   return (
@@ -265,7 +293,7 @@ const AccountForm = () => {
                 />
               </div>
               <div>
-                <button type='button'>보기</button>
+                <button type='button' onClick={togglePasswordVisibility}>보기</button>
               </div>
             </div>
             <div className="errorText" style={{ display: showErrorPassword ? 'block' : 'none' }}>

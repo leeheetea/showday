@@ -24,6 +24,13 @@ const DetailContainer = styled.div`
   .detailTitle{
     color: red;
   }
+
+  hr {
+    width: 100%;
+    padding: 0;
+    margin: 0 2rem 0 2rem ;
+  }
+
   input{
     margin-bottom: 2rem;
   }
@@ -36,6 +43,12 @@ const DetailContainer = styled.div`
     flex-direction: column; 
     padding: 2rem;
 
+    hr {
+      width: 100%;
+      padding: 0;
+      margin: 2rem 0 2rem 0;
+    }
+    
     .detailBox2{
       padding: 0;
     }

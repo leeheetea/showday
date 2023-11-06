@@ -7,6 +7,7 @@ import img3 from "../img/mapPage.PNG"
 import img4 from "../img/cancel.PNG"
 import callAxios from "../util/callAxios";
 import Review from "./Review";
+import ReservationInfor from "./ReservationInfor";
 
 const TabMenuContainter = styled.ul`
   font-weight: bold;
@@ -84,7 +85,7 @@ const Detail2 = ({data}) => {
       content: <img className="mapPage" src={img3} style={{width:"100%"}}  alt="" /> },
     { id: 4, 
       name: "예매/취소", 
-      content: <img className="cancel" src={img4}  style={{width:"100%"}}  alt="" /> },
+      content: <ReservationInfor/> },
   ];
 
   const selectMenuHandler = (index) => {

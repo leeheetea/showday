@@ -3,13 +3,13 @@ import "../css/Review.css";
 import callPostAxios from '../util/callPostAxios';
 import axios from 'axios';
 import callAxios from '../util/callAxios';
-import { createReview } from '../page/ApiService';
+import { createReview, deleteReview, updateReview } from '../page/ApiService';
 import { useNavigate } from 'react-router-dom';
 
 
 const Review = ({data}) => {
   const [selectedRating, setSelectedRating] = useState(null);
-  const [textarea, settexTarea] = useState('');
+  const [textarea, setTexTarea] = useState('');
   const [reviewItems, setReviewItems] = useState([]);
 
   const showId = data; 
@@ -28,7 +28,7 @@ const Review = ({data}) => {
   }
   const handleTextareaChange = (event) => {
     const text = event.target.value;
-    settexTarea(text);
+    setTexTarea(text);
   }
 
   const averageReviewGrade = reviewItems.length > 0
@@ -49,8 +49,15 @@ const Review = ({data}) => {
     if(!review.authEmail){
       return "익명";
     }
-    
-
+    const atIndex = review.authEmail.indexOf("@");
+    if (atIndex !== -1 && atIndex >= 2) {
+      const prefix = review.authEmail.substring(0, 2);
+      const asterisks = "*".repeat(atIndex - 2);
+      return prefix + asterisks + review.authEmail.substring(atIndex);
+    }
+    if (atIndex !== -1) {
+      return review.authEmail.substring(0, atIndex);
+    }
     return review.authEmail;
   }
 
@@ -69,16 +76,37 @@ const Review = ({data}) => {
       .then((res) => {
         alert("리뷰가 성공적으로 등록되었습니다.");
         console.log("res===" + res);
-        // window.location.href=`/detailpage/${showId}`;
+        fetchReviewItem();
+        setTexTarea('');
       }).catch((error) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
   }
 
-
-
+const handleEditReview= (reviewId) =>{
+  updateReview(reviewId)
+    .then((res) => {
+      alert("리뷰가 성공적으로 수정되었습니다.");
+      console.log("res===" + res);
+      fetchReviewItem();
+    }).catch((error) => {
+    console.error("리뷰 수정 중 오류가 발생했습니다.", error);
+    alert("리뷰 등록 중 오류가 발생했습니다.");
+  });
+}
   
+const handleDeleteReview= (reviewId) =>{
+  deleteReview(reviewId)
+    .then((res) => {
+      alert("리뷰가 성공적으로 삭제되었습니다.");
+      console.log("res===" + res);
+      fetchReviewItem();
+    }).catch((error) => {
+    console.error("리뷰 삭제 중 오류가 발생했습니다.", error);
+    alert("리뷰 등록 중 오류가 발생했습니다.");
+  });
+}
 
   return (
     <div className='product_detail_tabcontent review_comment'>
@@ -122,7 +150,9 @@ const Review = ({data}) => {
                 <div className='comment_input_box'>
                   {/* <label className='comment blind'>관람후기 작성란</label> */}
                   <textarea className='comment_textarea' placeholder='관람후기를 남겨보세요!' 
-                    maxLength={300} onChange={handleTextareaChange}>
+                    maxLength={300} 
+                    value={textarea}
+                    onChange={handleTextareaChange}>
                   </textarea>
                 </div>
 
@@ -163,6 +193,12 @@ const Review = ({data}) => {
                   <span className='comment_date'>
                     {reviewTime(review)}
                   </span>
+                  {/* {user && user.email === review.authEmail && (
+                    <span>
+                      <button onClick={() => handleEditReview(review.reviewId)}>수정</button>
+                      <button onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
+                    </span>
+                  )} */}
               </div>
             </div>
           ))}

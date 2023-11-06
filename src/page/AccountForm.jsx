@@ -1,8 +1,22 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import '../components/AccountForm.css'
 import AccountHeader from '../components/AccountHeader'
+import { emailAuth, register } from './ApiService';
+import EmailConfirm from './EmailConfirm';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AccountForm = () => {
+
+  const navigate = useNavigate();
+
+  // 약관 동의 항목
+  const location = useLocation();
+  const termsChecked = location.state?.termsChecked;
+  const initialEmail = location.state?.email || '';
+
+  // console.log({termsChecked, email});
+  // console.log({termsChecked});
+
   // 아이디 유효성 검사
   const [id, setId] = useState('');
   const [showErrorId, setShowErrorId] = useState(false);
@@ -60,7 +74,7 @@ const AccountForm = () => {
   }, [])
 
   // 이메일 유효성 검사
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [showErrorEmail, setShowErrorEmail] = useState(false);
 
 
@@ -86,12 +100,51 @@ const AccountForm = () => {
     }
   }, [])
 
+  // 이메일 인증
+  const [isEmailVerifiedOpen, setisEmailVerifiedOpen] = useState(false);
+  const [serverCode, setServerCode] = useState("");
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+
+  const isEmailVerifiedClose = () => {
+    setisEmailVerifiedOpen(false);
+  }
+
+  const handleEmailConfirm = (isConfirmed) => {
+    if (isConfirmed) {
+      alert("이메일 인증이 완료되었습니다.");
+      setisEmailVerifiedOpen(false);
+      setIsEmailVerified(true);
+    } else {
+      alert("인증 번호가 일치하지 않습니다.");
+    }
+  }
+
+  const handleEmailAuth = (emailDTO) => {
+    emailAuth(emailDTO)
+      .then((response) => {
+        setServerCode(response.confirmCode);
+        setisEmailVerifiedOpen(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("인증 중 오류가 발생했습니다. 다시 시도해주세요.");
+      })
+  }
+
   // 휴대폰 숫자만 입력으로 받음
   const [phone, setPhone] = useState('');
 
   const onChangePhone = useCallback((e) => {
     setPhone(e.target.value.replace(/[^0-9]/g, ''));
-  }, [])
+  }, []);
+
+  //smscheck
+  const [smscheck, setSmscheck] = useState(false);
+
+  const onChangeSmsCheckBox = (e) => {
+    setSmscheck(e.target.checked);
+  }
+
   // 14세 미만인 경우 체크박스
   const [isCheckedUnder14, setIsCheckedUnder14] = useState(false);
   const onChangeUnder14 = useCallback((e) => {
@@ -132,10 +185,10 @@ const AccountForm = () => {
   }, [])
 
   // 라디오 체크 확인용
-  const [isRadioChecked, setIsRadioChecked] = useState(false);
+  const [isRadioChecked, setIsRadioChecked] = useState("");
 
-  const onChangeRadio = (event) => {
-    setIsRadioChecked(event.target.checked);
+  const onChangeRadio = (e) => {
+    setIsRadioChecked(e.target.value);
   };
 
   // submit 버튼 활성화 조건, 빈칸, 모든 칸 입력, 에러텍스트 검사, 14세 미만 체크 일 때
@@ -174,10 +227,38 @@ const AccountForm = () => {
 
   }, [areAllFieldsEmpty, isAllFieldsValid, isCheckedUnder14, areAllFieldsEmpty14, isAllFieldsValid14, areAllFieldsFilled, areAllFieldsFilled14]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const username = data.get("id");
+    const password = data.get("password");
+    const name = data.get("name");
+    const email = data.get("email");
+    const phone = data.get("phone");
+
+    register(
+      { username: username, 
+        password: password, 
+        name: name, 
+        email: email, 
+        phone: phone, 
+        smscheck: smscheck, 
+        isRadioChecked: isRadioChecked,
+        termsChecked: termsChecked
+      })
+      .then((res) => {
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log("error", error);
+        alert("회원가입 중 오류가 발생했습니다.")
+      })
+  }
+
   return (
     <div>
       <AccountHeader></AccountHeader>
-      <form className='AccountForm'>
+      <form className='AccountForm' onSubmit={handleSubmit}>
         <div className='AccountFormWrapper'>
           {/* 아이디 */}
           <div className='uBlock'>
@@ -272,10 +353,17 @@ const AccountForm = () => {
                 value={email}
                 onChange={onChangeEmail}
                 ref={emailInputRef}
+                readOnly={isEmailVerified}
               />
               <div>
+                <button
+                  type='button'
+                  disabled={isEmailVerified}
+                  onClick={() => handleEmailAuth({ email })}>인증</button>
+              </div>
+              <div>
                 <label htmlFor="">
-                  <select name="" id="emailSelectOption" onChange={onChangeEmailSelect}>
+                  <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
                     <option value="">직접입력</option>
                     <option value="@naver.com">@naver.com</option>
                     <option value="@hanmail.net">@hanmail.net</option>
@@ -289,6 +377,12 @@ const AccountForm = () => {
             <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
               이메일 주소 양식에 맞게 작성해주세요.
             </div>
+            <EmailConfirm
+              isOpen={isEmailVerifiedOpen}
+              onClose={isEmailVerifiedClose}
+              onConfirm={handleEmailConfirm}
+              serverCode={serverCode}
+            />
             <div className='accountValidBlock'>
               <p className='blockText'>동일 정보로 가입된 계정으로 로그인 하시겠습니까?</p>
               <a href="#" className='accountValidBlockLogin'>로그인하기</a>
@@ -308,7 +402,7 @@ const AccountForm = () => {
                 value={phone}
                 onChange={onChangePhone}
               />
-              <button type='button'>인증번호받기</button>
+              {/* <button type='button'>인증번호받기</button> */}
             </div>
             <div className='errorText'>
               점유인증을 하여 휴대폰 번호를 등록해주세요. 등록한 번호는 로그인 이후 변경 가능합니다.
@@ -341,7 +435,7 @@ const AccountForm = () => {
           <div className='uBlock_checkBlock'>
             <div className='checkBox'>
               <label htmlFor="">
-                <input type="checkbox" />
+                <input type="checkbox" name='smsCheckBox' checked={smscheck} onChange={onChangeSmsCheckBox} />
                 <span>SMS, 이메일로 상품 및 이벤트 정보를 받겠습니다.(선택)</span>
               </label>
             </div>
@@ -436,6 +530,7 @@ const AccountForm = () => {
                     name='radio'
                     id='radio1'
                     onChange={onChangeRadio}
+                    value={"탈퇴 시까지"}
                   />
                   <span>탈퇴 시까지</span>
                 </label>
@@ -447,6 +542,7 @@ const AccountForm = () => {
                     name='radio'
                     id='radio2'
                     onChange={onChangeRadio}
+                    value={'1년'}
                   />
                   <span>1년</span>
                 </label>

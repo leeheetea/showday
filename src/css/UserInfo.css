@@ -1,0 +1,29 @@
+#openidwrap {
+  padding: 0 255px;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.mainMenuClass {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mainMenuClass>div {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.menuBox{
+  cursor: pointer;
+}
+
+
+
+.contentswrap {
+  /* width: 775px; */
+  /* height: 495px; */
+  background: white;
+  text-align: center;
+}

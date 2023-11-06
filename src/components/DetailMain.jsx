@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
-import Review from "./Review";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -50,9 +49,6 @@ const customModalStyles = {
   },
 };
 
-
-
-
 const DetailMain = ({ data }) => {
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
 
@@ -60,7 +56,7 @@ const DetailMain = ({ data }) => {
   
   const showId = data.id; 
 
-  const url = "/show/"+showId;
+  const url = "/show/"+showId
 
   useEffect(()=>{ 
     fetchShowItem();

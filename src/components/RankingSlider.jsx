@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from "../img/slide1.webp";
 import "../css/RankingSlider.css";
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useRankingType } from "../store/RankingTypeContext";
 import { useNavigate } from "react-router-dom";

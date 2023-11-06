@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { logout } from '../page/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 const LogoutCounter = () => {
     const INIT_TIME = 3600;
@@ -7,6 +8,7 @@ const LogoutCounter = () => {
     const initialTime = savedTime ? parseInt(savedTime, 10) : INIT_TIME;
     const [remainingTime, setRemainingTime] = useState(initialTime);
     let worker;
+    const navigate = useNavigate();
 
     const [extendLogin, setExtendLogin] = useState(false);
 
@@ -25,7 +27,9 @@ const LogoutCounter = () => {
             if (event.data === 'logout') {
                 logout()
                     .then(() => {
-                        window.location.href = "/";
+                        worker.terminate();
+                        // window.location.href = "/";
+                        navigate('/');
                     });
             } else {
                 setRemainingTime(event.data);

@@ -27,7 +27,13 @@ const LogoutCounter = () => {
             if (event.data === 'logout') {
                 logout()
                     .then(() => {
-                        worker.terminate();
+                        console.log(localStorage.getItem("REMAINING_TIME"));
+                        worker.terminate().then(
+                            localStorage.removeItem("REMAINING_TIME"),
+                            setTimeout(() => {
+                                localStorage.removeItem("REMAINING_TIME")
+                            }, 1000)
+                        );
                         // window.location.href = "/";
                         navigate('/');
                     });

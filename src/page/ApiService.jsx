@@ -156,8 +156,10 @@ export function logout() {
         .then((response) => {
           console.log(response);
           alert(response + "님이 로그아웃했습니다.");
+          console.log(localStorage.getItem("REMAINING_TIME"));
           localStorage.removeItem("ACCESS_TOKEN");
           localStorage.removeItem("REMAINING_TIME");
+          console.log(localStorage.getItem("REMAINING_TIME"));
           resolve();
         })
     }

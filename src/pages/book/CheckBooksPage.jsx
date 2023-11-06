@@ -1,17 +1,43 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import "./CheckBooksPage.css";
+import { setConfirms } from "../../store/slice";
 import BookTitle from "../../components/book/BookTitle";
 import LineContainer from "../../components/LineContainer";
 import LineButton from "../../components/LineButton";
 
 const CheckBooksPage = () => {
+  const bookDispatch = useDispatch();
   const state = useSelector((state) => state.userInfo);
   const [values, setValues] = useState({
     name: "",
     phoneNumber: "",
   });
+
+  // 필수 동의사항 체크
+  const [requiredConfirm, setRequiredConfirm] = useState({
+    confirm1: false,
+    confirm2: false
+  })
+  const handleConfirmChange = (confirm) => {
+    const updatedConfirmsChecked = {
+      ...requiredConfirm,
+      [confirm]: !requiredConfirm[confirm]
+    };
+    setRequiredConfirm(updatedConfirmsChecked);
+
+    const isAllRequiredConfirmsChecked = ['confirm1',  'confirm2'].every((confirm) =>
+      Object.values(updatedConfirmsChecked).every(
+        (checked) => checked));
+
+    if(isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
+      bookDispatch(setConfirms({step4: true}));
+    } else {
+      bookDispatch(setConfirms({step4: false}));
+    }
+  }
+
   const [email, setEmail] = useState('');
   // 이메일 유효성 검사
   const [showErrorEmail, setShowErrorEmail] = useState(false);
@@ -22,6 +48,7 @@ const CheckBooksPage = () => {
     const isValidEmail = emailPattern.test(e.target.value);
     setShowErrorEmail(!isValidEmail);
   }, [])
+
   // const onChangeEmail = useCallback((e) => {
   //   setEmail(e.target.value);
 
@@ -76,7 +103,7 @@ const CheckBooksPage = () => {
       </LineContainer>
       <BookTitle width='100%' tpadding='40px' isleft='true'>주문자 정보</BookTitle>
       <form action="">
-        <LineContainer tMargin='15px'>
+        <LineContainer tmargin='15px'>
           <div className='checkBookFormName'>
             <p className='required'>이름</p>
             <p>홍길동</p>
@@ -140,13 +167,27 @@ const CheckBooksPage = () => {
         </LineContainer>
       </form>
       <BookTitle width='100%' tpadding='40px' isleft='true'>예매자 확인</BookTitle>
-      <LineContainer tMargin='15px'>
-        <input type='radio' name='checkInfo1' value='checkInfo1' />
-        <span className='guideText'>주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일, &#40;배송수령 시&#41;, 주소, &#40;입력필요 시&#41; 생년월일을 수집하며, 이용목적 달성 이후 파기합니다.</span>
+      <LineContainer tmargin='15px'>
+        <label htmlFor="confirm1">
+          <input type='checkbox'
+            id='confirm1'
+            name='confirm1'
+            checked={requiredConfirm.confirm1}
+            onChange={() => handleConfirmChange('confirm1')}
+          />
+          <span className='guideText'>&nbsp;주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일을 수집하며 이용목적 달성 이후 파기합니다.</span>
+        </label>
       </LineContainer>
-      <LineContainer tMargin='-2px'>
-        <input type='radio' name='checkInfo2' value='checkInfo2' />
-        <span className='guideText'>개인정보 제3자 제공에 동의합니다. (고객응대 및 관람정보안내 등을 위함)</span>
+      <LineContainer tmrgin='-2px'>
+        <label htmlFor="confirm2">
+          <input type='checkbox'
+            id='confirm2'
+            name='confirm2'
+            checked={requiredConfirm.confirm2}
+            onChange={() => handleConfirmChange('confirm2')}
+          />
+          <span className='guideText'>&nbsp;개인정보 제3자 제공에 동의합니다. (고객응대 및 관람정보안내 등을 위함)</span>
+        </label>
       </LineContainer>
     </div>
   )

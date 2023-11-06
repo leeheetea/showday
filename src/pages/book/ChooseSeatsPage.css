@@ -27,7 +27,7 @@
 
 .stageBackground {
   width: 80%;
-  height: 70%;
+  height: 80%;
   margin-top: 20px;
   background-color: white;
   border-radius: 1rem;
@@ -42,7 +42,6 @@
   grid-template-columns: repeat(10, 1fr);
   gap: 3px;
   text-align: center;
-
 }
 
 .seat {

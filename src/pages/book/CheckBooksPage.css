@@ -50,11 +50,11 @@
 }
 
 .checkBookFormName {
+  width: 290px;
   height: 25px;
   display: flex;
   line-height: 0.2rem;
   align-items: center;
-
 
   >input {
     height: 25px;

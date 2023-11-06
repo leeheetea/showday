@@ -16,8 +16,12 @@ const countDown = () => {
         postMessage('logout');
         return;
     }
+
+    // if(!localStorage.getItem("ACCESS_TOKEN")) {
+    //     postMessage('logout');
+    //     return;
+    // }
     postMessage(remainingTime);
     setTimeout(countDown, 1000);
 };
 
-countDown();

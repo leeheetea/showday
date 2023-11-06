@@ -44,6 +44,7 @@ import UserInfoModify from "./page/UserInfoModify";
 import LoginLog from "./components/LoginLog";
 import KakaoRedirectLogout from "./components/KakaoRedirectLogout";
 import UserInfoResetPassword from "./page/UserInfoResetPassword";
+import NaverRedirect from "./components/NaverRedirect";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/user/oauth/kakao" element={<KakaoRedirect />}></Route>
             <Route path="/user/oauth/kakao/logout" element={<KakaoRedirectLogout/>} ></Route>
+            <Route path="/user/oauth/naver" element={<NaverRedirect />}></Route>
             <Route path="/findid" element={<FindId />}></Route>
             <Route path="/findpwd" element={<FindPwd />}></Route>
             <Route path="/accountcreate" element={<AccountCreate />}></Route>

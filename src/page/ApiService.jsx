@@ -104,7 +104,7 @@ export function logout() {
       payloadData = JSON.parse(atob(payloadBase64));
     }
 
-    if (payloadData.loginType == 1) {
+    if (payloadData.socialCode == 'kakao') {
       const popupURL = "http://localhost:80/user/oauth/kakao/logout";
       const width = 600;
       const height = 765;
@@ -134,7 +134,24 @@ export function logout() {
         }
       })
 
-    } else {
+    } else if (payloadData.socialCode == 'naver') {
+      const popupURL = "https://nid.naver.com/nidlogin.logout";
+      const width = 600;
+      const height = 765;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+      const logoutPopup = window.open(popupURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
+      logoutPopup.close();
+      call("/user/logout", "POST", { token })
+        .then((response) => {
+          alert(response + "님이 로그아웃했습니다.");
+          localStorage.removeItem("ACCESS_TOKEN");
+          localStorage.removeItem("REMAINING_TIME");
+          resolve();
+        })
+    }
+
+    else {
       call("/user/logout", "POST", { token })
         .then((response) => {
           console.log(response);

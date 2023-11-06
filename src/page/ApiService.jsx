@@ -43,9 +43,10 @@ export function call(api, method, request) {
         });
       }
 
-    }).catch((error) => {
-      console.log(error);
-    });
+    })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
 }
 
 
@@ -70,6 +71,12 @@ export function login(userDTO) {
 
       alert(response.username + "님이 로그인했습니다.");
       // window.location.href = "/";
+      return response;
+    })
+    .catch((error) => {
+      console.log(error.message);
+      alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+      throw error;
     });
 }
 

@@ -48,7 +48,7 @@ const UserInfo = () => {
                 navigate('/userinfomodify');
               }
               }>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                   manage_accounts
                 </span>
                 <div>
@@ -59,7 +59,7 @@ const UserInfo = () => {
               <div className='menuBox' onClick={() => {
                 navigate('/userinforesetpassword');
               }}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                   lock_open
                 </span>
                 <div>
@@ -68,7 +68,7 @@ const UserInfo = () => {
                 </div>
               </div>
               <div className='menuBox'>
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     package_2
                   </span>
                   <div>
@@ -77,7 +77,7 @@ const UserInfo = () => {
                   </div>
               </div>
               <div className='menuBox'>
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     share
                   </span>
                   <div>
@@ -88,14 +88,14 @@ const UserInfo = () => {
               <div className='menuBox' onClick={() => {
                 navigate('/loginlog');
               }}>
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     key
                   </span>
                   <p>로그인관리</p>
               </div>
               <div className='menuBox'>
               
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     logout
                   </span>
                   <p>회원탈퇴</p>

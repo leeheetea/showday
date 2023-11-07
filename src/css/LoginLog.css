@@ -1,21 +1,27 @@
-/* UserInfoModify.css */
-
-
 /* Styles for the container */
-.userInfoModify-container {
-  width: 40%;
+.loginlog-container {
+  width: 30%;
   margin: 0 auto;
   margin-top: 50px;
   padding: 20px;
-  background-color: #fff; /* white background for the container */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow for a bit of depth */
+  background-color: #fff;
+  /* white background for the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* subtle shadow for a bit of depth */
 }
 
+.loginlog-details {
+  padding-left: 30px;
+}
+
+.loginlog-details p {
+  display: flex;
+}
 
 
 /* Button specific styling */
 button {
-  
+
   border: none;
   cursor: pointer;
 }
@@ -65,5 +71,3 @@ button:disabled {
   text-align: center;
   align-items: center;
 }
-
-

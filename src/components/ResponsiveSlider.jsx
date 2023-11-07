@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import jsonData from "../musicalData.json";
 import { useNavigate } from "react-router-dom";
 import "../css/ResponsiveSlider.css";
+import callAxios from "../util/callAxios";
 
 const ResponsiveSlider = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
@@ -22,17 +22,20 @@ const ResponsiveSlider = () => {
     };
   }, []);
 
-  const data = jsonData
-    .filter((state) => state.smallBannerUrl && state.smallBannerUrl !== "")
-    .map((state) => ({
-      bannerUrl: state.bannerUrl,
-      url: state.smallBannerUrl,
-      id: state.id,
-    }));
+  const [showItems, setShowItems] = useState([]);
+  const url = "/show/banner"
+
+  useEffect(()=>{
+    fetchShowItem();
+  },[]);
+
+  const fetchShowItem = async()=>{
+    callAxios(url, setShowItems);
+  }
 
   const images = isLargeScreen
-    ? data.map((item) => ({ url: item.bannerUrl, id: item.id }))
-    : data.map((item) => ({ url: item.url, id: item.id }));
+    ? showItems.map((item) => ({ url: item.bannerUrl, id: item.showId }))
+    : showItems.map((item) => ({ url: item.smallBannerUrl, id: item.showId }));
 
   const settings = {
     dots: true,
@@ -83,7 +86,8 @@ const ResponsiveSlider = () => {
           <div key={index}>
             <img
               onClick={() => {
-                navigator("/detailpage/" + item.id);
+                navigator(`/detailpage/${item.id}`);
+
               }}
               className="responsive-slider"
               src={item.url}

@@ -26,6 +26,7 @@ const Review = ({data}) => {
     const intValue = parseInt(event.target.value, 10);
     setSelectedRating(intValue);
   }
+  
   const handleTextareaChange = (event) => {
     const text = event.target.value;
     setTexTarea(text);

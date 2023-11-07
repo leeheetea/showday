@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
-import Review from "./Review";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -50,16 +49,27 @@ const customModalStyles = {
   },
 };
 
+<<<<<<< HEAD
 
 
 
 const DetailMain = ( {data} ) => {
+=======
+const DetailMain = ({ data }) => {
+  const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
+>>>>>>> aa6888af9547f12bb5ae21e1fbe9d3981a3a3095
 
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
   
+<<<<<<< HEAD
   const showId = data;
   const url = '/show/'+showId;
+=======
+  const showId = data.id; 
+
+  const url = "/show/"+showId
+>>>>>>> aa6888af9547f12bb5ae21e1fbe9d3981a3a3095
 
   useEffect(()=>{ 
     fetchShowItem();

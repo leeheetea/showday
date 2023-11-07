@@ -1,29 +1,81 @@
 #openidwrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0 255px;
   margin: 50px 0;
   text-align: center;
+  /* height: 100vh; */
+}
+
+.memberClass .myClass {
+  background: white;
+  padding: 25px 0;
+}
+
+.memberClass .myClass p {
+  margin: 2px 0;
+}
+
+.memberClass .benefit {
+  background: white;
+}
+
+.memberClass .benefit p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 0;
+  height: 51px;
 }
 
 .mainMenuClass {
+  margin-top: 5px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 2px;
 }
+
+
 
 .mainMenuClass>div {
-  border: 1px solid black;
-  padding: 10px;
+  /* border: 1px solid black; */
+  background: white;
+  padding: 40px 20px;
 }
 
-.menuBox{
+.menuBox {
+  display: flex;
+  align-items: center;
+  justify-content: start;
   cursor: pointer;
 }
 
+.menuBox p {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 15px;
+  text-align: left;
+}
 
+.menuBox span {
+  display: block;
+  font-size: 12px;
+  margin: 10px 15px 0;
+  text-align: left;
+}
 
 .contentswrap {
-  /* width: 775px; */
-  /* height: 495px; */
-  background: white;
-  text-align: center;
+  width: 775px;
+  height: 495px;
+  /* background: white; */
+  /* text-align: center; */
+}
+
+.material-symbols-outlined {
+  font-size: 40px;
+}
+
+.menuBox .material-symbols-outlined {
+  font-size: 50px;
 }

@@ -75,7 +75,16 @@ export function login(userDTO) {
     })
     .catch((error) => {
       console.log(error.message);
-      alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+      // alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+
+      if (error.message === "User already logged") {
+        alert("이미 로그인된 사용자입니다.");
+      } else if (!isNaN(error.message)) {
+        alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+      } else {
+        alert("로그인에 실패했습니다.");
+      }
+
       throw error;
     });
 }
@@ -148,7 +157,9 @@ export function logout() {
       const left = window.screenX + (window.outerWidth - width) / 2;
       const top = window.screenY + (window.outerHeight - height) / 2;
       const logoutPopup = window.open(popupURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
-      logoutPopup.close();
+      setTimeout(() => {
+        logoutPopup.close();
+      }, 500);
       call("/user/logout", "POST", { token })
         .then((response) => {
           alert(response + "님이 로그아웃했습니다.");
@@ -235,4 +246,12 @@ export function updatePassword(userDTO) {
       console.log(response);
       return response;
     })
+}
+
+export function getName() {
+  return call("/user/name/request", "POST",)
+  .then((response) => {
+    console.log(response);
+    return response;
+  })
 }

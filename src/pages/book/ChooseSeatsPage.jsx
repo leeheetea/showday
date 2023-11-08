@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useOutletContext } from "react-router-dom";
+import {useOutletContext, useParams} from "react-router-dom";
 
-import {setMyBookSeats} from "../../store/slice";
+import {setBookInfo, setMyBookSeats, setShowInfo} from "../../store/slice";
 import "./ChooseSeatsPage.css";
 import BookTitle from "../../components/book/BookTitle";
 import seatImg from "../../img/seat.PNG";
 import Loading from '../../styles/loading';
 import utils from '../../utils'
+import {readShow, readShowSeat, readVenueSeatSize} from "../../service/book/bookApiService";
 
 // 임의 값
-const MAX_ROW = 26; // 알파벳 최대 26개 이므로
-const MAX_COL = 20;
-const T_MAX_ROW = (MAX_ROW + 1);
-const T_MAX_COL = (MAX_COL + 1);
+//const MAX_ROW = 26; // 알파벳 최대 26개 이므로
+////const T_MAX_ROW = (MAX_ROW + 1);
+//const T_MAX_COL = (MAX_COL + 1);
 const GRID_GAP = 2;
 const MAX_CAN_RESERVE_CNT = 5;
 const SEAT_DELIMITER = '@';
@@ -25,17 +25,19 @@ const Line = styled.hr`
 
 const SeatContainer = styled.div`
   //width: -webkit-fill-available;
-  height: 80%;
+  height: 100%;
   max-width: ${(props) => `${props.pwidth || 100}px`};
   max-height: ${(props) => `${props.pheight || 100}px`};
   display: grid;
-  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(12px, auto));
-  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(13px, auto));
+  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(20px, auto));
+  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(30px, auto));
   grid-auto-rows: 100px;
   text-align: center;
   grid-gap: ${GRID_GAP}px;
   box-sizing: border-box;
   justify-content: center;
+  align-content: center;
+  background: antiquewhite;
 `;
 
 const Seat = styled.div`
@@ -64,23 +66,77 @@ const SeatTitle = styled.div`
 `
 
 const ChooseSeatsPage = () => {
+  const { id, index } = useParams();
+
   const bookDispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
 
   // state에서 화면에 표시할 공연 정보 선언
-  const { title, place } = state.showInfo[0];
-  const { bookDate, bookShowTime, seats, bookShowTimeOrder } = state;
+  const { title, venueName } = state.showInfo;
+  const { bookDate, bookShowTime, myBookSeats, bookShowTimeOrder } = state.bookingData;
   const [loading, setLoading] = useState(true);
   const stageBackgroundRef = useRef(null);
   //const { count, leftSeats } = state.leftSeats[bookShowTimeOrder];
 
-  const initialSeatsInfo = new Array((MAX_COL + 1) * (MAX_ROW + 1)).fill(0);
-  const [displaySeatList, setDisplaySeatList] = useState(initialSeatsInfo);
+  //const [showSeaㅇtsList, setShowSeatsList] = useState(null);
+  const [displaySeatList, setDisplaySeatList] = useState(new Array((1) * (10)).fill(0));
   const choosedSeatListRef = useRef(new Array().fill(null));
+  const maxColRowInfoRef = useRef({maxCol: null, maxRow: null});
 
   useEffect(() => {
-
+    loadShowDataFromServer();
   }, []);
+
+  const loadShowDataFromServer = async () => {
+    // 서버 공연정보 메모리 저장
+    readShow(id).then((info) => {
+      bookDispatch(setShowInfo({info}));
+      if (info !== null && info !== undefined) {
+        // 극장id로 극장 Row, col 사이즈 가져오기
+        readVenueSeatSize(id).then((maxSeat) => {
+          if (maxSeat !== null && maxSeat !== undefined) {
+            maxColRowInfoRef.current = {
+              maxCol: maxSeat.seatMaxColumn + 1,
+              maxRow: maxSeat.seatMaxRow + 1
+            };
+
+            let replacedBookDate = bookDate.replaceAll('.', '-');
+            let replacedBookTime =
+              !utils.checkTimeStringFor(bookShowTime) && bookShowTime + ":00";
+
+            //console.log('>>> replacedBookDate : ', bookDate);
+            //console.log('>>> bookShowTime : ', bookShowTime);
+
+            readShowSeat(id, {"date": replacedBookDate, "time": replacedBookTime})
+              .then((res) => {
+                if (res !== null && res !== undefined) {
+                  let newDisplaySeatList = [...displaySeatList];
+
+                  res.map((item) => {
+                    let canReservation = (item.canReservation ? 0 : 1);
+                    newDisplaySeatList[item.seatId - 1] = canReservation;
+                  })
+                  console.log(">>> [readShowSeat] DisplaySeatList : " + displaySeatList);
+
+                  setDisplaySeatList((prevItems) => [...prevItems, newDisplaySeatList]);
+                  setDisplaySeatList(newDisplaySeatList);
+                } else {
+                  console.log(">>> 공연 스케쥴 해당 좌석 예매 여부 가져오기 실패");
+                }
+              })
+          } else {
+            console.log(">>> 극장 좌석 최대 가로, 세로 크기 가져오기 실패");
+          }
+        })
+      }
+    })
+  }
+
+
+
+  useEffect(() => {
+      setLoading((!displaySeatList === null));
+  }, [displaySeatList])
 
   useEffect(() => {
     const stageBackgroundElement = stageBackgroundRef.current;
@@ -116,7 +172,7 @@ const ChooseSeatsPage = () => {
       choosedSeatListRef.current.push(key);
 
       const newDisplaySeatList = [...displaySeatList];
-      newDisplaySeatList[(indexRow * T_MAX_COL) + indexCol] = 1;
+      newDisplaySeatList[(indexRow * maxColRowInfoRef.current.maxCol) + indexCol] = 1;
       setDisplaySeatList(newDisplaySeatList);
 
       // 복사해서 안보내고 바로 choosedSeatListRef.current 보내면
@@ -130,15 +186,15 @@ const ChooseSeatsPage = () => {
   function configureSeats() {
     return (
       <SeatContainer
-        maxcol={T_MAX_COL}
-        maxrow={T_MAX_ROW}
+        maxcol={maxColRowInfoRef.current.maxCol}
+        maxrow={maxColRowInfoRef.current.maxRow}
         pwidth={stageBackgroundRef?.current?.offsetWidth}
         pheight={stageBackgroundRef?.current?.offsetHeight}
       >
-        {displaySeatList.map((rowItems, idx) => {
+        {displaySeatList?.map((rowItems, idx) => {
 
-          const indexRow = parseInt(idx / T_MAX_COL, 10);
-          const indexCol = parseInt(idx % T_MAX_COL, 10);
+          const indexRow = parseInt(idx / maxColRowInfoRef.current.maxCol, 10);
+          const indexCol = parseInt(idx % maxColRowInfoRef.current.maxCol, 10);
 
           if ((indexCol === 0) && (indexRow === 0)) { // 첫행, 첫열은 공백 표시
             return <SeatTitle key={idx}></SeatTitle>
@@ -153,13 +209,13 @@ const ChooseSeatsPage = () => {
               return <SeatTitle key={idx}>{idx}</SeatTitle>
             }
           } else {
-            if (loading) {
-              <Loading />
-            } else {
+            // if (loading) {
+            //   <Loading />
+            // } else {
               return (
                 <Seat key={utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol)}
-                  width={stageBackgroundRef?.current?.offsetWidth / T_MAX_COL}
-                  height={stageBackgroundRef?.current?.offsetWidth / T_MAX_ROW}
+                  width={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxCol}
+                  height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
                   canreserve={rowItems}
                   onClick={() =>
                     handleChooseSeat(utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol))}
@@ -167,7 +223,7 @@ const ChooseSeatsPage = () => {
                   {rowItems}
                 </Seat>
               )
-            }
+            // }
           }
         })}
       </SeatContainer >
@@ -180,7 +236,7 @@ const ChooseSeatsPage = () => {
         {title}
       </BookTitle>
       <BookTitle width="100%" issubtitle="true" tpadding="10px">
-        {place} | {bookDate}&nbsp;{bookShowTime}
+        {venueName} | {bookDate}&nbsp;{bookShowTime}
       </BookTitle>
       <div className="stageContainer">
         {/* <span>STAGE</span> */}

@@ -12,11 +12,11 @@ import { useParams } from 'react-router-dom';
 const DiscountPricePage = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
-  const { price } = state.showInfo[0];
+  const { price } = state.showInfo;
   const { youtDiscount, bookStep } = state;
-  const myseatCnt = state.seats.myBookSeats.length;
+  const myseatCnt = state.myBookSeats?.length;
 
-  const unMarkedPrice = utils.getRemoveMarkThousand(price);
+  const unMarkedPrice = price // utils.getRemoveMarkThousand(price);
   const youtPrice = utils.getMarkThousand(
     Number(unMarkedPrice) + unMarkedPrice * (youtDiscount / 100)
   );

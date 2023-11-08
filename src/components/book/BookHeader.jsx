@@ -39,37 +39,33 @@ const headerList = [
   { step: 5, title: "결재하기" },
 ];
 
-const BookHeader = ({ onBookStepClick, id, step }) => {
+const BookHeader = ({ onBookStepClick, showId, index }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
   const { bookStep } = state;
+
+  //console.log(`[BookHeader] showId : ${showId} index : ${index}`);
 
   const handleStepUpdate = useCallback(() => {
     //console.log('bookStep 확인 : ', bookStep);
     handleStepClick(bookStep);
   }, [bookStep, state]);
 
-  useEffect(() => {
-    handleStepUpdate();
-  }, [handleStepUpdate]);
-
   const handleStepClick = (index) => {
     dispatch(setBookStep({ bookStep: index }));
-    onBookStepClick(index, id);
+    onBookStepClick(index, showId);
   }
-
-  //console.log('step : ', step, bookStep);
 
   return (
     <BookHeaderWrapper>
       <HeaderList>
-        {headerList.map((menu, index) => {
+        {headerList.map((menu, idx) => {
           return (
             <HeaderListItem
-              key={index + 1}
-              onClick={() => handleStepClick(index + 1)}>
+              key={idx + 1}
+              onClick={() => handleStepClick(idx + 1)}>
               {/* <ItemContainer>{menu.title}</ItemContainer> */}
-              <ItemContainer isaccent={(step === (index + 1)) ? 'true' : 'false'}>{menu.title}</ItemContainer>
+              <ItemContainer isaccent={(index === (idx + 1)) ? 'true' : 'false'}>{menu.title}</ItemContainer>
             </HeaderListItem>
           );
         })}

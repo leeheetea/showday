@@ -69,6 +69,8 @@ const SearchBar = () => {
               onClick={() => {
                 logout()
                   .then(() => {
+                    localStorage.removeItem("REMAINING_TIME");
+                    console.log(localStorage.getItem("REMAINING_TIME"));
                     navigate('/login');
                     // window.location.href="/login";
                   });

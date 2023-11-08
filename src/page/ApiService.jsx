@@ -43,9 +43,10 @@ export function call(api, method, request) {
         });
       }
 
-    }).catch((error) => {
-      console.log(error);
-    });
+    })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
 }
 
 
@@ -70,6 +71,21 @@ export function login(userDTO) {
 
       alert(response.username + "님이 로그인했습니다.");
       // window.location.href = "/";
+      return response;
+    })
+    .catch((error) => {
+      console.log(error.message);
+      // alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+
+      if (error.message === "User already logged") {
+        alert("이미 로그인된 사용자입니다.");
+      } else if (!isNaN(error.message)) {
+        alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
+      } else {
+        alert("로그인에 실패했습니다.");
+      }
+
+      throw error;
     });
 }
 
@@ -104,7 +120,7 @@ export function logout() {
       payloadData = JSON.parse(atob(payloadBase64));
     }
 
-    if (payloadData.loginType == 1) {
+    if (payloadData.socialCode == 'kakao') {
       const popupURL = "http://localhost:80/user/oauth/kakao/logout";
       const width = 600;
       const height = 765;
@@ -131,17 +147,66 @@ export function logout() {
               localStorage.removeItem("REMAINING_TIME");
               resolve();
             })
+            .catch((error) => {
+              console.error("logout error", error);
+              if (error instanceof Error && error.message.includes("User not found with id")) {
+                localStorage.clear();
+                window.location.reload();
+              } else {
+                console.error("Unexpected error occured during logout: ", error);
+              }
+            })
         }
       })
 
-    } else {
+    } else if (payloadData.socialCode == 'naver') {
+      const popupURL = "https://nid.naver.com/nidlogin.logout";
+      const width = 600;
+      const height = 765;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2;
+      const logoutPopup = window.open(popupURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
+      setTimeout(() => {
+        logoutPopup.close();
+      }, 500);
       call("/user/logout", "POST", { token })
         .then((response) => {
-          console.log(response);
           alert(response + "님이 로그아웃했습니다.");
           localStorage.removeItem("ACCESS_TOKEN");
           localStorage.removeItem("REMAINING_TIME");
           resolve();
+        })
+        .catch((error) => {
+          console.error("logout error", error);
+          if (error instanceof Error && error.message.includes("User not found with id")) {
+            localStorage.clear();
+            window.location.reload();
+          } else {
+            console.error("Unexpected error occured during logout: ", error);
+          }
+        })
+    }
+
+    else {
+      call("/user/logout", "POST", { token })
+        .then((response) => {
+          console.log(response);
+          alert(response + "님이 로그아웃했습니다.");
+          console.log(localStorage.getItem("REMAINING_TIME"));
+          localStorage.removeItem("ACCESS_TOKEN");
+          localStorage.removeItem("REMAINING_TIME");
+          // localStorage.clear();
+          console.log(localStorage.getItem("REMAINING_TIME"));
+          resolve();
+        })
+        .catch((error) => {
+          console.error("logout error", error);
+          if (error instanceof Error && error.message.includes("User not found with id")) {
+            localStorage.clear();
+            window.location.reload();
+          } else {
+            console.error("Unexpected error occured during logout: ", error);
+          }
         })
     }
   });
@@ -161,6 +226,14 @@ export function getUserInfo(userDTO) {
       console.log(response);
       return response;
     })
+    .catch((error) => {
+      if(error.message.includes("Incorrect Password")) {
+        alert("비밀번호가 틀렸습니다.");
+      } else {
+        console.log("Unexpected error occured during getUserInfo: ", error);
+      }
+      return Promise.reject(error);
+    })
 }
 
 export function matchPassword(userDTO) {
@@ -168,6 +241,14 @@ export function matchPassword(userDTO) {
     .then((response) => {
       console.log(response);
       return response;
+    })
+    .catch((error) => {
+      if(error.message.includes("Incorrect Password")) {
+        alert("비밀번호가 틀렸습니다.");
+      } else {
+        console.log("Unexpected error occured during matchPassword: ", error);
+      }
+      return Promise.reject(error);
     })
 }
 
@@ -193,6 +274,14 @@ export function findId(userDTO) {
       console.log(response);
       return response;
     })
+    .catch((error) => {
+      if(error.message.includes("User not found")) {
+        alert("입력이 잘못되었습니다.");
+      } else {
+        console.log("Unexpected error occured during findId: ", error);
+      }
+      return Promise.reject(error);
+    })
 }
 
 export function findPassword(userDTO) {
@@ -200,6 +289,14 @@ export function findPassword(userDTO) {
     .then((response) => {
       console.log(response);
       return response;
+    })
+    .catch((error) => {
+      if(error.message.includes("User not found")) {
+        alert("입력이 잘못되었습니다.");
+      } else {
+        console.log("Unexpected error occured during findPassword: ", error);
+      }
+      return Promise.reject(error);
     })
 }
 
@@ -211,10 +308,17 @@ export function updatePassword(userDTO) {
     })
 }
 
+export function getName() {
+  return call("/user/name/request", "POST",)
+    .then((response) => {
+      console.log(response);
+      return response;
+
 export function createReview(reviewDTO) {
   return call("/review", "POST", reviewDTO)
     .then((res) => {
       console.log("res: ", res);
       return res;
+
     })
 }

@@ -237,12 +237,13 @@ const AccountForm = () => {
     const phone = data.get("phone");
 
     register(
-      { username: username, 
-        password: password, 
-        name: name, 
-        email: email, 
-        phone: phone, 
-        smscheck: smscheck, 
+      {
+        username: username,
+        password: password,
+        name: name,
+        email: email,
+        phone: phone,
+        smscheck: smscheck,
         isRadioChecked: isRadioChecked,
         termsChecked: termsChecked
       })
@@ -355,12 +356,9 @@ const AccountForm = () => {
                 ref={emailInputRef}
                 readOnly={isEmailVerified}
               />
-              <div>
-                <button
-                  type='button'
-                  disabled={isEmailVerified}
-                  onClick={() => handleEmailAuth({ email })}>인증</button>
-              </div>
+
+
+
               <div>
                 <label htmlFor="">
                   <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
@@ -373,6 +371,12 @@ const AccountForm = () => {
                   </select>
                 </label>
               </div>
+              <button
+                type='button'
+                disabled={isEmailVerified}
+                onClick={() => handleEmailAuth({ email })}>인증
+              </button>
+
             </div>
             <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
               이메일 주소 양식에 맞게 작성해주세요.
@@ -439,7 +443,7 @@ const AccountForm = () => {
                 <span>SMS, 이메일로 상품 및 이벤트 정보를 받겠습니다.(선택)</span>
               </label>
             </div>
-            <div className='checkBox'>
+            {/* <div className='checkBox'>
               <label htmlFor="">
                 <input
                   type="checkbox"
@@ -448,14 +452,14 @@ const AccountForm = () => {
                 />
                 <span>14세 미만입니다.</span>
               </label>
-            </div>
+            </div> */}
             <div className='errorText' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>
               14세 미만 가입시 법정대리인 동의 필수입니다.
             </div>
           </div>
-          <div className='uBlock'>
+          {/* <div className='uBlock'>
             <p className='p_under14'>만 14세 미만 회원은 법정대리인(부모님) 동의를 받은 경우만 회원가입 가능합니다.</p>
-          </div>
+          </div> */}
 
           {/* 만 14세 미만 법정대리인 이름 */}
           <div className='uBlock_under14' style={{ display: isCheckedUnder14 ? 'block' : 'none' }}>

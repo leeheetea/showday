@@ -56,7 +56,10 @@ const FindId = () => {
         setResponseName(responseName)
         const responseDate = new Date(response.authDate);
         setResponseDate(responseDate.toLocaleString());
-      });
+      })
+      .catch((error) => {
+        
+      })
   }
 
   return (

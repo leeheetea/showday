@@ -287,10 +287,6 @@ export function createReview(reviewDTO) {
 export function updateReview(reviewId,reviewDTO){
   return call(`/review/${reviewId}`, "PUT", reviewDTO )
   .then((res) => {
-<<<<<<< HEAD
-    console.log("res: ", res);
-=======
->>>>>>> 177c0df4e3416898008ceaaf2bf0e678bbf47362
     return res;
   })
 }

@@ -91,7 +91,6 @@ const DetailMain = ( {data} ) => {
 //   }
 // }
 
-
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
@@ -103,10 +102,10 @@ const DetailMain = ( {data} ) => {
           <div className="product_heading">
             <h2 className="product_title">{showItems.title}</h2>
             <span className="product_shareButton">
-              <button onClick={() => setShareModalIsOpen(true)}>
+              {/* <button onClick={() => setShareModalIsOpen(true)}>
                 <FaShareAlt size="20" />
-              </button>
-              <Modal
+              </button> */}
+              {/* <Modal
                 isOpen={shareModalIsOpen}
                 onRequestClose={() => setShareModalIsOpen(false)}
                 style={customModalStyles}
@@ -114,7 +113,7 @@ const DetailMain = ( {data} ) => {
                 <button>
                   <BiLinkAlt></BiLinkAlt>
                 </button>
-              </Modal>
+              </Modal> */}
             </span>
           </div>
 

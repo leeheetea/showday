@@ -17,7 +17,6 @@ const Review = ({data}) => {
   const [editReviewContent, setEditReviewContent] = useState(''); //리뷰 수정 내용
   const [isModalOpen,setIsModalOpen] =useState(false);//리뷰 수정 모달
   const [selectedReviewId, setSelectedReviewId] = useState(null); // 리뷰 아이디
-  const [scrollPosition, setScrollPosition] = useState(0); //스크롤 포지션
 
   const showId = data; 
   const url = "/review/"+showId;
@@ -34,6 +33,13 @@ const Review = ({data}) => {
     const intValue = parseInt(event.target.value, 10);
     setSelectedRating(intValue);
   }
+//별점 수정
+const handleRatingReChange = (event) =>{
+  const intValue = parseInt(event.target.value, 10);
+  setReviewRating(intValue);
+}
+
+
   //리뷰 내용
   const handleTextareaChange = (event) => {
     const text = event.target.value;
@@ -98,7 +104,7 @@ const Review = ({data}) => {
             console.log("res===" + res);
             fetchReviewItem();
             setTexTarea('');
-            setSelectedRating(null); 
+            // setSelectedRating(null); 
           }).catch((error) => {
           console.error("리뷰 등록 중 오류가 발생했습니다.", error);
           alert("리뷰 등록 중 오류가 발생했습니다.");
@@ -119,7 +125,7 @@ const Review = ({data}) => {
   });
 
   //리뷰 수정
-  const handleEditClick = (reviewId, reviewText) => {
+  const handleEditClick = (reviewId, reviewText, authEmail, rating) => {
     setEditReviewContent(reviewText);
     setSelectedReviewId(reviewId);
     setIsModalOpen(true);
@@ -140,7 +146,7 @@ const Review = ({data}) => {
 
     const requestData = {
       reviewId: reviewId,
-      reviewGrade: 5,
+      reviewGrade: reviewRating,
       reviewText: editReviewContent,
       showId: showId,
       reviewTimestamp: timestamp,
@@ -170,25 +176,16 @@ const handleDeleteReview= (reviewId) =>{
   });
 }
 
-// 스크롤 이벤트 핸들러
-const handleScroll = () => {
-  setScrollPosition(window.scrollY);
-};
-useEffect(() => {
-  window.addEventListener('scroll', handleScroll);
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, []);
-
 // 모달의 스타일 설정
 const modalStyle = {
-  top: `50%`, 
-  transform: `translateY(-40%)`, 
-  left: `50%`, 
-  // eslint-disable-next-line no-dupe-keys
-  transform: `translateX(-40%)`, 
-  position: 'fixed',
+  position: `fixed`,
+  top: `50%`,
+  left: `50%`,
+  transform: `translate(-50%, -50%)`,
+  backgroundColor: `white`,
+  padding: `20px`,
+  borderRadius : `5px`,
+  boxShadow: `0 0 10px rgba(0, 0, 0, 0.2)`
 };
 //모달 닫기
 const closeModal = () => {
@@ -200,18 +197,8 @@ const handleModalClick = (event) => {
     closeModal();
   }
 };
-useEffect(() => {
-  window.addEventListener('scroll', handleScroll);
-  document.addEventListener('mousedown', handleModalClick);
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-    document.removeEventListener('mousedown', handleModalClick);
-  };
-}, []);
-
-
   return (
-    <div className='product_detail_tabcontent review_comment'>
+    <div>
       <div className='review_comment_write'>
           <div className='review_content_heading'>
             <h2 className='review_content_title'>관람후기<span className='text_number red'>{reviewItems.length}</span></h2>
@@ -298,7 +285,7 @@ useEffect(() => {
 
                   {userEmail === review.authEmail && (
                     <span>
-                        <button className="handleEditClick handleBtn" onClick={() => handleEditClick(review.reviewId, review.reviewText)}>수정</button>
+                        <button className="handleEditClick handleBtn" onClick={() => handleEditClick(review.reviewId, review.reviewText, review.authEmail, review.reviewRating)}>수정</button>
                         {"/"}
                         <button className="handleDeleteReview handleBtn" onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
                     </span>   
@@ -310,7 +297,30 @@ useEffect(() => {
            {/* 댓글 수정 modal */}
            {isModalOpen && (
               <div className="modal updateReviewText" style={modalStyle} ref={modalRef}>
+                 <div className="modal-header">
+                    <button className="close-button" onClick={closeModal}>
+                      &times; 
+                    </button>
+                  </div>
+                <div className='comment_star'>
+                 <div className='comment_star_select'>
+                    <input type="radio" id="5-stars" name="rating" value="5" onChange={handleRatingReChange}/>
+                    <label htmlFor="5-stars" className="star">&#9733;</label>
+                    <input type="radio" id="4-stars" name="rating" value="4" onChange={handleRatingReChange}/>
+                    <label htmlFor="4-stars" className="star">&#9733;</label>
+                    <input type="radio" id="3-stars" name="rating" value="3" onChange={handleRatingReChange}/>
+                    <label htmlFor="3-stars" className="star">&#9733;</label>
+                    <input type="radio" id="2-stars" name="rating" value="2" onChange={handleRatingReChange}/>
+                    <label htmlFor="2-stars" className="star">&#9733;</label>
+                    <input type="radio" id="1-star" name="rating" value="1" onChange={handleRatingReChange}/>
+                    <label htmlFor="1-star" className="star">&#9733;</label>  
+                 </div>
+                  {reviewRating === null ? (
+                    <p className='comment_star_desc'>별점을 선택해주세요.</p>)
+                   : (<p className='comment_star_desc'>{reviewRating}점</p>)}  
+                </div>
                 <input 
+                  className='modalReviewTextContainer'
                   type='text'
                   value={editReviewContent}
                   onChange={(e) => setEditReviewContent(e.target.value)}

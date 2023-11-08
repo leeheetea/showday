@@ -9,6 +9,8 @@ import axios from "axios";
 
 const RankingSlider = () => {
   const navigator = useNavigate();
+  let page = 0;
+  let size = 10;
 
   const [musicals, setMusicals] = useState([]);
   const [concerts, setConcerts] = useState([]);
@@ -16,38 +18,45 @@ const RankingSlider = () => {
 
   useEffect(() => {
     const fetchShow = async () => {
+      const url = "http://localhost/show";
       try {
-        const response = await axios.get('/show', {
+        const response = await axios.get(url, {
           params: {
-            type: 'musical'
+            type: 'musical',
+            page: page,
+            size: size
           }
         });
         console.log("musical", response.data)
         setMusicals(response.data);
       } catch (error) {
-        console.error('musical 정보를 호출에 에러가 발생함.', error);
+        console.error('musical 정보 호출에 에러가 발생함.', error);
       }
       try {
         const response = await axios.get('/show', {
           params: {
-            type: 'concert'
+            type: 'concert',
+            page: page,
+            size: size
           }
         });
         setConcerts(response.data);
         console.log("concert", response.data)
       } catch (error) {
-        console.error('concert 정보를 호출에 에러가 발생함.', error);
+        console.error('concert 정보 호출에 에러가 발생함.', error);
       }
       try {
         const response = await axios.get('/show', {
           params: {
-            type: 'theatre'
+            type: 'theatre',
+            page: page,
+            size: size
           }
         });
         setTheatres(response.data);
         console.log("theatre", response.data)
       } catch (error) {
-        console.error('Theatres 정보를 호출에 에러가 발생함.', error);
+        console.error('Theatres 정보 호출에 에러가 발생함.', error);
       }
     };
     fetchShow();

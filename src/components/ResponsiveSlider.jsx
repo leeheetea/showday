@@ -41,7 +41,8 @@ const ResponsiveSlider = () => {
         },
       });
       setShowItems(response.data);
-      console.log("showItems", showItems.data);
+      console.log("showItems", showItems);
+      console.log("response", response.data);
     } catch (error) {
       alert("배너 이미지 로딩 중 에러가 발생했습니다.");
     }

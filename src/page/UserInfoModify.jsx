@@ -35,6 +35,9 @@ const UserInfoModify = () => {
         setUserData(data);
         setShowPassword(prev => !prev);
       })
+      .catch((error) =>{
+        
+      })
   }
 
   // 이메일 유효성 검사

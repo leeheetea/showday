@@ -31,6 +31,9 @@ const UserInfoResetPassword = () => {
         setMessage(res);
         setShowPassword(prev => !prev);
       })
+      .catch((error) =>{
+        
+      })
   }
 
   const handleSubmitReset = (e) => {

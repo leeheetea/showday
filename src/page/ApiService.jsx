@@ -226,6 +226,14 @@ export function getUserInfo(userDTO) {
       console.log(response);
       return response;
     })
+    .catch((error) => {
+      if(error.message.includes("Incorrect Password")) {
+        alert("비밀번호가 틀렸습니다.");
+      } else {
+        console.log("Unexpected error occured during getUserInfo: ", error);
+      }
+      return Promise.reject(error);
+    })
 }
 
 export function matchPassword(userDTO) {
@@ -233,6 +241,14 @@ export function matchPassword(userDTO) {
     .then((response) => {
       console.log(response);
       return response;
+    })
+    .catch((error) => {
+      if(error.message.includes("Incorrect Password")) {
+        alert("비밀번호가 틀렸습니다.");
+      } else {
+        console.log("Unexpected error occured during matchPassword: ", error);
+      }
+      return Promise.reject(error);
     })
 }
 

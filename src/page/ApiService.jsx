@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const API_BASE_URL = "http://localhost:80";
 
 export function call(api, method, request) {
@@ -25,7 +23,6 @@ export function call(api, method, request) {
   return fetch(options.url, options)
     .then((response) => {
       if (response.status === 200) {
-        // return response.json();
 
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
@@ -37,16 +34,13 @@ export function call(api, method, request) {
       } else if (response.status === 403) {
         window.location.href = "/";
       } else {
-        // throw Error(response);
         return response.text().then(text => {
           throw new Error(text);
         });
       }
 
     })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
+
 }
 
 
@@ -54,7 +48,6 @@ export function register(userDTO) {
   return call("/user", "POST", userDTO)
     .then((response) => {
       alert(response.name + "님, 회원 가입이 완료되었습니다.");
-      // window.location.href = '/';
     });
 }
 
@@ -64,18 +57,13 @@ export function login(userDTO) {
   return call("/user/login", "POST", userDTO)
     .then((response) => {
       localStorage.setItem("ACCESS_TOKEN", response.token);
-      // console.log("response : ", response);
-      // setTimeout(() => {
-      //   logout();
-      // }, tokenExpirationTime); 
+
 
       alert(response.username + "님이 로그인했습니다.");
-      // window.location.href = "/";
       return response;
     })
     .catch((error) => {
       console.log(error.message);
-      // alert(`로그인에 실패했습니다. 현재 실패 횟수: ${error.message}`);
 
       if (error.message === "User already logged") {
         alert("이미 로그인된 사용자입니다.");
@@ -89,28 +77,9 @@ export function login(userDTO) {
     });
 }
 
-// export function logout() {
-//   // localStorage.setItem("ACCESS_TOKEN", null); 
-//   // localStorage.removeItem("ACCESS_TOKEN");
-//   return new Promise((resolve) => {
-//     localStorage.removeItem("ACCESS_TOKEN");
-//     resolve();
-//   })
-// }
+
 
 export function logout() {
-  // const token = localStorage.getItem('ACCESS_TOKEN');
-  // let payloadData = {};
-  // if (token) {
-  //   const payloadBase64 = token.split('.')[1];
-  //   payloadData = JSON.parse(atob(payloadBase64));
-  // }
-  // if (payloadData.loginType == 1) {
-  //   // 백엔드 로그아웃 엔드포인트 호출
-  //   window.open("http://localhost:80/user/oauth/kakao/logout", 'logoutPopup', 'width=600,height=500');
-  // }
-  // // 액세스 토큰 제거
-  // localStorage.removeItem("ACCESS_TOKEN");
 
   return new Promise((resolve, reject) => {
     const token = localStorage.getItem('ACCESS_TOKEN');
@@ -127,15 +96,6 @@ export function logout() {
       const left = window.screenX + (window.outerWidth - width) / 2;
       const top = window.screenY + (window.outerHeight - height) / 2;
       const logoutPopup = window.open(popupURL, "_blank", `width=${width},height=${height},left=${left},top=${top}`);
-
-      // const checkPopupURLChange = setInterval(() => {
-      //   if (logoutPopup.location.href === "http://localhost:3000/user/oauth/kakao/logout") {
-      //     clearInterval(checkPopupURLChange);
-      //     logoutPopup.close();
-      //     localStorage.removeItem("ACCESS_TOKEN");
-      //     resolve();
-      //   }  
-      // }, 100);
 
       window.addEventListener("message", (e) => {
         console.log("----------", e);
@@ -309,24 +269,24 @@ export function updatePassword(userDTO) {
 }
 
 export function getName() {
-  return call("/user/name/request", "POST",)
-    .then((response) => {
-      console.log(response);
-      return response;
+    return call("/user/name/request", "POST")
+        .then((response) => {
+            console.log(response);
+            return response;
+        });
+}
 
+// 리뷰 생성 함수입니다.
 export function createReview(reviewDTO) {
-  return call("/review", "POST", reviewDTO)
-    .then((res) => {
-      // console.log("res: ", res);
-      return res;
-
-    })
+    return call("/review", "POST", reviewDTO)
+        .then((res) => {
+            return res;
+        });
 }
 
 export function updateReview(reviewId,reviewDTO){
   return call(`/review/${reviewId}`, "POST", reviewDTO )
   .then((res) => {
-    // console.log("res: ", res);
     return res;
   })
 }
@@ -334,7 +294,6 @@ export function updateReview(reviewId,reviewDTO){
 export function deleteReview(reviewId){
   return call(`/review/${reviewId}`, "DELETE", null)
   .then((res) => {
-    // console.log("res: ", res);
     return res;
   })
 }
@@ -342,7 +301,6 @@ export function deleteReview(reviewId){
 export function userEmailCheck(){
   return call('/user/email', "GET", null)
   .then((res)=>{
-    // console.log("user Email res: ", res);
     return res;
   }
   )

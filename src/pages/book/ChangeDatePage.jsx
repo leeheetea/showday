@@ -45,7 +45,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
   const [isTimeClear, setIsTimeClear] = useState(false);
 
-  const { showTime } = state.showInfo[0];
+  const { showTime } = state.showInfo;
   const { bookDate, bookShowTime, seats } = state;
 
   useEffect(() => {
@@ -106,28 +106,20 @@ const ChangeDatePage = ({ onChangeDate }) => {
                 <span className="textLeft">{index + 1}회</span>
                 <span className="textRight">{time}:00</span>
               </li>
-              <li className="textLine">
-                <span className="textLeft">
-                  { /* 배우 정보는 변화만 보여주고자 넣은 임시 코드 */
-                    (selectedValue.getDate() % 2 === 0) ? '유승현, 최수진, 유성재, 청호준, 박세훈, 성재, 정종환, 박상선, 신요셉' : '성재, 정종환, 박상선, 신요셉'}
-                </span>
-              </li>
             </ul>
           ))}
         </LineContainer>
         <LineContainer width="30%" height="380px" isfrontcenter="true">
           <BookTitle isBottomLine>잔여석</BookTitle>
-          <ul>
-            <li className="textLine">
-              {seats.leftSeats[selectedTimeIndex]?.count &&
-                <>
+            { seats && seats.leftSeats[selectedTimeIndex]?.count &&
+              <ul>
+                <li className="textLine">
                   <span span className="textLeft">R석</span>
                   <span className="textRight">
                     {seats.leftSeats[selectedTimeIndex]?.count}
                   </span>
-                </>}
-            </li>
-          </ul>
+                </li>
+              </ul>}
         </LineContainer>
       </div>
     </div>

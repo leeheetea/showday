@@ -49,14 +49,14 @@ const customModalStyles = {
   },
 };
 
-const DetailMain = ({ data }) => {
-  const [shareModalIsOpen, setShareModalIsOpen] = useState(false);
 
+const DetailMain = ( {data} ) => {
+
+  const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
   
-  const showId = data.id; 
-
-  const url = "/show/"+showId
+  const showId = data;
+  const url = '/show/'+showId;
 
   useEffect(()=>{ 
     fetchShowItem();
@@ -65,7 +65,8 @@ const DetailMain = ({ data }) => {
   const fetchShowItem = async()=>{
     callAxios(url, setShowItems);
   }
-
+  console.log(showId);
+  
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">

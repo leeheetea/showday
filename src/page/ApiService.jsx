@@ -317,8 +317,33 @@ export function getName() {
 export function createReview(reviewDTO) {
   return call("/review", "POST", reviewDTO)
     .then((res) => {
-      console.log("res: ", res);
+      // console.log("res: ", res);
       return res;
 
     })
+}
+
+export function updateReview(reviewId,reviewDTO){
+  return call(`/review/${reviewId}`, "POST", reviewDTO )
+  .then((res) => {
+    // console.log("res: ", res);
+    return res;
+  })
+}
+
+export function deleteReview(reviewId){
+  return call(`/review/${reviewId}`, "DELETE", null)
+  .then((res) => {
+    // console.log("res: ", res);
+    return res;
+  })
+}
+
+export function userEmailCheck(){
+  return call('/user/email', "GET", null)
+  .then((res)=>{
+    // console.log("user Email res: ", res);
+    return res;
+  }
+  )
 }

@@ -3,14 +3,18 @@ import "../css/Review.css";
 import callPostAxios from '../util/callPostAxios';
 import axios from 'axios';
 import callAxios from '../util/callAxios';
-import { createReview } from '../page/ApiService';
+import { createReview, deleteReview, updateReview, userEmailCheck } from '../page/ApiService';
 import { useNavigate } from 'react-router-dom';
 
 
 const Review = ({data}) => {
-  const [selectedRating, setSelectedRating] = useState(null);
-  const [textarea, settexTarea] = useState('');
-  const [reviewItems, setReviewItems] = useState([]);
+  const [selectedRating, setSelectedRating] = useState(null); //별점
+  const [textarea, setTexTarea] = useState(''); // 리뷰내용
+  const [reviewItems, setReviewItems] = useState([]); // 리뷰 아이템
+  const [userEmail, setUserEmail] = useState([]); // 로그인 유저 이메일
+  const [editReviewContent, setEditReviewContent] = useState(''); //리뷰 수정 내용
+  const [isModalOpen,setIsModalOpen] =useState(false);//리뷰 수정 모달
+  const [selectedReviewId, setSelectedReviewId] = useState(null); // 리뷰 아이디
 
   const showId = data; 
   const url = "/review/"+showId;
@@ -18,55 +22,126 @@ const Review = ({data}) => {
     fetchReviewItem();
   },[showId]);
 
+  //리뷰 리스트 호출
   const fetchReviewItem = async()=>{
     callAxios(url,setReviewItems);
   }
-
+  //별점 
   const handleRatingChange = (event) => {
     const intValue = parseInt(event.target.value, 10);
     setSelectedRating(intValue);
   }
+  //리뷰 내용
   const handleTextareaChange = (event) => {
     const text = event.target.value;
-    settexTarea(text);
+    setTexTarea(text);
   }
-
+  //리뷰 평점
   const averageReviewGrade = reviewItems.length > 0
   ? reviewItems.reduce((sum, review) => 
     sum + review.reviewGrade, 0) / reviewItems.length
   : 0;
 
-  const formatTimestamp = (review) => {
+  //리뷰 날짜 표시
+  const reviewTime = (review) => {
     if (!review || !review.reviewTimestamp) {
       return "날짜 없음";
     }
-    const timestamp = new Date(review.reviewTimestamp);
-    if (isNaN(timestamp)) {
-      return "날짜 없음"; 
-    }
-    return timestamp.toISOString().slice(0, 23).replace('T', ' ');
+    const timestamp = review.reviewTimestamp;
+    return timestamp;
   };
-  const addReview = () => {
-    const timestamp = new Date();
-    const requestData = {
-      reviewText: textarea,
-      reviewGrade: selectedRating,
-      showId: showId,
-      reviewTimestamp: timestamp.toISOString()
-    };
+    
   
+  // 댓글 유저이메일
+  const reviewAuthEmail = (review)=>{
+    if(!review.authEmail){
+      return "익명";
+    }
+    const atIndex = review.authEmail.indexOf("@");
+    if (atIndex !== -1 && atIndex >= 2) {
+      const prefix = review.authEmail.substring(0, 2);
+      const asterisks = "*".repeat(atIndex - 2);
+      return prefix + asterisks + review.authEmail.substring(atIndex);
+    }
+    if (atIndex !== -1) {
+      return review.authEmail.substring(0, atIndex);
+    }
+    return review.authEmail;
+  }
+
+  //댓글 등록  
+  const addReview = () => {
+    const nowDate = new Date();
+    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    // console.log(timestamp);
+    const requestData = {
+      reviewGrade: selectedRating,
+      reviewText: textarea,
+      showId: showId,
+      reviewTimestamp: timestamp,
+    };
     createReview(requestData)
       .then((res) => {
         alert("리뷰가 성공적으로 등록되었습니다.");
-        // window.location.href=`/detailpage/${showId}`;
+        console.log("res===" + res);
+        fetchReviewItem();
+        setTexTarea('');
       }).catch((error) => {
       console.error("리뷰 등록 중 오류가 발생했습니다.", error);
       alert("리뷰 등록 중 오류가 발생했습니다.");
     });
   }
 
+// user email 
+ userEmailCheck()
+  .then((res)=>{
+    setUserEmail(res);               
+  }).catch((err)=>{
+    // console.error("유저 이메일 정보가 없습니다.",err);
+    setUserEmail(null);
+  });
+
+  //리뷰 수정
+  const handleEditClick = (reviewId, reviewText) => {
+    setEditReviewContent(reviewText);
+    setSelectedReviewId(reviewId);
+    setIsModalOpen(true);
+  };
+
+  const handleUpdateReview =(reviewId)=>{
+    const nowDate = new Date();
+    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    const requestData = {
+      reviewGrade: 5,
+      reviewText: editReviewContent,
+      showId: showId,
+      reviewTimestamp: timestamp,
+    };
+    updateReview(reviewId,requestData)
+      .then((res) => {
+        alert("리뷰가 성공적으로 수정되었습니다.");
+        console.log("res===" + res);
+        fetchReviewItem();
+      }).catch((error) => {
+      console.error("리뷰 수정 중 오류가 발생했습니다.", error);
+      alert("리뷰 등록 중 오류가 발생했습니다.");
+    });
+    setIsModalOpen(false);
+  }
 
   
+//리뷰 삭제
+const handleDeleteReview= (reviewId) =>{
+  deleteReview(reviewId)
+    .then((res) => {
+      alert("리뷰가 성공적으로 삭제되었습니다.");
+      console.log("res===" + res);
+      fetchReviewItem();
+    }).catch((error) => {
+    console.error("리뷰 삭제 중 오류가 발생했습니다.", error);
+    alert("리뷰 등록 중 오류가 발생했습니다.");
+  });
+}
 
   return (
     <div className='product_detail_tabcontent review_comment'>
@@ -110,7 +185,9 @@ const Review = ({data}) => {
                 <div className='comment_input_box'>
                   {/* <label className='comment blind'>관람후기 작성란</label> */}
                   <textarea className='comment_textarea' placeholder='관람후기를 남겨보세요!' 
-                    maxLength={300} onChange={handleTextareaChange}>
+                    maxLength={300} 
+                    value={textarea}
+                    onChange={handleTextareaChange}>
                   </textarea>
                 </div>
 
@@ -141,21 +218,37 @@ const Review = ({data}) => {
                 </span>
               </div>
               <div className='comment_content'>
-                <p className='comment_text'>{review.reviewText}</p>
+              <p className='comment_text'>{review.reviewText}</p>
               </div>
               <div className='product_comment_info'>
                   <span className='comment_id'>
-                  {review.authId}
+                  {reviewAuthEmail(review)}
                   </span>
                   &nbsp; &nbsp; 
                   <span className='comment_date'>
-                    {formatTimestamp(review)}
+                    {reviewTime(review)}
                   </span>
+                  {userEmail === review.authEmail && (
+                    <span>
+                      <button onClick={() => handleEditClick(review.reviewId, review.reviewText)}>수정</button>
+                      <button onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
+                    </span>   
+                  )}
               </div>
             </div>
           ))}
         </div>        
-
+           {/* 댓글 수정 modal */}
+           {isModalOpen && (
+              <div className="modal">
+                <input 
+                  type='text'
+                  value={editReviewContent}
+                  onChange={(e) => setEditReviewContent(e.target.value)}
+                />
+                <button onClick={() => handleUpdateReview(selectedReviewId)}>수정</button>
+              </div>
+            )}             
       </div> {/* review_comment_write */}
     </div> 
   );

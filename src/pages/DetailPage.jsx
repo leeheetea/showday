@@ -19,15 +19,15 @@ const DetailMainContainer = styled.div`
 `;
 const DetailPage = (props) => {
   const { id } = useParams();
-  const pageData = pagesData.find((data) => data.id === id);
+  // const pageData = pagesData.find((data) => data.id === id);
 
   return (
     <DetailMainContainer>
       <Header />
-      <DetailMain data={pageData} />
-      <Detail1 data={pageData} />
-      <Detail2 data={pageData} />
-      <DetailRecommend data={pageData} />
+      <DetailMain data={id} />
+      <Detail1 data={id} />
+      <Detail2 data={id} />
+      <DetailRecommend data={id} />
       <ToTopButton />
     </DetailMainContainer>
   );

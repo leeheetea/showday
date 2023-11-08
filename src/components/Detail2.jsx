@@ -7,6 +7,7 @@ import img3 from "../img/mapPage.PNG"
 import img4 from "../img/cancel.PNG"
 import callAxios from "../util/callAxios";
 import Review from "./Review";
+import ReservationInfor from "./ReservationInfor";
 
 const TabMenuContainter = styled.ul`
   font-weight: bold;
@@ -52,13 +53,12 @@ const DetailContainer = styled.div`
 
 
 
-const Detail2 = (props) => {
+const Detail2 = ({data}) => {
   const [currentTab, clickTab] = useState(0);
   
   const [showItems, setShowItems] = useState([]);
   
-  const showId = props.data.id;
-  // const showId = 1;
+  const showId = data;
   const url = "/show/"+showId;
   
   useEffect(()=>{ 
@@ -85,7 +85,7 @@ const Detail2 = (props) => {
       content: <img className="mapPage" src={img3} style={{width:"100%"}}  alt="" /> },
     { id: 4, 
       name: "예매/취소", 
-      content: <img className="cancel" src={img4}  style={{width:"100%"}}  alt="" /> },
+      content: <ReservationInfor/> },
   ];
 
   const selectMenuHandler = (index) => {

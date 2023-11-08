@@ -1,4 +1,5 @@
 import React from "react";
+import StyledLink from "./styled";
 
 const TicketingCancle = () => {
   return (
@@ -48,7 +49,11 @@ const TicketingCancle = () => {
           </thead>
           <tbody>
             <tr>
-              <td>1235468-516351</td>
+              <td>
+                <StyledLink to="/mypage/ticketingdetail">
+                  1235468-516351
+                </StyledLink>
+              </td>
               <td>문라이트</td>
               <td>2023-01-01</td>
               <td>2</td>

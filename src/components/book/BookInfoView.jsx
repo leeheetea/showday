@@ -23,10 +23,10 @@ const BookInfoView = ({childern}) => {
   const userState = useSelector((state) => state.userInfo);
 
   // state에서 화면에 표시할 공연 정보 선언
-  const { id, title, price, url } = state.showInfo[0];
-  const { bookDate, bookShowTime, totalPrice, bookStep } = state;
+  const { id, title, price, url } = state;
+  const { bookDate, bookShowTime, totalPrice, bookStep } = state.bookingData;
   const { name, phone, email } =  userState;
-  const myBookSeatList = state.seats.myBookSeats;
+  const myBookSeatList = state.bookingData.myBookSeats;
   const accountList = ["우리 1002-1111-1111", "하나 222-2222-2222-222", "신한 333-33333-3333-33"];
   const [payName,  setPayName] = useState('');
   const [payAccount, setPayAccount] = useState("");
@@ -47,6 +47,7 @@ const BookInfoView = ({childern}) => {
 
   useEffect(() => {
     handleInfoUpdate();
+    //console.log(">>> totalPrice : ", totalPrice);
   }, [handleInfoUpdate]);
 
   // 이전버튼 클릭시(예매 스텝에 따라 버튼 및 예매 빠져나가기 처리)

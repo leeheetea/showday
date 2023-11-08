@@ -9,14 +9,15 @@ import BookInfoView from "../../components/book/BookInfoView";
 import "./BookMainPage.css";
 
 const BookMainPage = () => {
-  const { id } = useParams();
+  const { id, index } = useParams();
   const navigator = useNavigate();
   const booksDatas = useSelector((state) => state.booksData);
-  const [currentTab, setCurrentTab] = useState(booksDatas.bookStep);
+  const [currentTab, setCurrentTab] = useState(booksDatas.bookStep ?? 2);
 
-  const handleStepClick = (index) => {
-    setCurrentTab(index);
-    navigator("/book/" + id + "/" + index);
+  const handleStepClick = (e) => {
+    setCurrentTab(e);
+    //console.log(`>>> id : ${id}, currentTab : ${currentTab} e : ${e}`);
+    navigator("/book/" + id + "/" + currentTab);
   };
 
   const handleChangDate = (e) => {
@@ -31,9 +32,9 @@ const BookMainPage = () => {
     <>
       <Header />
       <div className="rootWrapper">
-        <BookHeader id={id} step={currentTab} onBookStepClick={handleStepClick} />
+        <BookHeader showId={id} index={currentTab} onBookStepClick={handleStepClick} />
         <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
-          <Outlet context={id} onChangeDate={handleChangDate} />
+          <Outlet showId={id} step={currentTab} onChangeDate={handleChangDate} />
         </div>
         {currentTab !== 5 && <BookInfoView />}
       </div>

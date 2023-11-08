@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import musicalData from "../musicalData.json";
 import concertData from "../concertData.json";
 import theatreData from "../theatreData.json";
+import bookData from "../bookData.json";
 import faqSlice from "./faqSlice";
 import totalData from "../totalData.json";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -58,98 +59,50 @@ const theatreSlice = createSlice({
   },
 });
 
-const initialBooksState = {
-  bookId: 1, // 예약번호
-  userInfo: {
-    userId: "1",
-    name: "홍박사",
-    phone: "01022223333",
-    email: "abctest@test.com",
-  },
-  showInfo: [
-    // 예약 선택 공연 정보
-    {
-      id: "1001",
-      ranking: 1,
-      title: "노엘 갤러거 하이 플라잉 버즈",
-      bannerUrl: "",
-      url: "https://ticketimage.interpark.com/Play/image/large/23/23010643_p.gif",
-      place: "잠실 실내체육관",
-      period: "2023.11.27 ~2023.11.28",
-      price: "143,000원",
-      detail:
-        "https://ticketimage.interpark.com/Play/image/etc/23/23010643-05.jpg",
-      showType: "concert",
-      showTime: [11, 13],
-    },
-  ],
-  bookDate: "2023.04.01", // 예약 선택 날짜
-  bookCompleteTime: "12:30", // 예약 선택 시간
-  bookShowTime: "12:30", // 예약 선택 시간
-  bookShowTimeOrder: 1,
-  bookStep: 2,
-  confirms : {step4: false},
-  youtDiscount: -15,
-  totalPrice: {
-    sumPrice: 0,
-    sumYoutPrice: 0,
-    sumDiscount: 0,
-    resultTotalPrice: 0,
-  },
-  seats: {
-    /*
-    leftSeats: [
-      { count: 198, bookSeats: ["1_R3_A", "1_R4_A"] },
-      { count: 199, bookSeats: ["1_R7_A"] },
-      { count: 200, bookSeats: [] },
-    ],
-    */
-    reservedSeats: [
-      { seat_id: 1, seat_row: 3, set_column: 3 },
-      { seat_id: 2, seat_row: 3, set_column: 4 },
-      { seat_id: 3, seat_row: 3, set_column: 5 },
-    ],
-    myBookSeats: ["5@1", "5@2", "5@3"],
-  },
-};
+const initialBooksState = bookData;
 
 const booksSlice = createSlice({
   name: "booksData",
   initialState: initialBooksState,
   reducers: {
+    setShowInfo: (state, action) => {
+      state.showInfo = action.payload.info;
+    },
     setBookInfo: (state, action) => {
-      state.showInfo[0] = action.payload.props.data;
-      state.bookDate = moment(action.payload.selectedValueMs).format(
+      //console.log(state, action.payload);
+
+      //state.showInfo = action.payload.props.data;
+      state.bookingData.bookDate = moment(action.payload.selectedValueMs).format(
         "YYYY.MM.DD"
       );
-      state.bookShowTime = util.getItemFromString(
+        state.bookingData.bookShowTime = util.getItemFromString(
         action.payload.choosedShowTime
       );
     },
     setTotalPrice: (state, action) => {
-      state.totalPrice = action.payload;
+        state.bookingData.totalPrice = action.payload;
     },
 
     setBookStep: (state, action) => {
       //console.log("[booksSlice]", action.payload.bookStep);
-      state.bookStep = action.payload.bookStep;
+        state.bookingData.bookStep = action.payload.bookStep;
     },
 
     setBookDateTime: (state, action) => {
-      state.bookDate = moment(action.payload.selectedValueMs).format(
+        state.bookingData.bookDate = moment(action.payload.selectedValueMs).format(
         "YYYY.MM.DD"
       );
-      state.bookShowTime = action.payload.choosedShowTime;
-      state.bookShowTimeOrder = action.payload.bookShowTimeOrder;
+        state.bookingData.bookShowTime = action.payload.choosedShowTime;
+        state.bookingData.bookShowTimeOrder = action.payload.bookShowTimeOrder;
     },
 
     setMyBookSeats: (state, action) => {
-      state.seats.myBookSeats = action.payload.myBookSeats;
+        state.bookingData.myBookSeats = action.payload.myBookSeats;
       //console.log(">>>2_after" + state.seats.myBookSeats);
     },
 
     setConfirms: (state, action) => {
-      state.confirms = action.payload;
+        state.bookingData.bookDate.confirms = action.payload;
     }
   },
 });
@@ -206,6 +159,7 @@ export const {
   setTheatres
 } = theatreSlice.actions;
 export const {
+  setShowInfo,
   setBookInfo,
   setTotalPrice,
   setBookStep,

@@ -29,6 +29,10 @@ const getItemFromString = (time) => {
 
 const getMarkThousand = (number) => {
   //console.log("(getMarkThousand) number : ", number);
+    if(number !== null && number === undefined) {
+        console.log(`">>> $(number)값을 확인해 주세요."`);
+        return "0";
+    }
 
   const checkingValue = "원";
   let toNumberString = number
@@ -41,6 +45,11 @@ const getMarkThousand = (number) => {
 };
 
 const getRemoveMarkThousand = (numberString) => {
+  // console.log(`>>> numberString : ${numberString}`);
+  if(numberString === null || numberString === "") {
+    console.log('>>> 변환 전 값이 null 또는 빈 문자열 입니다.');
+    return 0;
+  }
   let toNumber = numberString.replace(",", "");
   toNumber = toNumber.replace("원", "");
   return toNumber;
@@ -60,6 +69,18 @@ const getAboutDelimiter = (type, delimiter, str1, str2) =>{
   }
 }
 
+const checkTimeStringFor = (timeStr) => {
+    const timePattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
+
+    if (timePattern.test(timeStr)) {
+        console.log("유효한 시간 형식입니다.");
+        return true;
+    } else {
+        console.log("유효하지 않은 시간 형식입니다.");
+        return false;
+    }
+}
+
 export default {
   dateFormat,
   getItemFromString,
@@ -67,4 +88,5 @@ export default {
   getMarkThousand, // 천단위 자릿수 표시 + '원'추가
   getRemoveMarkThousand, // 천단위 및 '원' 제거 후 숫자만 반환
   getAboutDelimiter,
+  checkTimeStringFor,
 };

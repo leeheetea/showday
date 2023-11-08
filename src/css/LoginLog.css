@@ -11,63 +11,16 @@
 }
 
 .loginlog-details {
-  padding-left: 30px;
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  grid-column: 1; 
+  margin-left: 30px;
 }
 
 .loginlog-details p {
-  display: flex;
+  text-align: left;
 }
 
-
-/* Button specific styling */
-button {
-
-  border: none;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: #cccccc;
-}
-
-
-/* Align the '보기' button next to the password input */
-.inputArea_password {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.inputArea_password button {
-  margin-left: 10px;
-}
-
-/* Error message styling */
-.errorText {
-  color: #ff0000;
-  font-size: 0.8rem;
-}
-
-/* Utility classes for layout */
-.uBlock {
-  margin-bottom: 20px;
-}
-
-.uBlock_checkBlock,
-.uBlock_validation {
-  margin-top: 10px;
-}
-
-/* Styling for labels and inputs for readability */
-.label,
-.inputArea_password label,
-.inputArea_id label,
-.inputArea_name label,
-.inputArea_phone label,
-.inputArea_email label {
-  display: block;
-  margin-bottom: .5rem;
-  font-weight: bold;
-  text-align: center;
-  align-items: center;
+.loginlog-details span {
+  text-align: left;
 }

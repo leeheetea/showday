@@ -94,12 +94,11 @@ const LoginLog = () => {
             <div className='loginlog-container'>
             <h1>로그인 관리</h1>
                 <div className='loginlog-details'>
-                    
-                    <p>로그인 타입 <span>{loginTypeStr}</span></p>
-                    <p>최근 접속일시 <span>{loginDate.toLocaleString()}</span></p>
-                    <p>운영체제 <span>{OS}</span></p>
-                    <p>브라우저/앱 <span>{browser}</span></p>
-                    <p>IP <span>{payloadData.ipAddress}</span></p>
+                    <p>로그인 타입 </p><p>{loginTypeStr}</p>
+                    <p>최근 접속일시 </p><p>{loginDate.toLocaleString()}</p>
+                    <p>운영체제 </p><p>{OS}</p>
+                    <p>브라우저/앱 </p><p>{browser}</p>
+                    <p>IP </p><p>{payloadData.ipAddress}</p>
                 </div>
                 
             </div>

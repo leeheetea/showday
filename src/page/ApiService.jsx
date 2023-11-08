@@ -147,6 +147,15 @@ export function logout() {
               localStorage.removeItem("REMAINING_TIME");
               resolve();
             })
+            .catch((error) => {
+              console.error("logout error", error);
+              if (error instanceof Error && error.message.includes("User not found with id")) {
+                localStorage.clear();
+                window.location.reload();
+              } else {
+                console.error("Unexpected error occured during logout: ", error);
+              }
+            })
         }
       })
 
@@ -167,6 +176,15 @@ export function logout() {
           localStorage.removeItem("REMAINING_TIME");
           resolve();
         })
+        .catch((error) => {
+          console.error("logout error", error);
+          if (error instanceof Error && error.message.includes("User not found with id")) {
+            localStorage.clear();
+            window.location.reload();
+          } else {
+            console.error("Unexpected error occured during logout: ", error);
+          }
+        })
     }
 
     else {
@@ -177,8 +195,18 @@ export function logout() {
           console.log(localStorage.getItem("REMAINING_TIME"));
           localStorage.removeItem("ACCESS_TOKEN");
           localStorage.removeItem("REMAINING_TIME");
+          // localStorage.clear();
           console.log(localStorage.getItem("REMAINING_TIME"));
           resolve();
+        })
+        .catch((error) => {
+          console.error("logout error", error);
+          if (error instanceof Error && error.message.includes("User not found with id")) {
+            localStorage.clear();
+            window.location.reload();
+          } else {
+            console.error("Unexpected error occured during logout: ", error);
+          }
         })
     }
   });
@@ -250,8 +278,8 @@ export function updatePassword(userDTO) {
 
 export function getName() {
   return call("/user/name/request", "POST",)
-  .then((response) => {
-    console.log(response);
-    return response;
-  })
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
 }

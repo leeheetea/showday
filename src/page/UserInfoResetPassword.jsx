@@ -3,16 +3,25 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { matchPassword, resetPassword } from './ApiService';
 import { useNavigate } from 'react-router-dom';
+import '../css/UserInfoResetPassword.css'
 
 const UserInfoResetPassword = () => {
 
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(true);
 
   const onChangeOldPassword = useCallback((e) => {
     setOldPassword(e.target.value);
   }, [])
+
+  const token = localStorage.getItem('ACCESS_TOKEN');
+  let payloadData = {};
+  if (token) {
+    const payloadBase64 = token.split('.')[1];
+    payloadData = JSON.parse(atob(payloadBase64));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +29,10 @@ const UserInfoResetPassword = () => {
     matchPassword({ password: oldPassword })
       .then((res) => {
         setMessage(res);
+        setShowPassword(prev => !prev);
+      })
+      .catch((error) =>{
+        
       })
   }
 
@@ -102,34 +115,48 @@ const UserInfoResetPassword = () => {
   return (
     <div>
       <Header />
-      <div className="grid-container">
+      <div className="resetPassword-container">
         <form onSubmit={handleSubmit}>
-          {/* <div>
-          <label htmlFor="password">비밀번호 </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder='비밀번호를 입력해주세요.'
-          /> */}
-          <div className='uBlock'>
-            <div className="inputArea_password">
-              <div className='inputAreaLabel'>
-                <label htmlFor="password">비밀번호</label>
+
+          {showPassword &&(<div>
+            <div className='uBlock'>
+              <div className="inputArea_id">
+                <label htmlFor="id">아이디</label>
                 <input
-                  type='password'
-                  placeholder='비밀번호를 입력해주세요'
-                  name='oldPassword'
-                  id='oldPassword'
-                  value={oldPassword}
-                  onChange={onChangeOldPassword}
+                  type="text"
+                  name='id'
+                  id='id'
+                  value={payloadData.username}
                 />
               </div>
             </div>
-          </div>
-          <div className='submitBtn'>
-            <button type='submit' disabled={!oldPassword}>비밀번호 확인</button>
-          </div>
+            {/* <div>
+            <label htmlFor="password">비밀번호 </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder='비밀번호를 입력해주세요.'
+            /> */}
+            <div className='uBlock'>
+              <div className="inputArea_password">
+                <div className='inputAreaLabel'>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    type='password'
+                    placeholder='비밀번호를 입력해주세요'
+                    name='oldPassword'
+                    id='oldPassword'
+                    value={oldPassword}
+                    onChange={onChangeOldPassword}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='submitBtn'>
+              <button type='submit' disabled={!oldPassword}>비밀번호 확인</button>
+            </div>
+          </div>)}
 
           {/* </div> */}
         </form>

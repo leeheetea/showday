@@ -4,11 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 import "../css/ResponsiveSlider.css";
-import callAxios from "../util/callAxios";
+import axios from "axios";
 
 const ResponsiveSlider = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
   const navigator = useNavigate();
+
+  let page = 0;
+  let size = 10;
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,15 +26,27 @@ const ResponsiveSlider = () => {
   }, []);
 
   const [showItems, setShowItems] = useState([]);
-  const url = "/show/banner"
+  const url = "/show/banner";
 
-  useEffect(()=>{
-    fetchShowItem();
-  },[]);
+  useEffect(() => {
+    fetchShowItem(page, size);
+  }, []);
 
-  const fetchShowItem = async()=>{
-    callAxios(url, setShowItems);
-  }
+  const fetchShowItem = async (page, size) => {
+    try {
+      const response = await axios.get(url, {
+        params: {
+          page: page,
+          size: size,
+        },
+      });
+      setShowItems(response.data);
+      console.log("showItems", showItems);
+      console.log("response", response.data);
+    } catch (error) {
+      alert("배너 이미지 로딩 중 에러가 발생했습니다.");
+    }
+  };
 
   const images = isLargeScreen
     ? showItems.map((item) => ({ url: item.bannerUrl, id: item.showId }))
@@ -83,11 +98,10 @@ const ResponsiveSlider = () => {
     <div className="responsive-slider-container">
       <Slider {...settings}>
         {images.map((item, index) => (
-          <div key={index}>
+          <div key={item.url}>
             <img
               onClick={() => {
                 navigator(`/detailpage/${item.id}`);
-
               }}
               className="responsive-slider"
               src={item.url}

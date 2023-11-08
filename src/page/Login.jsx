@@ -30,8 +30,7 @@ const Login = () => {
       navigate('/');
     })
     .catch((error) => {
-      console.log("error", error);
-      alert("로그인 중 오류가 발생했습니다.")
+      navigate('/login');
     })
     
     // const data = new FormData(e.target);

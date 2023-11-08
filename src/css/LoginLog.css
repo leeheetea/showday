@@ -1,0 +1,26 @@
+/* Styles for the container */
+.loginlog-container {
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #fff;
+  /* white background for the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* subtle shadow for a bit of depth */
+}
+
+.loginlog-details {
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  grid-column: 1; 
+  margin-left: 30px;
+}
+
+.loginlog-details p {
+  text-align: left;
+}
+
+.loginlog-details span {
+  text-align: left;
+}

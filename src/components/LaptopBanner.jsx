@@ -1,21 +1,35 @@
 import React, {useEffect, useState} from "react";
 import "../css/LaptopBanner.css";
 import { Link } from "react-router-dom";
-import callAxios from "../util/callAxios";
+import axios from "axios";
 
 
 const LaptopBanner = () => {
+
+  let page = 0;
+  let size = 10;
 
   const [showItems, setShowItems] = useState([]);
   const url = "/show/small-banner"
 
   useEffect(()=>{
-    fetchShowItem();
+    fetchShowItem(page, size);
   },[]);
 
-  const fetchShowItem = async()=>{
-    callAxios(url, setShowItems);
-  }
+  const fetchShowItem = async (page, size) => {
+    try {
+      const response = await axios.get(url, {
+        params: {
+          page: page,
+          size: size
+        }
+      });
+      setShowItems(response.data);
+      console.log("showItems", showItems.data);
+    } catch (error) {
+      alert("작은 배너 이미지 로딩 중 에러가 발생했습니다.")
+    }
+  };
 
   return (
 

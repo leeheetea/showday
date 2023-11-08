@@ -6,41 +6,41 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import utils from '../utils.js'
-import { setBookInfo, setBookStep, setBookDateTime } from '../store/slice'
+import { setBookInfo, setBookStep } from "../store/slice";
 
 const DetailContainer = styled.div`
-  display: flex; 
+  display: flex;
   justify-content: center;
-  
+
   border: 1.5px solid gray;
   border-radius: 5px;
   padding: 10px;
   min-width: 28rem;
 
-  .detailBox{
-    width:500px;
+  .detailBox {
+    width: 500px;
   }
-  .detailTitle{
+  .detailTitle {
     color: red;
   }
 
   hr {
     width: 100%;
     padding: 0;
-    margin: 0 2rem 0 2rem ;
+    margin: 0 2rem 0 2rem;
   }
 
-  input{
+  input {
     margin-bottom: 2rem;
   }
-  input, label{
-    cursor:pointer;
+  input,
+  label {
+    cursor: pointer;
   }
 
   @media screen and (max-width: 800px) {
     width: 80%;
-    flex-direction: column; 
+    flex-direction: column;
     padding: 2rem;
 
     hr {
@@ -48,14 +48,14 @@ const DetailContainer = styled.div`
       padding: 0;
       margin: 2rem 0 2rem 0;
     }
-    
-    .detailBox2{
+
+    .detailBox2 {
       padding: 0;
     }
-    .inputRadioCheck{
-      padding: 0 ;
+    .inputRadioCheck {
+      padding: 0;
     }
-    .detailBox2{
+    .detailBox2 {
       width: 100%;
     }
   }
@@ -88,28 +88,9 @@ const FormCheckText = styled.span`
   color: #777;
 `;
 
-const FormCheckLeft = styled.input.attrs({ type: "radio" })`
-  &:checked {
-    display: inline-block;
-    background: none;
-    padding: 0px 10px;
-    text-align: center;
-    height: 35px;
-    line-height: 33px;
-    font-weight: 500;
-    display: none;
-  }
-  &:checked + ${FormCheckText} {
-    background: black;
-    color: #fff;
-  }
-  display: none;
-`;
-
 const Detail1 = (props) => {
   const navigator = useNavigate();
   const bookDispatch = useDispatch();
-  const state = useSelector((state) => state.booksData);
 
   const [selectedValue, setSelectedValue] = useState(new Date());
   const [choosedShowTime, setChoosedShowTime] = useState(null);
@@ -122,7 +103,6 @@ const Detail1 = (props) => {
 
   /* 예매하기 버튼 선택 클릭 이벤트 */
   const handleClickBookBtn = () => {
-    let selectedValueMs = selectedValue.getTime(); // 직렬화 하라느 오류때문에 getTime 함수 한 번 변환 거침
     // 회차 선택 여부 체크
     if (choosedShowTime === null) {
       alert("관람을 원하시는 공연 시간(회차)을 선택해주세요.");
@@ -154,29 +134,7 @@ const Detail1 = (props) => {
         <div className="detailBox detailBox2">
           <h3 className="detailTitle">STEP2</h3>
           <h3>회차 선택</h3>
-          <div className="detailLabel">
-            {/* {props.data.showTime.map((time, index) => (
-              <div key={index}>
-                <label>
-                  <div className="detailLabelContainer">
-                    <FormCheckLeft
-                      className="inputRadioCheck"
-                      type="radio"
-                      name="radioButton"
-                      onClick={(e) => setChoosedShowTime(e.target.value)}
-                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
-                      checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
-                      onChange={(e) => {setChoosedShowTime(e.target.value);}}
-                    />
-                    <FormCheckText>
-                      {utils.dateFormatForButton(selectedValue) +" " +time +"시"}
-                    </FormCheckText>
-                  </div>
-                </label>
-                <br />
-              </div>
-            ))} */}
-          </div>
+          <div className="detailLabel">{}</div>
         </div>
       </DetailContainer>
       <ButtonContainer>

@@ -10,6 +10,7 @@ const UserInfoModify = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [userData, setUserData] = useState('');
+  const [showPassword, setShowPassword] = useState(true);
 
   const [showResetEmail, setShowResetEmail] = useState(false);
   const toggleShowEmailform = () => {
@@ -23,6 +24,7 @@ const UserInfoModify = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+    
   }
 
   const handleSubmit = (e) => {
@@ -31,6 +33,10 @@ const UserInfoModify = () => {
     getUserInfo({ password: password })
       .then(data => {
         setUserData(data);
+        setShowPassword(prev => !prev);
+      })
+      .catch((error) =>{
+        
       })
   }
 
@@ -113,29 +119,32 @@ const UserInfoModify = () => {
   return (
     <div>
       <Header />
-      <div class="grid-container">
+      <div class="userInfoModify-container">
         <form onSubmit={handleSubmit}>
-          <div className='uBlock'>
-            <div className="inputArea_password">
-              <div className='inputAreaLabel'>
-                <label htmlFor="password">비밀번호</label>
-                <input
-                  type={passwordVisible ? 'text' : 'password'}
-                  placeholder='비밀번호를 입력해주세요'
-                  name='password'
-                  id='password'
-                  value={password}
-                  onChange={onChangePassword}
-                />
-              </div>
-              <div>
-                <button type='button' onClick={togglePasswordVisibility}>보기</button>
+
+          {showPassword &&(<div>
+            <div className='uBlock'>
+              <div className="inputArea_password">
+                <div className='inputAreaLabel'>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    type={passwordVisible ? 'text' : 'password'}
+                    placeholder='비밀번호를 입력해주세요'
+                    name='password'
+                    id='password'
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                </div>
+                <div>
+                  <button type='button' onClick={togglePasswordVisibility}>보기</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='submitBtn'>
-            <button type='submit' disabled={!password}>비밀번호 확인</button>
-          </div>
+            <div className='submitBtn'>
+              <button type='submit' disabled={!password}>비밀번호 확인</button>
+            </div>
+          </div>)}
 
           {/* </div> */}
         </form>
@@ -200,14 +209,8 @@ const UserInfoModify = () => {
                   ref={emailInputRef}
                   readOnly={isEmailVerified}
                 />
-                <div>
-                  <button
-                    type='button'
-                    disabled={isEmailVerified}
-                    onClick={toggleShowEmailform}
-                    >수정</button>
-                </div>
-                <div>
+
+                
                   <label htmlFor="">
                     <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
                       <option value="">직접입력</option>
@@ -218,7 +221,14 @@ const UserInfoModify = () => {
                       <option value="@hotmail.com">@hotmail.com</option>
                     </select>
                   </label>
-                </div>
+                
+                
+                  <button
+                    type='button'
+                    disabled={isEmailVerified}
+                    onClick={toggleShowEmailform}
+                  >수정</button>
+             
               </div>
               <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
                 이메일 주소 양식에 맞게 작성해주세요.
@@ -246,13 +256,8 @@ const UserInfoModify = () => {
                     ref={emailInputRef}
                     readOnly={isEmailVerified}
                   />
-                  <div>
-                    <button
-                      type='button'
-                      disabled={isEmailVerified}
-                      onClick={() => handleEmailAuth({ email })}>인증</button>
-                  </div>
-                  <div>
+
+                  
                     <label htmlFor="">
                       <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
                         <option value="">직접입력</option>
@@ -263,7 +268,14 @@ const UserInfoModify = () => {
                         <option value="@hotmail.com">@hotmail.com</option>
                       </select>
                     </label>
-                  </div>
+                  
+
+               
+                    <button
+                      type='button'
+                      disabled={isEmailVerified}
+                      onClick={() => handleEmailAuth({ email })}>인증</button>
+                 
                 </div>
                 <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
                   이메일 주소 양식에 맞게 작성해주세요.

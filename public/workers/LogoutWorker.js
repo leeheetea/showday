@@ -16,8 +16,8 @@ const countDown = () => {
         postMessage('logout');
         return;
     }
+
     postMessage(remainingTime);
     setTimeout(countDown, 1000);
 };
 
-countDown();

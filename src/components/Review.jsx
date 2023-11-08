@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../css/Review.css";
-import callPostAxios from '../util/callPostAxios';
-import axios from 'axios';
 import callAxios from '../util/callAxios';
-import { createReview, deleteReview, updateReview, userEmailCheck } from '../page/ApiService';
+import { createReview, deleteReview, getReviewInfo, updateReview, userEmailCheck } from '../page/ApiService';
 import { useNavigate } from 'react-router-dom';
 
 
 const Review = ({data}) => {
+  const navigate = useNavigate();
+  const modalRef = useRef(null); //모달 
+
   const [selectedRating, setSelectedRating] = useState(null); //별점
+  const [reviewRating, setReviewRating] = useState(null); //수정별점
   const [textarea, setTexTarea] = useState(''); // 리뷰내용
   const [reviewItems, setReviewItems] = useState([]); // 리뷰 아이템
   const [userEmail, setUserEmail] = useState([]); // 로그인 유저 이메일
   const [editReviewContent, setEditReviewContent] = useState(''); //리뷰 수정 내용
   const [isModalOpen,setIsModalOpen] =useState(false);//리뷰 수정 모달
   const [selectedReviewId, setSelectedReviewId] = useState(null); // 리뷰 아이디
+  const [scrollPosition, setScrollPosition] = useState(0); //스크롤 포지션
 
   const showId = data; 
   const url = "/review/"+showId;
@@ -49,8 +52,7 @@ const Review = ({data}) => {
     }
     const timestamp = review.reviewTimestamp;
     return timestamp;
-  };
-    
+  }; 
   
   // 댓글 유저이메일
   const reviewAuthEmail = (review)=>{
@@ -71,27 +73,42 @@ const Review = ({data}) => {
 
   //댓글 등록  
   const addReview = () => {
-    const nowDate = new Date();
-    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
-    // console.log(timestamp);
-    const requestData = {
-      reviewGrade: selectedRating,
-      reviewText: textarea,
-      showId: showId,
-      reviewTimestamp: timestamp,
-    };
-    createReview(requestData)
-      .then((res) => {
-        alert("리뷰가 성공적으로 등록되었습니다.");
-        console.log("res===" + res);
-        fetchReviewItem();
-        setTexTarea('');
-      }).catch((error) => {
-      console.error("리뷰 등록 중 오류가 발생했습니다.", error);
-      alert("리뷰 등록 중 오류가 발생했습니다.");
-    });
-  }
+      if (!selectedRating){
+        alert("별점을 등록해주세요.");
+        return ;
+      }
+      if(!textarea){
+        alert("관람 후기를 입력해주세요.");
+        return ;
+      }
+      if (userEmail) {
+        const nowDate = new Date();
+        const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
 
+        const requestData = {
+          reviewGrade: selectedRating,
+          reviewText: textarea,
+          showId: showId,
+          reviewTimestamp: timestamp,
+        };
+
+        createReview(requestData)
+          .then((res) => {
+            alert("리뷰가 성공적으로 등록되었습니다.");
+            console.log("res===" + res);
+            fetchReviewItem();
+            setTexTarea('');
+            setSelectedRating(null); 
+          }).catch((error) => {
+          console.error("리뷰 등록 중 오류가 발생했습니다.", error);
+          alert("리뷰 등록 중 오류가 발생했습니다.");
+        });
+      }else {
+        alert("로그인이 필요합니다.");
+        navigate('/login');
+      }
+
+}
 // user email 
  userEmailCheck()
   .then((res)=>{
@@ -111,7 +128,18 @@ const Review = ({data}) => {
   const handleUpdateReview =(reviewId)=>{
     const nowDate = new Date();
     const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+
+    getReviewInfo(reviewId)
+    .then((reviewInfo) => {
+      setReviewRating(reviewInfo.reviewGrade);
+    }).catch((e)=>{
+      console.log("리뷰 데이터를 받아오지 못했습니다.");
+      console.log(e);
+    }
+    );
+
     const requestData = {
+      reviewId: reviewId,
       reviewGrade: 5,
       reviewText: editReviewContent,
       showId: showId,
@@ -129,7 +157,6 @@ const Review = ({data}) => {
     setIsModalOpen(false);
   }
 
-  
 //리뷰 삭제
 const handleDeleteReview= (reviewId) =>{
   deleteReview(reviewId)
@@ -142,6 +169,46 @@ const handleDeleteReview= (reviewId) =>{
     alert("리뷰 등록 중 오류가 발생했습니다.");
   });
 }
+
+// 스크롤 이벤트 핸들러
+const handleScroll = () => {
+  setScrollPosition(window.scrollY);
+};
+useEffect(() => {
+  window.addEventListener('scroll', handleScroll);
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+// 모달의 스타일 설정
+const modalStyle = {
+  top: `50%`, 
+  transform: `translateY(-40%)`, 
+  left: `50%`, 
+  // eslint-disable-next-line no-dupe-keys
+  transform: `translateX(-40%)`, 
+  position: 'fixed',
+};
+//모달 닫기
+const closeModal = () => {
+  setIsModalOpen(false);
+};
+//모달 외부 클릭 시
+const handleModalClick = (event) => {
+  if (modalRef.current && !modalRef.current.contains(event.target)) {
+    closeModal();
+  }
+};
+useEffect(() => {
+  window.addEventListener('scroll', handleScroll);
+  document.addEventListener('mousedown', handleModalClick);
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    document.removeEventListener('mousedown', handleModalClick);
+  };
+}, []);
+
 
   return (
     <div className='product_detail_tabcontent review_comment'>
@@ -228,10 +295,12 @@ const handleDeleteReview= (reviewId) =>{
                   <span className='comment_date'>
                     {reviewTime(review)}
                   </span>
+
                   {userEmail === review.authEmail && (
                     <span>
-                      <button onClick={() => handleEditClick(review.reviewId, review.reviewText)}>수정</button>
-                      <button onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
+                        <button className="handleEditClick handleBtn" onClick={() => handleEditClick(review.reviewId, review.reviewText)}>수정</button>
+                        {"/"}
+                        <button className="handleDeleteReview handleBtn" onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
                     </span>   
                   )}
               </div>
@@ -240,7 +309,7 @@ const handleDeleteReview= (reviewId) =>{
         </div>        
            {/* 댓글 수정 modal */}
            {isModalOpen && (
-              <div className="modal">
+              <div className="modal updateReviewText" style={modalStyle} ref={modalRef}>
                 <input 
                   type='text'
                   value={editReviewContent}

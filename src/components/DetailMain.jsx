@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
+import { readShowData, readVenueItem } from "../page/ApiService";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -54,24 +55,48 @@ const DetailMain = ( {data} ) => {
 
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
+  // const [venueItems, setVenueItems] = useState([]);
   
   const showId = data;
-  const url = '/show/'+showId;
+  // const url = '/show/'+showId;
 
   useEffect(()=>{ 
     fetchShowItem();
   },[showId]);
 
   const fetchShowItem = async()=>{
-    callAxios(url, setShowItems);
+    getShowData(showId);
   }
-  console.log(showId);
-  
+
+  const getShowData = (showId)=>{
+    readShowData(showId)
+    .then((res)=>{
+      console.log(res);
+      setShowItems(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
+//  const getVenueItem= (venueId)=>{
+//   if(venueId){
+//     readVenueItem(venueId)
+//     .then((res)=>{
+//       console.log(res);
+//       setVenueItems(res);
+//     }).catch((err)=>{
+//       console.log("공연 장소 이름 가지고 오기 실패!");
+//       console.error(err);
+//     });
+//   }
+// }
+
+
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
         <div className="detailMain_content_img">
-          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
+          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/"/>
         </div>
 
         <div className="product_detail_info">
@@ -96,18 +121,19 @@ const DetailMain = ( {data} ) => {
           <div className="product_info_list1">
             <li className="product_info_item">
               <InfoTitle className="product_info_title">장소</InfoTitle>
-              <div>{showItems.venueId}</div>
+              <div>{showItems.venueName}</div>
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">기간</InfoTitle>
-              {/* <div>{showItems.showSchedules}</div> */}
+              <div>{showItems.period}</div>
             </li>
 
             <li className="product_info_item">
               <InfoTitle className="product_info_title">가격</InfoTitle>
               <div>{showItems.price}</div>
             </li>
+
           </div>
         </div>
       </MainImgTextContainer>

@@ -190,10 +190,6 @@ input[type="file"] {
   font-weight: bold;
 }
 
-.comment_rating {
-  
-}
-
 .comment_content {
   margin-top: 10px;
 }
@@ -217,4 +213,52 @@ input[type="file"] {
 .product_comment_info{
   font-size: 10px;
   color: lightslategray;
+}
+
+
+/* 수정 삭제 버튼 */
+.handleBtn{
+  border: none;
+  background: none;
+}
+.handleBtn:hover{
+  cursor:pointer;
+}
+
+
+
+/* 댓글 추가 모달 css */
+
+.updateReviewText {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 모달 내부 요소 스타일 */
+.updateReviewText input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.updateReviewText button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.updateReviewText button:hover {
+  background-color: #0056b3;
 }

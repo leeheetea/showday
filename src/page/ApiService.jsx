@@ -274,6 +274,14 @@ export function findId(userDTO) {
       console.log(response);
       return response;
     })
+    .catch((error) => {
+      if(error.message.includes("User not found")) {
+        alert("입력이 잘못되었습니다.");
+      } else {
+        console.log("Unexpected error occured during findId: ", error);
+      }
+      return Promise.reject(error);
+    })
 }
 
 export function findPassword(userDTO) {
@@ -281,6 +289,14 @@ export function findPassword(userDTO) {
     .then((response) => {
       console.log(response);
       return response;
+    })
+    .catch((error) => {
+      if(error.message.includes("User not found")) {
+        alert("입력이 잘못되었습니다.");
+      } else {
+        console.log("Unexpected error occured during findPassword: ", error);
+      }
+      return Promise.reject(error);
     })
 }
 

@@ -52,15 +52,6 @@ const Commend = () => {
         </div>
         <div className="recommend-item-container">
           <ImgCommendContainer
-            src="https://image.toast.com/aaaaab/ticketlink/TKL_8/manbok_230704.jpg"
-            alt=""
-          />
-          <div>
-            <span>{"<만복이네 떡집> - 김천"}</span>
-          </div>
-        </div>
-        <div className="recommend-item-container">
-          <ImgCommendContainer
             src="https://image.toast.com/aaaaab/ticketlink/TKL_5/g_0822.jpg"
             alt=""
           />

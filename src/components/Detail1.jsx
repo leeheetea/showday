@@ -6,8 +6,8 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import utils from "../utils.js";
-import { setShowInfo } from "../store/slice";
+import utils from '../utils.js'
+import { setBookInfo, setBookStep, setBookDateTime } from '../store/slice'
 
 const DetailContainer = styled.div`
   display: flex; 
@@ -21,17 +21,16 @@ const DetailContainer = styled.div`
   .detailBox{
     width:500px;
   }
-  .detailBox2{
-    padding: 0 0 0 3rem;
-  }
   .detailTitle{
     color: red;
   }
+
   hr {
-    width: 100%
+    width: 100%;
     padding: 0;
     margin: 0 2rem 0 2rem ;
   }
+
   input{
     margin-bottom: 2rem;
   }
@@ -39,16 +38,17 @@ const DetailContainer = styled.div`
     cursor:pointer;
   }
 
-
   @media screen and (max-width: 800px) {
     width: 80%;
     flex-direction: column; 
     padding: 2rem;
+
     hr {
-      width: 100%
+      width: 100%;
       padding: 0;
       margin: 2rem 0 2rem 0;
     }
+    
     .detailBox2{
       padding: 0;
     }
@@ -56,8 +56,9 @@ const DetailContainer = styled.div`
       padding: 0 ;
     }
     .detailBox2{
-      width: 70vw;
+      width: 100%;
     }
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -82,8 +83,6 @@ const FormCheckText = styled.span`
   background: #e6e6e6;
   border-radius: 50px;
   border: none;
-  display: flex;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   color: #777;
@@ -106,6 +105,7 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   }
   display: none;
 `;
+
 const Detail1 = (props) => {
   const navigator = useNavigate();
   const bookDispatch = useDispatch();
@@ -131,27 +131,26 @@ const Detail1 = (props) => {
       console.log(choosedShowTime);
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
-      // console.log(props);
-      bookDispatch(setShowInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookInfo({ props, selectedValueMs, choosedShowTime }));
+      bookDispatch(setBookStep({ bookStep: 2 }));
       navigator("/book/" + props.data.id + "/2");
     }
   };
 
   return (
-    <div>
-      <DetailContainer>
+    <div className="detailPageBox">
+      <DetailContainer className="detailContainer">
         <div className="detailBox detailBox1">
           <h3 className="detailTitle">STEP1</h3>
           <h3>날짜 선택</h3>
           <Calendar
+            className={"calendarCustom"}
             onChange={handleChangedDate}
             minDate={new Date()}
             value={selectedValue}
-            minDate={new Date()}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
-        <hr />
         <div className="detailBox detailBox2">
           <h3 className="detailTitle">STEP2</h3>
           <h3>회차 선택</h3>
@@ -160,28 +159,19 @@ const Detail1 = (props) => {
               <div key={index}>
                 <label>
                   <div className="detailLabelContainer">
+                    
                     <FormCheckLeft
                       className="inputRadioCheck"
                       type="radio"
                       name="radioButton"
                       onClick={(e) => setChoosedShowTime(e.target.value)}
-                      value={
-                        utils.dateFormatForButton(selectedValue) +
-                        " " +
-                        time +
-                        "시"
-                      }
-                      checked={
-                        choosedShowTime ===
-                        utils.dateFormatForButton(selectedValue) +
-                          " " +
-                          time +
-                          "시"
-                      }
+                      value={utils.dateFormatForButton(selectedValue) + ' ' + time + '시'}
+                      checked={choosedShowTime === (utils.dateFormatForButton(selectedValue) + ' ' + time + '시')}
                       onChange={(e) => {
                         setChoosedShowTime(e.target.value);
                       }}
                     />
+
                     <FormCheckText>
                       {utils.dateFormatForButton(selectedValue) +
                         " " +

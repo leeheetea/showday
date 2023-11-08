@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="showday">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/0824오후.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -10,8 +10,12 @@ import { styled } from "styled-components";
 import ToTopButton from "../components/ToTopButton ";
 
 const DetailMainContainer = styled.div`
-  margin: 10%;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
   margin-top: 0;
+  text-align: center;
 `;
 const DetailPage = (props) => {
   const { id } = useParams();
@@ -23,7 +27,7 @@ const DetailPage = (props) => {
       <DetailMain data={pageData} />
       <Detail1 data={pageData} />
       <Detail2 data={pageData} />
-      <DetailRecommend />
+      <DetailRecommend data={pageData} />
       <ToTopButton />
     </DetailMainContainer>
   );

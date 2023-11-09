@@ -151,7 +151,7 @@ const Detail1 = (props) => {
       // 현재 뮤지컬 정보를 예약정보 업데이트
       bookDispatch(setBookInfo({ choosedShowDate, choosedShowTime, choosedShowTimeId }));
       bookDispatch(setBookStep({ bookStep: 2 }));
-      navigator("/book/" + props.data.id + "/2");
+      navigator("/book/" + props.data + "/2");
     }
   };
 

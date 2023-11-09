@@ -230,15 +230,6 @@ const UserInfoModify = () => {
                   >수정</button>
              
               </div>
-              <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
-                이메일 주소 양식에 맞게 작성해주세요.
-              </div>
-              <EmailConfirm
-                isOpen={isEmailVerifiedOpen}
-                onClose={isEmailVerifiedClose}
-                onConfirm={handleEmailConfirm}
-                serverCode={serverCode}
-              />
             </div>
 
             {/* 이메일 */}

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../css/Review.css";
-import callPostAxios from '../util/callPostAxios';
-import axios from 'axios';
 import callAxios from '../util/callAxios';
-import { createReview, deleteReview, updateReview, userEmailCheck } from '../page/ApiService';
+import { createReview, deleteReview, getReviewInfo, updateReview, userEmailCheck } from '../page/ApiService';
 import { useNavigate } from 'react-router-dom';
 
 
 const Review = ({data}) => {
+  const navigate = useNavigate();
+  const modalRef = useRef(null); //모달 
+
   const [selectedRating, setSelectedRating] = useState(null); //별점
+  const [reviewRating, setReviewRating] = useState(null); //수정별점
   const [textarea, setTexTarea] = useState(''); // 리뷰내용
   const [reviewItems, setReviewItems] = useState([]); // 리뷰 아이템
   const [userEmail, setUserEmail] = useState([]); // 로그인 유저 이메일
@@ -31,6 +33,12 @@ const Review = ({data}) => {
     const intValue = parseInt(event.target.value, 10);
     setSelectedRating(intValue);
   }
+  //별점 수정
+  const handleRatingReChange = (event) =>{
+    const intValue = parseInt(event.target.value, 10);
+    setReviewRating(intValue);
+  }
+
   //리뷰 내용
   const handleTextareaChange = (event) => {
     const text = event.target.value;
@@ -49,8 +57,7 @@ const Review = ({data}) => {
     }
     const timestamp = review.reviewTimestamp;
     return timestamp;
-  };
-    
+  }; 
   
   // 댓글 유저이메일
   const reviewAuthEmail = (review)=>{
@@ -71,48 +78,78 @@ const Review = ({data}) => {
 
   //댓글 등록  
   const addReview = () => {
-    const nowDate = new Date();
-    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
-    // console.log(timestamp);
-    const requestData = {
-      reviewGrade: selectedRating,
-      reviewText: textarea,
-      showId: showId,
-      reviewTimestamp: timestamp,
-    };
-    createReview(requestData)
-      .then((res) => {
-        alert("리뷰가 성공적으로 등록되었습니다.");
-        console.log("res===" + res);
-        fetchReviewItem();
-        setTexTarea('');
-      }).catch((error) => {
-      console.error("리뷰 등록 중 오류가 발생했습니다.", error);
-      alert("리뷰 등록 중 오류가 발생했습니다.");
-    });
-  }
+      if (!selectedRating){
+        alert("별점을 등록해주세요.");
+        return ;
+      }
+      if(!textarea){
+        alert("관람 후기를 입력해주세요.");
+        return ;
+      }
+       // user email 
+        userEmailCheck()
+        .then((res)=>{
+          setUserEmail(res);               
+        }).catch((err)=>{
+          setUserEmail(null);
+        });
+      if (userEmail) {
+        const nowDate = new Date();
+        const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
 
-// user email 
- userEmailCheck()
-  .then((res)=>{
-    setUserEmail(res);               
-  }).catch((err)=>{
-    // console.error("유저 이메일 정보가 없습니다.",err);
-    setUserEmail(null);
-  });
+        const requestData = {
+          reviewGrade: selectedRating,
+          reviewText: textarea,
+          showId: showId,
+          reviewTimestamp: timestamp,
+        };
+
+        createReview(requestData)
+          .then((res) => {
+            alert("리뷰가 성공적으로 등록되었습니다.");
+            console.log("res===" + res);
+            fetchReviewItem();
+            setTexTarea('');
+            // setSelectedRating(null); 
+          }).catch((error) => {
+          console.error("리뷰 등록 중 오류가 발생했습니다.", error);
+          alert("리뷰 등록 중 오류가 발생했습니다.");
+        });
+      }else {
+        alert("로그인이 필요합니다.");
+        navigate('/login');
+      }
+
+}
+
 
   //리뷰 수정
-  const handleEditClick = (reviewId, reviewText) => {
+  const handleEditClick = (reviewId, reviewText, authEmail, rating) => {
     setEditReviewContent(reviewText);
     setSelectedReviewId(reviewId);
     setIsModalOpen(true);
+    
+    getReviewInfo(reviewId)
+    .then((reviewInfo) => {
+      setReviewRating(reviewInfo.reviewGrade);
+      // console.log(reviewRating);
+    }).catch((e)=>{
+      console.log("리뷰 데이터를 받아오지 못했습니다.");
+      console.log(e);
+    }
+    );
   };
 
   const handleUpdateReview =(reviewId)=>{
     const nowDate = new Date();
     const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    
+    
+   
+    
     const requestData = {
-      reviewGrade: 5,
+      reviewId: reviewId,
+      reviewGrade: reviewRating,
       reviewText: editReviewContent,
       showId: showId,
       reviewTimestamp: timestamp,
@@ -129,7 +166,6 @@ const Review = ({data}) => {
     setIsModalOpen(false);
   }
 
-  
 //리뷰 삭제
 const handleDeleteReview= (reviewId) =>{
   deleteReview(reviewId)
@@ -143,8 +179,30 @@ const handleDeleteReview= (reviewId) =>{
   });
 }
 
+// 모달의 스타일 설정
+const modalStyle = {
+  width: `500px`,
+  position: `fixed`,
+  top: `50%`,
+  left: `50%`,
+  transform: `translate(-50%, -50%)`,
+  backgroundColor: `white`,
+  padding: `15px`,
+  borderRadius : `5px`,
+  boxShadow: `0 0 10px rgba(0, 0, 0, 0.2)`
+};
+//모달 닫기
+const closeModal = () => {
+  setIsModalOpen(false);
+};
+//모달 외부 클릭 시
+const handleModalClick = (event) => {
+  if (modalRef.current && !modalRef.current.contains(event.target)) {
+    closeModal();
+  }
+};
   return (
-    <div className='product_detail_tabcontent review_comment'>
+    <div>
       <div className='review_comment_write'>
           <div className='review_content_heading'>
             <h2 className='review_content_title'>관람후기<span className='text_number red'>{reviewItems.length}</span></h2>
@@ -228,10 +286,12 @@ const handleDeleteReview= (reviewId) =>{
                   <span className='comment_date'>
                     {reviewTime(review)}
                   </span>
+
                   {userEmail === review.authEmail && (
                     <span>
-                      <button onClick={() => handleEditClick(review.reviewId, review.reviewText)}>수정</button>
-                      <button onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
+                        <button className="handleEditClick handleBtn" onClick={() => handleEditClick(review.reviewId, review.reviewText, review.authEmail, review.reviewRating)}>수정</button>
+                        {"/"}
+                        <button className="handleDeleteReview handleBtn" onClick={() => handleDeleteReview(review.reviewId)}>삭제</button>
                     </span>   
                   )}
               </div>
@@ -240,12 +300,38 @@ const handleDeleteReview= (reviewId) =>{
         </div>        
            {/* 댓글 수정 modal */}
            {isModalOpen && (
-              <div className="modal">
-                <input 
-                  type='text'
-                  value={editReviewContent}
-                  onChange={(e) => setEditReviewContent(e.target.value)}
-                />
+              <div className="modal updateReviewText" style={modalStyle} ref={modalRef}>
+                 <div className="modal-header">
+                  <div>댓글 수정</div>
+                    <button className="close-button redBtn" onClick={closeModal}>
+                      &times; 
+                    </button>
+                  </div>
+                <div className='comment_star_container'>
+                  <div className='comment_star comment_star_update'>
+                   <div className='comment_star_select_update'>
+                      <input type="radio" id="5-stars_update" name="rating" value="5" onChange={handleRatingReChange}/>
+                      <label htmlFor="5-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="4-stars_update" name="rating" value="4" onChange={handleRatingReChange}/>
+                      <label htmlFor="4-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="3-stars_update" name="rating" value="3" onChange={handleRatingReChange}/>
+                      <label htmlFor="3-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="2-stars_update" name="rating" value="2" onChange={handleRatingReChange}/>
+                      <label htmlFor="2-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="1-star_update" name="rating" value="1" onChange={handleRatingReChange}/>
+                      <label htmlFor="1-star_update" className="star">&#9733;</label>  
+                   </div>
+                    {reviewRating === null ? (
+                      <p className='comment_star_desc'>별점을 선택해주세요.</p>)
+                     : (<p className='comment_star_desc'>{reviewRating}점</p>)}  
+                  </div>
+                  <input 
+                    className='modalReviewTextContainer'
+                    type='textarea'
+                    value={editReviewContent}
+                    onChange={(e) => setEditReviewContent(e.target.value)}
+                  />
+                </div>
                 <button onClick={() => handleUpdateReview(selectedReviewId)}>수정</button>
               </div>
             )}             

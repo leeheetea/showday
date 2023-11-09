@@ -17,7 +17,50 @@ header {
   margin-top: 0.5rem;
 }
 
+.searchInput {
+  border: none; 
+  outline: none; 
+}
+
+.searchbar select,
+.searchbar select:focus,
+.searchbar select:active  {
+  border: none;
+  border-right : 1px solid lightgray;
+  padding: 2px;
+}
+
+.searchbar select {
+  background-color: white;
+  color: #333; 
+}
+
+.searchbar select option {
+  background-color: white;
+  color: #333;
+}
+
+.searchbar select::after {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.searchbar select:hover {
+  cursor: pointer; 
+}
+
+
+
+
+
 @media (max-width: 767px) {
+  .searchbarSelect {
+    display: none;
+  }
   .header-container {
     display: flex;
     justify-content: space-between;
@@ -74,9 +117,13 @@ header {
     right: 2rem;
     bottom: 1.3rem;
   }
+
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
+  .searchbarSelect {
+    display: none;
+  }
   .header-container {
     display: flex;
     justify-content: space-around;

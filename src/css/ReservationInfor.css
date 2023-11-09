@@ -1,0 +1,22 @@
+.reservationInfoContainer{
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px 50px;
+  text-align: start;
+}
+
+.reservationInfo_table{
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+
+.reservationInfo_table th{
+  background-color: lightgray;
+  padding: 10px;
+}
+.reservationInfo_table td {
+  border: 1px solid lightgray;
+  padding: 10px;
+}

@@ -66,44 +66,39 @@ const booksSlice = createSlice({
   initialState: initialBooksState,
   reducers: {
     setShowInfo: (state, action) => {
-      state.showInfo = action.payload.info;
+      //console.log(">>> setShowInfo store ", state, action.payload);
+      state.showInfo = action.payload;
     },
     setBookInfo: (state, action) => {
-      //console.log(state, action.payload);
-
-      //state.showInfo = action.payload.props.data;
-      state.bookingData.bookDate = moment(action.payload.selectedValueMs).format(
-        "YYYY.MM.DD"
-      );
-        state.bookingData.bookShowTime = util.getItemFromString(
-        action.payload.choosedShowTime
-      );
+      state.bookingData.bookDate = action.payload.choosedShowDate.toISOString();
+      state.bookingData.bookShowTime = action.payload.choosedShowTime;
+      state.bookingData.choosedShowTimeId = action.payload.choosedShowTimeId;
     },
     setTotalPrice: (state, action) => {
-        state.bookingData.totalPrice = action.payload;
+      state.bookingData.totalPrice = action.payload;
     },
 
     setBookStep: (state, action) => {
       //console.log("[booksSlice]", action.payload.bookStep);
-        state.bookingData.bookStep = action.payload.bookStep;
+      state.bookingData.bookStep = action.payload.bookStep;
     },
 
     setBookDateTime: (state, action) => {
-        state.bookingData.bookDate = moment(action.payload.selectedValueMs).format(
-        "YYYY.MM.DD"
-      );
-        state.bookingData.bookShowTime = action.payload.choosedShowTime;
-        state.bookingData.bookShowTimeOrder = action.payload.bookShowTimeOrder;
+      state.bookingData.bookDate = moment(
+        action.payload.selectedValueMs
+      ).format("YYYY.MM.DD");
+      state.bookingData.bookShowTime = action.payload.choosedShowTime;
+      state.bookingData.bookShowTimeOrder = action.payload.bookShowTimeOrder;
     },
 
     setMyBookSeats: (state, action) => {
-        state.bookingData.myBookSeats = action.payload.myBookSeats;
+      state.bookingData.myBookSeats = action.payload.myBookSeats;
       //console.log(">>>2_after" + state.seats.myBookSeats);
     },
 
     setConfirms: (state, action) => {
-        state.bookingData.bookDate.confirms = action.payload;
-    }
+      state.bookingData.bookDate.confirms = action.payload;
+    },
   },
 });
 
@@ -148,16 +143,9 @@ const rootReducer = combineReducers({
   faq: faqSlice,
 });
 
-export const {
-  setMusicals,
-  getMusicalInfoById
-} = musicalsSlice.actions;
-export const {
-  setConcerts
-} = concertSlice.actions;
-export const {
-  setTheatres
-} = theatreSlice.actions;
+export const { setMusicals, getMusicalInfoById } = musicalsSlice.actions;
+export const { setConcerts } = concertSlice.actions;
+export const { setTheatres } = theatreSlice.actions;
 export const {
   setShowInfo,
   setBookInfo,
@@ -165,11 +153,8 @@ export const {
   setBookStep,
   setBookDateTime,
   setMyBookSeats,
-  setConfirms
+  setConfirms,
 } = booksSlice.actions;
-export const {
-  getUserInfo,
-  setUserInfo
-} = userInfoSlice.actions;
+export const { getUserInfo, setUserInfo } = userInfoSlice.actions;
 
 export default rootReducer;

@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {useOutletContext, useParams} from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 
-import {setBookInfo, setMyBookSeats, setShowInfo} from "../../store/slice";
+import { setBookInfo, setMyBookSeats, setShowInfo } from "../../store/slice";
 import "./ChooseSeatsPage.css";
 import BookTitle from "../../components/book/BookTitle";
 import seatImg from "../../img/seat.PNG";
 import Loading from '../../styles/loading';
 import utils from '../../utils'
-import {readShow, readShowSeat, readVenueSeatSize} from "../../service/book/bookApiService";
+import { readShow, readShowSeat, readVenueSeatSize } from "../../service/book/bookApiService";
 
 // 임의 값
 //const MAX_ROW = 26; // 알파벳 최대 26개 이므로
@@ -81,7 +81,7 @@ const ChooseSeatsPage = () => {
   //const [showSeaㅇtsList, setShowSeatsList] = useState(null);
   const [displaySeatList, setDisplaySeatList] = useState(new Array((1) * (10)).fill(0));
   const choosedSeatListRef = useRef(new Array().fill(null));
-  const maxColRowInfoRef = useRef({maxCol: null, maxRow: null});
+  const maxColRowInfoRef = useRef({ maxCol: null, maxRow: null });
 
   useEffect(() => {
     loadShowDataFromServer();
@@ -90,7 +90,7 @@ const ChooseSeatsPage = () => {
   const loadShowDataFromServer = async () => {
     // 서버 공연정보 메모리 저장
     readShow(id).then((info) => {
-      bookDispatch(setShowInfo({info}));
+      bookDispatch(setShowInfo({ info }));
       if (info !== null && info !== undefined) {
         // 극장id로 극장 Row, col 사이즈 가져오기
         readVenueSeatSize(id).then((maxSeat) => {
@@ -107,7 +107,7 @@ const ChooseSeatsPage = () => {
             //console.log('>>> replacedBookDate : ', bookDate);
             //console.log('>>> bookShowTime : ', bookShowTime);
 
-            readShowSeat(id, {"date": replacedBookDate, "time": replacedBookTime})
+            readShowSeat(id, { "date": replacedBookDate, "time": replacedBookTime })
               .then((res) => {
                 if (res !== null && res !== undefined) {
                   let newDisplaySeatList = [...displaySeatList];
@@ -135,7 +135,7 @@ const ChooseSeatsPage = () => {
 
 
   useEffect(() => {
-      setLoading((!displaySeatList === null));
+    setLoading((!displaySeatList === null));
   }, [displaySeatList])
 
   useEffect(() => {
@@ -160,11 +160,11 @@ const ChooseSeatsPage = () => {
       // 좌석 선택 막는 조건
       // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
       const fullySeatName = utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol);
-      if(choosedSeatListRef.current.includes(fullySeatName)) {
+      if (choosedSeatListRef.current.includes(fullySeatName)) {
         console.log(choosedSeatListRef.current, fullySeatName);
         alert('이미 선택한 자리 입니다.');
         return;
-      } else if(choosedSeatListRef.current.length >= MAX_CAN_RESERVE_CNT) {
+      } else if (choosedSeatListRef.current.length >= MAX_CAN_RESERVE_CNT) {
         alert('최대 5자리까지 선택 가능 합니다.');
         return;
       }
@@ -179,7 +179,7 @@ const ChooseSeatsPage = () => {
       // Arrary.push() 할 때 에러남, Cannot add property 1, object is not extensible
       // TypeError: Cannot add property 1, object is not extensible
       const choosedSeatListTmp = [...choosedSeatListRef.current];
-      bookDispatch(setMyBookSeats({myBookSeats : choosedSeatListTmp}));
+      bookDispatch(setMyBookSeats({ myBookSeats: choosedSeatListTmp }));
     }
   }
 
@@ -212,17 +212,17 @@ const ChooseSeatsPage = () => {
             // if (loading) {
             //   <Loading />
             // } else {
-              return (
-                <Seat key={utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol)}
-                  width={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxCol}
-                  height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
-                  canreserve={rowItems}
-                  onClick={() =>
-                    handleChooseSeat(utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol))}
-                >
-                  {rowItems}
-                </Seat>
-              )
+            return (
+              <Seat key={utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol)}
+                width={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxCol}
+                height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
+                canreserve={rowItems}
+                onClick={() =>
+                  handleChooseSeat(utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol))}
+              >
+                {rowItems}
+              </Seat>
+            )
             // }
           }
         })}

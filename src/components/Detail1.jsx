@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Calendar from "react-calendar";
@@ -6,7 +6,9 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import { setBookInfo, setBookStep } from "../store/slice";
+import { setBookInfo, setBookStep, setShowInfo } from "../store/slice";
+import { readShow } from "../service/book/bookApiService";
+import utils from "../utils";
 
 const DetailContainer = styled.div`
   display: flex;
@@ -23,7 +25,6 @@ const DetailContainer = styled.div`
   .detailTitle {
     color: red;
   }
-
   hr {
     width: 100%;
     padding: 0;
@@ -88,18 +89,53 @@ const FormCheckText = styled.span`
   color: #777;
 `;
 
-const Detail1 = (props) => {
-  const navigator = useNavigate();
-  const bookDispatch = useDispatch();
+const FormCheckLeft = styled.input.attrs({ type: "radio" })`
+  &:checked {
+    display: inline-block;
+    background: none;
+    padding: 0px 10px;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+    font-weight: 500;
+    display: none;
+  }
+  &:checked + ${FormCheckText} {
+    background: black;
+    color: #fff;
+  }
+  display: none;
+`;
 
-  const [selectedValue, setSelectedValue] = useState(new Date());
+const Detail1 = (props) => {
+  const state = useSelector((state) => state.booksData);
+
+  const navigator = useNavigate();
+
+  const bookDispatch = useDispatch();
+  const [choosedShowDate, setChoosedShowDate] = useState(new Date());
   const [choosedShowTime, setChoosedShowTime] = useState(null);
 
+  const [showScheduleList, setShowScheduleList] = useState(null); // 서버에서 받아온 id 포함 전체 스케쥴 정보
+  const showScheduleListRef = useRef(new Array()); // 시간 정보만 뽑아낸 리스트(표시용)
+  const showScheduleTimeIdRef = useRef(0);  // id 저장용
+
+  useEffect(() => {
+    getShowScheduleList();
+  }, [choosedShowDate]);
+
+  console.log("화면갱신!!! ", showScheduleList);
   /* 날짜 선택이 변경 될때 이벤트 */
-  const handleChangedDate = (e) => {
-    setSelectedValue(e);
-    setChoosedShowTime(null);
-  };
+  const handleChangedDate = (date) => {
+    setChoosedShowDate(date);
+    console.log("date changed!!");
+  }
+
+  /* 회차 선택이 변경 될때 이벤트 */
+  const handleChangeTime = (time) => {
+    setChoosedShowDate(time);
+    console.log("date changed!!");
+  }
 
   /* 예매하기 버튼 선택 클릭 이벤트 */
   const handleClickBookBtn = () => {
@@ -108,14 +144,43 @@ const Detail1 = (props) => {
       alert("관람을 원하시는 공연 시간(회차)을 선택해주세요.");
       return;
     } else {
-      console.log(choosedShowTime);
+      // 선택된 회차의 회차 아이디 가져오기
+      let choosedShowTimeId = showScheduleTimeIdRef.current;
+      console.log(">>> 예매버튼 선택!! ", choosedShowTime, choosedShowTimeId);
 
       // 현재 뮤지컬 정보를 예약정보 업데이트
-      bookDispatch(setBookInfo({ selectedValue, choosedShowTime }));
+      bookDispatch(setBookInfo({ choosedShowDate, choosedShowTime, choosedShowTimeId }));
       bookDispatch(setBookStep({ bookStep: 2 }));
-      navigator("/book/" + props.data.id + "/2");
+      navigator("/book/" + props.data + "/2");
     }
   };
+
+  const getShowScheduleList = () => {
+    var tempDate = new Date(choosedShowDate);
+    tempDate.setDate(tempDate.getDate() + 1);
+    const targetDate = tempDate.toISOString().split('T')[0];
+    //console.log(">>> scheduleDate List targetDate : ", targetDate);
+
+
+    // 필요한 회차 목록만 가져옴
+    const showSchedules = state?.showInfo?.showSchedules;
+
+    if (showSchedules) {
+      const filteredData = showSchedules.filter(item => item.scheduleDate === targetDate);
+      setShowScheduleList(filteredData); // 스케줄 전체 정보 포함 리스트
+      console.log("스케쥴 전체 리스트 가져오기 !!! ", showScheduleList);
+      // 회차 정보만 리스트 업데이트
+      const schedules = new Array();
+      filteredData.map((schedule) => {
+        schedules.push(schedule.scheduleTime.slice(0, -3));
+      })
+
+      console.log("------------------> ", schedules);
+      showScheduleListRef.current = schedules;
+    } else {
+      console.log("회차 목록 가져오기 실패");
+    }
+  }
 
   return (
     <div className="detailPageBox">
@@ -124,23 +189,60 @@ const Detail1 = (props) => {
           <h3 className="detailTitle">STEP1</h3>
           <h3>날짜 선택</h3>
           <Calendar
-            className={"calendarCustom"}
+            //className={"calendarCustom"}
             onChange={handleChangedDate}
-            minDate={new Date()}
-            value={selectedValue}
+            //minDate={moment.formatDay}
+            value={choosedShowDate}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
         </div>
         <div className="detailBox detailBox2">
-          <h3 className="detailTitle">STEP2</h3>
-          <h3>회차 선택</h3>
-          <div className="detailLabel">{}</div>
-        </div>
-      </DetailContainer>
+          <div className="detailBox3">
+            <h3 className="detailTitle">STEP2</h3>
+            <h3>회차 선택</h3>
+          </div>
+          <div className="detailBox4">
+            {
+              showScheduleListRef.current && showScheduleList &&
+              <div className="detailLabel">
+                {showScheduleListRef.current.map((time, index) => (
+                  <div key={showScheduleList[index].scheduleId}>
+                    <label>
+                      <div className="detailLabelContainer">
+                        <FormCheckLeft
+                          className="inputRadioCheck"
+                          type="radio"
+                          name="radioButton"
+                          onClick={(e) => {
+                            setChoosedShowTime(e.target.value);
+                            showScheduleTimeIdRef.current = showScheduleList[index].scheduleId;
+                          }}
+                          //value={utils.dateFormatForButton(choosedShowTime) + ' ' + time + '시'}
+                          value={utils.timeFormatForButton(time)}
+                          checked={choosedShowTime === (utils.timeFormatForButton(time))}
+                          onChange={(e) => {
+                            setChoosedShowTime(e.target.value);
+                            showScheduleTimeIdRef.current = showScheduleList[index].scheduleId;
+                          }}
+                        />
+
+                        <FormCheckText>
+                          {utils.timeFormatForButton(time)}
+                        </FormCheckText>
+                      </div>
+                    </label>
+                    <br />
+                  </div>
+                ))}
+              </div>
+            }
+          </div>
+        </div >
+      </DetailContainer >
       <ButtonContainer>
         <button onClick={handleClickBookBtn}>예매하기</button>
       </ButtonContainer>
-    </div>
+    </div >
   );
 };
 

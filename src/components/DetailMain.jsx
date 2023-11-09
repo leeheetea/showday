@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
+import { setShowInfo } from "../store/slice";
+import { useDispatch } from "react-redux";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -50,23 +52,32 @@ const customModalStyles = {
 };
 
 
-const DetailMain = ( {data} ) => {
+const DetailMain = ({ data }) => {
 
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
-  
+  const [value, setValue] = useState(new Date());
+
   const showId = data;
-  const url = '/show/'+showId;
+  const url = '/show/' + showId;
 
-  useEffect(()=>{ 
+  const bookDispatch = useDispatch();
+
+  useEffect(() => {
     fetchShowItem();
-  },[showId]);
+  }, [showId]);
 
-  const fetchShowItem = async()=>{
+  useEffect(() => {
+    console.log(">>> showItem Ok : ", showItems);
+    bookDispatch(setShowInfo(showItems));
+  }, [showItems, setShowInfo]);
+
+  const fetchShowItem = async () => {
     callAxios(url, setShowItems);
   }
+
   console.log(showId);
-  
+
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">

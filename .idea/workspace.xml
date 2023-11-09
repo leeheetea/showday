@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f1a46d03-02d2-490b-831b-8b56c7585351" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
@@ -51,6 +52,20 @@
       <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/DetailMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DetailMain.jsx" afterDir="false" />
+=======
+    <list default="true" id="1b3b2445-3a9f-42d2-a35b-6afe6d96126b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/showday.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/showday.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Detail1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DetailMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DetailMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/TicketingdetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/TicketingdetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/book/ChangeDatePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/book/ChangeDatePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/book/ChooseSeatsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/book/ChooseSeatsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+>>>>>>> f02ab1d647f79bbed42af88f245852e55cc6bb70
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +77,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -75,14 +93,26 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< HEAD
     "git-widget-placeholder": "main",
+=======
+    "git-widget-placeholder": "yr",
+>>>>>>> f02ab1d647f79bbed42af88f245852e55cc6bb70
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/lee/showday",
+    "last_opened_file_path": "/Users/oranc/showday",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+<<<<<<< HEAD
     "nodejs_package_manager_path": "yarn",
+=======
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+>>>>>>> f02ab1d647f79bbed42af88f245852e55cc6bb70
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,14 +123,34 @@
       <created>1699491077396</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1699491077396</updated>
       <workItem from="1699491078957" duration="687000" />
       <workItem from="1699491852465" duration="28000" />
       <workItem from="1699491988252" duration="4345000" />
+=======
+      <updated>1699268014764</updated>
+      <workItem from="1699417754922" duration="176000" />
+      <workItem from="1699417936888" duration="156000" />
+      <workItem from="1699429990516" duration="43000" />
+      <workItem from="1699472509547" duration="9458000" />
+>>>>>>> f02ab1d647f79bbed42af88f245852e55cc6bb70
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/Detail1.jsx</url>
+          <line>115</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

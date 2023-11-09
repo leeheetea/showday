@@ -56,18 +56,17 @@ const ChangeDatePage = ({ onChangeDate }) => {
   }, []);
 
   /* 날짜 선택이 변경 될때 이벤트 */
-  const handleChangedDate = (e) => {
-    setSelectedValue(e);
+  const handleChangedDate = (date) => {
+    setSelectedValue(date);
     setChoosedShowTime(null);
   };
 
   /* 회차선택 될때 이벤트 */
   const handleChooseTime = useCallback((time, index) => {
-
     let selectedValueMs = selectedValue.getTime();
     setSelectedTimeIndex(index);
     bookDispatch(setBookDateTime({
-      selectedValueMs: selectedValueMs,
+      selectedValue: selectedValueMs,
       choosedShowTime: time + ":00",
       bookShowTimeOrder: (selectedTimeIndex)
     }

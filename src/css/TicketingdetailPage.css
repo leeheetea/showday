@@ -1,0 +1,38 @@
+.ticketingTitle {
+  display: flex;
+  justify-content: space-start;
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+
+.ticketing-list {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.ticketing-table{
+  margin-left: 50px;
+  border-top: 2px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  width: 600px;
+  border-collapse: collapse;
+}
+
+
+.ticketing-table th {
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.ticketing-table td {
+  text-align: start; 
+  padding: 10px;
+  border: 1px solid #e0e0e0; 
+}
+
+

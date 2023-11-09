@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
+import { readShowData, readVenueItem } from "../page/ApiService";
 import { setShowInfo } from "../store/slice";
 import { useDispatch } from "react-redux";
 
@@ -56,6 +57,7 @@ const DetailMain = ({ data }) => {
 
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
+
   const [value, setValue] = useState(new Date());
 
   const showId = data;
@@ -73,58 +75,56 @@ const DetailMain = ({ data }) => {
   }, [showItems, setShowInfo]);
 
   const fetchShowItem = async () => {
-    callAxios(url, setShowItems);
+    getShowData(showId);
   }
 
-  console.log(showId);
+  const getShowData = (showId) => {
+    readShowData(showId)
+      .then((res) => {
+        console.log(res);
+        setShowItems(res);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
 
-  return (<></>);
-  // return (
-  //   <div className="detailMainBody">
-  //     <MainImgTextContainer id="detailMainBodyContent">
-  //       <div className="detailMain_content_img">
-  //         <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
-  //       </div>
 
-  //       <div className="product_detail_info">
-  //         <div className="product_heading">
-  //           <h2 className="product_title">{showItems.title}</h2>
-  //           <span className="product_shareButton">
-  //             <button onClick={() => setShareModalIsOpen(true)}>
-  //               <FaShareAlt size="20" />
-  //             </button>
-  //             <Modal
-  //               isOpen={shareModalIsOpen}
-  //               onRequestClose={() => setShareModalIsOpen(false)}
-  //               style={customModalStyles}
-  //             >
-  //               <button>
-  //                 <BiLinkAlt></BiLinkAlt>
-  //               </button>
-  //             </Modal>
-  //           </span>
-  //         </div>
+  return (
+    <div className="detailMainBody">
+      <MainImgTextContainer id="detailMainBodyContent">
+        <div className="detailMain_content_img">
+          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
+        </div>
 
-  //         <div className="product_info_list1">
-  //           <li className="product_info_item">
-  //             <InfoTitle className="product_info_title">장소</InfoTitle>
-  //             <div>{showItems.venueId}</div>
-  //           </li>
+        <div className="product_detail_info">
+          <div className="product_heading">
+            <h2 className="product_title">{showItems.title}</h2>
+            <span className="product_shareButton">
+              { }
+            </span>
+          </div>
 
-  //           <li className="product_info_item">
-  //             <InfoTitle className="product_info_title">기간</InfoTitle>
-  //             {/* <div>{showItems.showSchedules}</div> */}
-  //           </li>
+          <div className="product_info_list1">
+            <li className="product_info_item">
+              <InfoTitle className="product_info_title">장소</InfoTitle>
+              <div>{showItems.venueName}</div>
+            </li>
 
-  //           <li className="product_info_item">
-  //             <InfoTitle className="product_info_title">가격</InfoTitle>
-  //             <div>{showItems.price}</div>
-  //           </li>
-  //         </div>
-  //       </div>
-  //     </MainImgTextContainer>
-  //   </div>
-  // );
+            <li className="product_info_item">
+              <InfoTitle className="product_info_title">기간</InfoTitle>
+              <div>{showItems.period}</div>
+            </li>
+
+            <li className="product_info_item">
+              <InfoTitle className="product_info_title">가격</InfoTitle>
+              <div>{showItems.price}</div>
+            </li>
+
+          </div>
+        </div>
+      </MainImgTextContainer>
+    </div>
+  );
 };
 
 export default DetailMain;

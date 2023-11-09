@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { PureComponent } from 'react'
+import "../css/ReservationInfor.css";
 
 export class ReservationInfor extends PureComponent {
   render() {
@@ -7,24 +8,18 @@ export class ReservationInfor extends PureComponent {
       <div className='reservationInfoContainer'>
         <div className='reservationInfo'>
         <h3 className=''>티켓 수령안내</h3>
-         <ol>
-          <li>
             <p className='reservationInfo_title'>{"1) 일반배송"}</p>
             <p className='reservationInfo_text'>
               {"예매 완료(결제 완료)확인 후, 인편배송으로 영업일 기준 10일 이내 티켓을 수령하실 수 있습니다.​"}
               티켓을 배송하기 위한 배송료는 고객이 부담합니다.
               행사 또는 관람일에 따라 일반배송 선택이 제한될 수 있습니다.
             </p>
-          </li>
-          <li>
             <p className='reservationInfo_title'>{"2) 현장수령"}</p>
             <p className='reservationInfo_text'>
               행사 당일 공연 시작 시간 1시간 전 ~ 30분 전까지 행사장 매표소에서 티켓을 수령하실 수 있습니다.
               현장 매표소에서 예매 완료 SMS 또는 예매번호 및 예매자 정보 확인 후 티켓을 수령할 수 있습니다.
               기획사 정책 또는 행사일에 따라 현장 수령 방법의 선택이 제한될 수 있습니다.​ 
             </p>
-          </li>
-         </ol>
         </div>
         <div className='reservationInfo'>
           <h3>예매 취소 안내</h3>
@@ -56,14 +51,11 @@ export class ReservationInfor extends PureComponent {
           <p>일부 공연의 경우 취소 가능 시간이 상이할 수 있습니다.​​​ </p>
           <div className='reservationInfo'>
             <h3 className=''>티켓 환불 안내</h3>
-            <ol>
-              <li>
                 <p className='reservationInfo_text'>
                   예매취소 시 취소수수료와 배송료를 제외한 나머지 금액이 환불 됩니다. 
                   취소수수료는 상품별로 상이할 수 있으며 상품 상세정보 하단에서 확인할 수 있습니다. 
                 </p>
-              </li>
-              <li>
+             
                 <p className='reservationInfo_text'>
                   무통장입금으로 결제한 경우 환불처리를 위해 예매자 본인명의의 계좌정보(예금주, 은행, 계좌번호)를 입력해야 하며 접수일로부터 3~5일(영업일기준)이내 환불 받을 수 있습니다. 
                   상품에 따라 환불 시 송금수수료 500원이 부과될 수 있습니다. ​
@@ -76,8 +68,6 @@ export class ReservationInfor extends PureComponent {
                   휴대폰결제로 결제한 경우 당월 취소 시 즉시 환불되나 익월 취소 시에는 최대 60일까지 소요됩니다. 
                   SHOW포인트, 예매권, 상품권으로 결제한 경우 취소 시 즉시 계정으로 환불 됩니다.
                 </p>
-              </li>
-            </ol>
           </div>
 
         </div>

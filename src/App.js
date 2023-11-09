@@ -45,6 +45,7 @@ import LoginLog from "./components/LoginLog";
 import KakaoRedirectLogout from "./components/KakaoRedirectLogout";
 import UserInfoResetPassword from "./page/UserInfoResetPassword";
 import NaverRedirect from "./components/NaverRedirect";
+import TicketingdetailPage from "./components/TicketingdetailPage";
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
               <Route path="advanceticket" element={<Advanceticket />}></Route>
               <Route path="giftcard" element={<Giftcard />}></Route>
               <Route path="coupon" element={<Coupon />}></Route>
+              <Route path="ticketingdetail" element={<TicketingdetailPage/>}></Route>
             </Route>
             <Route path="/search" element={<SearchPage />}></Route>
             <Route path="*" element={<NotFound />} />

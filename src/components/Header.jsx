@@ -8,7 +8,16 @@ import LogoutCounter from "./LogoutCounter";
 const SearchBar = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const [selectedType, setSelectedType] = useState("all"); 
   const isLogin = !!localStorage.getItem("ACCESS_TOKEN");
+
+  const handleSearch= ()=>{
+    const searchUrl = `/search?keyword=${encodeURIComponent(searchValue)}&type=${encodeURIComponent(selectedType)}`;
+    navigate(searchUrl);
+    window.location.reload(); // 페이지 리로드
+  }
+
+
   return (
     <header>
       <div className="header-container">
@@ -29,16 +38,28 @@ const SearchBar = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              navigate(`/search?keyword=${encodeURIComponent(searchValue)}`);
+              handleSearch();
+              // navigate(`/search?keyword=${encodeURIComponent(searchValue)}&type=${encodeURIComponent(selectedType)}`);
             }}
           >
-            <input
-              className="searchbar"
-              type="text"
-              placeholder="검색어 입력"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
+            <div className="searchbar">
+              <select
+                className="searchbarSelect"
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}>
+                <option value="all">전체조회</option>
+                <option value="musical">뮤지컬</option>
+                <option value="concert">콘서트</option>
+                <option value="theatre">연극</option>
+              </select>
+              <input
+                className="searchInput"
+                type="text"
+                placeholder="검색어 입력"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </div>
             <div className="search-icon">
               <RiSearchLine />
             </div>

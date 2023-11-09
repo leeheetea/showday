@@ -18,7 +18,8 @@
 .comment_star{
   display: flex;
 }
-.comment_star_select {
+.comment_star_select,
+.comment_star_select_update  {
   display:flex;
   flex-direction: row-reverse;
   font-size:1.5em;
@@ -28,11 +29,13 @@
   color:#ccc;
   cursor:pointer;
 }
-.comment_star_select input {
+.comment_star_select input,
+.comment_star_select_update input{
   display:none;
 }
 
-.comment_star_select :checked ~ label {
+.comment_star_select :checked ~ label,
+.comment_star_select_update :checked ~ label{
   color:#f90;
 }
 
@@ -239,10 +242,19 @@ input[type="file"] {
 /* .modalReviewTextContainer */
 
 /* 모달 내부 요소 스타일 */
-.updateReviewText input[type="text"] {
-  width: 80%;
+.comment_star_container{
+  margin-top: 35px;
+  margin-bottom: 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding : 10px;
+}
+.updateReviewText input[type="textarea"] {
+  width: 90%;
+  height: 50px;
   padding: 10px;
   margin-bottom: 10px;
+  border: none;
 }
 
 .updateReviewText button {

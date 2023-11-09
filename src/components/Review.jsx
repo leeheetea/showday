@@ -79,7 +79,7 @@ const handleRatingReChange = (event) =>{
 
   //댓글 등록  
   const addReview = () => {
-      if (!selectedRating){
+      if (!reviewRating){
         alert("별점을 등록해주세요.");
         return ;
       }
@@ -120,7 +120,6 @@ const handleRatingReChange = (event) =>{
   .then((res)=>{
     setUserEmail(res);               
   }).catch((err)=>{
-    // console.error("유저 이메일 정보가 없습니다.",err);
     setUserEmail(null);
   });
 
@@ -129,21 +128,25 @@ const handleRatingReChange = (event) =>{
     setEditReviewContent(reviewText);
     setSelectedReviewId(reviewId);
     setIsModalOpen(true);
-  };
-
-  const handleUpdateReview =(reviewId)=>{
-    const nowDate = new Date();
-    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
-
+    
     getReviewInfo(reviewId)
     .then((reviewInfo) => {
       setReviewRating(reviewInfo.reviewGrade);
+      // console.log(reviewRating);
     }).catch((e)=>{
       console.log("리뷰 데이터를 받아오지 못했습니다.");
       console.log(e);
     }
     );
+  };
 
+  const handleUpdateReview =(reviewId)=>{
+    const nowDate = new Date();
+    const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    
+    
+   
+    
     const requestData = {
       reviewId: reviewId,
       reviewGrade: reviewRating,
@@ -178,12 +181,13 @@ const handleDeleteReview= (reviewId) =>{
 
 // 모달의 스타일 설정
 const modalStyle = {
+  width: `500px`,
   position: `fixed`,
   top: `50%`,
   left: `50%`,
   transform: `translate(-50%, -50%)`,
   backgroundColor: `white`,
-  padding: `20px`,
+  padding: `15px`,
   borderRadius : `5px`,
   boxShadow: `0 0 10px rgba(0, 0, 0, 0.2)`
 };
@@ -298,33 +302,36 @@ const handleModalClick = (event) => {
            {isModalOpen && (
               <div className="modal updateReviewText" style={modalStyle} ref={modalRef}>
                  <div className="modal-header">
-                    <button className="close-button" onClick={closeModal}>
+                  <div>댓글 수정</div>
+                    <button className="close-button redBtn" onClick={closeModal}>
                       &times; 
                     </button>
                   </div>
-                <div className='comment_star'>
-                 <div className='comment_star_select'>
-                    <input type="radio" id="5-stars" name="rating" value="5" onChange={handleRatingReChange}/>
-                    <label htmlFor="5-stars" className="star">&#9733;</label>
-                    <input type="radio" id="4-stars" name="rating" value="4" onChange={handleRatingReChange}/>
-                    <label htmlFor="4-stars" className="star">&#9733;</label>
-                    <input type="radio" id="3-stars" name="rating" value="3" onChange={handleRatingReChange}/>
-                    <label htmlFor="3-stars" className="star">&#9733;</label>
-                    <input type="radio" id="2-stars" name="rating" value="2" onChange={handleRatingReChange}/>
-                    <label htmlFor="2-stars" className="star">&#9733;</label>
-                    <input type="radio" id="1-star" name="rating" value="1" onChange={handleRatingReChange}/>
-                    <label htmlFor="1-star" className="star">&#9733;</label>  
-                 </div>
-                  {reviewRating === null ? (
-                    <p className='comment_star_desc'>별점을 선택해주세요.</p>)
-                   : (<p className='comment_star_desc'>{reviewRating}점</p>)}  
+                <div className='comment_star_container'>
+                  <div className='comment_star comment_star_update'>
+                   <div className='comment_star_select_update'>
+                      <input type="radio" id="5-stars_update" name="rating" value="5" onChange={handleRatingReChange}/>
+                      <label htmlFor="5-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="4-stars_update" name="rating" value="4" onChange={handleRatingReChange}/>
+                      <label htmlFor="4-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="3-stars_update" name="rating" value="3" onChange={handleRatingReChange}/>
+                      <label htmlFor="3-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="2-stars_update" name="rating" value="2" onChange={handleRatingReChange}/>
+                      <label htmlFor="2-stars_update" className="star">&#9733;</label>
+                      <input type="radio" id="1-star_update" name="rating" value="1" onChange={handleRatingReChange}/>
+                      <label htmlFor="1-star_update" className="star">&#9733;</label>  
+                   </div>
+                    {reviewRating === null ? (
+                      <p className='comment_star_desc'>별점을 선택해주세요.</p>)
+                     : (<p className='comment_star_desc'>{reviewRating}점</p>)}  
+                  </div>
+                  <input 
+                    className='modalReviewTextContainer'
+                    type='textarea'
+                    value={editReviewContent}
+                    onChange={(e) => setEditReviewContent(e.target.value)}
+                  />
                 </div>
-                <input 
-                  className='modalReviewTextContainer'
-                  type='text'
-                  value={editReviewContent}
-                  onChange={(e) => setEditReviewContent(e.target.value)}
-                />
                 <button onClick={() => handleUpdateReview(selectedReviewId)}>수정</button>
               </div>
             )}             

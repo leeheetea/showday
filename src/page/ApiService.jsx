@@ -309,7 +309,6 @@ export function userEmailCheck(){
 export function readVenueItem(venueId){
   return call(`/venue/${venueId}`, "GET", null)
   .then((res)=>{
-    console.log(res);
     return res;
   })
 }
@@ -317,13 +316,20 @@ export function readVenueItem(venueId){
 export function readShowData(showId){
   return call(`/show/${showId}`, "GET", null)
   .then((res)=>{
-    console.log(res);
     return res;
   })
 }
 
 export function getReviewInfo(reviewId){
   return call(`review/one/${reviewId}`, "GET", null)
+  .then((res)=>{
+    return res;
+  })
+}
+
+
+export function getSearchShow(searchUrl){
+  return call(searchUrl, "GET", null)
   .then((res)=>{
     console.log(res);
     return res;

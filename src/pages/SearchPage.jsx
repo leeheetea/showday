@@ -9,11 +9,12 @@ import { getSearchShow } from '../page/ApiService';
 const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const searchKeyword = searchParams.get('keyword');
+  // const searchKeyword = searchParams.get('keyword');
   const searchType = searchParams.get('type'); 
   const navigator = useNavigate();
 
   const [searchItems, setSearchItems] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState(searchParams.get('keyword'));
 
   useEffect(() => {
     fetchSearchItems();
@@ -39,6 +40,7 @@ const SearchPage = () => {
       <div className='searchPageContainer'>
         <div className='tx_result'>
           <h3>검색결과</h3>
+          <p><span className='red'>"{searchType}"</span></p>
           <p><span className='red'>"{searchKeyword}"</span>에 대한 
             검색 결과는 총 <span className='red'>{searchItems.length}</span>건 입니다.</p>
         </div>

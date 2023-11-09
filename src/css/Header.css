@@ -17,10 +17,6 @@ header {
   margin-top: 0.5rem;
 }
 
-
-
-
-
 .searchInput {
   border: none; 
   outline: none; 
@@ -44,9 +40,7 @@ header {
   color: #333;
 }
 
-/* 선택 상자 화살표 아이콘 스타일링 (원하는 아이콘으로 대체하세요) */
 .searchbar select::after {
-  content: "\25BC";
   font-size: 0.8rem;
   position: absolute;
   top: 50%;
@@ -56,7 +50,7 @@ header {
 }
 
 .searchbar select:hover {
-  cursor: pointer; /* 선택 상자 위에 마우스를 가져갈 때 포인터 커서로 변경 */
+  cursor: pointer; 
 }
 
 

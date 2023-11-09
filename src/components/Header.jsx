@@ -10,6 +10,14 @@ const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedType, setSelectedType] = useState("all"); 
   const isLogin = !!localStorage.getItem("ACCESS_TOKEN");
+
+  const handleSearch= ()=>{
+    const searchUrl = `/search?keyword=${encodeURIComponent(searchValue)}&type=${encodeURIComponent(selectedType)}`;
+    navigate(searchUrl);
+    window.location.reload(); // 페이지 리로드
+  }
+
+
   return (
     <header>
       <div className="header-container">
@@ -30,7 +38,8 @@ const SearchBar = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              navigate(`/search?keyword=${encodeURIComponent(searchValue)}&type=${selectedType}`);
+              handleSearch();
+              // navigate(`/search?keyword=${encodeURIComponent(searchValue)}&type=${encodeURIComponent(selectedType)}`);
             }}
           >
             <div className="searchbar">

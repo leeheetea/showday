@@ -33,12 +33,11 @@ const Review = ({data}) => {
     const intValue = parseInt(event.target.value, 10);
     setSelectedRating(intValue);
   }
-//별점 수정
-const handleRatingReChange = (event) =>{
-  const intValue = parseInt(event.target.value, 10);
-  setReviewRating(intValue);
-}
-
+  //별점 수정
+  const handleRatingReChange = (event) =>{
+    const intValue = parseInt(event.target.value, 10);
+    setReviewRating(intValue);
+  }
 
   //리뷰 내용
   const handleTextareaChange = (event) => {
@@ -79,7 +78,7 @@ const handleRatingReChange = (event) =>{
 
   //댓글 등록  
   const addReview = () => {
-      if (!reviewRating){
+      if (!selectedRating){
         alert("별점을 등록해주세요.");
         return ;
       }
@@ -87,6 +86,13 @@ const handleRatingReChange = (event) =>{
         alert("관람 후기를 입력해주세요.");
         return ;
       }
+       // user email 
+        userEmailCheck()
+        .then((res)=>{
+          setUserEmail(res);               
+        }).catch((err)=>{
+          setUserEmail(null);
+        });
       if (userEmail) {
         const nowDate = new Date();
         const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
@@ -115,13 +121,7 @@ const handleRatingReChange = (event) =>{
       }
 
 }
-// user email 
- userEmailCheck()
-  .then((res)=>{
-    setUserEmail(res);               
-  }).catch((err)=>{
-    setUserEmail(null);
-  });
+
 
   //리뷰 수정
   const handleEditClick = (reviewId, reviewText, authEmail, rating) => {

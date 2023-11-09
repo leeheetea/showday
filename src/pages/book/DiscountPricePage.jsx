@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import utils from '../../utils';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,15 +13,17 @@ const DiscountPricePage = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
   const { price } = state.showInfo;
-  const { youtDiscount, bookStep } = state;
+  const { bookStep } = state;
   const myseatCnt = state.myBookSeats?.length;
 
+  let youngDiscount = 0.15;
+
   const unMarkedPrice = price // utils.getRemoveMarkThousand(price);
-  const youtPrice = utils.getMarkThousand(
-    Number(unMarkedPrice) + unMarkedPrice * (youtDiscount / 100)
+  const youngPrice = utils.getMarkThousand(
+    price - (price * youngDiscount)
   );
   const disCountPrice = utils.getMarkThousand(
-    unMarkedPrice * (youtDiscount / 100)
+    unMarkedPrice * youngDiscount
   );
 
   const [values, setValues] = useState({
@@ -62,47 +64,47 @@ const DiscountPricePage = () => {
           <col width="70px" />
         </colgroup>
         <tbody>
-        <tr>
-          <th className="bookDiscountTh">일반가</th>
-          <td className="bookDiscountTd">일반가(정가)</td>
-          <td className="bookDiscountTd">{price}</td>
-          <td className="bookDiscountTd">
-            <input
-              type="number"
-              max={myseatCnt}
-              name="aNumber"
-              value={values.aNumber}
-              onChange={handleChange}
-            ></input>
-          </td>
-        </tr>
-        <tr>
-          <th className="bookDiscountTh" rowSpan={2}>할인종류</th>
-          <td className="bookDiscountTd">청소년할인({youtDiscount}%)</td>
-          <td className="bookDiscountTd">
-            {utils.getMarkThousand(youtPrice)}
-          </td>
-          <td className="bookDiscountTd">
-            <input
-              type="number"
-              max={myseatCnt}
-              name="cNumber"
-              value={values.cNumber}
-              onChange={handleChange}
-            ></input>
-          </td>
-        </tr>
-        <tr>
-          <td className="bookDiscountTd">&nbsp;</td>
-          <td className="bookDiscountTd">&nbsp;</td>
-          <td className="bookDiscountTd">
-            <input
-              type="number"
-              value="0"
-              disabled={true}
-            ></input>
-          </td>
-        </tr>
+          <tr>
+            <th className="bookDiscountTh">일반가</th>
+            <td className="bookDiscountTd">일반가(정가)</td>
+            <td className="bookDiscountTd">{utils.getMarkThousand(price)}</td>
+            <td className="bookDiscountTd">
+              <input
+                type="number"
+                max={myseatCnt}
+                name="aNumber"
+                value={values.aNumber}
+                onChange={handleChange}
+              ></input>
+            </td>
+          </tr>
+          <tr>
+            <th className="bookDiscountTh" rowSpan={2}>할인종류</th>
+            <td className="bookDiscountTd">청소년할인({youngDiscount * 100}%)</td>
+            <td className="bookDiscountTd">
+              {youngPrice}
+            </td>
+            <td className="bookDiscountTd">
+              <input
+                type="number"
+                max={myseatCnt}
+                name="cNumber"
+                value={values.cNumber}
+                onChange={handleChange}
+              ></input>
+            </td>
+          </tr>
+          <tr>
+            <td className="bookDiscountTd">&nbsp;</td>
+            <td className="bookDiscountTd">&nbsp;</td>
+            <td className="bookDiscountTd">
+              <input
+                type="number"
+                value="0"
+                disabled={true}
+              ></input>
+            </td>
+          </tr>
         </tbody>
       </table>
     )
@@ -115,16 +117,16 @@ const DiscountPricePage = () => {
           <col width="70px" />
         </colgroup>
         <tbody>
-        <tr>
-          <td className="bookDiscountTd">일반가(정가)</td>
-          <td className="bookDiscountTd">{price}</td>
-        </tr>
-        <tr>
-          <td className="bookDiscountTd">청소년할인({youtDiscount}%)</td>
-          <td className="bookDiscountTd">
-            {utils.getMarkThousand(youtPrice)}
-          </td>
-        </tr>
+          <tr>
+            <td className="bookDiscountTd">일반가(정가)</td>
+            <td className="bookDiscountTd">{utils.getMarkThousand(price)}</td>
+          </tr>
+          <tr>
+            <td className="bookDiscountTd">청소년할인({youngDiscount}%)</td>
+            <td className="bookDiscountTd">
+              {utils.getMarkThousand(youngPrice)}
+            </td>
+          </tr>
         </tbody>
       </table>
     )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./CheckBooksPage.css";
 import { setConfirms } from "../../store/slice";
@@ -27,14 +27,14 @@ const CheckBooksPage = () => {
     };
     setRequiredConfirm(updatedConfirmsChecked);
 
-    const isAllRequiredConfirmsChecked = ['confirm1',  'confirm2'].every((confirm) =>
+    const isAllRequiredConfirmsChecked = ['confirm1', 'confirm2'].every((confirm) =>
       Object.values(updatedConfirmsChecked).every(
         (checked) => checked));
 
-    if(isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
-      bookDispatch(setConfirms({step4: true}));
+    if (isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
+      bookDispatch(setConfirms({ step4: true }));
     } else {
-      bookDispatch(setConfirms({step4: false}));
+      bookDispatch(setConfirms({ step4: false }));
     }
   }
 
@@ -173,7 +173,7 @@ const CheckBooksPage = () => {
             id='confirm1'
             name='confirm1'
             checked={requiredConfirm.confirm1}
-            onChange={() => handleConfirmChange('confirm1')}
+          //onChange={() => handleConfirmChange('confirm1')}
           />
           <span className='guideText'>&nbsp;주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일을 수집하며 이용목적 달성 이후 파기합니다.</span>
         </label>

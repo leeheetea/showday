@@ -70,7 +70,8 @@ const booksSlice = createSlice({
       state.showInfo = action.payload;
     },
     setBookInfo: (state, action) => {
-      state.bookingData.bookDate = action.payload.choosedShowDate.toISOString();
+      console.log(" action.payload : ", action.payload);
+      state.bookingData.bookDate = action.payload.tempChoosedShowDate;
       state.bookingData.bookShowTime = action.payload.choosedShowTime;
       state.bookingData.choosedShowTimeId = action.payload.choosedShowTimeId;
     },
@@ -84,9 +85,9 @@ const booksSlice = createSlice({
     },
 
     setBookDateTime: (state, action) => {
-      state.bookingData.bookDate = moment(
-        action.payload.selectedValueMs
-      ).format("YYYY.MM.DD");
+      state.bookingData.bookDate = moment(action.payload.selectedValue).format(
+        "YYYY-MM-DD"
+      );
       state.bookingData.bookShowTime = action.payload.choosedShowTime;
       state.bookingData.bookShowTimeOrder = action.payload.bookShowTimeOrder;
     },

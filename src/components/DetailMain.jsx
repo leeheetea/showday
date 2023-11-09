@@ -70,22 +70,22 @@ const DetailMain = ({ data }) => {
   }, [showId]);
 
   useEffect(() => {
-    console.log(">>> showItem Ok : ", showItems);
+    //console.log(">>> showItem Ok : ", showItems);
     bookDispatch(setShowInfo(showItems));
   }, [showItems, setShowInfo]);
 
-  const fetchShowItem = async()=>{
+  const fetchShowItem = async () => {
     getShowData(showId);
   }
 
-  const getShowData = (showId)=>{
+  const getShowData = (showId) => {
     readShowData(showId)
-    .then((res)=>{
-      console.log(res);
-      setShowItems(res);
-    }).catch((err)=>{
-      console.log(err);
-    })
+      .then((res) => {
+        console.log(res);
+        setShowItems(res);
+      }).catch((err) => {
+        console.log(err);
+      })
   }
 
 
@@ -93,14 +93,14 @@ const DetailMain = ({ data }) => {
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
         <div className="detailMain_content_img">
-          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/"/>
+          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
         </div>
 
         <div className="product_detail_info">
           <div className="product_heading">
             <h2 className="product_title">{showItems.title}</h2>
             <span className="product_shareButton">
-              {}
+              { }
             </span>
           </div>
 

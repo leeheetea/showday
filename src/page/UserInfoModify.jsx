@@ -210,19 +210,6 @@ const UserInfoModify = () => {
                   readOnly={isEmailVerified}
                 />
 
-                
-                  <label htmlFor="">
-                    <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
-                      <option value="">직접입력</option>
-                      <option value="@naver.com">@naver.com</option>
-                      <option value="@hanmail.net">@hanmail.net</option>
-                      <option value="@gmail.com">@gmail.com</option>
-                      <option value="@nate.com">@nate.com</option>
-                      <option value="@hotmail.com">@hotmail.com</option>
-                    </select>
-                  </label>
-                
-                
                   <button
                     type='button'
                     disabled={isEmailVerified}

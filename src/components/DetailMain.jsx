@@ -2,7 +2,10 @@ import styled from "styled-components";
 import "../App.css";
 import { useEffect, useState } from "react";
 import "../css/DetailMain.css";
-import { readShowData } from "../page/ApiService";
+import callAxios from "../util/callAxios";
+import { readShowData, readVenueItem } from "../page/ApiService";
+import { setShowInfo } from "../store/slice";
+import { useDispatch } from "react-redux";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -47,15 +50,25 @@ const customModalStyles = {
 };
 
 
-const DetailMain = ( {data} ) => {
+const DetailMain = ({ data }) => {
 
   const [showItems, setShowItems] = useState([]);
-  
-  const showId = data;
 
-  useEffect(()=>{ 
+  const [value, setValue] = useState(new Date());
+
+  const showId = data;
+  const url = '/show/' + showId;
+
+  const bookDispatch = useDispatch();
+
+  useEffect(() => {
     fetchShowItem();
-  },[showId]);
+  }, [showId]);
+
+  useEffect(() => {
+    console.log(">>> showItem Ok : ", showItems);
+    bookDispatch(setShowInfo(showItems));
+  }, [showItems, setShowInfo]);
 
   const fetchShowItem = async()=>{
     getShowData(showId);
@@ -80,7 +93,10 @@ const DetailMain = ( {data} ) => {
 
         <div className="product_detail_info">
           <div className="product_heading">
-            <p className="product_title">{showItems.title}</p>
+            <h2 className="product_title">{showItems.title}</h2>
+            <span className="product_shareButton">
+              {}
+            </span>
           </div>
 
           <div className="product_info_list1">

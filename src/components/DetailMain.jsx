@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import { FaShareAlt } from "react-icons/fa";
-import { BiLinkAlt } from "react-icons/bi";
 import "../App.css";
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
 import "../css/DetailMain.css";
-import callAxios from "../util/callAxios";
-import { readShowData, readVenueItem } from "../page/ApiService";
+import { readShowData } from "../page/ApiService";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -53,12 +49,9 @@ const customModalStyles = {
 
 const DetailMain = ( {data} ) => {
 
-  const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
-  // const [venueItems, setVenueItems] = useState([]);
   
   const showId = data;
-  // const url = '/show/'+showId;
 
   useEffect(()=>{ 
     fetchShowItem();
@@ -78,19 +71,6 @@ const DetailMain = ( {data} ) => {
     })
   }
 
-//  const getVenueItem= (venueId)=>{
-//   if(venueId){
-//     readVenueItem(venueId)
-//     .then((res)=>{
-//       console.log(res);
-//       setVenueItems(res);
-//     }).catch((err)=>{
-//       console.log("공연 장소 이름 가지고 오기 실패!");
-//       console.error(err);
-//     });
-//   }
-// }
-
   return (
     <div className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
@@ -100,21 +80,7 @@ const DetailMain = ( {data} ) => {
 
         <div className="product_detail_info">
           <div className="product_heading">
-            <h2 className="product_title">{showItems.title}</h2>
-            <span className="product_shareButton">
-              {/* <button onClick={() => setShareModalIsOpen(true)}>
-                <FaShareAlt size="20" />
-              </button> */}
-              {/* <Modal
-                isOpen={shareModalIsOpen}
-                onRequestClose={() => setShareModalIsOpen(false)}
-                style={customModalStyles}
-              >
-                <button>
-                  <BiLinkAlt></BiLinkAlt>
-                </button>
-              </Modal> */}
-            </span>
+            <p className="product_title">{showItems.title}</p>
           </div>
 
           <div className="product_info_list1">

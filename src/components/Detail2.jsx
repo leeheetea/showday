@@ -24,7 +24,7 @@ const TabMenuContainter = styled.ul`
 
   .submenu {
     //기본 Tabmenu
-    width: calc(100% / 5);
+    width: calc(100% / 4);
     padding: 10px;
     font-size: 15px;
     transition: 0.5s;

@@ -6,7 +6,6 @@ import "../components/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { login } from "./ApiService";
-import kakaoImage from '../img/kakao_login_medium_narrow.png';
 
 const Login = () => {
 

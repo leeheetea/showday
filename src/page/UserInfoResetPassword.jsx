@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { matchPassword, resetPassword } from './ApiService';
+import { logout, matchPassword, resetPassword } from './ApiService';
 import { useNavigate } from 'react-router-dom';
 import '../css/UserInfoResetPassword.css'
 
@@ -42,7 +42,7 @@ const UserInfoResetPassword = () => {
       .then((res) => {
         console.log(res);
         if (res === "password updated") {
-          localStorage.removeItem("ACCESS_TOKEN");
+          logout();
           alert("비밀번호를 업데이트 했습니다. 다시 로그인해주세요.");
           navigate('/login');
         } else {
@@ -143,13 +143,16 @@ const UserInfoResetPassword = () => {
                 <div className='inputAreaLabel'>
                   <label htmlFor="password">비밀번호</label>
                   <input
-                    type='password'
+                    type={passwordVisible ? 'text' : 'password'}
                     placeholder='비밀번호를 입력해주세요'
                     name='oldPassword'
                     id='oldPassword'
                     value={oldPassword}
                     onChange={onChangeOldPassword}
                   />
+                </div>
+                <div>
+                  <button type='button' onClick={togglePasswordVisibility}>보기</button>
                 </div>
               </div>
             </div>

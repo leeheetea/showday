@@ -210,19 +210,6 @@ const UserInfoModify = () => {
                   readOnly={isEmailVerified}
                 />
 
-                
-                  <label htmlFor="">
-                    <select name="" id="emailSelectOption" onChange={onChangeEmailSelect} disabled={isEmailVerified}>
-                      <option value="">직접입력</option>
-                      <option value="@naver.com">@naver.com</option>
-                      <option value="@hanmail.net">@hanmail.net</option>
-                      <option value="@gmail.com">@gmail.com</option>
-                      <option value="@nate.com">@nate.com</option>
-                      <option value="@hotmail.com">@hotmail.com</option>
-                    </select>
-                  </label>
-                
-                
                   <button
                     type='button'
                     disabled={isEmailVerified}
@@ -230,15 +217,6 @@ const UserInfoModify = () => {
                   >수정</button>
              
               </div>
-              <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
-                이메일 주소 양식에 맞게 작성해주세요.
-              </div>
-              <EmailConfirm
-                isOpen={isEmailVerifiedOpen}
-                onClose={isEmailVerifiedClose}
-                onConfirm={handleEmailConfirm}
-                serverCode={serverCode}
-              />
             </div>
 
             {/* 이메일 */}

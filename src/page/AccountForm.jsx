@@ -221,14 +221,17 @@ const AccountForm = () => {
 
   useEffect(() => {
     setIsSubmitEnabled(
-      !areAllFieldsEmpty() && areAllFieldsFilled() && isAllFieldsValid() &&
+      !areAllFieldsEmpty() && areAllFieldsFilled() && isAllFieldsValid() && isEmailVerified &&
       (!isCheckedUnder14 || (isCheckedUnder14 && !areAllFieldsEmpty14() && areAllFieldsFilled14() && isAllFieldsValid14()))
     );
 
-  }, [areAllFieldsEmpty, isAllFieldsValid, isCheckedUnder14, areAllFieldsEmpty14, isAllFieldsValid14, areAllFieldsFilled, areAllFieldsFilled14]);
+  }, [areAllFieldsEmpty, isAllFieldsValid, isCheckedUnder14, areAllFieldsEmpty14, isAllFieldsValid14, areAllFieldsFilled, areAllFieldsFilled14, isEmailVerified]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isSubmitEnabled) {
+      return;
+    }
     const data = new FormData(e.target);
     const username = data.get("id");
     const password = data.get("password");

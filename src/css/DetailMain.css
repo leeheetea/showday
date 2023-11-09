@@ -1,20 +1,22 @@
-.detailMainBody{
+.detailMainBody {
   margin-top: 50px;
   width: 1000px;
+
   @media screen and (max-width: 800px) {
-    width:500px;
+    width: 500px;
   }
 }
 
 #detailMainBodyContent {
   width: 1000px;
   background: white;
+
   @media screen and (max-width: 800px) {
-    width:500px;
+    width: 500px;
   }
 }
 
-.detailMain_content_img{
+.detailMain_content_img {
   margin: 30px;
 }
 
@@ -33,6 +35,7 @@
   outline: none;
   text-align: center;
 }
+
 .product_shareButton button:hover {
   background: #fff;
   color: purple;
@@ -70,8 +73,9 @@ button:after {
 }
 
 
-.product_detail_info{
+.product_detail_info {
   white-space: nowrap;
+
   .product_heading {
     display: flex;
     justify-content: space-between;
@@ -79,15 +83,18 @@ button:after {
     margin-bottom: 1rem;
     border-bottom: 1px solid black;
   }
+
   .product_heading div {
     width: 500px;
   }
 }
-.product_info_item{
+
+.product_info_item {
   display: flex;
   justify-content: start;
 }
-.product_info_list1{
+
+.product_info_list1 {
   float: left;
   display: grid;
   width: 100%;
@@ -95,17 +102,21 @@ button:after {
   grid-template-rows: 50px 50px;
   list-style: none;
   padding-left: 0;
-  li{
+
+  li {
     margin-top: 1rem;
     display: flex;
-    padding: 1rem;  
+    padding: 1rem;
   }
-  .product_info_title{
+
+  .product_info_title {
     width: 5rem;
   }
-  li InfoTitle{
+
+  li InfoTitle {
     margin: 0 1.0rem 0 0;
   }
+
   @media screen and (max-width: 1100px) {
     float: none;
   }
@@ -113,72 +124,104 @@ button:after {
 
 
 /* detail1 components css */
-.detailPageBox{
+.detailPageBox {
   width: 1000px;
+
   @media screen and (max-width: 800px) {
-    width:500px;
+    width: 500px;
   }
 }
-.detailContainer{
+
+.detailContainer {
   background-color: white;
 
-  .detailBox{
-    width:500px;
+  .detailBox {
+    width: 500px;
   }
-  .detailBox2{
+
+  .detailBox2 {
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .detailTitle{
+
+  .detailBox3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .detailBox4 {
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detailTitle {
     color: red;
     margin-right: 10px;
   }
-  input{
+
+  input {
     margin: 2rem auto;
   }
-  input, label{
-    cursor:pointer;
+
+  input,
+  label {
+    cursor: pointer;
   }
 }
 
-.detailBox1{
+.detailBox1 {
   display: flex;
   align-items: flex-start;
   margin-left: 10px;
-  @media screen and (max-width: 800px){
+
+  @media screen and (max-width: 800px) {
     margin-bottom: 2rem;
   }
 }
-.detailBox2{
+
+.detailBox2 {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   border-left: 1px dotted gray;
 
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 800px) {
     border-left: none;
     justify-content: start;
     border-top: 1px dotted gray;
   }
 }
-.detailLabel{
+
+.detailLabel {
   padding: 1.5em;
 }
-.detailLabelContainer{
+
+.detailLabelContainer {
   margin-bottom: 1.5em;
 }
-.react-calendar{
+
+.react-calendar {
   margin-left: 18px;
   width: 18em;
   height: auto;
 }
-.react-calendar__tile:disabled{
+
+.react-calendar__tile:disabled {
   background-color: white;
 }
-.react-calendar__tile--now{
+
+.react-calendar__tile--now {
   background-color: white;
   color: black;
 }
-.react-calendar, .react-calendar__tile--now:hover{
+
+.react-calendar,
+.react-calendar__tile--now:hover {
   border: none;
   background-color: none;
 }

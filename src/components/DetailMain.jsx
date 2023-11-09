@@ -68,7 +68,7 @@ const DetailMain = ({ data }) => {
   }, [showId]);
 
   useEffect(() => {
-    console.log(">>> showItem Ok : ", showItems);
+    //console.log(">>> showItem Ok : ", showItems);
     bookDispatch(setShowInfo(showItems));
   }, [showItems, setShowInfo]);
 
@@ -78,52 +78,53 @@ const DetailMain = ({ data }) => {
 
   console.log(showId);
 
-  return (
-    <div className="detailMainBody">
-      <MainImgTextContainer id="detailMainBodyContent">
-        <div className="detailMain_content_img">
-          <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
-        </div>
+  return (<></>);
+  // return (
+  //   <div className="detailMainBody">
+  //     <MainImgTextContainer id="detailMainBodyContent">
+  //       <div className="detailMain_content_img">
+  //         <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />
+  //       </div>
 
-        <div className="product_detail_info">
-          <div className="product_heading">
-            <h2 className="product_title">{showItems.title}</h2>
-            <span className="product_shareButton">
-              <button onClick={() => setShareModalIsOpen(true)}>
-                <FaShareAlt size="20" />
-              </button>
-              <Modal
-                isOpen={shareModalIsOpen}
-                onRequestClose={() => setShareModalIsOpen(false)}
-                style={customModalStyles}
-              >
-                <button>
-                  <BiLinkAlt></BiLinkAlt>
-                </button>
-              </Modal>
-            </span>
-          </div>
+  //       <div className="product_detail_info">
+  //         <div className="product_heading">
+  //           <h2 className="product_title">{showItems.title}</h2>
+  //           <span className="product_shareButton">
+  //             <button onClick={() => setShareModalIsOpen(true)}>
+  //               <FaShareAlt size="20" />
+  //             </button>
+  //             <Modal
+  //               isOpen={shareModalIsOpen}
+  //               onRequestClose={() => setShareModalIsOpen(false)}
+  //               style={customModalStyles}
+  //             >
+  //               <button>
+  //                 <BiLinkAlt></BiLinkAlt>
+  //               </button>
+  //             </Modal>
+  //           </span>
+  //         </div>
 
-          <div className="product_info_list1">
-            <li className="product_info_item">
-              <InfoTitle className="product_info_title">장소</InfoTitle>
-              <div>{showItems.venueId}</div>
-            </li>
+  //         <div className="product_info_list1">
+  //           <li className="product_info_item">
+  //             <InfoTitle className="product_info_title">장소</InfoTitle>
+  //             <div>{showItems.venueId}</div>
+  //           </li>
 
-            <li className="product_info_item">
-              <InfoTitle className="product_info_title">기간</InfoTitle>
-              {/* <div>{showItems.showSchedules}</div> */}
-            </li>
+  //           <li className="product_info_item">
+  //             <InfoTitle className="product_info_title">기간</InfoTitle>
+  //             {/* <div>{showItems.showSchedules}</div> */}
+  //           </li>
 
-            <li className="product_info_item">
-              <InfoTitle className="product_info_title">가격</InfoTitle>
-              <div>{showItems.price}</div>
-            </li>
-          </div>
-        </div>
-      </MainImgTextContainer>
-    </div>
-  );
+  //           <li className="product_info_item">
+  //             <InfoTitle className="product_info_title">가격</InfoTitle>
+  //             <div>{showItems.price}</div>
+  //           </li>
+  //         </div>
+  //       </div>
+  //     </MainImgTextContainer>
+  //   </div>
+  // );
 };
 
 export default DetailMain;

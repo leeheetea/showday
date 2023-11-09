@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setBookStep } from "../../store/slice";
 import styled from "styled-components";
@@ -42,7 +42,9 @@ const headerList = [
 const BookHeader = ({ onBookStepClick, showId, index }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
-  const { bookStep } = state;
+  const { bookStep } = state.bookingData;
+
+  console.log('BookHeader bookStep : ', bookStep);
 
   //console.log(`[BookHeader] showId : ${showId} index : ${index}`);
 

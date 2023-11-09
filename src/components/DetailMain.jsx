@@ -7,6 +7,8 @@ import Modal from "react-modal";
 import "../css/DetailMain.css";
 import callAxios from "../util/callAxios";
 import { readShowData, readVenueItem } from "../page/ApiService";
+import { setShowInfo } from "../store/slice";
+import { useDispatch } from "react-redux";
 
 const MainImgTextContainer = styled.div`
   width: 100%;
@@ -51,18 +53,27 @@ const customModalStyles = {
 };
 
 
-const DetailMain = ( {data} ) => {
+const DetailMain = ({ data }) => {
 
   const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
-  // const [venueItems, setVenueItems] = useState([]);
-  
   const showId = data;
-  // const url = '/show/'+showId;
+  const [value, setValue] = useState(new Date());
 
-  useEffect(()=>{ 
+  const showId = data;
+  const url = '/show/' + showId;
+
+  const bookDispatch = useDispatch();
+
+  useEffect(() => {
     fetchShowItem();
-  },[showId]);
+  }, [showId]);
+
+  useEffect(() => {
+    console.log(">>> showItem Ok : ", showItems);
+    bookDispatch(setShowInfo(showItems));
+  }, [showItems, setShowInfo]);
+
 
   const fetchShowItem = async()=>{
     getShowData(showId);
@@ -78,18 +89,9 @@ const DetailMain = ( {data} ) => {
     })
   }
 
-//  const getVenueItem= (venueId)=>{
-//   if(venueId){
-//     readVenueItem(venueId)
-//     .then((res)=>{
-//       console.log(res);
-//       setVenueItems(res);
-//     }).catch((err)=>{
-//       console.log("공연 장소 이름 가지고 오기 실패!");
-//       console.error(err);
-//     });
-//   }
-// }
+  const fetchShowItem = async () => {
+    callAxios(url, setShowItems);
+  }
 
   return (
     <div className="detailMainBody">
@@ -102,18 +104,7 @@ const DetailMain = ( {data} ) => {
           <div className="product_heading">
             <h2 className="product_title">{showItems.title}</h2>
             <span className="product_shareButton">
-              {/* <button onClick={() => setShareModalIsOpen(true)}>
-                <FaShareAlt size="20" />
-              </button> */}
-              {/* <Modal
-                isOpen={shareModalIsOpen}
-                onRequestClose={() => setShareModalIsOpen(false)}
-                style={customModalStyles}
-              >
-                <button>
-                  <BiLinkAlt></BiLinkAlt>
-                </button>
-              </Modal> */}
+              {}
             </span>
           </div>
 

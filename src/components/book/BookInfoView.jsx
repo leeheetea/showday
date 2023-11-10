@@ -23,7 +23,7 @@ const BookInfoView = ({ childern }) => {
   const userState = useSelector((state) => state.userInfo);
 
   // state에서 화면에 표시할 공연 정보 선언
-  const { showId, title, price, url } = state.showInfo;
+  const { showId, title, price, thumbnailUrl } = state.showInfo;
   const { bookDate, bookShowTime, totalPrice, bookStep } = state.bookingData;
   const { name, phone, email } = userState;
   const myBookSeatList = state.bookingData.myBookSeats;
@@ -180,7 +180,7 @@ const BookInfoView = ({ childern }) => {
     return (
       (bookStep !== PAYMENT_STEP) ?
         (<div className="titleContainer">
-          <img className="titleLeft" src={url} alt="" />
+          <img className="titleLeft" src={thumbnailUrl} alt="" />
           <BookTitle width='30%' isflex='true'>
             {title}
           </BookTitle>
@@ -192,7 +192,7 @@ const BookInfoView = ({ childern }) => {
                 isflex='false' isleft='true'>{title}
               </BookTitle>
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                <img className="titleLeftSimple" src={url} alt="" />
+                <img className="titleLeftSimple" src={thumbnailUrl} alt="" />
                 <div style={{ display: 'flex' }}>
                   <LineContainer>{getDetailBookInfoSeatsSimple()}</LineContainer>
                   <LineContainer width={'600px'}>
@@ -224,7 +224,7 @@ const BookInfoView = ({ childern }) => {
 
   function getOrderUserInfo() {
     return <form action="">
-      <LineContainer tmargin='15px'>ㄹ굘ㅈ
+      <LineContainer tmargin='15px'>
         <div className='checkBookFormName'>
           <p>이름 | 홍길동</p>
           <p>휴대폰번호 | 010-1234-5678</p>

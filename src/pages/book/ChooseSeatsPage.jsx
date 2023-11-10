@@ -48,7 +48,7 @@ const Seat = styled.div`
   justify-content: center;
   align-items: center; 
   box-sizing: border-box;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   &:hover {
     background-color: darkblue; 
     border: ${GRID_GAP}px outset darkblue;// 마우스 오버 시 배경색을 변경
@@ -62,7 +62,8 @@ const SeatTitle = styled.div`
   color: black;
   justify-self: center;
   align-self: center;
-  font-size: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: bold;
 `
 
 const ChooseSeatsPage = () => {
@@ -155,8 +156,7 @@ const ChooseSeatsPage = () => {
   }, [displaySeatList])
 
   useEffect(() => {
-    const stageBackgroundElement = stageBackgroundRef.current;
-
+    const stageBackgroundElement = stageBackgroundRef?.current;
     // 극장 영역 완료전 오류 방지위한 체크
     if (stageBackgroundElement) {
       const width = stageBackgroundElement.offsetWidth;
@@ -165,7 +165,7 @@ const ChooseSeatsPage = () => {
     }
   }, [loading, setLoading]);
 
-  const handleChooseSeatTemp = (idx, seatId) => {
+  const handleChooseSeat = (idx, seatId) => {
     console.log('handleChooseSeatTemp 잘 탑니다!!!!!!!');
     //console.log('handleChooseSeatTemp seatInfo : ', seatInfo);
     console.log('handleChooseSeatTemp seatId : ', seatId);
@@ -198,40 +198,6 @@ const ChooseSeatsPage = () => {
     bookDispatch(setMyBookSeats({ myBookSeats: choosedSeatListTmp }));
     //}
   }
-
-  // const handleChooseSeat = (seatInfo) => {청소년할인(%)
-  //   if (seatInfo) {
-  //     //const seatPosition = utils.getAboutDelimiter('F', SEAT_DELIMITER, key);
-  //     //console.log(seatPosition);
-
-  //     const indexRow = parseInt(seatPosition[0], 10);
-  //     const indexCol = parseInt(seatPosition[1], 10);
-
-  //     // 좌석 선택 막는 조건
-  //     // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
-  //     const fullySeatName = utils.getAboutDelimiter('B', SEAT_DELIMITER, indexRow, indexCol);
-  //     if (choosedSeatListRef.current.includes(fullySeatName)) {
-  //       console.log(choosedSeatListRef.current, fullySeatName);
-  //       alert('이미 선택한 자리 입니다.');
-  //       return;
-  //     } else if (choosedSeatListRef.current.length >= MAX_CAN_RESERVE_CNT) {
-  //       alert('최대 5자리까지 선택 가능 합니다.');
-  //       return;
-  //     }
-
-  //     choosedSeatListRef.current.push(key);
-
-  //     const newDisplaySeatList = [...displaySeatList];
-  //     newDisplaySeatList[(indexRow * maxColRowInfoRef.current.maxCol) + indexCol] = 1;
-  //     setDisplaySeatList(newDisplaySeatList);
-
-  //     // 복사해서 안보내고 바로 choosedSeatListRef.current 보내면
-  //     // Arrary.push() 할 때 에러남, Cannot add property 1, object is not extensible
-  //     // TypeError: Cannot add property 1, object is not extensible
-  //     const choosedSeatListTmp = [...choosedSeatListRef.current];
-  //     bookDispatch(setMyBookSeats({ myBookSeats: choosedSeatListTmp }));
-  //   }
-  // }
 
   function configureSeats() {
     return (
@@ -269,10 +235,10 @@ const ChooseSeatsPage = () => {
                 key={idx}
                 width={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxCol}
                 height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
-                canreserve={rowItems?.canReservation}
-                onClick={() => handleChooseSeatTemp(idx, rowItems?.showSeatId)}
+                canreserve={rowItems?.canReservation?.toString()}
+                onClick={() => handleChooseSeat(idx, rowItems?.showSeatId)}
               >
-                {rowItems?.showSeatId}/{rowItems?.canReservation === true ? 1 : 0}
+                {/* {rowItems?.showSeatId}/{rowItems?.canReservation === true ? 1 : 0} */}
               </Seat>
             )
             // }

@@ -67,7 +67,6 @@ const BookInfoView = ({ onChangeDate }) => {
         // 매수선택 오류 사항 체크 확인(할인전 티켓금액가/장당가격 이 전체 매수랑 같은지 확인)
         if ((totalPrice.sumPrice / state.showInfo.price)
           !== myBookSeatList.length) {
-            Ticketingdeta
           alert('선택하신 좌석수와 예매하실 티켓매수가 일치하지 않습니다.');
           return;
         }

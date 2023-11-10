@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import StyledLink from "./styled";
-// import { callReservations } from "../service/book/bookApiService";
 
 
 const ORDER_STATE = {
@@ -30,19 +29,6 @@ const getReservationState = (state) => {
 };
 
 const TicketingCancle = () => {
-  const [reservations, setReservations] = useState(null);
-
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
-
-  // const loadData = () => {
-  //   callReservations().then((result) => {
-  //     if (result) {
-  //       setReservations(result);
-  //     }
-  //   });
-  // }
 
   return (
     <div className="myPageCheckContainer">
@@ -96,8 +82,8 @@ const TicketingCancle = () => {
                   1235468-516351
                 </StyledLink>
               </td>
-              <td>문라이트</td>
-              <td>2023-01-01</td>
+              <td>#1</td>
+              <td>#2</td>
               <td>2</td>
               <td>5일</td>
               {/* <td>{getReservationState(reservations?.orderState) ?? ORDER_STATE.PROCESSING}</td> */}

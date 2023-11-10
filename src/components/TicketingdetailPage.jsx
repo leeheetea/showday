@@ -6,7 +6,7 @@ const ORDER_STATE = {
   "PENDING": 1, // "예약대기"
   "PROCESSING": 2, // 진행중
   "CANCELED": 3, // 예약취소
-  "REFUNDED": 4,
+  "REFUNDED": 4, // 환불완료
   "COMPLETE": 5 // 예약완료
 };
 
@@ -19,7 +19,7 @@ const getReservationState = (state) => {
       break;
     case ORDER_STATE.CANCELED: return "예약취소";
       break;
-    case ORDER_STATE.REFUNDED:
+    case ORDER_STATE.REFUNDED: return "환불완료";
       break;
     case ORDER_STATE.COMPLETE: return "예약완료";
       break;
@@ -75,6 +75,7 @@ const TicketingdetailPage = () => {
               <div>이미지 들어갈 자리</div>
               <div>
                 <table className="ticketing-table">
+                  <tbody>
                   <tr>
                     <th>예매 번호</th>
                     <td>{result.reservationId}</td>
@@ -105,7 +106,7 @@ const TicketingdetailPage = () => {
                     <th>티켓수령방법</th>
                     <td colSpan="3">현장수령</td>
                   </tr>
-
+                  </tbody>
                 </table>
               </div>
             </div>

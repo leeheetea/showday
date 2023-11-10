@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51ed8695-1ff5-4098-a35d-0ef298a564c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/admin/ShowDetail.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/admin/ShowsTable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DetailMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DetailMain.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LaptopNavigator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LaptopNavigator.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyPageMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyPageMain.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ServiceMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ServiceMain.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/styled.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/styled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page/UserInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/UserInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TicketingdetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TicketingdetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +27,22 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;lht&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/showday&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/showday",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\showday\src\pages\admin" />
@@ -75,10 +65,5 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/src/pages/dashboard/Deposits.js" />
-      </list>
-    </option>
   </component>
 </project>

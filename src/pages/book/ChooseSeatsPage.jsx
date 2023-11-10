@@ -73,7 +73,7 @@ const ChooseSeatsPage = () => {
   const state = useSelector((state) => state.booksData);
 
   // state에서 화면에 표시할 공연 정보 선언
-  const { title, venueId, venueName } = state.showInfo;
+  const { title, venueId, venueName, price } = state.showInfo;
   const { bookDate, bookShowTime, myBookSeats, bookShowTimeOrder } = state.bookingData;
   const [loading, setLoading] = useState(true);
   const stageBackgroundRef = useRef(null);
@@ -195,7 +195,11 @@ const ChooseSeatsPage = () => {
     // Arrary.push() 할 때 에러남, Cannot add property 1, object is not extensible
     // TypeError: Cannot add property 1, object is not extensible
     const choosedSeatListTmp = [...choosedSeatListRef.current];
-    bookDispatch(setMyBookSeats({ myBookSeats: choosedSeatListTmp }));
+    const choosedSeatPriceList = new Array(choosedSeatListTmp.length).fill(price);
+    bookDispatch(setMyBookSeats({
+      myBookSeats: choosedSeatListTmp,
+      myBookSeatPrice: choosedSeatPriceList
+    }));
     //}
   }
 

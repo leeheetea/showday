@@ -155,7 +155,7 @@ const Detail1 = (props) => {
     var tempDate = new Date(choosedShowDate);
     tempDate.setDate(tempDate.getDate() + 1);
     const targetDate = tempDate.toISOString().split('T')[0];
-    console.log(">>> scheduleDate List targetDate : ", targetDate);
+    //console.log(">>> scheduleDate List targetDate : ", targetDate);
 
     // 필요한 회차 목록만 가져옴
     const showSchedules = await state?.showInfo?.showSchedules;

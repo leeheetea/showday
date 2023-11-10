@@ -94,11 +94,16 @@ const booksSlice = createSlice({
 
     setMyBookSeats: (state, action) => {
       state.bookingData.myBookSeats = action.payload.myBookSeats;
+      state.bookingData.myBookSeatPrice = action.payload.myBookSeatPrice;
       //console.log(">>>2_after" + state.seats.myBookSeats);
     },
 
     setConfirms: (state, action) => {
       state.bookingData.bookDate.confirms = action.payload;
+    },
+
+    setOrderAccount: (state, action) => {
+      state.bookingData.orderAccount = action.payload;
     },
   },
 });

@@ -27,3 +27,17 @@ export async function callReadVenueSeatSize(vnenuId) {
   console.log("readVenueSeatSize call : ", response);
   return response;
 }
+
+export async function callSaveReservation(requestData) {
+  //console.log("requestData : ", requestData);
+  const response = await call("/reservation", "POST", requestData);
+  console.log("readVenueSeatSize call : ", response);
+  return response;
+}
+
+export function callReservations(setReservations) {
+  const response = call("/reservation", "GET");
+  console.log("callReservations : ", response);
+  setReservations(response);
+  return response;
+}

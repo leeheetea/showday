@@ -31,11 +31,12 @@ const CheckBooksPage = () => {
       Object.values(updatedConfirmsChecked).every(
         (checked) => checked));
 
-    if (isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
-      bookDispatch(setConfirms({ step4: true }));
-    } else {
-      bookDispatch(setConfirms({ step4: false }));
-    }
+    // if (isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
+    //   bookDispatch(setConfirms({ step4: true }));
+    // } else {
+    //   bookDispatch(setConfirms({ step4: false }));
+    // }
+    bookDispatch(setConfirms({ step4: true }));
   }
 
   const [email, setEmail] = useState('');

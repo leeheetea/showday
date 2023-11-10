@@ -1,29 +1,29 @@
-import {call} from "../../page/ApiService";
+import { call } from "../../page/ApiService";
 
-export function readShowSeat(showId, showDateTime) {
+// 해당조건의 해당 좌석 예매 가능 여부 조회
+export async function callReadShowSeat(showId, showDateTime) {
+  console.log(">>> parameter showId : ", showId, showDateTime);
 
-  console.log(">>> parameter showId : " + showId);
-    console.log(">>> parameter showDateTime : " + showDateTime.date, showDateTime.time);
-
-  return call("/show/seat/" + showId
-     + "?date=" + showDateTime.date
-     + "&time=" + showDateTime.time, "GET")
-    .then((response) => {
-      console.log(">>> [readShowSeat] response : " + response);
-      return response;
-    })
+  const response = await call(
+    "/show/seat/" +
+      showId +
+      "?date=" +
+      showDateTime.date +
+      "&time=" +
+      showDateTime.time,
+    "GET"
+  );
+  return response;
 }
 
-export function readShow(showId) {
-    return call("/show/" + showId).then((response) => {
-        console.log(response);
-        return response;
-    })
+export async function callReadShow(showId) {
+  const response = await call("/show/" + showId);
+  console.log(response);
+  return response;
 }
 
-export function readVenueSeatSize(vnenuId) {
-    return call("/venue/" + vnenuId).then((response) => {
-        console.log("readVenueSeatSize call : " , response);
-        return response;
-    })
+export async function callReadVenueSeatSize(vnenuId) {
+  const response = await call("/venue/" + vnenuId);
+  console.log("readVenueSeatSize call : ", response);
+  return response;
 }

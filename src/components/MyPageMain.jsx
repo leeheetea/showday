@@ -50,7 +50,7 @@ const MyPageMain = () => {
                 </div>
               </li>
             </StyledLink>
-            <StyledLink to="/mypage/memberInfo">
+            <StyledLink to="/userinfomodify">
               <li>
                 <GoPerson className="icon" />
                 <div>

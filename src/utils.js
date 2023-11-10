@@ -25,7 +25,7 @@ const timeFormatForButton = (time) => {
   // ex) time 이 16:00:00 으로 넘오옴
   // 16:00로 문자열 만들어 넘기기
   let timeString = time.slice(0, -3);
-  console.log(">>> utils timeString ", time, timeString);
+  //console.log(">>> utils timeString ", time, timeString);
   return time;
 };
 
@@ -36,7 +36,7 @@ const getItemFromString = (time) => {
 };
 
 const getMarkThousand = (number) => {
-  //console.log("(getMarkThousand) number : ", number);
+  console.log("(getMarkThousand) number : ", number);
   if (number !== null && number === undefined) {
     console.log(`">>> $(number)값을 확인해 주세요."`);
     return "0";
@@ -85,10 +85,10 @@ const checkTimeStringFor = (timeStr) => {
   const timePattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
 
   if (timePattern.test(timeStr)) {
-    console.log("유효한 시간 형식입니다.");
+    console.log("유효한 시간 형식입니다.", timeStr);
     return true;
   } else {
-    console.log("유효하지 않은 시간 형식입니다.");
+    console.log("유효하지 않은 시간 형식입니다.", timeStr);
     return false;
   }
 };

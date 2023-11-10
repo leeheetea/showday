@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import "../css/SearchPage.css"
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from 'react-router-dom';
 import { getSearchShow } from '../page/ApiService';
 
 const SearchPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  // const searchKeyword = searchParams.get('keyword');
-  const searchType = searchParams.get('type'); 
+  const searchType = searchParams.get('type');
   const navigator = useNavigate();
 
   const [searchItems, setSearchItems] = useState([]);
@@ -31,11 +29,9 @@ const SearchPage = () => {
       console.error("검색 서치 중 오류가 발생했습니다.", err);
     })
   }
-  
-  
 
   return (
-    <div>
+    <div style={ {marginTop : '60px'}}>
       <Header/>
       <div className='searchPageContainer'>
         <div className='tx_result'>

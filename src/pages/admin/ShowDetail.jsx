@@ -5,8 +5,6 @@ import axios from 'axios';
 
 const ShowDetail = ({ show, onBack }) => {
     const [showDetails, setShowDetails] = useState(show);
-    const navigate = useNavigate();
-
 
     const formatDate = (dateArray) => {
         const [year, month, day] = dateArray;
@@ -60,7 +58,6 @@ const ShowDetail = ({ show, onBack }) => {
                 },
             });
         } else {
-            // 기타 필드 업데이트
             setShowDetails({ ...showDetails, [field]: e.target.value });
         }
     };
@@ -80,6 +77,7 @@ const ShowDetail = ({ show, onBack }) => {
                 showId: showDetails.showId,
                 title: showDetails.title,
                 type: showDetails.type,
+                period: showDetails.period,
                 contentDetail: showDetails.contentDetail,
                 thumbnailUrl: showDetails.thumbnailUrl,
                 price: showDetails.price,
@@ -109,9 +107,24 @@ const ShowDetail = ({ show, onBack }) => {
         }
     };
 
-    const handleDelete = () => {
-        console.log('삭제:', showDetails.showId);
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+        if (confirmDelete) {
+            try {
+                const url = `http://localhost/show/${showDetails.showId}`;
+                console.log('삭제 요청 URL:', url);
+
+                const response = await axios.delete(url);
+                alert('삭제가 성공적으로 처리되었습니다.');
+                onBack();
+                console.log('삭제 응답:', response.data);
+
+            } catch (error) {
+                console.error('삭제 실패:', error);
+            }
+        }
     };
+
 
     return (
         <Grid container spacing={1} style={{ marginTop: '20px' }}> {/* Spacing reduced from 2 to 1 */}

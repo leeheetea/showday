@@ -157,31 +157,28 @@ const Detail1 = (props) => {
     const targetDate = tempDate.toISOString().split('T')[0];
     console.log(">>> scheduleDate List targetDate : ", targetDate);
 
-    if (showSchedules) {
-      console.log(">>> scheduleDate List : ", showSchedules);
-    } else {
-      console.log(">>> scheduleDate List null??");
-    }
-
     // 필요한 회차 목록만 가져옴
     const showSchedules = await state?.showInfo?.showSchedules;
     // 필요한 회차 목록만 가져옴
-    console.log("------- showSchedules:", state?.showInfo?.showSchedules);
 
     if (showSchedules) {
-      const filteredData = showSchedules.filter(item => item.scheduleDate === targetDate);
-      setShowScheduleList(filteredData); // 스케줄 전체 정보 포함 리스트
-      //console.log("스케쥴 전체 리스트 가져오기 !!! ", showScheduleList);
-      // 회차 정보만 리스트 업데이트
-      const schedules = new Array();
-      filteredData.map((schedule) => {
-        schedules.push(schedule.scheduleTime.slice(0, -3));
+      console.log(">>> scheduleDate List(전체) : ", showSchedules);
+
+      let schedules = new Array();
+      showSchedules?.map((scheduleItem) => {
+        if (scheduleItem) {
+          if (scheduleItem.scheduleDate.join('-') === targetDate) {
+            //filteredData.push(scheduleItem.scheduleTime.join(':'));
+            schedules.push(scheduleItem.scheduleTime[0] + ":00");
+          }
+        }
       })
 
-      console.log("------------------> ", schedules);
+      setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
+      console.log("-------- 회차 schedules : ", schedules);
     } else {
-      console.log("회차 목록 가져오기 실패");
+      console.log("회차 목록 가져오기 실패 다시 시도!!");
     }
   }
 

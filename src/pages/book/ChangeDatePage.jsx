@@ -48,7 +48,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const [showScheduleList, setShowScheduleList] = useState(null); // 서버에서 받아온 id 포함 전체 스케쥴 정보
   const showScheduleListRef = useRef(new Array()); // 시간 정보만 뽑아낸 리스트(표시용)
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
-  const [reserveSeatCount, setReserveSeatCount] = useState(0); // 회차별 좐여석 카운팅 저장
+  const [reserveSeatCount, setReserveSeatCount] = useState(-1); // 회차별 좐여석 카운팅 저장
   const [isTimeClear, setIsTimeClear] = useState(false);
 
   const { showTime } = state.showInfo;
@@ -71,6 +71,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const handleChangedDate = (date) => {
     setChoosedShowDate(date);
     setChoosedShowTime(null);
+    setReserveSeatCount(-1);
   };
 
   /* 회차 선택 될때 이벤트 */
@@ -113,26 +114,29 @@ const ChangeDatePage = ({ onChangeDate }) => {
     console.log(">>> scheduleDate List targetDate : ", targetDate);
 
     // 필요한 회차 목록만 가져옴
-    // 필요한 회차 목록만 가져옴
     const showSchedules = await state?.showInfo?.showSchedules;
+    // 필요한 회차 목록만 가져옴
 
-    if (showSchedules !== null && showSchedules !== undefined) {
-      const filteredData = showSchedules.filter(item => item.scheduleDate === targetDate);
-      setShowScheduleList(filteredData); // 스케줄 전체 정보 포함 리스트
-      //console.log("스케쥴 전체 리스트 가져오기 !!! ", showScheduleList);
-      // 회차 정보만 리스트 업데이트
-      const schedules = new Array();
-      filteredData.map((schedule) => {
-        schedules.push(schedule.scheduleTime.slice(0, -3));
+    if (showSchedules) {
+      console.log(">>> scheduleDate List(전체) : ", showSchedules);
+
+      let schedules = new Array();
+      showSchedules?.map((scheduleItem) => {
+        if (scheduleItem) {
+          if (scheduleItem.scheduleDate.join('-') === targetDate) {
+            //filteredData.push(scheduleItem.scheduleTime.join(':'));
+            schedules.push(scheduleItem.scheduleTime[0] + ":00");
+          }
+        }
       })
 
-      console.log("------------------> ", schedules);
+      setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
+      console.log("-------- 회차 schedules : ", schedules);
     } else {
-      console.log("회차 목록 가져오기 실패");
+      console.log("회차 목록 가져오기 실패 다시 시도!!");
     }
-  };
-
+  }
 
   return (
     <div className="changeDateContainer">
@@ -170,14 +174,16 @@ const ChangeDatePage = ({ onChangeDate }) => {
         </LineContainer>
         <LineContainer width="30%" height="380px" isfrontcenter="true">
           <BookTitle isBottomLine>잔여석</BookTitle>
-          <ul>
-            <li className="textLine">
-              <span span className="textLeft">R석</span>
-              <span className="textRight">
-                {reserveSeatCount}
-              </span>
-            </li>
-          </ul>
+          {reserveSeatCount > 0 ?
+            <ul>
+              <li className="textLine">
+                <span span className="textLeft">R석</span>
+                <span className="textRight">
+                  {reserveSeatCount}
+                </span>
+              </li>
+            </ul>
+            : <></>}
         </LineContainer>
       </div>
     </div>

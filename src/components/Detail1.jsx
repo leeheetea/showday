@@ -160,9 +160,8 @@ const Detail1 = (props) => {
     if (showSchedules) {
       let schedules = new Array();
       showSchedules?.map((scheduleItem) => {
-        if (scheduleItem) {
+        if (typeof scheduleItem?.scheduleDate === Array) {
           if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
-            //filteredData.push(scheduleItem.scheduleTime.join(':'));
             schedules.push(scheduleItem.scheduleTime[0] + ":00");
           }
         }

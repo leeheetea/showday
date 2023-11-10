@@ -35,8 +35,9 @@ export async function callSaveReservation(requestData) {
   return response;
 }
 
-export async function callReservations() {
-  const response = await call("/reservation", "GET");
+export function callReservations(setReservations) {
+  const response = call("/reservation", "GET");
   console.log("callReservations : ", response);
+  setReservations(response);
   return response;
 }

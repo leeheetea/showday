@@ -14,10 +14,10 @@ const BookMainPage = () => {
   const booksDatas = useSelector((state) => state.booksData);
   const [currentTab, setCurrentTab] = useState(booksDatas.bookStep ?? 2);
 
-  const handleStepClick = (e) => {
-    setCurrentTab(e);
-    //console.log(`>>> id : ${id}, currentTab : ${currentTab} e : ${e}`);
-    navigator("/book/" + id + "/" + currentTab);
+  const handleStepClick = (newStep) => {
+    setCurrentTab(newStep);
+    console.log(`>>> id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
+    navigator("/book/" + id + "/" + newStep);
   };
 
   const handleChangDate = (e) => {

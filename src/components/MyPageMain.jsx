@@ -18,7 +18,7 @@ const MyPageMain = () => {
   return (
     <ServiceCenterMainContainer className="myPageMainContainer">
       <ServiceCenterContainer>
-        <div className="serviceCenterTitle">
+        <div  className="serviceCenterTitle">
           <h2>마이페이지</h2>
         </div>
         <div className="myPageIconsContainer">
@@ -50,7 +50,7 @@ const MyPageMain = () => {
                 </div>
               </li>
             </StyledLink>
-            <StyledLink to="/mypage/memberInfo">
+            <StyledLink to="/userinfomodify">
               <li>
                 <GoPerson className="icon" />
                 <div>

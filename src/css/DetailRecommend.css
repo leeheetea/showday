@@ -1,6 +1,24 @@
+.commendRecommendContainer{
+  display : flex;
+}
+.detailRecommend{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 15px;
+  align-items: center;
+  padding: 15px 0;
+}
 .recommend-item-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media (max-width: 767px) {
+   .commendRecommendContainer{
+    flex-direction: column;
+   }
+   
 }

@@ -26,10 +26,10 @@ const UserInfo = () => {
   }, [])
 
   return (
-    <div>
+    <div style={{ paddingTop: '80px' }}>
       <Header />
       <form>
-        <div id='openidwrap'>
+        <div  id='openidwrap'>
           <div className='contentswrap'>
             <div className='memberClass'>
               <div className='myClass'>

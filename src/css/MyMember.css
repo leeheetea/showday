@@ -1,5 +1,6 @@
 .myMemberContainer{
   width: 55rem;
+  margin-bottom: 50px;
 }
 .myMemberBoxBody{
   background-color: rgb(235, 235, 235);
@@ -17,5 +18,10 @@
 .myMemberTbody td, 
 .myMemberTbody th {
   border-bottom: 2px dotted gray; 
+}
+
+.myMemberTbody tr:last-child td,
+.myMemberTbody tr:last-child th {
+  border-bottom: none;
 }
 

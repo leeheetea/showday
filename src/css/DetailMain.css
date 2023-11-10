@@ -1,4 +1,10 @@
-.detailMainBody {
+.product_title{
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+.detailMainBody{
   margin-top: 50px;
   width: 1000px;
 
@@ -80,7 +86,7 @@ button:after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
     border-bottom: 1px solid black;
   }
 

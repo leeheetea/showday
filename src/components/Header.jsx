@@ -39,7 +39,6 @@ const SearchBar = () => {
             onSubmit={(e) => {
               e.preventDefault();
               handleSearch();
-              // navigate(`/search?keyword=${encodeURIComponent(searchValue)}&type=${encodeURIComponent(selectedType)}`);
             }}
           >
             <div className="searchbar">
@@ -58,6 +57,7 @@ const SearchBar = () => {
                 placeholder="검색어 입력"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
+                required
               />
             </div>
             <div className="search-icon">
@@ -109,7 +109,7 @@ const SearchBar = () => {
           </>
           )}
           <span className="search-container-menu-text">
-            <Link to="/mypage/memberInfo">마이페이지</Link>
+            <Link to="/mypage/ticketingcancle">마이페이지</Link>
           </span>
           <span className="search-container-menu-text">
             <Link to="/servicepage/servicefirst">고객센터</Link>

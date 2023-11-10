@@ -78,47 +78,49 @@ const Review = ({data}) => {
 
   //댓글 등록  
   const addReview = () => {
-      if (!selectedRating){
-        alert("별점을 등록해주세요.");
-        return ;
-      }
-      if(!textarea){
-        alert("관람 후기를 입력해주세요.");
-        return ;
-      }
-       // user email 
-        userEmailCheck()
-        .then((res)=>{
-          setUserEmail(res);               
-        }).catch((err)=>{
-          setUserEmail(null);
-        });
-      if (userEmail) {
-        const nowDate = new Date();
-        const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
+    if (!selectedRating){
+      alert("별점을 등록해주세요.");
+      return ;
+    }
+    if(!textarea){
+      alert("관람 후기를 입력해주세요.");
+      return ;
+    }
 
-        const requestData = {
-          reviewGrade: selectedRating,
-          reviewText: textarea,
-          showId: showId,
-          reviewTimestamp: timestamp,
-        };
+  userEmailCheck()
+  .then((res) => {
+    setUserEmail(res);
+    if (userEmail) {
+      const nowDate = new Date();
+      const timestamp = nowDate.toISOString().slice(0, 19).replace('T', ' ');
 
-        createReview(requestData)
-          .then((res) => {
-            alert("리뷰가 성공적으로 등록되었습니다.");
-            console.log("res===" + res);
-            fetchReviewItem();
-            setTexTarea('');
-            // setSelectedRating(null); 
-          }).catch((error) => {
+      const requestData = {
+        reviewGrade: selectedRating,
+        reviewText: textarea,
+        showId: showId,
+        reviewTimestamp: timestamp,
+      };
+
+      createReview(requestData)
+        .then((res) => {
+          alert("리뷰가 성공적으로 등록되었습니다.");
+          console.log("res===" + res);
+          fetchReviewItem();
+          setTexTarea('');
+        })
+        .catch((error) => {
           console.error("리뷰 등록 중 오류가 발생했습니다.", error);
-          alert("리뷰 등록 중 오류가 발생했습니다.");
         });
-      }else {
-        alert("로그인이 필요합니다.");
-        navigate('/login');
-      }
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate('/login');
+    }
+  })
+  .catch((err) => {
+    setUserEmail(null);
+    alert("로그인이 필요합니다.");
+    navigate('/login');
+  });
 
 }
 
@@ -143,10 +145,6 @@ const Review = ({data}) => {
   const handleUpdateReview =(reviewId)=>{
     const nowDate = new Date();
     const timestamp =nowDate.toISOString().slice(0, 19).replace('T', ' ');
-    
-    
-   
-    
     const requestData = {
       reviewId: reviewId,
       reviewGrade: reviewRating,

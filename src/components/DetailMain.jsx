@@ -51,7 +51,6 @@ const customModalStyles = {
 
 const DetailMain = ({ data }) => {
 
-  const [shareModalIsOpen, setShareModalIsOpen] = useState(false); //링크 공유 모달
   const [showItems, setShowItems] = useState([]);
 
   const [value, setValue] = useState(new Date());
@@ -83,7 +82,6 @@ const DetailMain = ({ data }) => {
         console.log(err);
       })
   }
-
 
   return (
     <div style={{ paddingTop: '80px' }} className="detailMainBody">

@@ -50,7 +50,7 @@ const ResponsiveSlider = () => {
 
   const images = isLargeScreen
     ? showItems.map((item) => ({ url: item.bannerUrl, id: item.showId }))
-    : showItems.map((item) => ({ url: item.smallBannerUrl, id: item.showId }));
+    : showItems.map((item) => ({ url: item.bannerUrl, id: item.showId }));
 
   const settings = {
     dots: true,

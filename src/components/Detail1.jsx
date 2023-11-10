@@ -161,24 +161,17 @@ const Detail1 = (props) => {
     const showSchedules = await state?.showInfo?.showSchedules;
     // 필요한 회차 목록만 가져옴
 
-    if (showSchedules) {
+    if (Array.isArray(showSchedules)) {
       console.log(">>> scheduleDate List(전체) : ", showSchedules);
 
       let schedules = new Array();
-      showSchedules?.map((scheduleItem) => {
-        if (scheduleItem) {
+      showSchedules.forEach((scheduleItem) => {
+        if (scheduleItem && Array.isArray(scheduleItem.scheduleDate)) {
           if (scheduleItem.scheduleDate.join('-') === targetDate) {
-            //filteredData.push(scheduleItem.scheduleTime.join(':'));
             schedules.push(scheduleItem.scheduleTime[0] + ":00");
           }
         }
-      })
-
-      setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
-      showScheduleListRef.current = schedules;
-      console.log("-------- 회차 schedules : ", schedules);
-    } else {
-      console.log("회차 목록 가져오기 실패 다시 시도!!");
+      });
     }
   }
 

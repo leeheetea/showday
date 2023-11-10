@@ -8,15 +8,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {TablePagination} from "@mui/material";
+import {Button, TablePagination} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
-export default function ShowsTable({ onShowSelect }) {
+export default function ShowsTable({ onShowSelect, onShowCreate }) {
 
     const [showsData, setShowsData] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalCount, setTotalCount] = useState(0);
+
+    const navigate = useNavigate();
+
+    const handleCreateShow = () => {
+        onShowCreate();
+    };
 
     const handleRowClick = (show) => {
         onShowSelect(show);
@@ -82,6 +88,14 @@ export default function ShowsTable({ onShowSelect }) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleCreateShow}
+                style={{ margin: '20px' }}
+            >
+                생성
+            </Button>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"

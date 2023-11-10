@@ -20,6 +20,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import {useState} from "react";
 import ShowsTable from "./ShowsTable";
 import ShowDetail from "./ShowDetail";
+import CreateShowForm from "./CreateShowForm";
 
 
 const drawerWidth = 240;
@@ -78,6 +79,10 @@ export default function AdminDashboard() {
 
     const showContentManagement = () => {
         setSelectedMenu('contentManagement'); // ShowsTable 컴포넌트를 보여주기 위해 상태 변경
+    };
+
+    const handleCreateShow = () => {
+        setSelectedMenu('createShow');
     };
 
     const handleMenuItemClick = (menu) => {
@@ -161,8 +166,11 @@ export default function AdminDashboard() {
                     }}
                 >
                     {/* 선택된 메뉴에 따라 컨텐츠를 조건부 렌더링합니다. */}
-                    {selectedMenu === 'contentManagement' && <ShowsTable onShowSelect={handleShowSelect} />}
+
+                    {selectedMenu === 'contentManagement' && <ShowsTable onShowSelect={handleShowSelect} onShowCreate={handleCreateShow} />}
                     {selectedMenu === 'showDetail' && selectedShow && <ShowDetail show={selectedShow} onBack={showContentManagement} />}
+                    {selectedMenu === 'createShow' && (<CreateShowForm onBack={showContentManagement} />
+                    )}
                 </Box>
             </Box>
         </ThemeProvider>

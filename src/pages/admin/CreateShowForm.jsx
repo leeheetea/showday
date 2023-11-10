@@ -10,8 +10,16 @@ const ShowCreateForm = ({ onBack }) => {
         contentDetail: [],
         thumbnailUrl: '',
         price: '',
-        venueName: '',
-        showSchedules: [],
+        venueId: '',
+        showSchedules: [
+            {
+                "scheduleDate": "2023-11-10",
+                "scheduleTime": "16:00"
+            },
+            {
+                "scheduleDate": "2023-11-30",
+                "scheduleTime": "19:00"
+            }],
         showBanners: { bannerUrl: '', smallBannerUrl: '' }
     });
 
@@ -37,38 +45,22 @@ const ShowCreateForm = ({ onBack }) => {
         setShowDetails({ ...showDetails, contentDetail: newContentDetails });
     };
 
-    const handleScheduleChange = (e, index, field) => {
-        const newSchedules = showDetails.showSchedules.map((schedule, idx) => {
-            if (idx === index) {
-                let newValue = e.target.value;
-                if (field === 'scheduleDate') {
-                    newValue = newValue.split('-').map(Number);
-                } else if (field === 'scheduleTime') {
-                    const [hours, minutes] = newValue.split(':').map(Number);
-                    newValue = [hours, minutes];
-                }
-                return { ...schedule, [field]: newValue };
-            }
-            return schedule;
-        });
-        setShowDetails({ ...showDetails, showSchedules: newSchedules });
-    };
-
     // 쇼 생성 처리 함수
     const handleSubmit = async () => {
         try {
+            const formattedPeriod = showDetails.period.split('~').join(' ~ '); // "YYYY.MM.DD~YYYY.MM.DD" 형식으로 변경
             const url = 'http://localhost/show';
             const payload = {
                 title: showDetails.title,
                 type: showDetails.type,
-                period: showDetails.period,
+                period: formattedPeriod,
                 contentDetail: showDetails.contentDetail,
                 thumbnailUrl: showDetails.thumbnailUrl,
                 price: showDetails.price,
-                venueName: showDetails.venueName,
+                venueId: showDetails.venueId,
                 showSchedules: showDetails.showSchedules.map(schedule => ({
-                    scheduleDate: formatDate(schedule.scheduleDate),
-                    scheduleTime: formatTime(schedule.scheduleTime)
+                    scheduleDate: schedule.scheduleDate,
+                    scheduleTime: schedule.scheduleTime
                 })),
                 showBanners: showDetails.showBanners
             };
@@ -83,13 +75,6 @@ const ShowCreateForm = ({ onBack }) => {
 
     return (
         <Grid container spacing={1} style={{ marginTop: '20px' }}>
-            <Grid item xs={12} md={4}>
-                <img
-                    src={showDetails.thumbnailUrl || 'placeholder-image-url.jpg'}
-                    alt="썸네일 미리보기"
-                    style={{ width: '100%', height: 'auto', maxWidth: '250px' }}
-                />
-            </Grid>
             <Grid item xs={12} md={8}>
                 <Paper style={{ padding: '16px' }}>
                     <Typography variant="h6" gutterBottom>
@@ -132,12 +117,12 @@ const ShowCreateForm = ({ onBack }) => {
                         onChange={(e) => handleInputChange(e, 'price')}
                     />
                     <TextField
-                        label="장소 이름"
+                        label="장소 코드"
                         type="text"
                         fullWidth
                         margin="normal"
-                        value={showDetails.venueName}
-                        onChange={(e) => handleInputChange(e, 'venueName')}
+                        value={showDetails.venueId}
+                        onChange={(e) => handleInputChange(e, 'venueId')}
                     />
                     <TextField
                         label="썸네일 URL"

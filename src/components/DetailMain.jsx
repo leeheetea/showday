@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import { FaShareAlt } from "react-icons/fa";
-import { BiLinkAlt } from "react-icons/bi";
 import "../App.css";
 import { useEffect, useState } from "react";
-import Modal from "react-modal";
 import "../css/DetailMain.css";
-import callAxios from "../util/callAxios";
-import { readShowData, readVenueItem } from "../page/ApiService";
+import { readShowData} from "../page/ApiService";
 import { setShowInfo } from "../store/slice";
 import { useDispatch } from "react-redux";
 
@@ -90,7 +86,7 @@ const DetailMain = ({ data }) => {
 
 
   return (
-    <div className="detailMainBody">
+    <div style={{ paddingTop: '80px' }} className="detailMainBody">
       <MainImgTextContainer id="detailMainBodyContent">
         <div className="detailMain_content_img">
           <ImgSizeWrapper src={showItems.thumbnailUrl} alt="/" />

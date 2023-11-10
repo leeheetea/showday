@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="51ed8695-1ff5-4098-a35d-0ef298a564c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/showday.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/showday.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/5/1528860d78c42a358a2b8a381db4310110fd7c20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2ece1733f1bb0d1cc556ac1a9c49146ced84d91d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/669a5173e4c42504c3f26d9b44fcb9b87185132c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/8/d8c7071d72da2011c98e61e8af10efb6b78781bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e406c639bac8941f251fecbd3d2b5eb64688a661" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e53dfc9922d0de3f830f7c009e3936cd54eb247e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/5/1528860d78c42a358a2b8a381db4310110fd7c20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/e/2ece1733f1bb0d1cc556ac1a9c49146ced84d91d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/6/669a5173e4c42504c3f26d9b44fcb9b87185132c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/8/d8c7071d72da2011c98e61e8af10efb6b78781bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/4/e406c639bac8941f251fecbd3d2b5eb64688a661" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/5/e53dfc9922d0de3f830f7c009e3936cd54eb247e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/ShowDetail.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/ShowsTable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResponsiveSlider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResponsiveSlider.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DetailMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DetailMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LaptopNavigator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LaptopNavigator.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MyPageMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyPageMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ServiceMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ServiceMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/styled.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/styled.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/page/UserInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/page/UserInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,24 +30,35 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2Xvuy58gAQZH0ILwaJdhqzCGmm8" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/showday",
-    "nodejs_package_manager_path": "yarn",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lht&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/showday&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\showday\src\pages\admin" />
+      <recent name="D:\showday\src\pages\dashboard" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,11 +67,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699522125805</updated>
-      <workItem from="1699522128142" duration="70000" />
+      <workItem from="1699522128142" duration="1692000" />
+      <workItem from="1699572461037" duration="7678000" />
+      <workItem from="1699582149478" duration="17367000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/pages/dashboard/Deposits.js" />
+      </list>
+    </option>
   </component>
 </project>

@@ -4,7 +4,7 @@ import StyledLink from "../components/styled";
 
 const LaptopNavigator = () => {
   return (
-    <div className="Laptopnavigator-container">
+    <div style={{ paddingTop: '80px' }} className="Laptopnavigator-container">
       <StyledLink to="/musical">
         <span className="Laptopnavigator-text">뮤지컬</span>
       </StyledLink>

@@ -16,6 +16,7 @@ export const StyledLink = styled(Link)`
 export const ServiceCenterMainContainer = styled.div`
   background: rgb(246, 246, 246);
   padding: 80px;
+  padding-top: 160px;
 `;
 export const ServiceCenterContainer = styled.div`
   background: white;

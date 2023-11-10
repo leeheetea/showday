@@ -46,6 +46,8 @@ import KakaoRedirectLogout from "./components/KakaoRedirectLogout";
 import UserInfoResetPassword from "./page/UserInfoResetPassword";
 import NaverRedirect from "./components/NaverRedirect";
 import TicketingdetailPage from "./components/TicketingdetailPage";
+import AdminMain from "./pages/admin/AdminMain"
+import ShowDetail from "./pages/admin/ShowDetail";
 
 function App() {
   return (
@@ -54,6 +56,7 @@ function App() {
         <RankingTypeProvider>
           <ScrollToTop />
           <Routes>
+            <Route path="/admin" element={<AdminMain/>}></Route>
             <Route path="/" element={<Main />}></Route>
             <Route path="/musical" element={<Musical />}></Route>
             <Route path="/concert" element={<Concert />}></Route>

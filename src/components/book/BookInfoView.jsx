@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setBookStep } from '../../store/slice'
+import { callSaveReservation } from '../../service/book/bookApiService';
 //import Modal from "../Modal";
 
 import "./BookInfoView.css";
@@ -16,7 +17,7 @@ import { Line } from "../../styles/styled";
 const SEAT_DELIMITER = '@';
 const PAYMENT_STEP = 5;
 
-const BookInfoView = ({ childern }) => {
+const BookInfoView = ({ onChangeDate }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.booksData);
@@ -29,7 +30,7 @@ const BookInfoView = ({ childern }) => {
   const myBookSeatList = state.bookingData.myBookSeats;
   const accountList = ["우리 1002-1111-1111", "하나 222-2222-2222-222", "신한 333-33333-3333-33"];
   const [payName, setPayName] = useState('');
-  const [payAccount, setPayAccount] = useState("");
+  const [payAccount, setPayAccount] = useState(accountList[0]);
   const [isCheckedPayAgree, setIsCheckedPayAgree] = useState(false);
   //const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -43,7 +44,7 @@ const BookInfoView = ({ childern }) => {
     //   'resultTotalPrice : ',
     //   totalPrice.resultTotalPrice
     // );
-  }, [totalPrice, bookShowTime, myBookSeatList]);
+  }, [totalPrice, bookShowTime, myBookSeatList, bookStep]);
 
   useEffect(() => {
     handleInfoUpdate();
@@ -59,15 +60,14 @@ const BookInfoView = ({ childern }) => {
   }
 
   const handleNextBtn = (e) => {
-    // '다음단계'선택 시, 스템별 확인 사항 체크후, 이상 없다면 아래 로직 실행
-    //console.log("======= step : ", bookStep);
-
-    switch (bookStep) {
-      // case 2: break;
+    // 현재단계, 에서 체크할꺼 체크 후 값 증가
+    switch ((bookStep)) {
+      case 2: break;
       case 3:
         // 매수선택 오류 사항 체크 확인(할인전 티켓금액가/장당가격 이 전체 매수랑 같은지 확인)
         if ((totalPrice.sumPrice / state.showInfo.price)
           !== myBookSeatList.length) {
+            Ticketingdeta
           alert('선택하신 좌석수와 예매하실 티켓매수가 일치하지 않습니다.');
           return;
         }
@@ -81,40 +81,82 @@ const BookInfoView = ({ childern }) => {
         break;
       case 5:
         // 구매조건 결재진행 동의 체크
-        // if (isCheckedPayAgree) {
-        //   // 결재팝업으로 띄우기
-        //   console.log('구매조건 동의');
-        //   let message = `
-        //     무통장입금 예약등록이 완료되었습니다.\n
-        //     에매확인/취소페이지의 예매상세보기에서 입금하실 계좌번호를 확인하신후 입금기한내에 입금을 완료하셔야 예매가 완료됩니다.\n\n
-        //     은행명 : {payAccount}\n
-        //     예금주 : 쇼데이\n
-        //     입금기한 : {Date.now()}
-        //   `;
-        //   //setIsModalOpen(true);
-        //   alert(message);
-        // } else {
-        //   alert('구매 조건 및 결제 진행 동의 부탁드립니다.');
-        //   return;
-        // }
-
+        if (isCheckedPayAgree) {
+          // 결재팝업으로 띄우기
+          console.log('구매조건 동의', utils.getMidnightTime());
+          let message = `
+            무통장입금 예약등록이 완료되었습니다.\n
+            에매확인/취소페이지의 예매상세보기에서 입금하실 계좌번호를 확인하신후 입금기한내에 입금을 완료하셔야 예매가 완료됩니다.\n\n
+            은행명 : ${payAccount}\n
+            예금주 : 쇼데이\n
+            입금기한 : ${utils.getMidnightTime()}
+          `;
+          //setIsModalOpen(true);
+          alert(message);
+        } else {
+          alert('구매 조건 및 결제 진행 동의 부탁드립니다.');
+          return;
+        }
         break;
     }
 
-
-    //console.log('handleNextBtn count : ', e.target.value);
-    //console.log("===스텝 ㅂ꾸기", bookStep);
     dispatch(setBookStep({ bookStep: bookStep + 1 }));
 
     if (bookStep < 5) {
       navigate('/book/' + showId + '/' + (bookStep + 1));
     } else {
       navigate('/');
+
+      if (bookStep === 5) {
+        // dispatch(setOrderAccount({
+        //   bank: payAccount,
+        //   depositDeadline: utils.getMidnightTime(new Date()),
+        // }));
+
+        callSaveReservation(makeReservationDataSet()).then(result => {
+          console.log('callSaveReservation result : ', result);
+        });
+      }
     }
+
+    //onChangeDate(); // 상위로 이벤트 던지기
+  }
+
+  function makeReservationDataSet() {
+    // 로그인 Id 져오기
+    let userId = 0;
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    if (token) {
+      const payloadBase64 = token.split(".")[1];
+      userId = JSON.parse(atob(payloadBase64)).sub;
+      console.log("=== check userId : ", userId);
+    }
+
+    let selectedSeats = new Array();
+    myBookSeatList.map((seatId) => {
+      selectedSeats.push({
+        seatId, price
+      });
+    })
+
+    // 리턴정보 구성
+    const reservationData = {
+      selectedSeats: selectedSeats,
+      showId: showId,
+      userId: userId,
+      date: bookDate,
+      time: bookShowTime,
+    };
+
+    return reservationData;
   }
 
   function show1() {
-
+    return (
+      <div>
+        무통장입금
+      </div>
+    )
   }
 
   function show2() {
@@ -159,6 +201,7 @@ const BookInfoView = ({ childern }) => {
                     <p className='required'>입금은행</p>
                     <p><select
                       value={payAccount}
+                      defaultValue={accountList[0]}
                       onChange={(e) => setPayAccount(e.target.value)}>
                       {accountList.map((item) => (
                         <option value={item} key={item}>
@@ -172,53 +215,7 @@ const BookInfoView = ({ childern }) => {
             </td>
           </tr>
         </tbody>
-      </table>
-    );
-  }
-
-  function getTitle() {
-    return (
-      (bookStep !== PAYMENT_STEP) ?
-        (<div className="titleContainer">
-          <img className="titleLeft" src={thumbnailUrl} alt="" />
-          <BookTitle width='30%' isflex='true'>
-            {title}
-          </BookTitle>
-        </div>
-        ) : (
-          <>
-            <div className="titleContainerRow">
-              <BookTitle
-                isflex='false' isleft='true'>{title}
-              </BookTitle>
-              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                <img className="titleLeftSimple" src={thumbnailUrl} alt="" />
-                <div style={{ display: 'flex' }}>
-                  <LineContainer>{getDetailBookInfoSeatsSimple()}</LineContainer>
-                  <LineContainer width={'600px'}>
-                    {gtDetailBookInfoPriceSimple()}
-                  </LineContainer>
-                </div>
-              </div>
-            </div>
-            <div>
-              <LineContainer>
-                {getPaymentInfo()}
-                <div className='checkBox payCheckBox'>
-                  <label htmlFor="payAgree">
-                    <input
-                      id="payAgree"
-                      type="checkbox"
-                      checked={isCheckedPayAgree}
-                    //onChange={(e) => setIsCheckedPayAgree(e.target.checked)}
-                    />
-                    <span>위 구매조건을 확인, 결제진행에 동의합니다.</span>
-                  </label>
-                </div>
-              </LineContainer>
-
-            </div>
-          </>)
+      </table >
     );
   }
 
@@ -305,6 +302,54 @@ const BookInfoView = ({ childern }) => {
         </tfoot>
       </table>
     </>
+  }
+
+  function getTitle() {
+    return (
+      (bookStep !== PAYMENT_STEP) ?
+        (<div className="titleContainer">
+          <img className="titleLeft" src={thumbnailUrl} alt="" />
+          <BookTitle width='30%' isflex='true'>
+            {title}
+          </BookTitle>
+        </div>
+        ) : (
+          <>
+            <div className="titleContainerRow">
+              <BookTitle
+                isflex='false' isleft='true'>{title}
+              </BookTitle>
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                <img className="titleLeftSimple" src={thumbnailUrl} alt="" />
+                <div style={{ display: 'flex' }}>
+                  <LineContainer>{getDetailBookInfoSeatsSimple()}</LineContainer>
+                  <LineContainer width={'600px'}>
+                    {gtDetailBookInfoPriceSimple()}
+                  </LineContainer>
+                </div>
+              </div>
+            </div>
+            <div>
+              <LineContainer>
+                {getPaymentInfo()}
+                <div className='checkBox payCheckBox'>
+                  <label htmlFor="payAgree">
+                    <input
+                      id="payAgree"
+                      type="checkbox"
+                      checked={isCheckedPayAgree}
+                      onChange={(e) => {
+                        setIsCheckedPayAgree(e.target.checked)
+                      }}
+                    />
+                    <span>위 구매조건을 확인, 결제진행에 동의합니다.</span>
+                  </label>
+                </div>
+              </LineContainer>
+
+            </div>
+          </>)
+    );
   }
 
   function gtDetailBookInfoPriceSimple() {
@@ -397,19 +442,20 @@ const BookInfoView = ({ childern }) => {
           width='48%'
           height='50px'
           order='true'
-          onClick={handleNextBtn}>
+          onClick={(e) => handleNextBtn(e)}>
           다음단계
         </LineButton>
         : <LineButton
           width='48%'
           height='50px'
           point='true'
-          onClick={handleNextBtn}>
+          onClick={(e) => handleNextBtn(e)}>
           결제하기
         </LineButton>}
     </div>;
   }
 
+  console.log('====== bookStep !== PAYMENT_STEP(5) ', bookStep);
   return (
     (bookStep !== PAYMENT_STEP) ?
       <div className="bookInfoViewWrapper">

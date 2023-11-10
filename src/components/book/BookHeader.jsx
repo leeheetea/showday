@@ -44,7 +44,7 @@ const BookHeader = ({ onBookStepClick, showId, index }) => {
   const state = useSelector((state) => state.booksData);
   const { bookStep } = state.bookingData;
 
-  console.log('BookHeader bookStep : ', bookStep);
+  console.log('[B]ookHeader] 매개변수 확인 : ', onBookStepClick, showId, index);
 
   //console.log(`[BookHeader] showId : ${showId} index : ${index}`);
 

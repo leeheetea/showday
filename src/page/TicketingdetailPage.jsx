@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MyPage from "../pages/MyPage";
 
 import Calendar from "react-calendar";
@@ -16,7 +16,7 @@ const TicketingdetailPage = () => {
         onChange={setValue}
         //minDate={moment.formatDay}
         value={value}
-        //formatDay={(locale, date) => moment(date).format("DD")}
+      //formatDay={(locale, date) => moment(date).format("DD")}
       />
     </div>
   );

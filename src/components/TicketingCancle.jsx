@@ -1,7 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StyledLink from "./styled";
+// import { callReservations } from "../service/book/bookApiService";
+
+
+const ORDER_STATE = {
+  "PENDING": 1, // "예약대기"
+  "PROCESSING": 2, // 진행중
+  "CANCELED": 3, // 예약취소
+  "REFUNDED": 4,
+  "COMPLETE": 5 // 예약완료
+};
+
+const getReservationState = (state) => {
+  console.log('getReservationState : ', state);
+  switch (state) {
+    case ORDER_STATE.PENDING: return "예약대기";
+      break;
+    case ORDER_STATE.PROCESSING:
+      break;
+    case ORDER_STATE.CANCELED: return "예약취소";
+      break;
+    case ORDER_STATE.REFUNDED:
+      break;
+    case ORDER_STATE.COMPLETE: return "예약완료";
+      break;
+    default:
+      return "예약대기";
+  };
+};
 
 const TicketingCancle = () => {
+  const [reservations, setReservations] = useState(null);
+
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
+
+  // const loadData = () => {
+  //   callReservations().then((result) => {
+  //     if (result) {
+  //       setReservations(result);
+  //     }
+  //   });
+  // }
+
   return (
     <div className="myPageCheckContainer">
       <div className="myPageCheckTitle">
@@ -58,7 +100,8 @@ const TicketingCancle = () => {
               <td>2023-01-01</td>
               <td>2</td>
               <td>5일</td>
-              <td>구매확정</td>
+              {/* <td>{getReservationState(reservations?.orderState) ?? ORDER_STATE.PROCESSING}</td> */}
+              <td>22222</td>
             </tr>
           </tbody>
         </table>
@@ -87,7 +130,7 @@ const TicketingCancle = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

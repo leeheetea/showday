@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="51ed8695-1ff5-4098-a35d-0ef298a564c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/showday.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/showday.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/5/1528860d78c42a358a2b8a381db4310110fd7c20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2ece1733f1bb0d1cc556ac1a9c49146ced84d91d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/669a5173e4c42504c3f26d9b44fcb9b87185132c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/8/d8c7071d72da2011c98e61e8af10efb6b78781bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e406c639bac8941f251fecbd3d2b5eb64688a661" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e53dfc9922d0de3f830f7c009e3936cd54eb247e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/5/1528860d78c42a358a2b8a381db4310110fd7c20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/e/2ece1733f1bb0d1cc556ac1a9c49146ced84d91d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/6/669a5173e4c42504c3f26d9b44fcb9b87185132c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/8/d8c7071d72da2011c98e61e8af10efb6b78781bd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/4/e406c639bac8941f251fecbd3d2b5eb64688a661" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/5/e53dfc9922d0de3f830f7c009e3936cd54eb247e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResponsiveSlider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResponsiveSlider.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Detail1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TicketingCancle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TicketingCancle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/book/BookHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/book/BookHeader.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/book/BookMainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/book/BookMainPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/book/CheckBooksPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/book/CheckBooksPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/book/ChooseSeatsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/book/ChooseSeatsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/book/bookApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/book/bookApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +28,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2Xvuy58gAQZH0ILwaJdhqzCGmm8" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -43,8 +40,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "yr",
     "last_opened_file_path": "D:/showday",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
     "vue.rearranger.settings.migration": "true"
   }

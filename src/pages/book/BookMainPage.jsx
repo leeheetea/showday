@@ -16,12 +16,13 @@ const BookMainPage = () => {
 
   const handleStepClick = (newStep) => {
     setCurrentTab(newStep);
-    console.log(`>>> id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
+    console.log(`???? handleStepClick id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
     navigator("/book/" + id + "/" + newStep);
   };
 
   const handleChangDate = (e) => {
     console.log('날짜 변경됨 : ', e.target.value);
+    setCurrentTab(currentTab);
   }
 
   const handleChangePrice = (e) => {

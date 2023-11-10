@@ -36,7 +36,7 @@ const getItemFromString = (time) => {
 };
 
 const getMarkThousand = (number) => {
-  console.log("(getMarkThousand) number : ", number);
+  //console.log("(getMarkThousand) number : ", number);
   if (number !== null && number === undefined) {
     console.log(`">>> $(number)값을 확인해 주세요."`);
     return "0";
@@ -93,6 +93,32 @@ const checkTimeStringFor = (timeStr) => {
   }
 };
 
+const getMidnightTime = () => {
+  // 현재 날짜에 1일(24시간)을 더하면 다음 날 자정이 됩니다.
+  const now = new Date();
+  const nextMidnight = new Date(now);
+  nextMidnight.setDate(nextMidnight.getDate() + 1);
+
+  // 시, 분, 초, 밀리초를 0으로 설정하여 자정 시간으로 만듭니다.
+  nextMidnight.setHours(0, 0, 0, 0);
+  //console.log(nextMidnight);
+
+  // 날짜 정보 추출 (년, 월, 일)
+  const year = nextMidnight.getUTCFullYear();
+  const month = nextMidnight.getUTCMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+  const day = nextMidnight.getUTCDate();
+
+  // 시간 정보 추출 (시, 분, 초)
+  const hours = nextMidnight.getUTCHours();
+  const minutes = nextMidnight.getUTCMinutes();
+  const seconds = nextMidnight.getUTCSeconds();
+
+  return (
+    //[year, month, day].join(".") + "(" + nextMidnight.getDay() + ") 자정까지 "
+    [year, month, day].join(".") + "(" + nextMidnight.getDay() + ") 자정까지 "
+  );
+};
+
 export default {
   dateFormat,
   getItemFromString,
@@ -102,4 +128,5 @@ export default {
   getAboutDelimiter,
   checkTimeStringFor,
   timeFormatForButton,
+  getMidnightTime,
 };

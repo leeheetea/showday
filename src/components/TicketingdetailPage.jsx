@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/TicketingdetailPage.css"
 import { callReservations } from "../service/book/bookApiService";
+import {useLocation} from "react-router-dom";
 
 const ORDER_STATE = {
   "PENDING": 1, // "예약대기"
@@ -29,35 +30,13 @@ const getReservationState = (state) => {
 };
 
 const TicketingdetailPage = () => {
-  const [reservations, setReservations] = useState(
-    {
-      "reservationId": 1,
-      "userName": "dd",
-      "venueName": "venue1",
-      "seat": [
-        {
-          "seatId": 2,
-          "seatRow": 1,
-          "seatColumn": 2,
-          "venueId": 1,
-          "showSeatIds": [
-          ]
-        }
-      ],
-      "showImgUrl": "https://ticketimage.interpark.com/Play/image/large/L0/L0000049_p.gif",
-      "orderState": "PENDING"
-    }
-  );
 
-  useEffect(() => {
-    loadData();
-  }, []);
-  let result = [];
-  const loadData = async () => {
-    result = await callReservations(setReservations);
-    console.log('>>> result : ', result);
-    // }
-  };
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const orderId = queryParams.get('orderID'); // URL 쿼리 파라미터에서 'orderID' 값을 가져옵니다.
+
+
 
   return (
     <div>
@@ -78,9 +57,9 @@ const TicketingdetailPage = () => {
                   <tbody>
                   <tr>
                     <th>예매 번호</th>
-                    <td>{result.reservationId}</td>
+                    <td></td>
                     <th>예매자</th>
-                    <td>{reservations?.userName}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>관람일</th>
@@ -88,7 +67,7 @@ const TicketingdetailPage = () => {
                   </tr>
                   <tr>
                     <th>공연장</th>
-                    <td colSpan="3">{reservations?.venueName}</td>
+                    <td colSpan="3"></td>
                   </tr>
                   <tr>
                     <th>좌석</th>

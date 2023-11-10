@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51ed8695-1ff5-4098-a35d-0ef298a564c9" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TicketingdetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TicketingdetailPage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/book/BookInfoView.jsx" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/pages/admin/CreateShowForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Detail1.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail1.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DetailMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DetailMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SearchPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SearchPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/AdminMain.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/AdminMain.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ShowDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ShowDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ShowsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ShowsTable.jsx" afterDir="false" />
+>>>>>>> 486d0a7c254f3f0a55dddf4f03f51131430bc33e
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +70,7 @@
       <updated>1699522125805</updated>
       <workItem from="1699522128142" duration="1692000" />
       <workItem from="1699572461037" duration="7678000" />
-      <workItem from="1699582149478" duration="17367000" />
+      <workItem from="1699582149478" duration="24909000" />
     </task>
     <servers />
   </component>

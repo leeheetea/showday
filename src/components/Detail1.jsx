@@ -61,7 +61,6 @@ const DetailContainer = styled.div`
     }
   }
 `;
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
@@ -88,7 +87,6 @@ const FormCheckText = styled.span`
   cursor: pointer;
   color: #777;
 `;
-
 const FormCheckLeft = styled.input.attrs({ type: "radio" })`
   &:checked {
     display: inline-block;
@@ -108,6 +106,7 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 `;
 
 const Detail1 = (props) => {
+
   const state = useSelector((state) => state.booksData);
 
   const navigator = useNavigate();
@@ -120,15 +119,10 @@ const Detail1 = (props) => {
   const showScheduleListRef = useRef(new Array()); // 시간 정보만 뽑아낸 리스트(표시용)
   const showScheduleTimeIdRef = useRef(0);  // id 저장용
 
-  useEffect(() => {
-    getShowScheduleList();
-  }, [choosedShowDate]);
 
-  //console.log("화면갱신!!! ", showScheduleList);
   /* 날짜 선택이 변경 될때 이벤트 */
   const handleChangedDate = (date) => {
     setChoosedShowDate(date);
-    //console.log("date changed!!111111 : ", date);
   }
 
   /* 예매하기 버튼 선택 클릭 이벤트 */
@@ -140,7 +134,6 @@ const Detail1 = (props) => {
     } else {
       // 선택된 회차의 회차 아이디 가져오기
       let choosedShowTimeId = showScheduleTimeIdRef.current;
-      //console.log(">>> 예매버튼 선택!! ", choosedShowDate, choosedShowTime, choosedShowTimeId);
 
       const tempChoosedShowDate = moment(choosedShowDate)
         .format("YYYY-MM-DD");
@@ -151,19 +144,20 @@ const Detail1 = (props) => {
     }
   };
 
+  useEffect(() => {
+    getShowScheduleList();
+  }, [choosedShowDate]);
+
   const getShowScheduleList = async () => {
-    var tempDate = new Date(choosedShowDate);
+    let tempDate = new Date(choosedShowDate);
     tempDate.setDate(tempDate.getDate() + 1);
     const targetDate = tempDate.toISOString().split('T')[0];
-    //console.log(">>> scheduleDate List targetDate : ", targetDate);
+    console.log(">>>>>>>>", targetDate);
 
-    // 필요한 회차 목록만 가져옴
     const showSchedules = await state?.showInfo?.showSchedules;
     // 필요한 회차 목록만 가져옴
 
     if (showSchedules) {
-      //console.log(">>> scheduleDate List(전체) : ", showSchedules);
-
       let schedules = new Array();
       showSchedules?.map((scheduleItem) => {
         if (scheduleItem) {
@@ -176,7 +170,6 @@ const Detail1 = (props) => {
 
       setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
-      //console.log("-------- 회차 schedules : ", schedules);
     } else {
       console.log("회차 목록 가져오기 실패 다시 시도!!");
     }
@@ -191,7 +184,7 @@ const Detail1 = (props) => {
           <Calendar
             className={"calendarCustom"}
             onChange={handleChangedDate}
-            minDate={moment.formatDay}
+            minDate={new Date()}
             value={choosedShowDate}
             formatDay={(locale, date) => moment(date).format("DD")}
           />
@@ -225,7 +218,6 @@ const Detail1 = (props) => {
                             showScheduleTimeIdRef.current = showScheduleList[index].scheduleId;
                           }}
                         />
-
                         <FormCheckText>
                           {utils.timeFormatForButton(time)}
                         </FormCheckText>

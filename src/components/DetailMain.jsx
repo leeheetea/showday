@@ -65,7 +65,6 @@ const DetailMain = ({ data }) => {
   }, [showId]);
 
   useEffect(() => {
-    //console.log(">>> showItem Ok : ", showItems);
     bookDispatch(setShowInfo(showItems));
   }, [showItems, setShowInfo]);
 

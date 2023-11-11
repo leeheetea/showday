@@ -6,6 +6,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import { setBookInfo, setMyBookSeats } from "../../store/slice";
 import "./ChooseSeatsPage.css";
 import BookTitle from "../../components/book/BookTitle";
+import LineButton from "../../components/LineButton";
 import seatImg from "../../img/seat.PNG";
 import Loading from '../../styles/loading';
 import utils from '../../utils'
@@ -18,53 +19,6 @@ import { callReadShow, callReadShowSeat, callReadVenueSeatSize } from "../../ser
 const GRID_GAP = 2;
 const MAX_CAN_RESERVE_CNT = 5;
 const SEAT_DELIMITER = '@';
-
-const Line = styled.hr`
-  border: 0.1px solid #ecedfc;
-`;
-
-const SeatContainer = styled.div`
-  //width: -webkit-fill-available;
-  height: 100%;
-  max-width: ${(props) => `${props.pwidth || 100}px`};
-  max-height: ${(props) => `${props.pheight || 100}px`};
-  display: grid;
-  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(20px, auto));
-  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(30px, auto));
-  grid-auto-rows: 100px;
-  text-align: center;
-  grid-gap: ${GRID_GAP}px;
-  box-sizing: border-box;
-  justify-content: center;
-  align-content: center;
-  background: antiquewhite;
-`;
-
-const Seat = styled.div`
-  width: ${(props) => `(${props.width || 10} - ${GRID_GAP})px`};
-  height: ${(props) => `(${props.height || 10} - ${GRID_GAP})px`};
-  background-color: ${(props) => (props.canreserve) ? "#ffffff" : "#000000"};
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  box-sizing: border-box;
-  font-size: 0.7rem;
-  &:hover {
-    background-color: darkblue; 
-    border: ${GRID_GAP}px outset darkblue;// 마우스 오버 시 배경색을 변경
-    margin: -${GRID_GAP}px;
-  }
-`;
-
-const SeatTitle = styled.div`
-  //width: 10px;
-  //height: 10px;
-  color: black;
-  justify-self: center;
-  align-self: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-`
 
 const ChooseSeatsPage = () => {
   const { id, index } = useParams();
@@ -166,13 +120,7 @@ const ChooseSeatsPage = () => {
   }, [loading, setLoading]);
 
   const handleChooseSeat = (idx, seatId) => {
-    console.log('handleChooseSeatTemp 잘 탑니다!!!!!!!');
-    //console.log('handleChooseSeatTemp seatInfo : ', seatInfo);
     console.log('handleChooseSeatTemp seatId : ', seatId);
-
-    //if (seatInfo) {
-    //const seatPosition = utils.getAboutDelimiter('F', SEAT_DELIMITER, key);
-    //console.log(seatPosition);
 
     // 좌석 선택 막는 조건
     // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
@@ -185,6 +133,7 @@ const ChooseSeatsPage = () => {
       return;
     }
 
+    // 단순 seatId만 저장되며, 예매중 오른쪽 화면에 표시되는 배열
     choosedSeatListRef.current.push(seatId);
 
     const newDisplaySeatList = [...displaySeatList];
@@ -254,12 +203,20 @@ const ChooseSeatsPage = () => {
 
   return (
     <div className="chooseSeatsContainer">
-      <BookTitle width="100%" isleft="true">
-        {title}
-      </BookTitle>
-      <BookTitle width="100%" issubtitle="true" tpadding="10px">
-        {venueName} | {bookDate.split('T')[0]}&nbsp;{bookShowTime}
-      </BookTitle>
+      <AreaRowArrange>
+        <div className="decorCol"></div>
+        <AreaRowArrange>
+          <div className='siz'>
+            <BookTitle isleft="true">
+              {title}
+            </BookTitle>
+            <BookTitle issubtitle="true" tpadding="10px">
+              {venueName} | {bookDate.split('T')[0]}&nbsp;{bookShowTime}
+            </BookTitle>
+          </div>
+          {/* <LineButton width='70px'>초기화</LineButton> */}
+        </AreaRowArrange>
+      </AreaRowArrange>
       <div className="stageContainer">
         {/* <span>STAGE</span> */}
         <div className="stageBackground" ref={stageBackgroundRef}>
@@ -271,3 +228,71 @@ const ChooseSeatsPage = () => {
 };
 
 export default ChooseSeatsPage;
+
+
+const Line = styled.hr`
+  border: 0.1px solid #ecedfc;
+`;
+
+const SeatContainer = styled.div`
+  //width: -webkit-fill-available;
+  height: 100%;
+  max-width: ${(props) => `${props.pwidth || 100}px`};
+  max-height: ${(props) => `${props.pheight || 100}px`};
+  display: grid;
+  border-radius: 1rem;
+  grid-template-rows: repeat(${(props) => props.maxrow || 1}, minmax(20px, auto));
+  grid-template-columns: repeat(${(props) => props.maxcol || 1}, minmax(30px, auto));
+  grid-auto-rows: 100px;
+  text-align: center;
+  grid-gap: ${GRID_GAP}px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-content: center;
+  background: white;
+`;
+
+const Seat = styled.div`
+  width: ${(props) => `(${props.width || 10} - ${GRID_GAP})px`};
+  height: ${(props) => `(${props.height || 10} - ${GRID_GAP})px`};
+  background-color: ${(props) => (props.canreserve) ?
+    "#7ccf55" : "#FC7B07"};
+  border: 1px solid ${(props) => (props.canreserve) ?
+    "#7ccf55" : "#FC7B07"};
+  border-radius: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  box-sizing: border-box;
+  font-size: 0.7rem;
+  &:hover {
+    background-color: #C82020; 
+    border: ${GRID_GAP}px outset #C82020;// 마우스 오버 시 배경색을 변경
+    margin: -${GRID_GAP}px;
+  }
+`;
+
+const AreaRowArrange = styled.div`
+  width: ${(props) => `${props.width} ? ${props.width} : undefined`};
+  height: ${(props) => `${props.height} ? ${props.height} : undefined`};
+  display: flex;
+  flex-direction: row;
+`
+
+const AreaColArrange = styled.div`
+  width: ${(props) => `${props.width} ? ${props.width} : undefined`};
+  height: ${(props) => `${props.height} ? ${props.height} : undefined`};
+  display: flex;
+  flex-direction: column;
+`
+
+
+const SeatTitle = styled.div`
+  //width: 10px;
+  //height: 10px;
+  color: #b4b3b3;
+  justify-self: center;
+  align-self: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+`

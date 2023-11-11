@@ -25,10 +25,6 @@ const BookMainPage = () => {
     setCurrentTab(currentTab);
   }
 
-  const handleChangePrice = (e) => {
-    alert('가격변경');
-  }
-
   return (
     <>
       <Header />

@@ -160,10 +160,8 @@ const Detail1 = (props) => {
     if (showSchedules) {
       let schedules = new Array();
       showSchedules?.map((scheduleItem) => {
-        if (typeof scheduleItem?.scheduleDate === Array) {
-          if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
-            schedules.push(scheduleItem.scheduleTime[0] + ":00");
-          }
+        if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
+          schedules.push(scheduleItem.scheduleTime[0] + ":00");
         }
       })
 

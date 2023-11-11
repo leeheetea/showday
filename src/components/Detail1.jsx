@@ -148,22 +148,35 @@ const Detail1 = (props) => {
     getShowScheduleList();
   }, [choosedShowDate]);
 
+  const getDateJoinString = (str) => {
+    if (Array.isArray(str?.scheduleDate)) {
+      return str?.scheduleDate?.join('-');
+    } else if (str !== null && str !== "" && str.includes('-')) {
+      return str;
+    } else {
+      return null;
+    }
+  }
+
   const getShowScheduleList = async () => {
     let tempDate = new Date(choosedShowDate);
     tempDate.setDate(tempDate.getDate() + 1);
     const targetDate = tempDate.toISOString().split('T')[0];
-    console.log(">>>>>>>>", targetDate);
 
     const showSchedules = await state?.showInfo?.showSchedules;
     // 필요한 회차 목록만 가져옴
 
     if (showSchedules) {
       let schedules = new Array();
-      showSchedules?.map((scheduleItem) => {
-        if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
-          schedules.push(scheduleItem.scheduleTime[0] + ":00");
+
+      showSchedules?.map((scheduleItem, index) => {
+        const dateString = getDateJoinString(scheduleItem);
+        if (dateString === targetDate) {
+          const tempTime = showSchedules[index].scheduleTime[0] + ":00";
+          schedules.push(tempTime);
+          return true;
         }
-      })
+      });
 
       setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;

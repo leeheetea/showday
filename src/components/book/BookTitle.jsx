@@ -17,18 +17,19 @@ const StyleTitle = styled.h3`
   font-weight: ${props => props.issubtitle ? '' : 'bold'};
   padding-top: ${props => props.tpadding ? props.tpadding : '0px'};
   margin-top: ${props => props.tmargin ? props.tmargin : '0px'};
+  margin-bottom: 0.2rem;
   display: ${props => props.isflex ? 'flex' : 'block'};
 `;
 
 function BookTitle({ children, isleft, issubtitle, isBottomLine, tpadding, isflex, ...rest }) {
-  return <StyleTitle 
+  return <StyleTitle
     padding-top={tpadding}
-    text-align= {issubtitle || isleft ? 'left' : 'center'}
+    text-align={issubtitle || isleft ? 'left' : 'center'}
     issubtitle={issubtitle}
     isflex={isflex}
     {...rest}>
-      {children} 
-    {isBottomLine ? <Line/> : <></>}
+    {children}
+    {isBottomLine ? <Line /> : <></>}
   </StyleTitle>
 }
 

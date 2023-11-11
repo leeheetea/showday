@@ -107,7 +107,7 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 const Detail1 = (props) => {
 
   const state = useSelector((state) => state.booksData);
-
+  console.log(state);
   const navigator = useNavigate();
 
   const bookDispatch = useDispatch();
@@ -146,24 +146,36 @@ const Detail1 = (props) => {
     getShowScheduleList();
   }, [choosedShowDate]);
 
+  const getDateJoinString = (str) => {
+    if (Array.isArray(str?.scheduleDate)) {
+      return str?.scheduleDate?.join('-');
+    } else if (str !== null && str !== "" && str.includes('-')) {
+      return str;
+    } else {
+      return null;
+    }
+  }
+
   const getShowScheduleList = async () => {
     let tempDate = new Date(choosedShowDate);
     tempDate.setDate(tempDate.getDate() + 1);
     const targetDate = tempDate.toISOString().split('T')[0];
 
-    const showSchedules = await state?.showInfo?.showSchedules;
+    const showSchedules = await state?.showSchedules;
     // 필요한 회차 목록만 가져옴
 
     if (showSchedules) {
-      let schedules = [];
-      showSchedules?.map((scheduleItem) => {
-        if (scheduleItem) {
-          if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
-            schedules.push(scheduleItem.scheduleTime[0] + ":00");
-          }
-        }
-      })
 
+      let schedules = new Array();
+
+      showSchedules?.map((scheduleItem, index) => {
+        const dateString = getDateJoinString(scheduleItem);
+        if (dateString === targetDate) {
+          const tempTime = showSchedules[index].scheduleTime[0] + ":00";
+          schedules.push(tempTime);
+          return true;
+        }
+      });
       setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
     } else {
@@ -180,7 +192,7 @@ const Detail1 = (props) => {
           <Calendar
             className={"calendarCustom"}
             onChange={handleChangedDate}
-            minDate={moment.formatDay}
+            minDate={new Date()}
             value={choosedShowDate}
             formatDay={(locale, date) => moment(date).format("DD")}
           />

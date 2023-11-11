@@ -6,8 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 import "../css/DetailMain.css";
 import { useNavigate } from "react-router-dom";
-import { setBookInfo, setBookStep, setShowInfo } from "../store/slice";
-import { callReadShow } from "../service/book/bookApiService";
+import { setBookInfo, setBookStep} from "../store/slice";
 import utils from "../utils";
 
 const DetailContainer = styled.div`
@@ -130,7 +129,6 @@ const Detail1 = (props) => {
     // 회차 선택 여부 체크
     if (choosedShowTime === null) {
       alert("관람을 원하시는 공연 시간(회차)을 선택해주세요.");
-      return;
     } else {
       // 선택된 회차의 회차 아이디 가져오기
       let choosedShowTimeId = showScheduleTimeIdRef.current;
@@ -152,17 +150,15 @@ const Detail1 = (props) => {
     let tempDate = new Date(choosedShowDate);
     tempDate.setDate(tempDate.getDate() + 1);
     const targetDate = tempDate.toISOString().split('T')[0];
-    console.log(">>>>>>>>", targetDate);
 
     const showSchedules = await state?.showInfo?.showSchedules;
     // 필요한 회차 목록만 가져옴
 
     if (showSchedules) {
-      let schedules = new Array();
+      let schedules = [];
       showSchedules?.map((scheduleItem) => {
         if (scheduleItem) {
           if (scheduleItem?.scheduleDate?.join('-') === targetDate) {
-            //filteredData.push(scheduleItem.scheduleTime.join(':'));
             schedules.push(scheduleItem.scheduleTime[0] + ":00");
           }
         }
@@ -171,7 +167,7 @@ const Detail1 = (props) => {
       setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
     } else {
-      console.log("회차 목록 가져오기 실패 다시 시도!!");
+      alert("회차 목록 가져오기 실패 다시 시도!!");
     }
   }
 
@@ -184,7 +180,7 @@ const Detail1 = (props) => {
           <Calendar
             className={"calendarCustom"}
             onChange={handleChangedDate}
-            minDate={new Date()}
+            minDate={moment.formatDay}
             value={choosedShowDate}
             formatDay={(locale, date) => moment(date).format("DD")}
           />

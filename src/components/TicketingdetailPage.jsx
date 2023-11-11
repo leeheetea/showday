@@ -36,8 +36,6 @@ const TicketingdetailPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const orderId = queryParams.get('orderID'); // URL 쿼리 파라미터에서 'orderID' 값을 가져옵니다.
 
-
-
   return (
     <div>
       <div className="myPageCheckContainer">

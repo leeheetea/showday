@@ -71,6 +71,8 @@ const booksSlice = createSlice({
     },
     setBookInfo: (state, action) => {
       console.log(" action.payload : ", action.payload);
+      state.bookingData.myBookSeats = action.payload.myBookSeats;
+      state.bookingData.myBookSeatsPrice = action.payload.myBookSeatsPrice;
       state.bookingData.bookDate = action.payload.tempChoosedShowDate;
       state.bookingData.bookShowTime = action.payload.choosedShowTime;
       state.bookingData.choosedShowTimeId = action.payload.choosedShowTimeId;

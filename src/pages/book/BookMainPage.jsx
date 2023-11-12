@@ -16,7 +16,7 @@ const BookMainPage = () => {
 
   const handleStepClick = (newStep) => {
     setCurrentTab(newStep);
-    console.log(`???? handleStepClick id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
+    // console.log(`???? handleStepClick id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
     navigator("/book/" + id + "/" + newStep);
   };
 

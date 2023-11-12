@@ -30,7 +30,7 @@ function LineContainer({
     txtcolor={txtcolor}
     isfrontcenter={isfrontcenter}
     padding={padding}
-    padding-top={tpadding}
+    tpadding={tpadding}
     cursor={cursor}
     {...rest}>
     {children}

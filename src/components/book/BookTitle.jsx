@@ -21,15 +21,16 @@ const StyleTitle = styled.h3`
   display: ${props => props.isflex ? 'flex' : 'block'};
 `;
 
-function BookTitle({ children, isleft, issubtitle, isBottomLine, tpadding, isflex, ...rest }) {
+function BookTitle({ children, isleft, issubtitle, isbottomline, tpadding, tmargin, isflex, ...rest }) {
   return <StyleTitle
-    padding-top={tpadding}
-    text-align={issubtitle || isleft ? 'left' : 'center'}
+    tpadding={tpadding}
+    tmargin={tmargin}
+    isleft={issubtitle || isleft ? 'left' : 'center'}
     issubtitle={issubtitle}
     isflex={isflex}
     {...rest}>
     {children}
-    {isBottomLine ? <Line /> : <></>}
+    {isbottomline ? <Line /> : <></>}
   </StyleTitle>
 }
 

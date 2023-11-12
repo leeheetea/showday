@@ -187,7 +187,7 @@ export function getUserInfo(userDTO) {
       return response;
     })
     .catch((error) => {
-      if(error.message.includes("Incorrect Password")) {
+      if (error.message.includes("Incorrect Password")) {
         alert("비밀번호가 틀렸습니다.");
       } else {
         console.log("Unexpected error occured during getUserInfo: ", error);
@@ -203,7 +203,7 @@ export function matchPassword(userDTO) {
       return response;
     })
     .catch((error) => {
-      if(error.message.includes("Incorrect Password")) {
+      if (error.message.includes("Incorrect Password")) {
         alert("비밀번호가 틀렸습니다.");
       } else {
         console.log("Unexpected error occured during matchPassword: ", error);
@@ -235,7 +235,7 @@ export function findId(userDTO) {
       return response;
     })
     .catch((error) => {
-      if(error.message.includes("User not found")) {
+      if (error.message.includes("User not found")) {
         alert("입력이 잘못되었습니다.");
       } else {
         console.log("Unexpected error occured during findId: ", error);
@@ -251,7 +251,7 @@ export function findPassword(userDTO) {
       return response;
     })
     .catch((error) => {
-      if(error.message.includes("User not found")) {
+      if (error.message.includes("User not found")) {
         alert("입력이 잘못되었습니다.");
       } else {
         console.log("Unexpected error occured during findPassword: ", error);
@@ -269,69 +269,69 @@ export function updatePassword(userDTO) {
 }
 
 export function getName() {
-    return call("/user/name/request", "POST")
-        .then((response) => {
-            console.log(response);
-            return response;
-        });
+  return call("/user/name/request", "POST")
+    .then((response) => {
+      console.log(response);
+      return response;
+    });
 }
 
 // 리뷰 생성 함수입니다.
 export function createReview(reviewDTO) {
-    return call("/review", "POST", reviewDTO)
-        .then((res) => {
-            return res;
-        });
+  return call("/review", "POST", reviewDTO)
+    .then((res) => {
+      return res;
+    });
 }
 
-export function updateReview(reviewId,reviewDTO){
-  return call(`/review/${reviewId}`, "PUT", reviewDTO )
-  .then((res) => {
-    return res;
-  })
+export function updateReview(reviewId, reviewDTO) {
+  return call(`/review/${reviewId}`, "PUT", reviewDTO)
+    .then((res) => {
+      return res;
+    })
 }
 
-export function deleteReview(reviewId){
+export function deleteReview(reviewId) {
   return call(`/review/${reviewId}`, "DELETE", null)
-  .then((res) => {
-    return res;
-  })
+    .then((res) => {
+      return res;
+    })
 }
 
-export function userEmailCheck(){
+export function userEmailCheck() {
   return call('/user/email', "GET", null)
-  .then((res)=>{
-    return res;
-  }
-  )
+    .then((res) => {
+      return res;
+    }
+    )
 }
 
-export function readVenueItem(venueId){
+export function readVenueItem(venueId) {
   return call(`/venue/${venueId}`, "GET", null)
-  .then((res)=>{
-    return res;
-  })
+    .then((res) => {
+      return res;
+    })
 }
 
-export function readShowData(showId){
+export function readShowData(showId) {
   return call(`/show/${showId}`, "GET", null)
-  .then((res)=>{
-    return res;
-  })
+    .then((res) => {
+      return res;
+    })
 }
 
-export function getReviewInfo(reviewId){
+export function getReviewInfo(reviewId) {
   return call(`review/one/${reviewId}`, "GET", null)
-  .then((res)=>{
-    return res;
-  })
+    .then((res) => {
+      return res;
+    })
 }
 
 
-export function getSearchShow(searchUrl){
+export function getSearchShow(searchUrl) {
   return call(searchUrl, "GET", null)
-  .then((res)=>{
-    console.log(res);
-    return res;
-  })
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
 }

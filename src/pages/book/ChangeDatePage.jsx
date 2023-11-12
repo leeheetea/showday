@@ -51,7 +51,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
   const [reserveSeatCount, setReserveSeatCount] = useState(-1); // 회차별 좐여석 카운팅 저장
   const [isTimeClear, setIsTimeClear] = useState(false);
 
-  const { showTime } = state.showInfo;
+  const { period, showTime } = state.showInfo;
   const { bookDate, bookShowTime, seats } = state.bookingData;
 
   useEffect(() => {
@@ -99,9 +99,8 @@ const ChangeDatePage = ({ onChangeDate }) => {
     // 좌석의 예약 상태 확인용 서버 호출
     callReadShowSeat(id, { "date": replacedBookDate, "time": replacedBookTime })
       .then((res, index) => {
-        console.log(res, index);
+        //console.log(res, index);
         const canReservationSeats = res.filter(item => (item.canReservation === true));
-        console.log('canReservationSeats.length : ', canReservationSeats.length, canReservationSeats.count);
         setReserveSeatCount(canReservationSeats.length);
       })
 
@@ -132,7 +131,6 @@ const ChangeDatePage = ({ onChangeDate }) => {
 
       setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
       showScheduleListRef.current = schedules;
-      console.log("-------- 회차 schedules : ", schedules);
     } else {
       console.log("회차 목록 가져오기 실패 다시 시도!!");
     }
@@ -142,19 +140,19 @@ const ChangeDatePage = ({ onChangeDate }) => {
     <div className="changeDateContainer">
       <div className="topContainer">
         <LineContainer width="40%" height="380px" isfrontcenter="true">
-          <BookTitle isBottomLine>
+          <BookTitle isbottomline="true">
             <StepSpan>STEP1</StepSpan>&nbsp;날짜선택
           </BookTitle>
           <div>
             <Calendar
               onChange={handleChangedDate}
-              minDate={new Date()}
+              minDate={period > new Date() ? new Date(period.split('~')[0]) : new Date()}
               value={choosedShowDate}
             />
           </div>
         </LineContainer>
         <LineContainer width="30%" height="380px" isfrontcenter="true">
-          <BookTitle isBottomLine>
+          <BookTitle isbottomline="true">
             <StepSpan>STEP2&nbsp;</StepSpan>
             회차선택
           </BookTitle>
@@ -173,7 +171,7 @@ const ChangeDatePage = ({ onChangeDate }) => {
           ))}
         </LineContainer>
         <LineContainer width="30%" height="380px" isfrontcenter="true">
-          <BookTitle isBottomLine>잔여석</BookTitle>
+          <BookTitle isbottomline="true">잔여석</BookTitle>
           {reserveSeatCount > 0 ?
             <ul>
               <li className="textLine">

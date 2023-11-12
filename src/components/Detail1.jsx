@@ -151,8 +151,6 @@ const Detail1 = (props) => {
     }
   };
 
-
-
   const getDateJoinString = (str) => {
     if (Array.isArray(str?.scheduleDate)) {
       return str?.scheduleDate.map(item => (parseInt(item) < 10 ? '0' + item : item)).join('-');
@@ -188,36 +186,6 @@ const Detail1 = (props) => {
       alert("회차 목록 가져오기 실패 다시 시도!!");
     }
   }
-
-  // const getShowScheduleListTest = async () => {
-  //   // let tempDate = new Date(choosedShowDate);
-  //   const targetDate = choosedShowDate ? new Date(choosedShowDate) : new Date();
-  //   const showSchedules = await state.showSchedules;
-  //   // 필요한 회차 목록만 가져옴
-
-  //   if (showSchedules) {
-  //     let schedules = new Array();
-  //     showSchedules?.map((scheduleItem, index) => {
-  //       // 선택한 날짜가 있는 scheduleItem 의 쇼 회차 정보 가져오기
-  //       // {"scheduleId": 1, "scheduleDate": [2023, 9, 21], "scheduleTime": [16, 0], "showId": 1}
-  //       const dateString = getDateJoinString(scheduleItem); // 년, 월, 일 분리 정보 년-월-일로 변환
-  //       console.log("*** schedules dateString : ", dateString, utils.dateFormat(targetDate));
-  //       //console.log("*** schedules targetDate : ", targetDate);
-
-  //       if (dateString === utils.dateFormat(targetDate)) { // 회차 정보가 있는 경우
-  //         const tempTime = showSchedules[index].scheduleTime[0] + ":00";
-  //         schedules.push(tempTime);
-  //         console.log("*** schedules : ", schedules);
-  //         return true
-  //       }
-  //     });
-  //     setShowScheduleList(schedules); // 스케줄 전체 정보 포함 리스트
-  //     showScheduleListRef.current = schedules;
-  //     console.log("*** schedules : ", schedules);
-  //   } else {
-  //     console.log("회차 목록 가져오기 실패 다시 시도!!");
-  //   }
-  // }
 
   return (
     <div className="detailPageBox">

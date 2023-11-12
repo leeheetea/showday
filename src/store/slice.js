@@ -101,7 +101,7 @@ const booksSlice = createSlice({
     },
 
     setConfirms: (state, action) => {
-      state.bookingData.bookDate.confirms = action.payload;
+      state.bookingData.confirms = action.payload;
     },
 
     setOrderAccount: (state, action) => {

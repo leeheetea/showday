@@ -29,6 +29,7 @@
 .stageRefresh {
   width: 5%;
   background-color: rgb(212, 255, 241);
+  cursor: pointer;
 }
 
 .stageContainer {
@@ -41,6 +42,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 1.3rem;
+  min-height: 300px;
+  max-height: 570px;
 
   >span {
     color: white;

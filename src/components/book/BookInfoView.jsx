@@ -73,15 +73,28 @@ const BookInfoView = ({ onChangeDate }) => {
         break;
       case 4:
         // 예매확인 필수동의 모두 체크했는지 확인
-        // if (!state.confirms?.step4) {
-        //   alert('주문자 확인 및 휴대폰번호와 이메일 수집(개인정보 제공 동의)을 확인하셔야\n결제가 가능합니다. ');
-        //   return;
-        // }
+        if (!state.bookingData.confirms?.step4) {
+          alert('주문자 확인 및 휴대폰번호와 이메일 수집(개인정보 제공 동의)을 확인하셔야\n결제가 가능합니다. ');
+          return;
+        }
         break;
       case 5:
         // 구매조건 결재진행 동의 체크
-        if (!isCheckedPayAgree) {
+        if (isCheckedPayAgree) {
+          // 결재팝업으로 띄우기
+          console.log('구매조건 동의', utils.getMidnightTime());
+          let message = `
+            무통장입금 예약등록이 완료되었습니다.\n
+            에매확인/취소페이지의 예매상세보기에서 입금하실 계좌번호를 확인하신후 입금기한내에 입금을 완료하셔야 예매가 완료됩니다.\n\n
+            은행명 : ${payAccount}\n
+            예금주 : 쇼데이\n
+            입금기한 : ${utils.getMidnightTime()}
+          `;
+          //setIsModalOpen(true);
+          alert(message);
+        } else {
           alert('구매 조건 및 결제 진행 동의 부탁드립니다.');
+          return;
         }
         break;
     }
@@ -91,28 +104,21 @@ const BookInfoView = ({ onChangeDate }) => {
     if (bookStep < 5) {
       navigate('/book/' + showId + '/' + (bookStep + 1));
     } else {
-      if (bookStep === 5 && isCheckedPayAgree) {
-        if (!localStorage.getItem("ACCESS_TOKEN")) {
-          alert("로그인이 필요합니다.");
-          navigate('/login');
-        } else {
-          callSaveReservation(makeReservationDataSet()).then(result => {
-            console.log('callSaveReservation result : ', result);
-
-            let message = `
-              무통장입금 예약등록이 완료되었습니다.\n
-              에매확인/취소페이지의 예매상세보기에서 입금하실 계좌번호를 확인하신후 입금기한내에 입금을 완료하셔야 예매가 완료됩니다.\n\n
-              은행명 : ${payAccount}\n
-              예금주 : 쇼데이\n
-              입금기한 : ${utils.getMidnightTime()}
-            `;
-            //setIsModalOpen(true);
-            alert(message);
-          });
-        }
-      }
       navigate('/');
+
+      if (bookStep === 5) {
+        // dispatch(setOrderAccount({
+        //   bank: payAccount,
+        //   depositDeadline: utils.getMidnightTime(new Date()),
+        // }));
+
+        callSaveReservation(makeReservationDataSet()).then(result => {
+          console.log('callSaveReservation result : ', result);
+        });
+      }
     }
+
+    //onChangeDate(); // 상위로 이벤트 던지기
   }
 
   function makeReservationDataSet() {
@@ -227,14 +233,14 @@ const BookInfoView = ({ onChangeDate }) => {
   function getDetailBookInfoSeats() {
     return <>
       {(bookStep !== PAYMENT_STEP) &&
-        <BookTitle isleft="true" tpadding="1.5rem">
+        <BookTitle isleft="true" tpadding="100px">
           예매정보
-        </BookTitle >}
+        </BookTitle>}
       <LineContainer
         width="94%"
         height="133px"
         padding="10px"
-        tpadding="1.5rem">
+        tpadding="10px">
         <ul className="reserveSeatInfo">
           {myBookSeatList.map((seat, idx) => {
             return (<li key={idx} className="textLine">
@@ -315,7 +321,7 @@ const BookInfoView = ({ onChangeDate }) => {
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <img className="titleLeftSimple" src={thumbnailUrl} alt="" />
                 <div style={{ display: 'flex' }}>
-
+                  <LineContainer>{getDetailBookInfoSeatsSimple()}</LineContainer>
                   <LineContainer width={'600px'}>
                     {gtDetailBookInfoPriceSimple()}
                   </LineContainer>

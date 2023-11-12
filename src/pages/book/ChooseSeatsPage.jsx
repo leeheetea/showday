@@ -7,10 +7,12 @@ import { setBookInfo, setMyBookSeats } from "../../store/slice";
 import "./ChooseSeatsPage.css";
 import BookTitle from "../../components/book/BookTitle";
 import LineButton from "../../components/LineButton";
-import seatImg from "../../img/seat.PNG";
+import refreshSeatIcon from "../../img/refreshSeatIcon.png";
 import Loading from '../../styles/loading';
 import utils from '../../utils'
 import { callReadShow, callReadShowSeat, callReadVenueSeatSize } from "../../service/book/bookApiService";
+import { DomainDisabled } from '@mui/icons-material';
+
 
 // 임의 값
 //const MAX_ROW = 26; // 알파벳 최대 26개 이므로
@@ -75,6 +77,11 @@ const ChooseSeatsPage = () => {
                 newDisplaySeatList = new Array(maxColRowInfoRef.current.maxCol * maxColRowInfoRef.current.maxRow).fill(1);
 
                 let seatCount = 0 //res.length;
+                bookDispatch(setMyBookSeats({
+                  myBookSeats: [],
+                  myBookSeatPrice: []
+                }));
+
                 // 타이틀과 아닌 부분 구분해서 데이터 저장
                 if (newDisplaySeatList) {
                   newDisplaySeatList = newDisplaySeatList.map((item, index) => {
@@ -120,7 +127,7 @@ const ChooseSeatsPage = () => {
   }, [loading, setLoading]);
 
   const handleChooseSeat = (idx, seatId) => {
-    console.log('handleChooseSeatTemp seatId : ', seatId);
+    console.log('handleChooseSeatT.. : ', choosedSeatListRef.current, myBookSeats);
 
     // 좌석 선택 막는 조건
     // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
@@ -153,6 +160,7 @@ const ChooseSeatsPage = () => {
   }
 
   function configureSeats() {
+    const backupSeatList = { ...displaySeatList }; // 내용만 얖은 복사하기
     return (
       <SeatContainer
         maxcol={maxColRowInfoRef.current.maxCol}
@@ -188,7 +196,9 @@ const ChooseSeatsPage = () => {
                 key={idx}
                 width={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxCol}
                 height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
-                canreserve={rowItems?.canReservation?.toString()}
+                canreserve={rowItems?.canReservation}
+                disabled={!rowItems?.canReservation}
+                mychoose={choosedSeatListRef.current.includes(rowItems?.showSeatId)}
                 onClick={() => handleChooseSeat(idx, rowItems?.showSeatId)}
               >
                 {/* {rowItems?.showSeatId}/{rowItems?.canReservation === true ? 1 : 0} */}
@@ -206,7 +216,7 @@ const ChooseSeatsPage = () => {
       <AreaRowArrange>
         <div className="decorCol"></div>
         <AreaRowArrange>
-          <div className='siz'>
+          <div className=''>
             <BookTitle isleft="true">
               {title}
             </BookTitle>
@@ -218,8 +228,11 @@ const ChooseSeatsPage = () => {
         </AreaRowArrange>
       </AreaRowArrange>
       <div className="stageContainer">
-        {/* <span>STAGE</span> */}
         <div className="stageBackground" ref={stageBackgroundRef}>
+          <div className='stageCenter'>
+            <span className='stageTitle'>STAGE&nbsp;</span>
+            <img className="stageRefresh" src={refreshSeatIcon} alt="" onClick={loadShowDataFromServer} />
+          </div>
           {configureSeats()}
         </div>
       </div>
@@ -236,7 +249,7 @@ const Line = styled.hr`
 
 const SeatContainer = styled.div`
   //width: -webkit-fill-available;
-  height: 100%;
+  height: 75%;
   max-width: ${(props) => `${props.pwidth || 100}px`};
   max-height: ${(props) => `${props.pheight || 100}px`};
   display: grid;
@@ -256,9 +269,9 @@ const Seat = styled.div`
   width: ${(props) => `(${props.width || 10} - ${GRID_GAP})px`};
   height: ${(props) => `(${props.height || 10} - ${GRID_GAP})px`};
   background-color: ${(props) => (props.canreserve) ?
-    "#7ccf55" : "#FC7B07"};
+    "#7ccf55" : (props.mychoose) ? "#C82020" : "#FC7B07"};
   border: 1px solid ${(props) => (props.canreserve) ?
-    "#7ccf55" : "#FC7B07"};
+    "#7ccf55" : (props.mychoose) ? "#C82020" : "#FC7B07"};
   border-radius: 0.2rem;
   display: flex;
   justify-content: center;
@@ -270,6 +283,8 @@ const Seat = styled.div`
     border: ${GRID_GAP}px outset #C82020;// 마우스 오버 시 배경색을 변경
     margin: -${GRID_GAP}px;
   }
+  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 `;
 
 const AreaRowArrange = styled.div`

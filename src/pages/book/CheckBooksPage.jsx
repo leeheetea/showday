@@ -94,7 +94,7 @@ const CheckBooksPage = () => {
 
   return (
     <div className="checkBooksContainer">
-      <BookTitle width="100%" $isLeft={true}>
+      <BookTitle width="100%" $isleft={true}>
         티켓할인, 매수 선택
       </BookTitle>
       <LineContainer className="getTicketContainer" tmargin="10px">

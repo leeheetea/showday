@@ -15,8 +15,8 @@ const SimpleButton = styled.button`
   cursor: pointer;
 `
 
-const BookButton = ({onClick}) => {
- 
+const BookButton = ({ onClick }) => {
+
   return (
     <>
       <SimpleButton onClick={onClick}>

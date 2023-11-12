@@ -2,8 +2,6 @@ import { call } from "../../page/ApiService";
 
 // 해당조건의 해당 좌석 예매 가능 여부 조회
 export async function callReadShowSeat(showId, showDateTime) {
-  console.log(">>> parameter showId : ", showId, showDateTime);
-
   const response = await call(
     "/show/seat/" +
       showId +

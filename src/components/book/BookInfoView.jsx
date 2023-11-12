@@ -98,7 +98,6 @@ const BookInfoView = ({ onChangeDate }) => {
         } else {
           callSaveReservation(makeReservationDataSet()).then(result => {
             console.log('callSaveReservation result : ', result);
-            navigate('/');
 
             let message = `
               무통장입금 예약등록이 완료되었습니다.\n
@@ -112,6 +111,7 @@ const BookInfoView = ({ onChangeDate }) => {
           });
         }
       }
+      navigate('/');
     }
   }
 

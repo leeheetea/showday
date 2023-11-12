@@ -127,7 +127,7 @@ const ChooseSeatsPage = () => {
   }, [loading, setLoading]);
 
   const handleChooseSeat = (idx, seatId) => {
-    //console.log('handleChooseSeatTemp seatId : ', seatId);
+    console.log('handleChooseSeatT.. : ', choosedSeatListRef.current, myBookSeats);
 
     // 좌석 선택 막는 조건
     // 1) 이미 선택한 자리, 한 명당 최대 5자리까지 예약 가능
@@ -198,6 +198,7 @@ const ChooseSeatsPage = () => {
                 height={stageBackgroundRef?.current?.offsetWidth / maxColRowInfoRef.current.maxRow}
                 canreserve={rowItems?.canReservation}
                 disabled={!rowItems?.canReservation}
+                mychoose={choosedSeatListRef.current.includes(rowItems?.showSeatId)}
                 onClick={() => handleChooseSeat(idx, rowItems?.showSeatId)}
               >
                 {/* {rowItems?.showSeatId}/{rowItems?.canReservation === true ? 1 : 0} */}
@@ -268,9 +269,9 @@ const Seat = styled.div`
   width: ${(props) => `(${props.width || 10} - ${GRID_GAP})px`};
   height: ${(props) => `(${props.height || 10} - ${GRID_GAP})px`};
   background-color: ${(props) => (props.canreserve) ?
-    "#7ccf55" : "#FC7B07"};
+    "#7ccf55" : (props.mychoose) ? "#C82020" : "#FC7B07"};
   border: 1px solid ${(props) => (props.canreserve) ?
-    "#7ccf55" : "#FC7B07"};
+    "#7ccf55" : (props.mychoose) ? "#C82020" : "#FC7B07"};
   border-radius: 0.2rem;
   display: flex;
   justify-content: center;

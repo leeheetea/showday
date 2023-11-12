@@ -47,7 +47,6 @@ import UserInfoResetPassword from "./page/UserInfoResetPassword";
 import NaverRedirect from "./components/NaverRedirect";
 import TicketingdetailPage from "./components/TicketingdetailPage";
 import AdminMain from "./pages/admin/AdminMain"
-import ShowDetail from "./pages/admin/ShowDetail";
 
 function App() {
   return (

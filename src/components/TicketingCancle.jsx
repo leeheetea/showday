@@ -108,7 +108,7 @@ const TicketingCancle = () => {
                         {order.orderId}
                     </td>
                     <td>
-                      <StyledLink to={`/mypage/ticketingdetail?orderID=${order.orderId}`}>
+                      <StyledLink to={`/mypage/ticketingdetail?orderId=${order.orderId}`}>
                         {order.reservation.reservationShowName}
                       </StyledLink>
                     </td>

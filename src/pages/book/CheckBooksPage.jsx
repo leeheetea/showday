@@ -31,11 +31,6 @@ const CheckBooksPage = () => {
       Object.values(updatedConfirmsChecked).every(
         (checked) => checked));
 
-    // if (isAllRequiredConfirmsChecked) { // 모두 동의된 경우 메모리에 저장
-    //   bookDispatch(setConfirms({ step4: true }));
-    // } else {
-    //   bookDispatch(setConfirms({ step4: false }));
-    // }
     bookDispatch(setConfirms({ step4: true }));
   }
 
@@ -49,14 +44,6 @@ const CheckBooksPage = () => {
     const isValidEmail = emailPattern.test(e.target.value);
     setShowErrorEmail(!isValidEmail);
   }, [])
-
-  // const onChangeEmail = useCallback((e) => {
-  //   setEmail(e.target.value);
-
-  //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  //   const isValidEmail = emailPattern.test(e.target.value);
-  //   setShowErrorEmail(!isValidEmail);
-  // }, [])
 
   useEffect(() => {
     setValues(state);
@@ -77,7 +64,6 @@ const CheckBooksPage = () => {
   };
 
   const emailInputRef = useRef(null);
-
   const onChangeEmailSelect = useCallback((e) => {
     const selectedDomain = e.target.value;
     setEmail((prevEmail) => {
@@ -89,8 +75,6 @@ const CheckBooksPage = () => {
       emailInputRef.current.focus();
     }
   }, [])
-
-
 
   return (
     <div className="checkBooksContainer">
@@ -107,7 +91,10 @@ const CheckBooksPage = () => {
         <LineContainer tmargin='15px'>
           <div className='checkBookFormName'>
             <p className='required'>이름</p>
-            <p>홍길동</p>
+            <input
+              name='userName'
+              inputMode='text'
+            ></input>
             <p className='required'>휴대폰번호</p>
             <input
               value={values.phoneNumber}
@@ -121,11 +108,6 @@ const CheckBooksPage = () => {
         <LineContainer tmargin='-2px'>
           <div className='checkBookFormName'>
             <p>이메일</p>
-            {/*  <input
-              value={values.email}
-              name='email'
-              placeholder='이메일'
-              onChange={handleChange}></input> */}
             <div className='emailContainer'>
               <div className="emailInput">
                 <input
@@ -174,7 +156,7 @@ const CheckBooksPage = () => {
             id='confirm1'
             name='confirm1'
             checked={requiredConfirm.confirm1}
-          //onChange={() => handleConfirmChange('confirm1')}
+            onChange={() => handleConfirmChange('confirm1')}
           />
           <span className='guideText'>&nbsp;주문자 확인 및 예매처리를 위해 휴대폰번호, 이메일을 수집하며 이용목적 달성 이후 파기합니다.</span>
         </label>

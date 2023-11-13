@@ -46,10 +46,7 @@ const BookHeader = ({ onBookStepClick, showId, index }) => {
 
   console.log('[B]ookHeader] 매개변수 확인 : ', onBookStepClick, showId, index);
 
-  //console.log(`[BookHeader] showId : ${showId} index : ${index}`);
-
   const handleStepUpdate = useCallback(() => {
-    //console.log('bookStep 확인 : ', bookStep);
     handleStepClick(bookStep);
   }, [bookStep, state]);
 

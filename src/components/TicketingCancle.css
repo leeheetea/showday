@@ -1,0 +1,10 @@
+/* TicketingCancle.css */
+
+/* ... 기존 스타일 ... */
+
+table thead th {
+    white-space: nowrap; /* 줄바꿈 방지 */
+    padding: 10px; /* 적절한 패딩 */
+    /* 필요에 따라 최소 너비 설정 */
+    min-width: 100px; /* 예시로 100px 설정, 상황에 맞게 조정 */
+}

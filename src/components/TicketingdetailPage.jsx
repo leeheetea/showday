@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../css/TicketingdetailPage.css"
-import { callReservations } from "../service/book/bookApiService";
 import {useLocation} from "react-router-dom";
+import "./TicketingdetailPage.css"
+import axios from "axios";
 
 const ORDER_STATE = {
   "PENDING": 1, // "예약대기"
@@ -12,7 +13,6 @@ const ORDER_STATE = {
 };
 
 const getReservationState = (state) => {
-  console.log('getReservationState : ', state);
   switch (state) {
     case ORDER_STATE.PENDING: return "예약대기";
       break;
@@ -32,9 +32,39 @@ const getReservationState = (state) => {
 const TicketingdetailPage = () => {
 
   const location = useLocation();
+  const [orderDetail, setOrderDetail] = useState({
+    orderState: "",
+    reservationId: 0,
+    seat: [],
+    showImgUrl: "",
+    userName: "",
+    venueName: "",
+  });
 
   const queryParams = new URLSearchParams(location.search);
-  const orderId = queryParams.get('orderID'); // URL 쿼리 파라미터에서 'orderID' 값을 가져옵니다.
+  const orderId = queryParams.get('orderId');
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          params: {
+            orderId: orderId
+          }
+        };
+        const response = await axios.get('http://localhost/reservation', config);
+        console.log("response", response)
+        setOrderDetail(response.data);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    };
+    fetchOrders().then(() => console.log(orderDetail))
+  }, []);
 
   return (
     <div>
@@ -45,38 +75,36 @@ const TicketingdetailPage = () => {
         <div>
           <div className="ticketingData">
             <div className='ticketingTitle'>
-              <div>뮤지컬 제목</div>
-              <div>예약</div>
+              <div>{orderDetail.venueName + " -"}</div>
+              <div>{getReservationState(orderDetail.orderState)}</div>
             </div>
             <div className="ticketing-list">
-              <div>이미지 들어갈 자리</div>
+              <div> <img src={orderDetail.showImgUrl} alt="Show" /></div>
               <div>
                 <table className="ticketing-table">
                   <tbody>
                   <tr>
                     <th>예매 번호</th>
-                    <td></td>
+                    <td>{orderDetail.reservationId}</td>
                     <th>예매자</th>
-                    <td></td>
+                    <td>{orderDetail.userName}</td>
                   </tr>
                   <tr>
                     <th>관람일</th>
-                    <td colSpan="3">관람일</td>
+                    <td colSpan="3">2023-11-12</td>
                   </tr>
                   <tr>
                     <th>공연장</th>
-                    <td colSpan="3"></td>
+                    <td colSpan="3">{orderDetail.venueName}</td>
                   </tr>
                   <tr>
                     <th>좌석</th>
                     <td colSpan="3">
-                      {/* {reservations?.seat && reservations?.seat.map((seat) => {
-                        return (
-                          <div key={reservations.seatId}>
-                            {seat.seatRow} 열 {seat.seatCol} 석
+                      {orderDetail.seat && orderDetail.seat.map((seat, index) => (
+                          <div key={index}>
+                            {seat.seatRow} 열 {seat.seatColumn} 석
                           </div>
-                        );
-                      })} */}
+                      ))}
                     </td>
                   </tr>
                   <tr>

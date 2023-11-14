@@ -18,7 +18,7 @@ const DiscountPricePage = () => {
 
   let youngDiscount = 0.15;
 
-  const unMarkedPrice = price // utils.getRemoveMarkThousand(price);
+  const unMarkedPrice = price
   const youngPrice = utils.getMarkThousand(
     price - (price * youngDiscount)
   );
@@ -52,8 +52,7 @@ const DiscountPricePage = () => {
           resultTotalPrice: resultTotalPrice,
         })
       );
-
-      return updatedValues; // 이 값을 반환하여 상태를 업데이트합니다.
+      return updatedValues;
     });
   };
 

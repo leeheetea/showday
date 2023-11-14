@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StyledLink from "./styled";
 import axios from "axios";
+import "./TicketingCancle.css"
 
 
 const ORDER_STATE = {
@@ -53,7 +54,7 @@ const TicketingCancle = () => {
       }
     };
 
-    fetchOrders(); // 함수 호출
+    fetchOrders().then(() => console.log(orders)); // 함수 호출
   }, []);
 
     return (
@@ -108,14 +109,14 @@ const TicketingCancle = () => {
                         {order.orderId}
                     </td>
                     <td>
-                      <StyledLink to={`/mypage/ticketingdetail?orderID=${order.orderId}`}>
+                      <StyledLink to={`/mypage/ticketingdetail?orderId=${order.orderId}`}>
                         {order.reservation.reservationShowName}
                       </StyledLink>
                     </td>
                     <td>{formatDate(order.reservation.reservationDate)}</td>
                     <td>{order.reservation.reservationTicketAmount}</td>
-                    <td>{/* 취소 가능일 정보가 필요하다면 여기에 추가하세요 */}</td>
-                    <td>{order.reservation.reservationState}</td>
+                    <td>{"관람일로 부터 7일"}</td>
+                    <td>{getReservationState(order.reservation.reservationState)}</td>
                   </tr>
               ))}
               </tbody>

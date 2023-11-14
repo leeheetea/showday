@@ -49,14 +49,6 @@ const CheckBooksPage = () => {
     setShowErrorEmail(!isValidEmail);
   }, [])
 
-  // const onChangeEmail = useCallback((e) => {
-  //   setEmail(e.target.value);
-
-  //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  //   const isValidEmail = emailPattern.test(e.target.value);
-  //   setShowErrorEmail(!isValidEmail);
-  // }, [])
-
   useEffect(() => {
     setValues(state);
   }, []);
@@ -76,7 +68,6 @@ const CheckBooksPage = () => {
   };
 
   const emailInputRef = useRef(null);
-
   const onChangeEmailSelect = useCallback((e) => {
     const selectedDomain = e.target.value;
     setEmail((prevEmail) => {
@@ -88,8 +79,6 @@ const CheckBooksPage = () => {
       emailInputRef.current.focus();
     }
   }, [])
-
-
 
   return (
     <div className="checkBooksContainer">

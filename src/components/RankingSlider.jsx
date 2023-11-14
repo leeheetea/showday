@@ -27,7 +27,6 @@ const RankingSlider = () => {
             size: size
           }
         });
-        console.log("musical", response.data)
         setMusicals(response.data);
       } catch (error) {
         console.error('musical 정보 호출에 에러가 발생함.', error);
@@ -41,7 +40,6 @@ const RankingSlider = () => {
           }
         });
         setConcerts(response.data);
-        console.log("concert", response.data)
       } catch (error) {
         console.error('concert 정보 호출에 에러가 발생함.', error);
       }
@@ -54,7 +52,6 @@ const RankingSlider = () => {
           }
         });
         setTheatres(response.data);
-        console.log("theatre", response.data)
       } catch (error) {
         console.error('Theatres 정보 호출에 에러가 발생함.', error);
       }

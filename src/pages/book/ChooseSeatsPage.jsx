@@ -52,6 +52,11 @@ const ChooseSeatsPage = () => {
       console.log('*** venue Info : ', venueSeatInfo);
 
       if (venueSeatInfo !== null && venueSeatInfo !== undefined) {
+
+        // 관련 저장용 정보 초기화
+        choosedSeatListRef.current = [];
+        seatInfoListRef.current = venueSeatInfo; // 서버에서 가져온 정보 백업
+
         maxColRowInfoRef.current = {
           maxCol: venueSeatInfo.seatMaxColumn + 1,
           maxRow: venueSeatInfo.seatMaxRow + 1
@@ -60,8 +65,6 @@ const ChooseSeatsPage = () => {
         let replacedBookDate = bookDate.replaceAll('.', '-');
         let replacedBookTime =
           !utils.checkTimeStringFor(bookShowTime) && bookShowTime + ":00";
-
-        seatInfoListRef.current = venueSeatInfo; // 서버에서 가져온 정보 백업
 
         // 좌석의 예약 상태 확인용 서버 호출
         callReadShowSeat(id, { "date": replacedBookDate, "time": replacedBookTime })
@@ -72,7 +75,6 @@ const ChooseSeatsPage = () => {
 
               // 정보변경(타이틀 정보 포함하도록 리스트 구성  변경
               setDisplaySeatList((prevItems) => {
-                //console.log("!!! SEATDISPLAY prevItems: ", prevItems, maxColRowInfoRef.current);
                 let newDisplaySeatList = [...prevItems];
                 newDisplaySeatList = new Array(maxColRowInfoRef.current.maxCol * maxColRowInfoRef.current.maxRow).fill(1);
 
@@ -85,11 +87,9 @@ const ChooseSeatsPage = () => {
                 // 타이틀과 아닌 부분 구분해서 데이터 저장
                 if (newDisplaySeatList) {
                   newDisplaySeatList = newDisplaySeatList.map((item, index) => {
-                    //console.log(">>> maxColRowInfoRef.current.maxCol : ", maxColRowInfoRef.current.maxCol);
                     if ((index < maxColRowInfoRef.current.maxCol) || (index % maxColRowInfoRef.current.maxCol === 0)) { // 첫번째 Row줄  
                       return null;
                     } else {
-                      // console.log("OMG", res, seatCount, res[seatCount], newDisplaySeatList);
                       return res[seatCount++];
                     }
 
@@ -152,11 +152,12 @@ const ChooseSeatsPage = () => {
     // TypeError: Cannot add property 1, object is not extensible
     const choosedSeatListTmp = [...choosedSeatListRef.current];
     const choosedSeatPriceList = new Array(choosedSeatListTmp.length).fill(price);
+
+    //store 저장
     bookDispatch(setMyBookSeats({
       myBookSeats: choosedSeatListTmp,
       myBookSeatPrice: choosedSeatPriceList
     }));
-    //}
   }
 
   function configureSeats() {

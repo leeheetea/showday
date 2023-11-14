@@ -85,7 +85,6 @@ const BookInfoView = ({ onChangeDate }) => {
           console.log('구매조건 동의', utils.getMidnightTime());
           let message = `
             무통장입금 예약등록이 완료되었습니다.\n
-            에매확인/취소페이지의 예매상세보기에서 입금하실 계좌번호를 확인하신후 입금기한내에 입금을 완료하셔야 예매가 완료됩니다.\n\n
             은행명 : ${payAccount}\n
             예금주 : 쇼데이\n
             입금기한 : ${utils.getMidnightTime()}
@@ -189,7 +188,7 @@ const BookInfoView = ({ onChangeDate }) => {
               <form action="">
                 <LineContainer tmargin='15px' style={{ textAlign: '-webkit-center' }}>
                   <div className='checkBookAccountInfo'>
-                    <p className='required'>입금자명</p>
+                    <label className='required'>입금자명</label>
                     <p><input
                       value={payName}
                       onChange={(e) => setPayName(e.target.value)}
@@ -233,7 +232,7 @@ const BookInfoView = ({ onChangeDate }) => {
   function getDetailBookInfoSeats() {
     return <>
       {(bookStep !== PAYMENT_STEP) &&
-        <BookTitle isleft="true" tpadding="100px">
+        <BookTitle isleft="true" tpadding="2rem">
           예매정보
         </BookTitle>}
       <LineContainer
@@ -416,7 +415,7 @@ const BookInfoView = ({ onChangeDate }) => {
                   <span>
                     {/* {utils.getAboutDelimiter('F', SEAT_DELIMITER, seat)[0]} 열&nbsp;&nbsp;
                     {utils.getAboutDelimiter('F', SEAT_DELIMITER, seat)[1]} 행 */}
-                    {idx}
+                    {seat}
                   </span>
                 </li>);
               })}
@@ -456,7 +455,7 @@ const BookInfoView = ({ onChangeDate }) => {
 
   console.log('====== bookStep !== PAYMENT_STEP(5) ', bookStep);
   return (
-    (bookStep !== PAYMENT_STEP) ?
+    (bookStep < PAYMENT_STEP) ?
       <div className="bookInfoViewWrapper">
         {getTitle()}
         {getDetailBookInfoSeats()}

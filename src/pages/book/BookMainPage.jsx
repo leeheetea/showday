@@ -12,12 +12,14 @@ const BookMainPage = () => {
   const { id, index } = useParams();
   const navigator = useNavigate();
   const booksDatas = useSelector((state) => state.booksData);
-  const [currentTab, setCurrentTab] = useState(booksDatas.bookStep ?? 2);
+  const { bookStep } = booksDatas.bookingData;
+  const [currentTab, setCurrentTab] = useState(bookStep ?? 2);
 
-  const handleStepClick = (newStep) => {
-    setCurrentTab(newStep);
-    // console.log(`???? handleStepClick id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
-    navigator("/book/" + id + "/" + newStep);
+  const handleStepClick = (index, showId) => {
+    console.log('상위로 이벤트 전달 확인!!! ', index);
+    setCurrentTab(index);
+    //console.log(`???? BookMainPage id : ${id}, currentTab : ${currentTab}, e : ${newStep}`);
+    navigator("/book/" + id + "/" + index);
   };
 
   const handleChangDate = (e) => {
@@ -25,15 +27,17 @@ const BookMainPage = () => {
     setCurrentTab(currentTab);
   }
 
+  console.log('currentTab : ', currentTab);
+
   return (
     <>
       <Header />
       <div className="rootWrapper">
         <BookHeader showId={id} index={currentTab} onBookStepClick={handleStepClick} />
-        <div className={currentTab !== 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
+        <div className={currentTab < 5 ? 'bookLeftContainer' : 'bookLeftContainerAll'}>
           <Outlet showId={id} step={currentTab} onChangeDate={handleChangDate} />
         </div>
-        {currentTab !== 5 && <BookInfoView />}
+        {currentTab < 5 && <BookInfoView />}
       </div>
     </>
   );

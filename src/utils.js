@@ -97,6 +97,8 @@ const getMidnightTime = () => {
   // 현재 날짜에 1일(24시간)을 더하면 다음 날 자정이 됩니다.
   const now = new Date();
   const nextMidnight = new Date(now);
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+
   nextMidnight.setDate(nextMidnight.getDate() + 1);
 
   // 시, 분, 초, 밀리초를 0으로 설정하여 자정 시간으로 만듭니다.
@@ -115,7 +117,10 @@ const getMidnightTime = () => {
 
   return (
     //[year, month, day].join(".") + "(" + nextMidnight.getDay() + ") 자정까지 "
-    [year, month, day].join(".") + "(" + nextMidnight.getDay() + ") 자정까지 "
+    [year, month, day].join(".") +
+    "(" +
+    daysOfWeek[nextMidnight.getDay()] +
+    ") 자정까지 "
   );
 };
 

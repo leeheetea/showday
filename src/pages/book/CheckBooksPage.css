@@ -23,6 +23,10 @@
   }
 }
 
+.required {
+  margin-right: 10px;
+}
+
 .required::after {
   content: '*';
   color: red;
@@ -49,9 +53,9 @@
   height: 23px;
 }
 
-.checkBookFormName {
+.checkBookName {
   width: 290px;
-  height: 25px;
+  height: 15px;
   display: flex;
   line-height: 0.2rem;
   align-items: center;
@@ -75,4 +79,50 @@
 
 .errorText {
   text-align: right;
+}
+
+.inputAreaContainer {
+  border-bottom: 1px solid rgb(201, 201, 201);
+  padding: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  >input {
+    width: 15rem;
+    height: 1.8rem;
+  }
+}
+
+.emailAreaContainer {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  >input {
+    width: 15rem;
+    height: 1.8rem;
+  }
+
+
+}
+
+.emailContainer select {
+  height: 1.8rem;
+}
+
+
+.inputAreaPassword {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infoBlock {
+  margin: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
 }

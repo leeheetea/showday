@@ -160,10 +160,20 @@
 
 .checkBookAccountInfo {
   width: 290px;
-  height: 25px;
+  height: 40px;
   display: flex;
-  line-height: 0.2rem;
+  line-height: 0.7rem;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align-last: center;
+}
+
+.checkBookAccountInfo input {
+  width: 11rem;
+  height: 1.8rem;
+}
+
+.checkBookAccountInfo select {
+  width: 11.4rem;
+  height: 1.8rem;
 }

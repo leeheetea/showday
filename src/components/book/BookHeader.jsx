@@ -53,6 +53,10 @@ const BookHeader = ({ onBookStepClick, showId, index }) => {
     handleStepClick(bookStep);
   }, [bookStep, state]);
 
+  useEffect(() => {
+    handleStepUpdate();
+  }, [bookStep])
+
   const handleStepClick = (index) => {
     dispatch(setBookStep({ bookStep: index }));
     onBookStepClick(index, showId);

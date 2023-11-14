@@ -105,28 +105,23 @@ const CheckBooksPage = () => {
       <form action="">
         <LineContainer tmargin='15px'>
           <div className='checkBookFormName'>
-            <p className='required'>이름</p>
-            <p>홍길동</p>
-            <p className='required'>휴대폰번호</p>
-            <input
-              value={values.phoneNumber}
-              name='phoneNumber'
-              inputMode="numeric"
-              maxLength={11}
-              placeholder="휴대폰번호 (-없이 입력)"
-              onChange={handleChange}></input>
-          </div>
-        </LineContainer>
-        <LineContainer tmargin='-2px'>
-          <div className='checkBookFormName'>
-            <p>이메일</p>
-            {/*  <input
-              value={values.email}
-              name='email'
-              placeholder='이메일'
-              onChange={handleChange}></input> */}
-            <div className='emailContainer'>
-              <div className="emailInput">
+            <div className='inputAreaContainer'>
+              <label className='required'>아이디</label>
+              <p>홍길동</p>
+            </div>
+            <div className='inputAreaContainer'>
+              <p className='required'>휴대폰번호</p>
+              <input
+                value={values.phoneNumber}
+                name='phoneNumber'
+                inputMode="numeric"
+                maxLength={11}
+                placeholder="휴대폰번호 (-없이 입력)"
+                onChange={handleChange}></input>
+            </div>
+            <div className='inputAreaContainer'>
+              <label>이메일</label>
+              <div className='emailAreaContainer'>
                 <input
                   value={email}
                   name='email'
@@ -138,31 +133,31 @@ const CheckBooksPage = () => {
                   id="inputTelClear"
                   className="delBtn"
                 ></span>
+                <div className="emailSelect">
+                  <select name="memEmail2" id="memEmail2" onChange={onChangeEmailSelect}>
+                    <option value="@etc">직접입력</option>
+                    <option value="@naver.com">@naver.com</option>
+                    <option value="@hanmail.net">@hanmail.net</option>
+                    <option value="@gmail.com">@gmail.com</option>
+                    <option value="@nate.com">@nate.com</option>
+                    <option value="@hotmail.com">@hotmail.com</option>
+                  </select>
+                  <div className="newSelect">{/* todo */}</div>
+                  <ul className="options">
+                    <li className="option">직접입력</li>
+                    <li className="option">naver.com</li>
+                    <li className="option">hanmail.net</li>
+                    <li className="option">gmail.com</li>
+                    <li className="option">nate.com</li>
+                    <li className="option">hotmail.com</li>
+                  </ul>
+                </div>
               </div>
-              <div className="emailSelect">
-                <select name="memEmail2" id="memEmail2" onChange={onChangeEmailSelect}>
-                  <option value="@etc">직접입력</option>
-                  <option value="@naver.com">@naver.com</option>
-                  <option value="@hanmail.net">@hanmail.net</option>
-                  <option value="@gmail.com">@gmail.com</option>
-                  <option value="@nate.com">@nate.com</option>
-                  <option value="@hotmail.com">@hotmail.com</option>
-                </select>
-                <div className="newSelect">{/* todo */}</div>
-                <ul className="options">
-                  <li className="option">직접입력</li>
-                  <li className="option">naver.com</li>
-                  <li className="option">hanmail.net</li>
-                  <li className="option">gmail.com</li>
-                  <li className="option">nate.com</li>
-                  <li className="option">hotmail.com</li>
-                </ul>
-              </div>
-            </div>
 
-          </div>
-          <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
-            이메일 주소 양식에 맞게 작성해주세요.
+            </div>
+            <div className="errorText" style={{ display: showErrorEmail ? 'block' : 'none' }}>
+              이메일 주소 양식에 맞게 작성해주세요.
+            </div>
           </div>
         </LineContainer>
       </form>
@@ -189,7 +184,7 @@ const CheckBooksPage = () => {
           <span className='guideText'>&nbsp;개인정보 제3자 제공에 동의합니다. (고객응대 및 관람정보안내 등을 위함)</span>
         </label>
       </LineContainer>
-    </div>
+    </div >
   )
 }
 
